@@ -4,14 +4,15 @@ import { Heart } from "lucide-react";
 
 export function Footer() {
   return (
-    <footer className="border-t border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container mx-auto px-4 py-8 max-w-6xl">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+    <footer className="border-t border-accent/20 dark:border-accent/10 bg-muted/40 backdrop-blur supports-[backdrop-filter]:bg-background/40">
+      <div className="container mx-auto px-4 py-10 max-w-6xl">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-8">
           
-          <div className="flex flex-col items-center md:items-start gap-2">
-            <h3 className="font-urdu text-xl font-bold text-primary">حق دار</h3>
-            <p className="text-sm text-muted-foreground flex items-center gap-1">
-              Built with <Heart className="w-4 h-4 text-red-500 fill-current" /> for Code for Pakistan 2026
+          <div className="flex flex-col items-center md:items-start gap-1">
+            <h3 className="font-urdu text-2xl font-bold text-foreground">حق دار</h3>
+            <p className="text-[10px] font-garamond italic font-bold tracking-widest text-accent uppercase">HaqDar AI</p>
+            <p className="text-xs text-muted-foreground flex items-center gap-1.5 mt-2 font-inter">
+              Built with <Heart className="w-3.5 h-3.5 text-red-500 fill-current" /> for Code for Pakistan
             </p>
           </div>
 
@@ -25,7 +26,7 @@ export function Footer() {
               href="https://github.com/waybig125/haqdar-ai" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="text-muted-foreground hover:text-foreground transition-colors"
+              className="text-muted-foreground hover:text-accent transition-colors cursor-pointer"
               aria-label="GitHub Repository"
             >
               <svg
@@ -48,10 +49,11 @@ export function Footer() {
 
         </div>
         
-        <div className="mt-8 text-center text-xs text-muted-foreground/60">
-          <p>&copy; {new Date().getFullYear()} HaqDar AI. All rights reserved.</p>
+        <div className="mt-8 pt-8 border-t border-accent/10 text-center text-[10px] uppercase tracking-widest text-muted-foreground/60 font-inter">
+          <p>&copy; {new Date().getFullYear()} HaqDar AI. Dedicated to Legal Accessibility.</p>
         </div>
       </div>
     </footer>
+
   );
 }

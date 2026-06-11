@@ -9,25 +9,25 @@ const SCORE_CONFIG = {
   high: {
     label: "HIGH CONFIDENCE",
     urduLabel: "اعلیٰ اعتماد",
-    colorClass: "text-emerald-600 dark:text-emerald-500",
-    bgClass: "bg-emerald-100 dark:bg-emerald-950/50",
-    borderClass: "border-emerald-200 dark:border-emerald-900",
+    colorClass: "text-primary dark:text-emerald-400",
+    bgClass: "bg-primary/5 dark:bg-emerald-950/20",
+    borderClass: "border-primary/20 dark:border-emerald-800/30",
     Icon: ShieldCheck
   },
   medium: {
     label: "MEDIUM CONFIDENCE",
     urduLabel: "درمیانہ اعتماد",
-    colorClass: "text-amber-600 dark:text-amber-500",
-    bgClass: "bg-amber-100 dark:bg-amber-950/50",
-    borderClass: "border-amber-200 dark:border-amber-900",
+    colorClass: "text-accent dark:text-amber-400",
+    bgClass: "bg-accent/5 dark:bg-amber-950/20",
+    borderClass: "border-accent/20 dark:border-amber-800/30",
     Icon: AlertCircle
   },
   needs_verification: {
     label: "NEEDS VERIFICATION",
     urduLabel: "تصدیق درکار ہے",
-    colorClass: "text-red-600 dark:text-red-500",
-    bgClass: "bg-red-100 dark:bg-red-950/50",
-    borderClass: "border-red-200 dark:border-red-900",
+    colorClass: "text-red-600 dark:text-red-400",
+    bgClass: "bg-red-500/5 dark:bg-red-950/20",
+    borderClass: "border-red-500/20 dark:border-red-800/30",
     Icon: AlertTriangle
   }
 };
@@ -39,12 +39,12 @@ export function TrustScore({ score, reason, className }) {
 
   return (
     <motion.div 
-      initial={{ opacity: 0, scale: 0.95 }}
+      initial={{ opacity: 0, scale: 0.98 }}
       animate={{ opacity: 1, scale: 1 }}
       className={cn("flex flex-col sm:flex-row items-start sm:items-center gap-3", className)}
     >
       <div className={cn(
-        "flex items-center gap-2 px-3 py-1.5 rounded-full border shadow-sm font-semibold text-xs tracking-wider",
+        "flex items-center gap-2 px-3 py-1.5 rounded border shadow-sm font-bold text-[10px] tracking-widest font-inter",
         config.bgClass,
         config.colorClass,
         config.borderClass
@@ -54,10 +54,11 @@ export function TrustScore({ score, reason, className }) {
       </div>
       
       {reason && (
-        <p className="text-sm text-muted-foreground font-urdu m-0">
+        <p className="text-sm font-medium text-muted-foreground font-urdu m-0">
           {reason}
         </p>
       )}
     </motion.div>
   );
 }
+

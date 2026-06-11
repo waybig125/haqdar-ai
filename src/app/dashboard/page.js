@@ -22,18 +22,19 @@ export default async function DashboardPage() {
       <main className="flex-grow bg-background">
         
         {/* Dashboard Header */}
-        <div className="bg-muted/10 border-b border-border/40 pb-8 pt-12 md:pt-16">
+        <div className="border-b border-accent/20 dark:border-accent/10 pb-10 pt-16 bg-muted/20 relative">
           <div className="container mx-auto px-4 max-w-7xl">
             <AnimatedContainer variant="fadeUp">
-              <h1 className="font-urdu text-4xl md:text-5xl font-bold text-foreground mb-3">
-                سول نبض <span className="font-inter text-3xl font-light text-muted-foreground ml-2">— Civic Pulse</span>
+              <h1 className="font-urdu text-4xl md:text-5xl font-bold text-foreground mb-3 leading-[1.3]">
+                سول نبض <span className="font-garamond italic text-3xl font-bold text-accent ml-3">— Civic Pulse</span>
               </h1>
-              <p className="text-lg text-muted-foreground max-w-2xl">
-                Open data tracking of institutional accountability across Pakistan. All reports are completely anonymous.
+              <p className="text-sm md:text-base text-muted-foreground max-w-2xl leading-relaxed font-inter">
+                Real-time open data tracking of institutional accountability and transparency across Pakistan. All reports are completely anonymous.
               </p>
             </AnimatedContainer>
           </div>
         </div>
+
 
         <div className="container mx-auto px-4 max-w-7xl py-12">
           

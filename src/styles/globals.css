@@ -38,6 +38,7 @@
 
   --font-inter: var(--font-inter);
   --font-urdu: var(--font-urdu);
+  --font-garamond: var(--font-garamond);
 }
 
 /*
@@ -59,78 +60,78 @@
 
 @layer base {
   :root {
-    /* HaqDar Civic Emerald Theme - Light */
-    --background: 60 14% 97%; /* #FAFAF8 */
-    --foreground: 20 6% 10%; /* #1C1917 */
+    /* The Court Archivist Theme - Light (Warm Parchment / Stamp Green / Wax Gold) */
+    --background: 36 30% 97%; /* #FAF7F2 */
+    --foreground: 150 20% 8%; /* #0F1412 */
     --card: 0 0% 100%;
-    --card-foreground: 20 6% 10%;
+    --card-foreground: 150 20% 8%;
     --popover: 0 0% 100%;
-    --popover-foreground: 20 6% 10%;
+    --popover-foreground: 150 20% 8%;
     
-    /* Emerald 500 */
-    --primary: 160 84% 39%;
-    --primary-foreground: 0 0% 100%;
+    /* Stamp Paper Emerald Green */
+    --primary: 152 53% 15%; /* #11382A */
+    --primary-foreground: 36 30% 98%; /* #FAF9F6 */
     
-    /* Warm Sand */
-    --secondary: 36 33% 94%; /* #F5F1EB */
-    --secondary-foreground: 20 6% 10%;
+    /* Stamp Ink Indigo */
+    --secondary: 215 38% 27%; /* #2A3E5D */
+    --secondary-foreground: 0 0% 100%;
     
-    --muted: 60 5% 96%;
-    --muted-foreground: 24 5% 45%; /* #78716C */
+    --muted: 36 20% 93%; /* #EDE7DC */
+    --muted-foreground: 36 8% 40%; /* #6F6960 */
     
-    /* Amber 500 */
-    --accent: 38 92% 50%;
-    --accent-foreground: 20 6% 10%;
+    /* Burnished Brass-Gold */
+    --accent: 38 52% 56%; /* #C5A059 */
+    --accent-foreground: 150 20% 8%;
     
-    /* Red 500 */
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
     
-    --border: 20 6% 90%;
-    --input: 20 6% 90%;
-    --ring: 160 84% 39%;
-    --radius: 0.75rem;
+    /* Warm Document Border */
+    --border: 36 18% 85%; /* #DDD2C0 */
+    --input: 36 18% 85%;
+    --ring: 152 53% 15%;
+    --radius: 0.5rem;
 
     /* Confidence / Badges */
-    --confidence-high: 160 84% 39%;
-    --confidence-medium: 38 92% 50%;
+    --confidence-high: 152 53% 15%;
+    --confidence-medium: 38 52% 56%;
     --confidence-low: 0 84% 60%;
     
     /* SDGs */
-    --sdg-16: 216 84% 52%; /* #1F6FEB */
-    --sdg-10: 330 68% 54%; /* #DA3B8A */
+    --sdg-16: 215 38% 27%; /* Themed blue */
+    --sdg-10: 38 52% 56%; /* Themed gold */
   }
 
   .dark {
-    /* HaqDar Civic Emerald Theme - Dark */
-    --background: 20 14% 4%; /* #0C0A09 */
-    --foreground: 60 5% 96%; /* #FAFAF9 */
-    --card: 20 6% 10%; /* #1C1917 */
-    --card-foreground: 60 5% 96%;
-    --popover: 20 6% 10%;
-    --popover-foreground: 60 5% 96%;
+    /* The Court Archivist Theme - Dark (Inkwell Obsidian / Jade / Shining Gold) */
+    --background: 150 15% 5%; /* #090D0B */
+    --foreground: 40 20% 90%; /* #ECE6DB */
+    --card: 150 15% 8%; /* #0E1411 */
+    --card-foreground: 40 20% 90%;
+    --popover: 150 15% 8%;
+    --popover-foreground: 40 20% 90%;
     
-    /* Emerald 500 */
-    --primary: 160 84% 39%;
-    --primary-foreground: 0 0% 100%;
+    /* Deep Emerald */
+    --primary: 152 60% 45%; /* #10B981 */
+    --primary-foreground: 150 15% 5%;
     
-    /* Deep Charcoal / Warm Sand inverted */
-    --secondary: 20 5% 15%; /* #292524 */
-    --secondary-foreground: 60 5% 96%;
+    /* Ink Slate */
+    --secondary: 215 25% 18%;
+    --secondary-foreground: 40 20% 90%;
     
-    --muted: 20 6% 15%;
-    --muted-foreground: 24 5% 64%; /* #A8A29E */
+    --muted: 150 12% 12%;
+    --muted-foreground: 40 10% 65%;
     
-    /* Amber 500 */
-    --accent: 38 92% 50%;
-    --accent-foreground: 0 0% 100%;
+    /* Bright Wax Gold */
+    --accent: 38 70% 60%; /* #D4AF37 */
+    --accent-foreground: 150 15% 5%;
     
-    --destructive: 0 62% 30%;
-    --destructive-foreground: 60 5% 96%;
+    --destructive: 0 62% 35%;
+    --destructive-foreground: 40 20% 90%;
     
-    --border: 20 6% 20%;
-    --input: 20 6% 20%;
-    --ring: 160 84% 39%;
+    --border: 150 12% 16%;
+    --input: 150 12% 16%;
+    --ring: 152 60% 45%;
   }
 }
 
@@ -138,25 +139,46 @@
   * {
     @apply border-border;
   }
+  
   body {
     @apply bg-background text-foreground;
+    /* Ledger ledger-paper lines pattern */
     background-image: 
-      linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
-    background-size: 40px 40px;
+      linear-gradient(to right, rgba(197, 160, 89, 0.04) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(197, 160, 89, 0.04) 1px, transparent 1px);
+    background-size: 32px 32px;
     background-attachment: fixed;
+    position: relative;
   }
   
   .dark body {
     background-image: 
-      linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+      linear-gradient(to right, rgba(212, 175, 55, 0.02) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(212, 175, 55, 0.02) 1px, transparent 1px);
+  }
+
+  /* Custom base64 SVG noise overlay for tactile grunge/paper texture */
+  body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    opacity: 0.04; /* Very subtle paper tooth */
+    z-index: 9999;
+    pointer-events: none;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  }
+
+  .dark body::before {
+    opacity: 0.06; /* Slightly stronger noise contrast in dark mode */
   }
   
   /* Urdu Typography Adjustments */
   [lang="ur"] {
     font-family: var(--font-urdu), system-ui, sans-serif;
-    line-height: 1.8; /* Nastaliq needs more vertical breathing room */
+    line-height: 1.9; /* More vertical breathing room for Nastaliq script */
   }
 
   /* Latin Fallback */
@@ -195,3 +217,4 @@
 ::-webkit-scrollbar-thumb:hover {
   @apply bg-muted-foreground/50;
 }
+

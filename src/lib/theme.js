@@ -7,35 +7,36 @@
 export const THEME = {
   colors: {
     primary: {
-      DEFAULT: '#10B981', // Emerald 500
-      dark: '#059669',    // Emerald 600
+      DEFAULT: '#11382A', // Stamp-paper deep green
+      dark: '#10B981',    // Emerald green for dark mode
     },
     accent: {
-      DEFAULT: '#F59E0B', // Amber 500
-      alt: '#EF4444',     // Red 500 (Needs Verification)
+      DEFAULT: '#C5A059', // Burnished Brass Gold
+      alt: '#DC2626',     // Destructive red
     },
     light: {
-      background: '#FAFAF8',
+      background: '#FAF7F2',
       surface: '#FFFFFF',
-      surfaceAlt: '#F5F1EB',
-      text: '#1C1917',
-      textMuted: '#78716C',
+      surfaceAlt: '#EDE7DC',
+      text: '#0F1412',
+      textMuted: '#6F6960',
     },
     dark: {
-      background: '#0C0A09',
-      surface: '#1C1917',
-      surfaceAlt: '#292524',
-      text: '#FAFAF9',
-      textMuted: '#A8A29E',
+      background: '#090D0B',
+      surface: '#0E1411',
+      surfaceAlt: '#1A231F',
+      text: '#ECE6DB',
+      textMuted: '#A09A8F',
     }
   },
   confidence: {
-    high: '#10B981',
-    medium: '#F59E0B',
-    needs_verification: '#EF4444'
+    high: '#11382A',
+    medium: '#C5A059',
+    needs_verification: '#DC2626'
   },
   sdg: {
-    sdg16: '#1F6FEB', // Peace & Justice
-    sdg10: '#DA3B8A'  // Reduced Inequalities
+    sdg16: '#2A3E5D', // Navy / stamp-ink blue
+    sdg10: '#C5A059'  // Wax Gold
   }
 };
+

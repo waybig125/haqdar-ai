@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect, useRef } from 'react';
 import { analyzeComplaint, getStats } from './api';
 
 export function useAnalyzeComplaint() {
@@ -30,23 +30,27 @@ export function useSpeechRecognition() {
   const [supported, setSupported] = useState(true);
   const [language, setLanguage] = useState('ur-PK');
   const [speechError, setSpeechError] = useState(null);
+  
+  const recognitionRef = useRef(null);
 
-  const startListening = useCallback(() => {
-    setSpeechError(null);
-    if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    if (!SpeechRecognition) {
       setSupported(false);
       return;
     }
 
-    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    setSupported(true);
     const recognition = new SpeechRecognition();
-
     recognition.lang = language;
     recognition.continuous = false;
-    recognition.interimResults = true;
+    recognition.interimResults = false; // Disable interim results to avoid duplicate appends
 
     recognition.onstart = () => {
       setIsListening(true);
+      setSpeechError(null);
       setTranscript('');
     };
 
@@ -63,7 +67,6 @@ export function useSpeechRecognition() {
     };
 
     recognition.onerror = (event) => {
-      // 'no-speech' fires when the user didn't speak in time — not a real error
       if (event.error !== 'no-speech') {
         console.error('Speech recognition error', event.error);
         if (event.error === 'not-allowed') {
@@ -79,12 +82,47 @@ export function useSpeechRecognition() {
       setIsListening(false);
     };
 
-    recognition.start();
+    recognitionRef.current = recognition;
 
     return () => {
-      recognition.stop();
+      if (recognitionRef.current) {
+        recognitionRef.current.abort();
+      }
     };
   }, [language]);
 
-  return { isListening, transcript, startListening, supported, setTranscript, language, setLanguage, speechError };
+  const startListening = useCallback(() => {
+    if (!recognitionRef.current) return;
+
+    try {
+      if (isListening) {
+        recognitionRef.current.stop();
+      } else {
+        setTranscript('');
+        setSpeechError(null);
+        recognitionRef.current.start();
+      }
+    } catch (err) {
+      console.error("Failed to start/stop SpeechRecognition", err);
+    }
+  }, [isListening]);
+
+  const stopListening = useCallback(() => {
+    if (recognitionRef.current) {
+      recognitionRef.current.stop();
+    }
+  }, []);
+
+  return { 
+    isListening, 
+    transcript, 
+    startListening, 
+    stopListening,
+    supported, 
+    setTranscript, 
+    language, 
+    setLanguage, 
+    speechError 
+  };
 }
+

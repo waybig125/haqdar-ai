@@ -1,7 +1,7 @@
 "use client";
 
-import React, { useState } from 'react';
-import { Mic, Send, Square, AlertCircle } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { Mic, Send, Square, AlertCircle, Sparkles } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { AnimatedContainer } from '@/components/ui/AnimatedContainer';
 import { useSpeechRecognition } from '@/lib/hooks';
@@ -16,10 +16,32 @@ const EXAMPLES = [
 
 export function ComplaintInput({ onAnalyze, loading }) {
   const [text, setText] = useState('');
-  const { isListening, transcript, startListening, supported, setTranscript, language, setLanguage, speechError } = useSpeechRecognition();
+  const { 
+    isListening, 
+    transcript, 
+    startListening, 
+    supported, 
+    setTranscript, 
+    language, 
+    setLanguage, 
+    speechError 
+  } = useSpeechRecognition();
+
+  // Smart language auto-detect when user types
+  useEffect(() => {
+    const urduRegex = /[\u0600-\u06FF]/;
+    if (text.trim()) {
+      const isUrdu = urduRegex.test(text);
+      if (isUrdu && language !== 'ur-PK') {
+        setLanguage('ur-PK');
+      } else if (!isUrdu && language !== 'en-US') {
+        setLanguage('en-US');
+      }
+    }
+  }, [text, language, setLanguage]);
 
   // Update text area when speech transcript updates
-  React.useEffect(() => {
+  useEffect(() => {
     if (transcript) {
       setText(prev => {
         const base = prev.trim();
@@ -44,38 +66,58 @@ export function ComplaintInput({ onAnalyze, loading }) {
     setLanguage(prev => prev === 'ur-PK' ? 'en-US' : 'ur-PK');
   };
 
+  const isUrduMode = language === 'ur-PK';
+
   return (
     <div id="complaint-section" className="w-full max-w-4xl mx-auto px-4 py-12 scroll-mt-24">
       <AnimatedContainer variant="fadeUp">
         
+        {/* Parchment Document Petition Wrapper */}
         <div className={cn(
-          "bg-card/40 backdrop-blur-xl border border-white/10 dark:border-white/5 shadow-2xl rounded-2xl p-5 md:p-8 transition-all duration-300 relative overflow-hidden",
-          isListening ? "ring-1 ring-primary/50 shadow-[0_0_40px_rgba(34,197,94,0.15)]" : "focus-within:ring-1 focus-within:ring-white/20 hover:border-white/20"
+          "bg-card border-4 border-double border-accent/30 dark:border-accent/15 shadow-[0_25px_60px_-15px_rgba(27,56,42,0.08)] dark:shadow-[0_25px_60px_-15px_rgba(0,0,0,0.5)] rounded-2xl p-6 md:p-10 transition-all duration-300 relative overflow-hidden",
+          isListening ? "ring-2 ring-red-500/30 dark:ring-red-500/20 shadow-[0_0_50px_rgba(239,68,68,0.15)]" : "hover:border-accent/40"
         )}>
           
+          {/* Subtle watermark in upper right of document */}
+          <div className="absolute top-4 right-6 text-[10px] uppercase tracking-[0.2em] font-semibold text-muted-foreground/15 font-inter select-none pointer-events-none">
+            Official Petition Form
+          </div>
+
           <form onSubmit={handleSubmit} className="flex flex-col gap-6 relative z-10">
-            <textarea
-              value={text}
-              onChange={(e) => setText(e.target.value)}
-              placeholder={language === 'ur-PK' ? "اپنی شکایت یہاں لکھیں یا بول کر درج کریں..." : "Type or speak your complaint here..."}
-              className={cn(
-                "w-full min-h-[160px] bg-transparent resize-none outline-none leading-relaxed text-foreground placeholder:text-muted-foreground/50",
-                language === 'ur-PK' ? "font-urdu text-2xl" : "font-inter text-xl"
+            <div className="relative">
+              <textarea
+                value={text}
+                onChange={(e) => setText(e.target.value)}
+                placeholder={isUrduMode ? "اپنی شکایت یہاں لکھیں یا مائیک کا بٹن دبا کر بولیں..." : "Type or click the microphone to speak your complaint..."}
+                className={cn(
+                  "w-full min-h-[180px] bg-transparent resize-none outline-none leading-relaxed text-foreground placeholder:text-muted-foreground/30 focus:placeholder:text-muted-foreground/20 transition-all",
+                  isUrduMode ? "font-urdu text-2xl md:text-3xl leading-[1.8]" : "font-garamond text-xl md:text-2xl font-medium"
+                )}
+                dir={isUrduMode ? "rtl" : "ltr"}
+                disabled={loading}
+              />
+              
+              {!text && (
+                <div className="absolute bottom-2 right-2 text-muted-foreground/30 text-xs flex items-center gap-1.5 font-inter">
+                  <Sparkles className="w-3.5 h-3.5" />
+                  Auto-detects Urdu & English
+                </div>
               )}
-              dir={language === 'ur-PK' ? "rtl" : "ltr"}
-              disabled={loading}
-            />
+            </div>
 
             {speechError === 'not-allowed' && (
-              <div className="bg-destructive/10 border border-destructive/30 rounded-lg p-3 text-sm text-destructive-foreground flex items-start gap-2 animate-in fade-in slide-in-from-top-2">
+              <div className="bg-destructive/10 border border-destructive/20 rounded-xl p-4 text-sm text-foreground flex items-start gap-3 animate-in fade-in slide-in-from-top-3">
                 <AlertCircle className="w-5 h-5 shrink-0 mt-0.5 text-destructive" />
-                <p className="font-inter">
-                  <strong>Microphone Access Blocked:</strong> To use voice input on mobile, your browser requires a secure <strong>HTTPS</strong> connection. Please use a secure URL or grant microphone permissions in your browser settings.
-                </p>
+                <div className="font-inter space-y-1">
+                  <p className="font-bold text-destructive">Microphone Blocked (Insecure Context)</p>
+                  <p className="text-xs text-muted-foreground leading-relaxed">
+                    Mobile browsers strictly block microphone access on insecure connections (HTTP). Please access HaqDar AI via the secure <strong className="text-foreground">HTTPS</strong> localtunnel URL or grant microphone permissions in your mobile browser settings.
+                  </p>
+                </div>
               </div>
             )}
 
-            <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 pt-6 border-t border-border/30">
+            <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 pt-6 border-t border-accent/20 dark:border-accent/10">
               
               {/* Examples */}
               <div className="flex flex-wrap gap-2 flex-1">
@@ -84,25 +126,25 @@ export function ComplaintInput({ onAnalyze, loading }) {
                     key={i}
                     type="button"
                     onClick={() => handleExampleClick(ex)}
-                    className="text-xs font-inter px-4 py-2 rounded-full bg-secondary/60 text-secondary-foreground hover:bg-secondary transition-colors backdrop-blur-sm"
+                    className="text-xs font-inter px-3.5 py-1.5 rounded-md border border-border/80 bg-muted/30 text-muted-foreground hover:bg-accent/10 hover:text-accent hover:border-accent/30 transition-all cursor-pointer"
                   >
                     {ex}
                   </button>
                 ))}
               </div>
 
-              {/* Action Buttons */}
+              {/* Action Controls */}
               <div className="flex items-center gap-3 self-end md:self-auto shrink-0">
                 
-                {/* Language Toggle */}
+                {/* Language Manual Override */}
                 <Button
                   type="button"
                   variant="ghost"
                   onClick={toggleLanguage}
-                  className="rounded-full px-4 border border-border/40 hover:bg-background/50 font-medium tracking-wider"
+                  className="rounded-lg h-10 px-3 border border-border/60 hover:bg-accent/10 font-bold tracking-widest text-xs font-inter text-muted-foreground hover:text-accent"
                   title="Toggle Language"
                 >
-                  <span className="font-inter font-bold text-xs">{language === 'ur-PK' ? 'UR' : 'EN'}</span>
+                  {isUrduMode ? 'اردو' : 'ENGLISH'}
                 </Button>
 
                 {supported ? (
@@ -111,25 +153,25 @@ export function ComplaintInput({ onAnalyze, loading }) {
                     variant={isListening ? "destructive" : "secondary"}
                     size="icon"
                     className={cn(
-                      "rounded-full transition-all duration-300 relative",
-                      isListening && "animate-pulse shadow-[0_0_25px_rgba(239,68,68,0.6)] scale-110"
+                      "rounded-lg w-10 h-10 transition-all duration-300 relative border border-border/60 cursor-pointer",
+                      isListening && "animate-pulse ring-2 ring-red-500/40 dark:ring-red-500/25 scale-105"
                     )}
                     onClick={startListening}
                     disabled={loading}
-                    title={isListening ? "Stop listening" : "Start speaking"}
+                    title={isListening ? "Stop voice input" : "Start speaking"}
                   >
-                    {isListening ? <Square className="w-5 h-5" /> : <Mic className="w-5 h-5" />}
+                    {isListening ? <Square className="w-4 h-4" /> : <Mic className="w-4.5 h-4.5" />}
                   </Button>
                 ) : (
-                  <div className="text-xs text-muted-foreground flex items-center gap-1" title="Voice input not supported in this browser">
-                    <AlertCircle className="w-4 h-4" />
+                  <div className="text-xs text-muted-foreground flex items-center justify-center border rounded-lg w-10 h-10" title="Voice input not supported in this browser">
+                    <AlertCircle className="w-4.5 h-4.5 text-muted-foreground/40" />
                   </div>
                 )}
 
                 <Button 
                   type="submit" 
                   disabled={!text.trim() || loading}
-                  className="rounded-full px-8 font-urdu font-bold shadow-lg shadow-primary/20 hover:shadow-primary/40 transition-all hover:-translate-y-0.5"
+                  className="rounded-lg h-10 px-8 font-urdu font-bold shadow-lg shadow-primary/10 hover:shadow-primary/25 hover:border-primary transition-all hover:-translate-y-0.5 cursor-pointer"
                 >
                   {loading ? (
                     <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
@@ -145,9 +187,9 @@ export function ComplaintInput({ onAnalyze, loading }) {
             </div>
           </form>
 
-          {/* Listening Indicator Background */}
+          {/* Glowing record overlay indicator */}
           {isListening && (
-            <div className="absolute inset-0 bg-gradient-to-r from-destructive/0 via-destructive/5 to-destructive/0 animate-pulse pointer-events-none" />
+            <div className="absolute inset-0 bg-red-500/2 dark:bg-red-500/1 pointer-events-none" />
           )}
 
         </div>
@@ -155,3 +197,4 @@ export function ComplaintInput({ onAnalyze, loading }) {
     </div>
   );
 }
+

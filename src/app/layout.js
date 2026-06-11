@@ -1,4 +1,4 @@
-import { urduFont, interFont } from "@/lib/fonts";
+import { urduFont, interFont, ebGaramondFont } from "@/lib/fonts";
 import "@/styles/globals.css";
 import { Providers } from "./providers";
 import { AmbientBackground } from "@/components/ui/AmbientBackground";
@@ -12,7 +12,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="ur" dir="rtl" suppressHydrationWarning style={{ scrollBehavior: 'smooth' }}>
       <body
-        className={`${urduFont.variable} ${interFont.variable} font-inter antialiased bg-background text-foreground relative min-h-screen`}
+        className={`${urduFont.variable} ${interFont.variable} ${ebGaramondFont.variable} font-inter antialiased bg-background text-foreground relative min-h-screen`}
       >
         <AmbientBackground />
         <Providers>
@@ -24,3 +24,4 @@ export default function RootLayout({ children }) {
     </html>
   );
 }
+

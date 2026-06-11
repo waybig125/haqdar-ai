@@ -1,4 +1,4 @@
-import { Noto_Nastaliq_Urdu, Inter } from 'next/font/google';
+import { Noto_Nastaliq_Urdu, Inter, EB_Garamond } from 'next/font/google';
 
 export const urduFont = Noto_Nastaliq_Urdu({
   subsets: ['arabic'],
@@ -12,3 +12,11 @@ export const interFont = Inter({
   variable: '--font-inter',
   display: 'swap',
 });
+
+export const ebGaramondFont = EB_Garamond({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
+  variable: '--font-garamond',
+  display: 'swap',
+});
+
