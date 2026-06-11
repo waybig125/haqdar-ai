@@ -1,0 +1,78 @@
+import React from 'react';
+import { Header } from '@/components/layout/Header';
+import { Footer } from '@/components/layout/Footer';
+import { StatCard } from '@/components/ui/StatCard';
+import { CivicPulse } from '@/components/features/CivicPulse';
+import { AnimatedContainer } from '@/components/ui/AnimatedContainer';
+import { getStats } from '@/lib/api';
+import { FileWarning, Target, TrendingUp } from 'lucide-react';
+
+export const metadata = {
+  title: "Civic Pulse | HaqDar AI",
+  description: "Live dashboard tracking institutional corruption and complaints across Pakistan.",
+};
+
+export default async function DashboardPage() {
+  // In App Router, we can fetch data directly in Server Components
+  const stats = await getStats();
+
+  return (
+    <div className="min-h-screen flex flex-col selection:bg-primary/20 selection:text-primary">
+      <Header />
+      
+      <main className="flex-grow bg-background">
+        
+        {/* Dashboard Header */}
+        <div className="bg-muted/10 border-b border-border/40 pb-8 pt-12 md:pt-16">
+          <div className="container mx-auto px-4 max-w-7xl">
+            <AnimatedContainer variant="fadeUp">
+              <h1 className="font-urdu text-4xl md:text-5xl font-bold text-foreground mb-3">
+                سول نبض <span className="font-inter text-3xl font-light text-muted-foreground ml-2">— Civic Pulse</span>
+              </h1>
+              <p className="text-lg text-muted-foreground max-w-2xl">
+                Open data tracking of institutional accountability across Pakistan. All reports are completely anonymous.
+              </p>
+            </AnimatedContainer>
+          </div>
+        </div>
+
+        <div className="container mx-auto px-4 max-w-7xl py-12">
+          
+          {/* Top Stat Cards */}
+          <AnimatedContainer variant="staggerChildren" className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+            
+            <StatCard 
+              title="Total Anonymous Reports" 
+              value={stats.total_reports.toLocaleString()} 
+              icon={FileWarning}
+              trend="up"
+              trendLabel="12% this month"
+            />
+            
+            <StatCard 
+              title="SDG 16 Progress Metric" 
+              value={`${stats.sdg16_progress}%`} 
+              icon={Target}
+              trend="up"
+              trendLabel="0.4% improvement"
+            />
+
+            <StatCard 
+              title="Most Reported Issue" 
+              value={stats.top_issues[0].name} 
+              icon={TrendingUp}
+              className="md:border-primary/20 md:bg-primary/5"
+            />
+            
+          </AnimatedContainer>
+
+          {/* Main Visualizations */}
+          <CivicPulse data={stats} />
+
+        </div>
+      </main>
+
+      <Footer />
+    </div>
+  );
+}
