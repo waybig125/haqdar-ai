@@ -1,5 +1,5 @@
 import { urduFont, interFont } from "@/lib/fonts";
-import "@/styles/globals.scss";
+import "@/styles/globals.css";
 import { Providers } from "./providers";
 
 export const metadata = {
