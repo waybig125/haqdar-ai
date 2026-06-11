@@ -16,7 +16,7 @@ const EXAMPLES = [
 
 export function ComplaintInput({ onAnalyze, loading }) {
   const [text, setText] = useState('');
-  const { isListening, transcript, startListening, supported, setTranscript, language, setLanguage } = useSpeechRecognition();
+  const { isListening, transcript, startListening, supported, setTranscript, language, setLanguage, speechError } = useSpeechRecognition();
 
   // Update text area when speech transcript updates
   React.useEffect(() => {
@@ -49,8 +49,8 @@ export function ComplaintInput({ onAnalyze, loading }) {
       <AnimatedContainer variant="fadeUp">
         
         <div className={cn(
-          "bg-card border border-border/50 shadow-lg rounded-2xl p-5 md:p-8 transition-all duration-300 relative overflow-hidden",
-          isListening ? "ring-2 ring-primary/40 shadow-primary/10" : "focus-within:ring-2 focus-within:ring-primary/20"
+          "bg-card/40 backdrop-blur-xl border border-white/10 dark:border-white/5 shadow-2xl rounded-2xl p-5 md:p-8 transition-all duration-300 relative overflow-hidden",
+          isListening ? "ring-1 ring-primary/50 shadow-[0_0_40px_rgba(34,197,94,0.15)]" : "focus-within:ring-1 focus-within:ring-white/20 hover:border-white/20"
         )}>
           
           <form onSubmit={handleSubmit} className="flex flex-col gap-6 relative z-10">
@@ -65,6 +65,15 @@ export function ComplaintInput({ onAnalyze, loading }) {
               dir={language === 'ur-PK' ? "rtl" : "ltr"}
               disabled={loading}
             />
+
+            {speechError === 'not-allowed' && (
+              <div className="bg-destructive/10 border border-destructive/30 rounded-lg p-3 text-sm text-destructive-foreground flex items-start gap-2 animate-in fade-in slide-in-from-top-2">
+                <AlertCircle className="w-5 h-5 shrink-0 mt-0.5 text-destructive" />
+                <p className="font-inter">
+                  <strong>Microphone Access Blocked:</strong> To use voice input on mobile, your browser requires a secure <strong>HTTPS</strong> connection. Please use a secure URL or grant microphone permissions in your browser settings.
+                </p>
+              </div>
+            )}
 
             <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 pt-6 border-t border-border/30">
               

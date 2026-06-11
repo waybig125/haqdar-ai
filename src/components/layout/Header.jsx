@@ -45,7 +45,7 @@ export function Header() {
         
         {/* Logo */}
         <Link href="/" className="flex flex-col items-start gap-0 hover:opacity-80 transition-opacity">
-          <span className="font-urdu text-2xl font-bold text-primary leading-none">حق دار</span>
+          <span className="font-urdu text-2xl font-bold text-primary leading-none drop-shadow-[0_0_15px_rgba(16,185,129,0.5)]">حق دار</span>
           <span className="text-[10px] font-inter font-medium tracking-wider text-muted-foreground uppercase">HaqDar AI</span>
         </Link>
 

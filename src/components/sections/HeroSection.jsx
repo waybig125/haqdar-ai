@@ -26,17 +26,17 @@ export function HeroSection() {
         </AnimatedContainer>
 
         <AnimatedContainer variant="fadeUp" delay={0.2}>
-          <h1 className="font-urdu text-5xl md:text-7xl font-bold text-foreground mb-4 leading-[1.2]">
-            آواز میں <span className="text-primary">انصاف</span><br />
-            کی <span className="text-accent">طاقت</span>
+          <h1 className="font-urdu text-5xl md:text-7xl font-bold mb-4 leading-[1.2] bg-clip-text text-transparent bg-gradient-to-br from-foreground via-primary to-accent animate-gradient-x">
+            آواز میں انصاف<br />
+            کی طاقت
           </h1>
         </AnimatedContainer>
 
         <AnimatedContainer variant="fadeUp" delay={0.3}>
-          <p className="text-xl md:text-2xl font-inter text-muted-foreground mb-3 font-light tracking-wide max-w-3xl mx-auto">
+          <p className="text-xl md:text-2xl font-inter text-muted-foreground mb-3 font-light tracking-wide max-w-3xl mx-auto" dir="ltr">
             The Power of Justice in <span className="text-foreground font-medium">Every Voice.</span>
           </p>
-          <p className="text-base text-muted-foreground/80 mb-10 max-w-2xl mx-auto">
+          <p className="text-base text-muted-foreground/80 mb-10 max-w-2xl mx-auto" dir="ltr">
             Pakistan's first voice-enabled AI legal rights assistant. Speak your complaint, know your rights, and get your official letter drafted instantly.
           </p>
         </AnimatedContainer>

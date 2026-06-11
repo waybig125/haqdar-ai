@@ -29,8 +29,10 @@ export function useSpeechRecognition() {
   const [transcript, setTranscript] = useState('');
   const [supported, setSupported] = useState(true);
   const [language, setLanguage] = useState('ur-PK');
+  const [speechError, setSpeechError] = useState(null);
 
   const startListening = useCallback(() => {
+    setSpeechError(null);
     if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
       setSupported(false);
       return;
@@ -64,6 +66,11 @@ export function useSpeechRecognition() {
       // 'no-speech' fires when the user didn't speak in time — not a real error
       if (event.error !== 'no-speech') {
         console.error('Speech recognition error', event.error);
+        if (event.error === 'not-allowed') {
+          setSpeechError('not-allowed');
+        } else {
+          setSpeechError(event.error);
+        }
       }
       setIsListening(false);
     };
@@ -79,5 +86,5 @@ export function useSpeechRecognition() {
     };
   }, [language]);
 
-  return { isListening, transcript, startListening, supported, setTranscript, language, setLanguage };
+  return { isListening, transcript, startListening, supported, setTranscript, language, setLanguage, speechError };
 }
