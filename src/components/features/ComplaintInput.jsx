@@ -16,13 +16,12 @@ const EXAMPLES = [
 
 export function ComplaintInput({ onAnalyze, loading }) {
   const [text, setText] = useState('');
-  const { isListening, transcript, startListening, supported, setTranscript } = useSpeechRecognition();
+  const { isListening, transcript, startListening, supported, setTranscript, language, setLanguage } = useSpeechRecognition();
 
   // Update text area when speech transcript updates
   React.useEffect(() => {
     if (transcript) {
       setText(prev => {
-        // Simple heuristic to append safely
         const base = prev.trim();
         return base ? `${base} ${transcript}` : transcript;
       });
@@ -41,32 +40,42 @@ export function ComplaintInput({ onAnalyze, loading }) {
     setText(example);
   };
 
+  const toggleLanguage = () => {
+    setLanguage(prev => prev === 'ur-PK' ? 'en-US' : 'ur-PK');
+  };
+
   return (
-    <div id="complaint-section" className="w-full max-w-3xl mx-auto px-4 py-12 scroll-mt-24">
+    <div id="complaint-section" className="w-full max-w-4xl mx-auto px-4 py-12 scroll-mt-24">
       <AnimatedContainer variant="fadeUp">
         
-        <div className="bg-card border shadow-sm rounded-2xl p-4 md:p-6 transition-all focus-within:ring-2 focus-within:ring-primary/20 focus-within:border-primary/50 relative overflow-hidden">
+        <div className={cn(
+          "bg-background/40 backdrop-blur-2xl border border-white/20 dark:border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.08)] rounded-[2rem] p-6 md:p-8 transition-all duration-500 relative overflow-hidden",
+          isListening ? "ring-2 ring-primary/50 shadow-[0_8px_40px_rgba(34,197,94,0.15)]" : "focus-within:ring-2 focus-within:ring-primary/30"
+        )}>
           
-          <form onSubmit={handleSubmit} className="flex flex-col gap-4 relative z-10">
+          <form onSubmit={handleSubmit} className="flex flex-col gap-6 relative z-10">
             <textarea
               value={text}
               onChange={(e) => setText(e.target.value)}
-              placeholder="اپنی شکایت یہاں لکھیں یا بول کر درج کریں..."
-              className="w-full min-h-[120px] bg-transparent resize-none outline-none font-urdu text-xl leading-relaxed text-foreground placeholder:text-muted-foreground/60"
-              dir="auto"
+              placeholder={language === 'ur-PK' ? "اپنی شکایت یہاں لکھیں یا بول کر درج کریں..." : "Type or speak your complaint here..."}
+              className={cn(
+                "w-full min-h-[160px] bg-transparent resize-none outline-none leading-relaxed text-foreground placeholder:text-muted-foreground/50",
+                language === 'ur-PK' ? "font-urdu text-2xl" : "font-inter text-xl"
+              )}
+              dir={language === 'ur-PK' ? "rtl" : "ltr"}
               disabled={loading}
             />
 
-            <div className="flex flex-col-reverse sm:flex-row items-start sm:items-center justify-between gap-4 pt-4 border-t border-border/40">
+            <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 pt-6 border-t border-border/30">
               
               {/* Examples */}
-              <div className="flex flex-wrap gap-2">
+              <div className="flex flex-wrap gap-2 flex-1">
                 {EXAMPLES.map((ex, i) => (
                   <button
                     key={i}
                     type="button"
                     onClick={() => handleExampleClick(ex)}
-                    className="text-xs px-3 py-1.5 rounded-full bg-secondary/50 text-secondary-foreground hover:bg-secondary transition-colors"
+                    className="text-xs font-inter px-4 py-2 rounded-full bg-secondary/60 text-secondary-foreground hover:bg-secondary transition-colors backdrop-blur-sm"
                   >
                     {ex}
                   </button>
@@ -74,15 +83,27 @@ export function ComplaintInput({ onAnalyze, loading }) {
               </div>
 
               {/* Action Buttons */}
-              <div className="flex items-center gap-2 self-end sm:self-auto w-full sm:w-auto justify-end">
+              <div className="flex items-center gap-3 self-end md:self-auto shrink-0">
+                
+                {/* Language Toggle */}
+                <Button
+                  type="button"
+                  variant="ghost"
+                  onClick={toggleLanguage}
+                  className="rounded-full px-4 border border-border/40 hover:bg-background/50 font-medium tracking-wider"
+                  title="Toggle Language"
+                >
+                  <span className="font-inter font-bold text-xs">{language === 'ur-PK' ? 'UR' : 'EN'}</span>
+                </Button>
+
                 {supported ? (
                   <Button
                     type="button"
                     variant={isListening ? "destructive" : "secondary"}
                     size="icon"
                     className={cn(
-                      "rounded-full transition-all",
-                      isListening && "animate-pulse shadow-[0_0_15px_rgba(239,68,68,0.5)]"
+                      "rounded-full transition-all duration-300 relative",
+                      isListening && "animate-pulse shadow-[0_0_25px_rgba(239,68,68,0.6)] scale-110"
                     )}
                     onClick={startListening}
                     disabled={loading}
@@ -99,7 +120,7 @@ export function ComplaintInput({ onAnalyze, loading }) {
                 <Button 
                   type="submit" 
                   disabled={!text.trim() || loading}
-                  className="rounded-full px-6 font-urdu font-bold"
+                  className="rounded-full px-8 font-urdu font-bold shadow-lg shadow-primary/20 hover:shadow-primary/40 transition-all hover:-translate-y-0.5"
                 >
                   {loading ? (
                     <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
@@ -117,7 +138,7 @@ export function ComplaintInput({ onAnalyze, loading }) {
 
           {/* Listening Indicator Background */}
           {isListening && (
-            <div className="absolute inset-0 bg-destructive/5 animate-pulse pointer-events-none" />
+            <div className="absolute inset-0 bg-gradient-to-r from-destructive/0 via-destructive/5 to-destructive/0 animate-pulse pointer-events-none" />
           )}
 
         </div>

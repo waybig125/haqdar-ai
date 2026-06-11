@@ -31,7 +31,7 @@ export function CivicPulse({ data }) {
           <CardHeader>
             <CardTitle className="font-urdu text-2xl text-foreground">شکایات کا رجحان (6 ماہ)</CardTitle>
           </CardHeader>
-          <CardContent className="h-[300px]">
+          <CardContent className="h-[300px] min-w-0 min-h-0">
             <ResponsiveContainer width="100%" height="100%">
               <AreaChart data={data.monthly_trend} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
                 <defs>
@@ -60,7 +60,7 @@ export function CivicPulse({ data }) {
           <CardHeader>
             <CardTitle className="font-urdu text-2xl text-foreground">اقسام (Categories)</CardTitle>
           </CardHeader>
-          <CardContent className="h-[300px] flex items-center justify-center">
+          <CardContent className="h-[300px] flex items-center justify-center min-w-0 min-h-0">
             <ResponsiveContainer width="100%" height="100%">
               <PieChart>
                 <Pie

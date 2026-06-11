@@ -15,29 +15,29 @@ export function HeroSection() {
   };
 
   return (
-    <section className="relative pt-24 pb-16 md:pt-32 md:pb-24 overflow-hidden">
-      {/* Background Pattern */}
-      <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-primary/10 via-background to-background" />
+    <section className="relative pt-32 pb-24 md:pt-48 md:pb-32 overflow-hidden flex flex-col items-center justify-center min-h-[85vh]">
       
-      <div className="container mx-auto px-4 max-w-4xl text-center flex flex-col items-center">
+      <div className="container mx-auto px-4 text-center flex flex-col items-center relative z-10">
         
         <AnimatedContainer variant="fadeUp" delay={0.1}>
-          <div className="mb-6 flex justify-center">
-            <SDGBadge variant="both" />
+          <div className="mb-8 flex justify-center">
+            <SDGBadge variant="both" className="bg-background/40 backdrop-blur-md border-border/20 shadow-sm" />
           </div>
         </AnimatedContainer>
 
         <AnimatedContainer variant="fadeUp" delay={0.2}>
-          <h1 className="font-urdu text-5xl md:text-7xl font-bold text-foreground mb-6 leading-tight">
-            اپنی شکایت درج کریں — <br className="hidden md:block" />
-            <span className="text-primary">اپنے حقوق جانیں</span>
+          <h1 className="font-urdu text-[4rem] sm:text-[6rem] lg:text-[8rem] font-black text-foreground mb-4 leading-[1.1] tracking-tight drop-shadow-sm mix-blend-hard-light dark:mix-blend-normal">
+            آواز میں <span className="text-primary/90">انصاف</span><br />
+            کی <span className="text-accent/90">طاقت</span>
           </h1>
         </AnimatedContainer>
 
         <AnimatedContainer variant="fadeUp" delay={0.3}>
-          <p className="text-lg md:text-xl text-muted-foreground mb-10 max-w-2xl mx-auto font-medium">
-            Speak your complaint. Know your rights. Get your letter. <br />
-            Pakistan's first voice-enabled AI legal rights assistant.
+          <p className="text-xl md:text-3xl font-inter text-muted-foreground mb-4 font-light tracking-wide max-w-3xl mx-auto">
+            The Power of Justice in <span className="text-foreground font-medium">Every Voice.</span>
+          </p>
+          <p className="text-lg text-muted-foreground/80 mb-12 max-w-2xl mx-auto">
+            Pakistan's first voice-enabled AI legal rights assistant. Speak your complaint, know your rights, and get your official letter drafted instantly.
           </p>
         </AnimatedContainer>
 
@@ -45,10 +45,10 @@ export function HeroSection() {
           <Button 
             size="lg" 
             onClick={scrollToInput}
-            className="rounded-full px-8 h-14 text-lg font-urdu shadow-lg shadow-primary/25 hover:shadow-primary/40 transition-all hover:-translate-y-1"
+            className="rounded-full px-10 h-16 text-xl font-urdu shadow-[0_8px_30px_rgb(0,0,0,0.12)] shadow-primary/30 hover:shadow-primary/50 transition-all hover:-translate-y-1 bg-foreground text-background hover:bg-foreground/90"
           >
             شکایت درج کریں
-            <ArrowDown className="ms-2 w-5 h-5" />
+            <ArrowDown className="ms-3 w-6 h-6 animate-bounce" />
           </Button>
         </AnimatedContainer>
 

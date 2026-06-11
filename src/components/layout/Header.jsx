@@ -35,18 +35,18 @@ export function Header() {
   return (
     <header 
       className={cn(
-        "sticky top-0 z-50 w-full transition-all duration-300 border-b",
+        "sticky top-0 z-50 w-full transition-all duration-500 border-b",
         isScrolled 
-          ? "bg-background/80 backdrop-blur-md border-border/40 shadow-sm" 
-          : "bg-background border-transparent"
+          ? "bg-background/40 backdrop-blur-2xl border-border/20 shadow-sm py-2" 
+          : "bg-transparent border-transparent py-4"
       )}
     >
-      <div className="container mx-auto px-4 max-w-6xl h-16 flex items-center justify-between">
+      <div className="container mx-auto px-4 max-w-6xl flex items-center justify-between">
         
         {/* Logo */}
         <Link href="/" className="flex flex-col items-start gap-0 hover:opacity-80 transition-opacity">
-          <span className="font-urdu text-2xl font-bold text-primary leading-none">حق دار</span>
-          <span className="text-[10px] font-inter font-medium tracking-wider text-muted-foreground uppercase">HaqDar AI</span>
+          <span className="font-urdu text-4xl font-bold text-primary leading-none drop-shadow-sm">حق دار</span>
+          <span className="text-xs font-inter font-medium tracking-widest text-muted-foreground uppercase mt-1">HaqDar AI</span>
         </Link>
 
         {/* Desktop Navigation */}

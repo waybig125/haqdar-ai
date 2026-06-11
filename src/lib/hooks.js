@@ -28,6 +28,7 @@ export function useSpeechRecognition() {
   const [isListening, setIsListening] = useState(false);
   const [transcript, setTranscript] = useState('');
   const [supported, setSupported] = useState(true);
+  const [language, setLanguage] = useState('ur-PK');
 
   const startListening = useCallback(() => {
     if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
@@ -38,7 +39,7 @@ export function useSpeechRecognition() {
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
     const recognition = new SpeechRecognition();
 
-    recognition.lang = 'ur-PK'; // Urdu (Pakistan)
+    recognition.lang = language;
     recognition.continuous = false;
     recognition.interimResults = true;
 
@@ -48,11 +49,15 @@ export function useSpeechRecognition() {
     };
 
     recognition.onresult = (event) => {
-      let currentTranscript = '';
+      let finalTranscript = '';
       for (let i = event.resultIndex; i < event.results.length; ++i) {
-        currentTranscript += event.results[i][0].transcript;
+        if (event.results[i].isFinal) {
+          finalTranscript += event.results[i][0].transcript;
+        }
       }
-      setTranscript(currentTranscript);
+      if (finalTranscript) {
+        setTranscript(finalTranscript);
+      }
     };
 
     recognition.onerror = (event) => {
@@ -69,7 +74,7 @@ export function useSpeechRecognition() {
     return () => {
       recognition.stop();
     };
-  }, []);
+  }, [language]);
 
-  return { isListening, transcript, startListening, supported, setTranscript };
+  return { isListening, transcript, startListening, supported, setTranscript, language, setLanguage };
 }
