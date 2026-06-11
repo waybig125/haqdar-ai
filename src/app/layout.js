@@ -12,7 +12,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="ur" dir="rtl" suppressHydrationWarning style={{ scrollBehavior: 'smooth' }}>
       <body
-        className={`${urduFont.variable} ${interFont.variable} font-inter antialiased bg-transparent text-foreground relative min-h-screen`}
+        className={`${urduFont.variable} ${interFont.variable} font-inter antialiased bg-background text-foreground relative min-h-screen`}
       >
         <AmbientBackground />
         <Providers>

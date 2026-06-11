@@ -123,7 +123,7 @@ export function HeatmapSection() {
 
           <div className="absolute -bottom-5 left-1/2 -translate-x-1/2 z-20">
             <div className="bg-background border shadow-xl rounded-full px-6 py-3 flex items-center gap-3 whitespace-nowrap">
-              <span className="w-3 h-3 rounded-full bg-red-500 animate-pulse" />
+              <span className="w-3 h-3 rounded-full bg-red-500" />
               <span className="font-bold text-lg font-inter tracking-tight">1,247</span>
               <span className="text-sm font-medium text-muted-foreground uppercase tracking-wider">Reports this month</span>
             </div>

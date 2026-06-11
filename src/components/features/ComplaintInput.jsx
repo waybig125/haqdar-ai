@@ -49,8 +49,8 @@ export function ComplaintInput({ onAnalyze, loading }) {
       <AnimatedContainer variant="fadeUp">
         
         <div className={cn(
-          "bg-background/40 backdrop-blur-2xl border border-white/20 dark:border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.08)] rounded-[2rem] p-6 md:p-8 transition-all duration-500 relative overflow-hidden",
-          isListening ? "ring-2 ring-primary/50 shadow-[0_8px_40px_rgba(34,197,94,0.15)]" : "focus-within:ring-2 focus-within:ring-primary/30"
+          "bg-card border border-border/50 shadow-lg rounded-2xl p-5 md:p-8 transition-all duration-300 relative overflow-hidden",
+          isListening ? "ring-2 ring-primary/40 shadow-primary/10" : "focus-within:ring-2 focus-within:ring-primary/20"
         )}>
           
           <form onSubmit={handleSubmit} className="flex flex-col gap-6 relative z-10">

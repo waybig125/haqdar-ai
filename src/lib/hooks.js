@@ -61,7 +61,10 @@ export function useSpeechRecognition() {
     };
 
     recognition.onerror = (event) => {
-      console.error('Speech recognition error', event.error);
+      // 'no-speech' fires when the user didn't speak in time — not a real error
+      if (event.error !== 'no-speech') {
+        console.error('Speech recognition error', event.error);
+      }
       setIsListening(false);
     };
 
