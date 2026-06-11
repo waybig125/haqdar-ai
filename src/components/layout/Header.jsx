@@ -77,10 +77,8 @@ export function Header() {
           <ThemeToggle />
           
           <Sheet>
-            <SheetTrigger asChild>
-              <Button variant="ghost" size="icon" aria-label="Open Menu">
-                <Menu className="w-5 h-5" />
-              </Button>
+            <SheetTrigger render={<Button variant="ghost" size="icon" aria-label="Open Menu" />}>
+              <Menu className="w-5 h-5" />
             </SheetTrigger>
             <SheetContent side="start" className="w-[300px] sm:w-[400px]">
               <SheetTitle className="sr-only">Navigation Menu</SheetTitle>

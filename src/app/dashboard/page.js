@@ -5,7 +5,6 @@ import { StatCard } from '@/components/ui/StatCard';
 import { CivicPulse } from '@/components/features/CivicPulse';
 import { AnimatedContainer } from '@/components/ui/AnimatedContainer';
 import { getStats } from '@/lib/api';
-import { FileWarning, Target, TrendingUp } from 'lucide-react';
 
 export const metadata = {
   title: "Civic Pulse | HaqDar AI",
@@ -44,7 +43,7 @@ export default async function DashboardPage() {
             <StatCard 
               title="Total Anonymous Reports" 
               value={stats.total_reports.toLocaleString()} 
-              icon={FileWarning}
+              iconName="FileWarning"
               trend="up"
               trendLabel="12% this month"
             />
@@ -52,7 +51,7 @@ export default async function DashboardPage() {
             <StatCard 
               title="SDG 16 Progress Metric" 
               value={`${stats.sdg16_progress}%`} 
-              icon={Target}
+              iconName="Target"
               trend="up"
               trendLabel="0.4% improvement"
             />
@@ -60,7 +59,7 @@ export default async function DashboardPage() {
             <StatCard 
               title="Most Reported Issue" 
               value={stats.top_issues[0].name} 
-              icon={TrendingUp}
+              iconName="TrendingUp"
               className="md:border-primary/20 md:bg-primary/5"
             />
             

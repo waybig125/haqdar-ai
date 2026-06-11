@@ -16,11 +16,9 @@ export default function NotFound() {
         The page you are looking for might have been removed, had its name changed, or is temporarily unavailable.
       </p>
       
-      <Button asChild size="lg" className="rounded-full px-8">
-        <Link href="/">
-          <ArrowLeft className="w-4 h-4 mr-2" />
-          واپس ہوم پیج پر جائیں (Go Home)
-        </Link>
+      <Button render={<Link href="/" />} size="lg" className="rounded-full px-8">
+        <ArrowLeft className="w-4 h-4 mr-2" />
+        واپس ہوم پیج پر جائیں (Go Home)
       </Button>
     </div>
   );

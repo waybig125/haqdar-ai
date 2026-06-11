@@ -4,15 +4,24 @@ import React from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { cn } from '@/lib/utils';
 import { motion } from 'framer-motion';
+import { FileWarning, Target, TrendingUp } from 'lucide-react';
+
+const ICONS = {
+  FileWarning,
+  Target,
+  TrendingUp,
+};
 
 export function StatCard({ 
   title, 
   value, 
-  icon: Icon, 
+  iconName, 
   trend, 
   trendLabel, 
   className 
 }) {
+  const Icon = iconName ? ICONS[iconName] : null;
+
   return (
     <Card className={cn("overflow-hidden border-border/50 shadow-sm", className)}>
       <CardContent className="p-6">
