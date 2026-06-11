@@ -25,8 +25,8 @@ export default async function DashboardPage() {
         <div className="border-b border-accent/20 dark:border-accent/10 pb-10 pt-16 bg-muted/20 relative">
           <div className="container mx-auto px-4 max-w-7xl">
             <AnimatedContainer variant="fadeUp">
-              <h1 className="font-urdu text-4xl md:text-5xl font-bold text-foreground mb-3 leading-[1.3]">
-                سول نبض <span className="font-garamond italic text-3xl font-bold text-accent ml-3">— Civic Pulse</span>
+              <h1 className="font-urdu text-4xl md:text-5xl font-bold text-foreground mb-3 leading-[1.3] flex flex-wrap items-center">
+                سول نبض <span className="gold-gradient-text font-garamond italic text-3xl font-bold ml-3">— Civic Pulse</span>
               </h1>
               <p className="text-sm md:text-base text-muted-foreground max-w-2xl leading-relaxed font-inter">
                 Real-time open data tracking of institutional accountability and transparency across Pakistan. All reports are completely anonymous.
@@ -34,6 +34,7 @@ export default async function DashboardPage() {
             </AnimatedContainer>
           </div>
         </div>
+
 
 
         <div className="container mx-auto px-4 max-w-7xl py-12">

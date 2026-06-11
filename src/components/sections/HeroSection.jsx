@@ -5,6 +5,7 @@ import { AnimatedContainer } from '@/components/ui/AnimatedContainer';
 import { SDGBadge } from '@/components/ui/SDGBadge';
 import { Button } from '@/components/ui/button';
 import { ArrowDown } from 'lucide-react';
+import { GeometricMedallion } from '@/components/ui/GeometricMedallion';
 
 export function HeroSection() {
   const scrollToInput = () => {
@@ -15,45 +16,65 @@ export function HeroSection() {
   };
 
   return (
-    <section className="relative pt-24 pb-16 md:pt-36 md:pb-28 overflow-hidden">
+    <section className="relative pt-20 pb-16 md:pt-32 md:pb-24 overflow-hidden">
       
-      <div className="container mx-auto px-4 max-w-4xl text-center flex flex-col items-center relative z-10">
-        
-        <AnimatedContainer variant="fadeUp" delay={0.1}>
-          <div className="mb-8 flex justify-center">
-            <SDGBadge variant="both" />
+      <div className="container mx-auto px-4 max-w-6xl relative z-10">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+          
+          {/* Left / Center content */}
+          <div className="md:col-span-8 flex flex-col items-center md:items-start text-center md:text-start">
+            
+            <AnimatedContainer variant="fadeUp" delay={0.1}>
+              <div className="mb-6 flex justify-center md:justify-start">
+                <SDGBadge variant="both" />
+              </div>
+            </AnimatedContainer>
+
+            <AnimatedContainer variant="fadeUp" delay={0.2}>
+              <h1 className="font-garamond text-5xl md:text-8xl font-black mb-1 tracking-wider uppercase bg-gradient-to-b from-[#FAF4E5] via-[#C5A059] to-[#8A6635] text-transparent bg-clip-text filter drop-shadow-[0_4px_8px_rgba(0,0,0,0.4)] leading-none select-none">
+                HaqDar AI
+              </h1>
+              <p className="font-garamond italic text-lg md:text-xl font-bold tracking-widest text-accent uppercase mb-8" dir="ltr">
+                AI-Powered Rights Empowerment for Pakistan
+              </p>
+            </AnimatedContainer>
+
+            <AnimatedContainer variant="fadeUp" delay={0.3} className="space-y-6">
+              <h2 className="font-urdu text-4xl md:text-6xl font-bold leading-[1.3] text-foreground">
+                آواز میں انصاف کی طاقت
+              </h2>
+              <p className="text-sm md:text-base text-muted-foreground max-w-xl leading-relaxed font-inter" dir="ltr">
+                Pakistan's first voice-enabled AI legal rights assistant. Speak your complaint in Urdu or English, know your rights, and draft formal legal petitions instantly.
+              </p>
+            </AnimatedContainer>
+
+            <AnimatedContainer variant="fadeUp" delay={0.4} className="mt-10">
+              <Button 
+                size="lg" 
+                onClick={scrollToInput}
+                className="bezel-btn px-10 h-14 font-urdu text-xl rounded-lg border border-accent/40 shadow-xl cursor-pointer"
+              >
+                شکایت درج کریں
+                <ArrowDown className="ms-2 w-5 h-5 animate-bounce text-accent" />
+              </Button>
+            </AnimatedContainer>
+
           </div>
-        </AnimatedContainer>
 
-        <AnimatedContainer variant="fadeUp" delay={0.2}>
-          <h1 className="font-urdu text-5xl md:text-7xl font-bold mb-6 leading-[1.3] bg-clip-text text-transparent bg-gradient-to-r from-foreground via-accent to-foreground">
-            آواز میں انصاف<br />
-            کی طاقت
-          </h1>
-        </AnimatedContainer>
+          {/* Right Column: Decorative Gold Rosette Medallion */}
+          <div className="hidden md:col-span-4 md:flex items-center justify-center relative">
+            <AnimatedContainer variant="fadeUp" delay={0.3} className="relative z-10">
+              <div className="relative group">
+                <div className="absolute -inset-4 bg-accent/10 rounded-full blur-3xl opacity-30 animate-pulse pointer-events-none" />
+                <GeometricMedallion size={300} className="animate-[spin_120s_linear_infinite]" />
+              </div>
+            </AnimatedContainer>
+          </div>
 
-        <AnimatedContainer variant="fadeUp" delay={0.3}>
-          <p className="text-2xl md:text-3xl font-garamond italic text-muted-foreground mb-4 tracking-wide max-w-3xl mx-auto" dir="ltr">
-            The Power of Justice in <span className="text-accent font-semibold not-italic">Every Voice.</span>
-          </p>
-          <p className="text-sm md:text-base text-muted-foreground/80 mb-12 max-w-xl mx-auto leading-relaxed font-inter" dir="ltr">
-            Pakistan's first voice-enabled AI legal rights assistant. Speak your complaint in Urdu or English, know your rights, and draft formal legal petitions instantly.
-          </p>
-        </AnimatedContainer>
-
-        <AnimatedContainer variant="fadeUp" delay={0.4}>
-          <Button 
-            size="lg" 
-            onClick={scrollToInput}
-            className="px-10 h-14 rounded-lg font-urdu text-xl shadow-xl shadow-primary/5 dark:shadow-black/20 hover:shadow-primary/15 transition-all hover:-translate-y-0.5 border border-accent/30 hover:border-accent cursor-pointer"
-          >
-            شکایت درج کریں
-            <ArrowDown className="ms-2 w-5 h-5 animate-bounce" />
-          </Button>
-        </AnimatedContainer>
-
+        </div>
       </div>
     </section>
   );
 }
+
 

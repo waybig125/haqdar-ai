@@ -23,15 +23,15 @@ export function StatCard({
   const Icon = iconName ? ICONS[iconName] : null;
 
   return (
-    <Card className={cn("overflow-hidden border border-accent/25 dark:border-accent/15 bg-card shadow-[0_10px_30px_rgba(27,56,42,0.02)] dark:shadow-[0_10px_30px_rgba(0,0,0,0.3)] rounded-xl relative", className)}>
-      <div className="absolute left-0 top-0 h-full w-1 bg-accent/40" />
+    <Card className={cn("overflow-hidden border-2 border-accent/20 bg-card rounded-xl shadow-[0_8px_25px_rgba(0,0,0,0.15)] dark:shadow-[0_8px_25px_rgba(0,0,0,0.4)] relative", className)}>
+      <div className="absolute left-0 top-0 h-full w-1.5 bg-gradient-to-b from-[#FAF4E5] via-[#C5A059] to-[#8A6635]" />
       <CardContent className="p-6">
         <div className="flex items-center justify-between gap-4 mb-4">
           <h3 className="font-bold text-muted-foreground text-[10px] tracking-widest uppercase font-inter">
             {title}
           </h3>
           {Icon && (
-            <div className="w-10 h-10 rounded bg-accent/10 flex items-center justify-center text-accent">
+            <div className="w-10 h-10 rounded bg-[#3A231A]/10 dark:bg-accent/10 flex items-center justify-center text-accent">
               <Icon className="w-4.5 h-4.5" />
             </div>
           )}
@@ -50,7 +50,7 @@ export function StatCard({
           {trend && (
             <div className={cn(
               "flex items-center text-xs font-bold font-inter",
-              trend === 'up' ? "text-red-500" : trend === 'down' ? "text-emerald-600 dark:text-emerald-400" : "text-amber-500"
+              trend === 'up' ? "text-red-600 dark:text-red-400" : trend === 'down' ? "text-emerald-700 dark:text-emerald-400" : "text-accent"
             )}>
               {trend === 'up' ? '↑' : trend === 'down' ? '↓' : '→'}
               <span className="ms-1 text-[10px] font-semibold text-muted-foreground uppercase tracking-widest">{trendLabel}</span>
@@ -60,5 +60,6 @@ export function StatCard({
       </CardContent>
     </Card>
   );
+
 
 }

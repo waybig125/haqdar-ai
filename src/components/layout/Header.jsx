@@ -14,6 +14,7 @@ import {
   SheetTitle,
 } from "@/components/ui/sheet";
 import { cn } from '@/lib/utils';
+import { GeometricMedallion } from '@/components/ui/GeometricMedallion';
 
 const NAV_LINKS = [
   { name: 'شکایت درج کریں (Home)', href: '/' },
@@ -37,17 +38,21 @@ export function Header() {
       className={cn(
         "sticky top-0 z-50 w-full transition-all duration-300 border-b h-16 flex items-center",
         isScrolled 
-          ? "bg-background/95 backdrop-blur-lg border-border/80 shadow-md shadow-black/5" 
+          ? "bg-background/95 backdrop-blur-lg border-accent/20 dark:border-accent/10 shadow-md shadow-black/5" 
           : "bg-background/80 backdrop-blur-md border-transparent"
       )}
     >
       <div className="container mx-auto px-4 max-w-6xl flex items-center justify-between">
         
         {/* Logo */}
-        <Link href="/" className="flex flex-col items-start gap-0.5 hover:opacity-90 transition-opacity group">
-          <span className="font-urdu text-2xl font-bold text-foreground leading-none group-hover:text-primary transition-colors">حق دار</span>
-          <span className="text-[10px] font-garamond italic font-bold tracking-widest text-accent uppercase leading-none">HaqDar AI</span>
+        <Link href="/" className="flex items-center gap-2.5 hover:opacity-95 transition-opacity group">
+          <GeometricMedallion size={32} className="shrink-0 drop-shadow-[0_2px_8px_rgba(197,160,89,0.3)]" />
+          <div className="flex flex-col items-start gap-0">
+            <span className="font-urdu text-2xl font-bold text-foreground leading-none group-hover:text-accent transition-colors">حق دار</span>
+            <span className="text-[9px] font-garamond italic font-bold tracking-widest text-accent uppercase leading-none">HaqDar AI</span>
+          </div>
         </Link>
+
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center gap-6">
@@ -83,10 +88,14 @@ export function Header() {
             <SheetContent side="start" className="w-[300px] sm:w-[400px] bg-card border-e border-border">
               <SheetTitle className="sr-only">Navigation Menu</SheetTitle>
               <div className="flex flex-col gap-8 mt-8">
-                <Link href="/" className="flex flex-col items-start gap-1">
-                  <span className="font-urdu text-3xl font-bold text-foreground">حق دار</span>
-                  <span className="text-xs font-garamond italic font-bold tracking-widest text-accent uppercase">HaqDar AI</span>
+                <Link href="/" className="flex items-center gap-3">
+                  <GeometricMedallion size={36} className="shrink-0 drop-shadow-[0_2px_8px_rgba(197,160,89,0.3)]" />
+                  <div className="flex flex-col items-start gap-0">
+                    <span className="font-urdu text-3xl font-bold text-foreground">حق دار</span>
+                    <span className="text-[10px] font-garamond italic font-bold tracking-widest text-accent uppercase">HaqDar AI</span>
+                  </div>
                 </Link>
+
                 
                 <nav className="flex flex-col gap-2">
                   {NAV_LINKS.map((link) => (

@@ -72,33 +72,36 @@ export function ComplaintInput({ onAnalyze, loading }) {
     <div id="complaint-section" className="w-full max-w-4xl mx-auto px-4 py-12 scroll-mt-24">
       <AnimatedContainer variant="fadeUp">
         
-        {/* Parchment Document Petition Wrapper */}
+        {/* Mahogany Wood Console Outer Frame */}
         <div className={cn(
-          "bg-card border-4 border-double border-accent/30 dark:border-accent/15 shadow-[0_25px_60px_-15px_rgba(27,56,42,0.08)] dark:shadow-[0_25px_60px_-15px_rgba(0,0,0,0.5)] rounded-2xl p-6 md:p-10 transition-all duration-300 relative overflow-hidden",
-          isListening ? "ring-2 ring-red-500/30 dark:ring-red-500/20 shadow-[0_0_50px_rgba(239,68,68,0.15)]" : "hover:border-accent/40"
+          "wood-console rounded-2xl p-6 md:p-8 transition-all duration-300 relative overflow-hidden",
+          isListening ? "ring-2 ring-red-500/50" : ""
         )}>
           
-          {/* Subtle watermark in upper right of document */}
-          <div className="absolute top-4 right-6 text-[10px] uppercase tracking-[0.2em] font-semibold text-muted-foreground/15 font-inter select-none pointer-events-none">
-            Official Petition Form
-          </div>
+          <form onSubmit={handleSubmit} className="flex flex-col gap-5 relative z-10">
+            
+            {/* Aged Parchment Sheet Textarea Box */}
+            <div className="parchment-sheet rounded-xl p-5 md:p-8 relative">
+              
+              {/* Official Document Seal Watermark */}
+              <div className="absolute top-3 right-5 text-[9px] uppercase tracking-[0.25em] font-bold text-amber-900/15 dark:text-amber-100/10 font-inter select-none pointer-events-none">
+                Official Petition Form
+              </div>
 
-          <form onSubmit={handleSubmit} className="flex flex-col gap-6 relative z-10">
-            <div className="relative">
               <textarea
                 value={text}
                 onChange={(e) => setText(e.target.value)}
                 placeholder={isUrduMode ? "اپنی شکایت یہاں لکھیں یا مائیک کا بٹن دبا کر بولیں..." : "Type or click the microphone to speak your complaint..."}
                 className={cn(
-                  "w-full min-h-[180px] bg-transparent resize-none outline-none leading-relaxed text-foreground placeholder:text-muted-foreground/30 focus:placeholder:text-muted-foreground/20 transition-all",
-                  isUrduMode ? "font-urdu text-2xl md:text-3xl leading-[1.8]" : "font-garamond text-xl md:text-2xl font-medium"
+                  "w-full min-h-[170px] bg-transparent resize-none outline-none leading-relaxed placeholder:text-amber-900/30 dark:placeholder:text-amber-100/25 transition-all border-none focus:ring-0",
+                  isUrduMode ? "font-urdu text-2xl md:text-3xl leading-[1.8] text-amber-950 dark:text-amber-100" : "font-garamond text-xl md:text-2xl font-bold text-amber-950 dark:text-amber-100"
                 )}
                 dir={isUrduMode ? "rtl" : "ltr"}
                 disabled={loading}
               />
               
               {!text && (
-                <div className="absolute bottom-2 right-2 text-muted-foreground/30 text-xs flex items-center gap-1.5 font-inter">
+                <div className="absolute bottom-3 right-4 text-amber-900/40 dark:text-amber-100/30 text-xs flex items-center gap-1.5 font-inter">
                   <Sparkles className="w-3.5 h-3.5" />
                   Auto-detects Urdu & English
                 </div>
@@ -117,16 +120,17 @@ export function ComplaintInput({ onAnalyze, loading }) {
               </div>
             )}
 
-            <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 pt-6 border-t border-accent/20 dark:border-accent/10">
+            {/* Mahogany Console Controls Footer Bar */}
+            <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-5 pt-4">
               
-              {/* Examples */}
+              {/* Examples (styled as bezeled wood console pills) */}
               <div className="flex flex-wrap gap-2 flex-1">
                 {EXAMPLES.map((ex, i) => (
                   <button
                     key={i}
                     type="button"
                     onClick={() => handleExampleClick(ex)}
-                    className="text-xs font-inter px-3.5 py-1.5 rounded-md border border-border/80 bg-muted/30 text-muted-foreground hover:bg-accent/10 hover:text-accent hover:border-accent/30 transition-all cursor-pointer"
+                    className="text-xs font-inter px-3.5 py-1.5 rounded bg-[#3A231A]/60 text-accent hover:bg-[#3A231A] border border-[#523225] hover:border-[#C5A059]/40 transition-all cursor-pointer shadow-[0_2px_4px_rgba(0,0,0,0.2)] font-semibold"
                   >
                     {ex}
                   </button>
@@ -136,12 +140,12 @@ export function ComplaintInput({ onAnalyze, loading }) {
               {/* Action Controls */}
               <div className="flex items-center gap-3 self-end md:self-auto shrink-0">
                 
-                {/* Language Manual Override */}
+                {/* Language Manual Override (Gold bezeled) */}
                 <Button
                   type="button"
                   variant="ghost"
                   onClick={toggleLanguage}
-                  className="rounded-lg h-10 px-3 border border-border/60 hover:bg-accent/10 font-bold tracking-widest text-xs font-inter text-muted-foreground hover:text-accent"
+                  className="bezel-btn rounded px-4 h-10 font-bold tracking-widest text-xs font-inter text-accent cursor-pointer"
                   title="Toggle Language"
                 >
                   {isUrduMode ? 'اردو' : 'ENGLISH'}
@@ -153,32 +157,32 @@ export function ComplaintInput({ onAnalyze, loading }) {
                     variant={isListening ? "destructive" : "secondary"}
                     size="icon"
                     className={cn(
-                      "rounded-lg w-10 h-10 transition-all duration-300 relative border border-border/60 cursor-pointer",
-                      isListening && "animate-pulse ring-2 ring-red-500/40 dark:ring-red-500/25 scale-105"
+                      "bezel-btn rounded-full w-10 h-10 transition-all duration-300 relative cursor-pointer",
+                      isListening && "animate-pulse ring-2 ring-red-500/50 scale-105"
                     )}
                     onClick={startListening}
                     disabled={loading}
                     title={isListening ? "Stop voice input" : "Start speaking"}
                   >
-                    {isListening ? <Square className="w-4 h-4" /> : <Mic className="w-4.5 h-4.5" />}
+                    {isListening ? <Square className="w-4 h-4 text-red-400" /> : <Mic className="w-4.5 h-4.5 text-accent" />}
                   </Button>
                 ) : (
-                  <div className="text-xs text-muted-foreground flex items-center justify-center border rounded-lg w-10 h-10" title="Voice input not supported in this browser">
-                    <AlertCircle className="w-4.5 h-4.5 text-muted-foreground/40" />
+                  <div className="text-xs text-muted-foreground flex items-center justify-center border border-[#523225] rounded-full w-10 h-10 bg-[#3A231A]" title="Voice input not supported in this browser">
+                    <AlertCircle className="w-4.5 h-4.5 text-muted-foreground/30" />
                   </div>
                 )}
 
                 <Button 
                   type="submit" 
                   disabled={!text.trim() || loading}
-                  className="rounded-lg h-10 px-8 font-urdu font-bold shadow-lg shadow-primary/10 hover:shadow-primary/25 hover:border-primary transition-all hover:-translate-y-0.5 cursor-pointer"
+                  className="bezel-btn px-8 h-10 font-urdu font-bold rounded-lg cursor-pointer flex items-center gap-2 border-emerald-600 bg-gradient-to-b from-emerald-800 to-emerald-950 hover:from-emerald-700 hover:to-emerald-900"
                 >
                   {loading ? (
                     <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
                   ) : (
                     <>
                       تجزیہ کریں
-                      <Send className="w-4 h-4 ms-2 rotate-180 rtl:rotate-0" />
+                      <Send className="w-4 h-4 ms-2 rotate-180 rtl:rotate-0 text-emerald-400" />
                     </>
                   )}
                 </Button>
@@ -186,6 +190,7 @@ export function ComplaintInput({ onAnalyze, loading }) {
 
             </div>
           </form>
+
 
           {/* Glowing record overlay indicator */}
           {isListening && (

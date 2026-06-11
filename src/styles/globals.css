@@ -41,13 +41,6 @@
   --font-garamond: var(--font-garamond);
 }
 
-/*
-  The default border color has changed to `currentColor` in Tailwind CSS v4,
-  so we've added these compatibility styles to make sure everything still
-  looks the same as it did with Tailwind CSS v3.
-  If we ever want to remove these styles, we need to add an explicit border
-  color utility to any element that depends on these defaults.
-*/
 @layer base {
   *,
   ::after,
@@ -60,78 +53,77 @@
 
 @layer base {
   :root {
-    /* The Court Archivist Theme - Light (Warm Parchment / Stamp Green / Wax Gold) */
-    --background: 36 30% 97%; /* #FAF7F2 */
-    --foreground: 150 20% 8%; /* #0F1412 */
-    --card: 0 0% 100%;
-    --card-foreground: 150 20% 8%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 150 20% 8%;
+    /* Analog Mahogany & Brass Parchment - Light (Warm Parchment / Mahogany Gold / Deep Coffee Ink) */
+    --background: 37 32% 93%; /* #F3ECD8 */
+    --foreground: 22 40% 10%; /* #22120B */
+    --card: 37 36% 95%; /* #FAF4E5 */
+    --card-foreground: 22 40% 10%;
+    --popover: 37 36% 95%;
+    --popover-foreground: 22 40% 10%;
     
-    /* Stamp Paper Emerald Green */
-    --primary: 152 53% 15%; /* #11382A */
-    --primary-foreground: 36 30% 98%; /* #FAF9F6 */
+    /* Deep Mahogany Wood / Forest Ink */
+    --primary: 22 42% 12%; /* #2C160C */
+    --primary-foreground: 37 36% 98%;
     
-    /* Stamp Ink Indigo */
-    --secondary: 215 38% 27%; /* #2A3E5D */
-    --secondary-foreground: 0 0% 100%;
+    /* Aged Paper Accent */
+    --secondary: 22 30% 20%;
+    --secondary-foreground: 37 36% 98%;
     
-    --muted: 36 20% 93%; /* #EDE7DC */
-    --muted-foreground: 36 8% 40%; /* #6F6960 */
+    --muted: 37 20% 88%;
+    --muted-foreground: 22 15% 40%;
     
-    /* Burnished Brass-Gold */
+    /* Wax Gold Accent */
     --accent: 38 52% 56%; /* #C5A059 */
-    --accent-foreground: 150 20% 8%;
+    --accent-foreground: 22 40% 10%;
     
-    --destructive: 0 84% 60%;
+    --destructive: 0 74% 45%;
     --destructive-foreground: 0 0% 100%;
     
-    /* Warm Document Border */
-    --border: 36 18% 85%; /* #DDD2C0 */
-    --input: 36 18% 85%;
-    --ring: 152 53% 15%;
+    --border: 37 22% 80%; /* Aged gold-ivory border */
+    --input: 37 22% 80%;
+    --ring: 38 52% 56%;
     --radius: 0.5rem;
 
     /* Confidence / Badges */
-    --confidence-high: 152 53% 15%;
+    --confidence-high: 22 42% 12%;
     --confidence-medium: 38 52% 56%;
-    --confidence-low: 0 84% 60%;
+    --confidence-low: 0 74% 45%;
     
     /* SDGs */
-    --sdg-16: 215 38% 27%; /* Themed blue */
-    --sdg-10: 38 52% 56%; /* Themed gold */
+    --sdg-16: 22 42% 12%;
+    --sdg-10: 38 52% 56%;
   }
 
   .dark {
-    /* The Court Archivist Theme - Dark (Inkwell Obsidian / Jade / Shining Gold) */
-    --background: 150 15% 5%; /* #090D0B */
-    --foreground: 40 20% 90%; /* #ECE6DB */
-    --card: 150 15% 8%; /* #0E1411 */
-    --card-foreground: 40 20% 90%;
-    --popover: 150 15% 8%;
-    --popover-foreground: 40 20% 90%;
+    /* Analog Mahogany & Brass Parchment - Dark (Obsidian Mahogany / Glowing Gold) */
+    --background: 22 30% 6%; /* #120A07 */
+    --foreground: 37 28% 88%; /* #ECE5D5 */
+    --card: 22 28% 10%; /* #1D120E */
+    --card-foreground: 37 28% 88%;
+    --popover: 22 28% 10%;
+    --popover-foreground: 37 28% 88%;
     
-    /* Deep Emerald */
-    --primary: 152 60% 45%; /* #10B981 */
-    --primary-foreground: 150 15% 5%;
+    /* Glowing Gold */
+    --primary: 38 70% 60%; /* #D4AF37 */
+    --primary-foreground: 22 30% 6%;
     
-    /* Ink Slate */
-    --secondary: 215 25% 18%;
-    --secondary-foreground: 40 20% 90%;
+    /* Dark Mahogany Panel */
+    --secondary: 22 24% 15%; /* #281710 */
+    --secondary-foreground: 37 28% 88%;
     
-    --muted: 150 12% 12%;
-    --muted-foreground: 40 10% 65%;
+    --muted: 22 20% 12%;
+    --muted-foreground: 37 10% 60%;
     
-    /* Bright Wax Gold */
-    --accent: 38 70% 60%; /* #D4AF37 */
-    --accent-foreground: 150 15% 5%;
+    /* Wax Gold */
+    --accent: 38 70% 60%;
+    --accent-foreground: 22 30% 6%;
     
-    --destructive: 0 62% 35%;
-    --destructive-foreground: 40 20% 90%;
+    --destructive: 0 62% 40%;
+    --destructive-foreground: 37 28% 88%;
     
-    --border: 150 12% 16%;
-    --input: 150 12% 16%;
-    --ring: 152 60% 45%;
+    --border: 22 18% 18%;
+    --input: 22 18% 18%;
+    --ring: 38 70% 60%;
   }
 }
 
@@ -142,7 +134,7 @@
   
   body {
     @apply bg-background text-foreground;
-    /* Ledger ledger-paper lines pattern */
+    /* Ledger-paper lines watermark pattern */
     background-image: 
       linear-gradient(to right, rgba(197, 160, 89, 0.04) 1px, transparent 1px),
       linear-gradient(to bottom, rgba(197, 160, 89, 0.04) 1px, transparent 1px);
@@ -150,7 +142,7 @@
     background-attachment: fixed;
     position: relative;
   }
-  
+
   .dark body {
     background-image: 
       linear-gradient(to right, rgba(212, 175, 55, 0.02) 1px, transparent 1px),
@@ -165,20 +157,20 @@
     left: 0;
     width: 100vw;
     height: 100vh;
-    opacity: 0.04; /* Very subtle paper tooth */
+    opacity: 0.05; /* Subtle paper texture overlay */
     z-index: 9999;
     pointer-events: none;
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
   }
 
   .dark body::before {
-    opacity: 0.06; /* Slightly stronger noise contrast in dark mode */
+    opacity: 0.07;
   }
   
   /* Urdu Typography Adjustments */
   [lang="ur"] {
     font-family: var(--font-urdu), system-ui, sans-serif;
-    line-height: 1.9; /* More vertical breathing room for Nastaliq script */
+    line-height: 1.9;
   }
 
   /* Latin Fallback */
@@ -188,6 +180,83 @@
 }
 
 @layer utilities {
+  /* Rich Mahogany Wood Panel Console styling */
+  .wood-console {
+    background: linear-gradient(135deg, #1C0F0A 0%, #2A170F 50%, #170C08 100%);
+    border: 3px solid #361F15;
+    box-shadow: 
+      0 15px 40px rgba(0,0,0,0.5), 
+      inset 0 1px 0 rgba(255,255,255,0.05),
+      inset 0 -1px 0 rgba(0,0,0,0.4),
+      0 0 0 1px rgba(197, 160, 89, 0.15);
+  }
+
+  /* Textured Aged Parchment Sheet styling */
+  .parchment-sheet {
+    background: linear-gradient(to bottom, #FAF3E0 0%, #E8DFCB 100%);
+    border: 1.5px solid #C5B69C;
+    box-shadow: 
+      inset 0 3px 12px rgba(45,30,23,0.18),
+      0 1px 2px rgba(255,255,255,0.3);
+    color: #2D1A10; /* Elegant Dark Brown Ink */
+  }
+
+  .dark .parchment-sheet {
+    background: linear-gradient(to bottom, #1D1410 0%, #150E0A 100%);
+    border: 1.5px solid #36221A;
+    box-shadow: 
+      inset 0 3px 12px rgba(0,0,0,0.7),
+      0 1px 1px rgba(255,255,255,0.02);
+    color: #E6DBC6; /* Soft warm gold ink */
+  }
+
+  /* Glowing metallic gold text gradient */
+  .gold-gradient-text {
+    background: linear-gradient(to bottom, #FAE6B9 0%, #C5A059 45%, #92753F 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.15));
+  }
+
+  .gold-gradient-text-light {
+    background: linear-gradient(to bottom, #4D3325 0%, #2E1A11 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .dark .gold-gradient-text-light {
+    background: linear-gradient(to bottom, #FAE6B9 0%, #C5A059 45%, #92753F 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+  }
+
+  /* Custom bezeled buttons */
+  .bezel-btn {
+    border: 1.5px solid #C5A059;
+    background: linear-gradient(to bottom, #3E291F 0%, #2A1A13 100%);
+    color: #FAF4E5;
+    box-shadow: 
+      0 3px 6px rgba(0,0,0,0.2),
+      inset 0 1px 0 rgba(255,255,255,0.05);
+    transition: all 0.2s ease;
+  }
+
+  .bezel-btn:hover {
+    background: linear-gradient(to bottom, #4A3328 0%, #36221A 100%);
+    border-color: #DFBA73;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 10px rgba(197,160,89,0.25);
+  }
+
+  .bezel-btn:active {
+    transform: translateY(1px);
+    box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+  }
+
   @keyframes gradient-x {
     0%, 100% {
       background-size: 200% 200%;
@@ -217,4 +286,5 @@
 ::-webkit-scrollbar-thumb:hover {
   @apply bg-muted-foreground/50;
 }
+
 
