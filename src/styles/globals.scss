@@ -1,0 +1,175 @@
+@import "tailwindcss";
+
+@plugin "tailwindcss-animate";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme {
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-ring: hsl(var(--ring));
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+
+  --color-destructive: hsl(var(--destructive));
+  --color-destructive-foreground: hsl(var(--destructive-foreground));
+
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+
+  --color-popover: hsl(var(--popover));
+  --color-popover-foreground: hsl(var(--popover-foreground));
+
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+
+  --radius-lg: var(--radius);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-sm: calc(var(--radius) - 4px);
+
+  --font-inter: var(--font-inter);
+  --font-urdu: var(--font-urdu);
+}
+
+/*
+  The default border color has changed to `currentColor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentColor);
+  }
+}
+
+@layer base {
+  :root {
+    /* HaqDar Civic Emerald Theme - Light */
+    --background: 60 14% 97%; /* #FAFAF8 */
+    --foreground: 20 6% 10%; /* #1C1917 */
+    --card: 0 0% 100%;
+    --card-foreground: 20 6% 10%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 20 6% 10%;
+    
+    /* Emerald 500 */
+    --primary: 160 84% 39%;
+    --primary-foreground: 0 0% 100%;
+    
+    /* Warm Sand */
+    --secondary: 36 33% 94%; /* #F5F1EB */
+    --secondary-foreground: 20 6% 10%;
+    
+    --muted: 60 5% 96%;
+    --muted-foreground: 24 5% 45%; /* #78716C */
+    
+    /* Amber 500 */
+    --accent: 38 92% 50%;
+    --accent-foreground: 20 6% 10%;
+    
+    /* Red 500 */
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    
+    --border: 20 6% 90%;
+    --input: 20 6% 90%;
+    --ring: 160 84% 39%;
+    --radius: 0.75rem;
+
+    /* Confidence / Badges */
+    --confidence-high: 160 84% 39%;
+    --confidence-medium: 38 92% 50%;
+    --confidence-low: 0 84% 60%;
+    
+    /* SDGs */
+    --sdg-16: 216 84% 52%; /* #1F6FEB */
+    --sdg-10: 330 68% 54%; /* #DA3B8A */
+  }
+
+  .dark {
+    /* HaqDar Civic Emerald Theme - Dark */
+    --background: 20 14% 4%; /* #0C0A09 */
+    --foreground: 60 5% 96%; /* #FAFAF9 */
+    --card: 20 6% 10%; /* #1C1917 */
+    --card-foreground: 60 5% 96%;
+    --popover: 20 6% 10%;
+    --popover-foreground: 60 5% 96%;
+    
+    /* Emerald 500 */
+    --primary: 160 84% 39%;
+    --primary-foreground: 0 0% 100%;
+    
+    /* Deep Charcoal / Warm Sand inverted */
+    --secondary: 20 5% 15%; /* #292524 */
+    --secondary-foreground: 60 5% 96%;
+    
+    --muted: 20 6% 15%;
+    --muted-foreground: 24 5% 64%; /* #A8A29E */
+    
+    /* Amber 500 */
+    --accent: 38 92% 50%;
+    --accent-foreground: 0 0% 100%;
+    
+    --destructive: 0 62% 30%;
+    --destructive-foreground: 60 5% 96%;
+    
+    --border: 20 6% 20%;
+    --input: 20 6% 20%;
+    --ring: 160 84% 39%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  
+  /* Urdu Typography Adjustments */
+  [lang="ur"] {
+    font-family: var(--font-urdu), system-ui, sans-serif;
+    line-height: 1.8; /* Nastaliq needs more vertical breathing room */
+  }
+
+  /* Latin Fallback */
+  [lang="en"] {
+    font-family: var(--font-inter), system-ui, sans-serif;
+  }
+
+  /* Smooth scrolling */
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  @apply bg-muted-foreground/30 rounded-full;
+}
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-muted-foreground/50;
+}
