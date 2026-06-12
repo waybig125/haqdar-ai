@@ -9,7 +9,7 @@ import { THEME } from '@/lib/theme';
 import { AnimatedContainer } from '@/components/ui/AnimatedContainer';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { FileWarning, Languages, Milestone, PieChart as PieIcon } from 'lucide-react';
+import { FileWarning, Languages, Milestone, PieChart as PieIcon, CheckCircle2 } from 'lucide-react';
 
 export function CivicPulse({ data }) {
   const [mounted, setMounted] = useState(false);
@@ -46,6 +46,12 @@ export function CivicPulse({ data }) {
     { name: 'قانون میچ (Law Matched)', count: 1120, color: '#1F6FEB' },
     { name: 'مسودہ تیار (Drafted)', count: 1120, color: '#107C41' },
     { name: 'زیرِ کاروائی (In Review)', count: 340, color: '#DA3B8A' },
+  ];
+
+  const resolutionData = [
+    { name: 'Resolved (حل شدہ)', value: 68 },
+    { name: 'In Progress (جاری ہے)', value: 20 },
+    { name: 'In Review (زیرِ غور)', value: 12 },
   ];
 
   const COLORS = [
@@ -167,7 +173,7 @@ export function CivicPulse({ data }) {
             <div className="w-8 h-8 rounded bg-[#3A231A]/10 dark:bg-accent/10 flex items-center justify-center text-accent">
               <PieIcon className="w-4 h-4" />
             </div>
-            <CardTitle className="font-urdu text-2xl font-bold text-foreground">اقسام (Categories)</CardTitle>
+            <CardTitle className="font-urdu text-2xl font-bold text-foreground">شکایات کی اقسام / Categories</CardTitle>
           </CardHeader>
           <CardContent className="w-full h-[300px] relative min-w-0 min-h-0 z-10">
             <div className="absolute inset-0 w-full h-full p-4">
@@ -205,9 +211,55 @@ export function CivicPulse({ data }) {
         </Card>
       </AnimatedContainer>
 
+      {/* Resolution Rate Breakdown (Donut) */}
+      <AnimatedContainer variant="fadeUp" delay={0.28}>
+        <Card className="border border-accent/20 dark:border-[#523225] shadow-lg h-[400px] bg-card rounded-xl overflow-hidden relative">
+          <div className="grunge-overlay" />
+          <CardHeader className="pb-2 flex flex-row items-center gap-3 relative z-10">
+            <div className="w-8 h-8 rounded bg-[#3A231A]/10 dark:bg-accent/10 flex items-center justify-center text-accent">
+              <CheckCircle2 className="w-4 h-4" />
+            </div>
+            <CardTitle className="font-urdu text-2xl font-bold text-foreground">شکایات کے حل کی شرح / Resolution Rate</CardTitle>
+          </CardHeader>
+          <CardContent className="w-full h-[300px] relative min-w-0 min-h-0 z-10">
+            <div className="absolute inset-0 w-full h-full p-4">
+              <ResponsiveContainer width="99%" height="100%" minWidth={0} minHeight={0}>
+                <PieChart>
+                  <Pie
+                    data={resolutionData}
+                    cx="50%"
+                    cy="50%"
+                    innerRadius={70}
+                    outerRadius={95}
+                    paddingAngle={4}
+                    dataKey="value"
+                    stroke="none"
+                  >
+                    {resolutionData.map((entry, index) => (
+                      <Cell key={`cell-${index}`} fill={['#107C41', '#C5A059', '#DA3B8A'][index % 3]} />
+                    ))}
+                  </Pie>
+                  <Tooltip 
+                    contentStyle={{ backgroundColor: 'var(--color-card)', borderColor: 'var(--color-accent)', borderRadius: '8px', borderWidth: '1.5px' }}
+                    itemStyle={{ color: 'var(--color-foreground)', fontFamily: 'var(--font-inter)', fontSize: '12px' }}
+                  />
+                  <Legend wrapperStyle={{ fontFamily: 'var(--font-inter)', fontSize: '11px', paddingTop: '10px' }} />
+                </PieChart>
+              </ResponsiveContainer>
+            </div>
+            
+            {/* Center Legend Tag */}
+            <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none select-none z-10 mt-[-20px]">
+              <span className="text-[9px] font-bold text-muted-foreground uppercase tracking-widest font-inter">Resolved</span>
+              <span className="font-garamond italic text-xl font-bold text-emerald-600 dark:text-emerald-400">68%</span>
+            </div>
+          </CardContent>
+        </Card>
+      </AnimatedContainer>
+
       {/* Top Districts (Rankings) */}
-      <AnimatedContainer variant="fadeUp" delay={0.3} className="lg:col-span-2">
-        <Card className="border border-accent/20 dark:border-[#523225] shadow-lg bg-card rounded-xl overflow-hidden relative">
+      <AnimatedContainer variant="fadeUp" delay={0.3} className="lg:col-span-1">
+        <Card className="border border-accent/20 dark:border-[#523225] shadow-lg bg-card rounded-xl overflow-hidden relative h-full">
           <div className="grunge-overlay" />
           <CardHeader className="pb-2 relative z-10">
             <CardTitle className="font-urdu text-2xl font-bold text-foreground">متاثرہ اضلاع (Top Districts)</CardTitle>
@@ -235,6 +287,60 @@ export function CivicPulse({ data }) {
                   </div>
                 </div>
               ))}
+            </div>
+          </CardContent>
+        </Card>
+      </AnimatedContainer>
+
+      {/* Provincial Heat Intensity Map */}
+      <AnimatedContainer variant="fadeUp" delay={0.32} className="lg:col-span-1">
+        <Card className="border border-accent/20 dark:border-[#523225] shadow-lg bg-card rounded-xl overflow-hidden relative h-full">
+          <div className="grunge-overlay" />
+          <CardHeader className="pb-2 relative z-10 flex flex-row items-center gap-3">
+            <div className="w-8 h-8 rounded bg-[#3A231A]/10 dark:bg-accent/10 flex items-center justify-center text-accent">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4"><polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21"/><line x1="9" y1="3" x2="9" y2="18"/><line x1="15" y1="6" x2="15" y2="21"/></svg>
+            </div>
+            <CardTitle className="font-urdu text-2xl font-bold text-foreground">صوبائی رپورٹنگ شدت / Provincial Intensity</CardTitle>
+          </CardHeader>
+          <CardContent className="pt-6 relative z-10 flex flex-col items-center justify-center min-h-[280px]">
+            {/* Simple Mock SVG Pakistan Provinces Map with intensity colors */}
+            <svg viewBox="0 0 500 400" className="w-full max-w-[320px] drop-shadow-[0_4px_12px_rgba(0,0,0,0.15)] filter dark:drop-shadow-[0_4px_12px_rgba(0,0,0,0.4)]">
+              {/* GB */}
+              <path d="M300 20 L350 40 L380 90 L330 90 L300 60 Z" fill="#C5A059" opacity="0.3" stroke="#FAF4E5" strokeWidth="2" className="transition-all hover:opacity-80 cursor-pointer">
+                <title>Gilgit-Baltistan: Low Intensity</title>
+              </path>
+              {/* KP */}
+              <path d="M220 70 L300 60 L330 90 L310 130 L260 140 L240 100 Z" fill="#107C41" opacity="0.6" stroke="#FAF4E5" strokeWidth="2" className="transition-all hover:opacity-80 cursor-pointer">
+                <title>Khyber Pakhtunkhwa: Medium-High Intensity</title>
+              </path>
+              {/* Punjab */}
+              <path d="M260 140 L310 130 L350 180 L320 250 L250 240 L230 190 Z" fill="#107C41" opacity="0.95" stroke="#FAF4E5" strokeWidth="2" className="transition-all hover:opacity-80 cursor-pointer">
+                <title>Punjab: High Intensity</title>
+              </path>
+              {/* Balochistan */}
+              <path d="M80 180 L230 190 L250 240 L200 310 L90 280 L70 230 Z" fill="#C5A059" opacity="0.5" stroke="#FAF4E5" strokeWidth="2" className="transition-all hover:opacity-80 cursor-pointer">
+                <title>Balochistan: Medium Intensity</title>
+              </path>
+              {/* Sindh */}
+              <path d="M200 310 L250 240 L320 250 L280 340 L210 330 Z" fill="#107C41" opacity="0.85" stroke="#FAF4E5" strokeWidth="2" className="transition-all hover:opacity-80 cursor-pointer">
+                <title>Sindh: High Intensity</title>
+              </path>
+            </svg>
+
+            {/* Map Legend */}
+            <div className="flex gap-4 mt-6 text-[10px] font-bold font-inter text-muted-foreground uppercase tracking-wider">
+              <div className="flex items-center gap-1.5">
+                <span className="w-3 h-3 rounded bg-[#107C41] opacity-95" />
+                <span>High</span>
+              </div>
+              <div className="flex items-center gap-1.5">
+                <span className="w-3 h-3 rounded bg-[#107C41] opacity-60" />
+                <span>Medium</span>
+              </div>
+              <div className="flex items-center gap-1.5">
+                <span className="w-3 h-3 rounded bg-[#C5A059] opacity-50" />
+                <span>Low</span>
+              </div>
             </div>
           </CardContent>
         </Card>
