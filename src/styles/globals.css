@@ -99,6 +99,11 @@
     /* Emerald */
     --emerald: 145 77% 30%;
     --emerald-foreground: 0 0% 100%;
+
+    /* Medallion Background Gradient stops (Light theme) */
+    --medallion-bg-start: #5A3E2F;
+    --medallion-bg-mid: #3D271D;
+    --medallion-bg-end: #241610;
   }
 
   .dark {
@@ -135,6 +140,11 @@
     /* Emerald */
     --emerald: 145 77% 40%;
     --emerald-foreground: 22 30% 6%;
+
+    /* Medallion Background Gradient stops (Dark theme) */
+    --medallion-bg-start: #21130B;
+    --medallion-bg-mid: #120905;
+    --medallion-bg-end: #050201;
   }
 }
 

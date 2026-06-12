@@ -56,11 +56,18 @@ export function GeometricMedallion({ className, size = 120 }) {
           <stop offset="100%" stopColor="#634D14" />
         </radialGradient>
 
-        {/* Dark mahogany background */}
+        {/* Dark mahogany background (theme-adapted via CSS variables) */}
         <radialGradient id={`bg-${id}`} cx="50%" cy="50%" r="55%">
-          <stop offset="0%" stopColor="#2E1E14" />
-          <stop offset="70%" stopColor="#1C110A" />
-          <stop offset="100%" stopColor="#0D0804" />
+          <stop offset="0%" stopColor="var(--medallion-bg-start)" />
+          <stop offset="70%" stopColor="var(--medallion-bg-mid)" />
+          <stop offset="100%" stopColor="var(--medallion-bg-end)" />
+        </radialGradient>
+
+        {/* Jade Green Gradient for Center Disc */}
+        <radialGradient id={`jade-${id}`} cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stopColor="#22C55E" />
+          <stop offset="65%" stopColor="#15803D" />
+          <stop offset="100%" stopColor="#14532D" />
         </radialGradient>
 
         {/* Warm inner glow */}
@@ -173,8 +180,8 @@ export function GeometricMedallion({ className, size = 120 }) {
         );
       })}
 
-      {/* ====== LAYER 4: Inner disc (dark field for icon) ====== */}
-      <circle cx="100" cy="100" r="55" fill="#1A100A" />
+      {/* ====== LAYER 4: Inner disc (jade field for icon) ====== */}
+      <circle cx="100" cy="100" r="55" fill={`url(#jade-${id})`} />
       <circle cx="100" cy="100" r="55" fill={`url(#innerglow-${id})`} />
       <circle cx="100" cy="100" r="55" stroke={g} strokeWidth="2.5" fill="none" />
       <circle cx="100" cy="100" r="51" stroke={g} strokeWidth="0.5" fill="none" opacity="0.3" />
@@ -203,7 +210,7 @@ export function GeometricMedallion({ className, size = 120 }) {
         return (
           <g key={`flourish-${angle}`} opacity="0.6">
             <circle cx={x} cy={y} r="2.5" fill={g} />
-            <circle cx={x} cy={y} r="1" fill="#1A100A" />
+            <circle cx={x} cy={y} r="1" fill="#14532D" />
           </g>
         );
       })}

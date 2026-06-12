@@ -14,7 +14,6 @@ import {
   SheetTitle,
 } from "@/components/ui/sheet";
 import { cn } from '@/lib/utils';
-import { GeometricMedallion } from '@/components/ui/GeometricMedallion';
 
 const NAV_LINKS = [
   { urdu: 'شکایت درج کریں', english: 'Home', href: '/' },

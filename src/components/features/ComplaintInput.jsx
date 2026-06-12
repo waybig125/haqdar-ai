@@ -16,15 +16,15 @@ const EXAMPLES = [
 
 export function ComplaintInput({ onAnalyze, loading }) {
   const [text, setText] = useState('');
-  const { 
-    isListening, 
-    transcript, 
-    startListening, 
-    supported, 
-    setTranscript, 
-    language, 
-    setLanguage, 
-    speechError 
+  const {
+    isListening,
+    transcript,
+    startListening,
+    supported,
+    setTranscript,
+    language,
+    setLanguage,
+    speechError
   } = useSpeechRecognition();
 
   // Smart language auto-detect when user types
@@ -71,18 +71,18 @@ export function ComplaintInput({ onAnalyze, loading }) {
   return (
     <div id="complaint-section" className="w-full max-w-6xl mx-auto px-4 py-12 scroll-mt-24">
       <AnimatedContainer variant="fadeUp">
-        
+
         {/* Mahogany Wood Console Outer Frame */}
         <div className={cn(
           "wood-console rounded-2xl p-6 md:p-8 transition-all duration-300 relative overflow-hidden",
           isListening ? "ring-2 ring-red-500/50" : ""
         )}>
-          
+
           <form onSubmit={handleSubmit} className="flex flex-col gap-5 relative z-10">
-            
+
             {/* Aged Parchment Sheet Textarea Box */}
             <div className="parchment-sheet rounded-xl p-5 md:p-8 pt-14 pb-10 relative">
-              
+
               {/* Language Badge Chip */}
               <div className="absolute top-3 left-4 flex items-center gap-1.5 px-2.5 py-0.5 rounded-full border border-accent/20 bg-accent/5 text-[9px] font-bold text-accent font-inter select-none">
                 {isUrduMode ? '🇵🇰 اردو' : '🇬🇧 English'}
@@ -99,13 +99,13 @@ export function ComplaintInput({ onAnalyze, loading }) {
                 placeholder={isUrduMode ? "اپنی شکایت یہاں لکھیں یا مائیک کا بٹن دبا کر بولیں..." : "Type or click the microphone to speak your complaint..."}
                 className={cn(
                   "w-full min-h-[170px] bg-transparent resize-none outline-none leading-relaxed placeholder:text-amber-900/30 dark:placeholder:text-amber-100/25 transition-all border-none focus:ring-0 mt-2",
-                  isUrduMode ? "font-urdu text-2xl md:text-3xl leading-[2.2] text-amber-950 dark:text-amber-100" : "font-garamond text-xl md:text-2xl font-bold leading-[2.2] text-amber-950 dark:text-amber-100"
+                  isUrduMode ? "font-urdu text-2xl md:text-3xl leading-[2.2] text-amber-950 dark:text-amber-100" : "font-garamond text-2xl md:text-3xl font-bold leading-[2.2] text-amber-950 dark:text-amber-100"
                 )}
                 dir={isUrduMode ? "rtl" : "ltr"}
                 disabled={loading}
                 maxLength={800}
               />
-              
+
               {isListening && (
                 <div className="absolute bottom-3 left-4 flex items-center gap-1.5 text-xs text-red-600 dark:text-red-400 font-semibold animate-pulse">
                   <span className="w-2 h-2 rounded-full bg-red-600 dark:bg-red-400" />
@@ -138,7 +138,7 @@ export function ComplaintInput({ onAnalyze, loading }) {
 
             {/* Mahogany Console Controls Footer Bar */}
             <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-5 pt-4">
-              
+
               {/* Examples (styled as bezeled wood console pills) */}
               <div className="flex flex-wrap gap-2 flex-1">
                 {EXAMPLES.map((ex, i) => (
@@ -155,7 +155,7 @@ export function ComplaintInput({ onAnalyze, loading }) {
 
               {/* Action Controls */}
               <div className="flex items-center gap-3 self-end md:self-auto shrink-0">
-                
+
                 {/* Language Manual Override (Gold bezeled) */}
                 <Button
                   type="button"
@@ -188,8 +188,8 @@ export function ComplaintInput({ onAnalyze, loading }) {
                   </div>
                 )}
 
-                <Button 
-                  type="submit" 
+                <Button
+                  type="submit"
                   disabled={!text.trim() || loading}
                   className="bezel-btn px-8 h-10 font-urdu font-bold rounded-lg cursor-pointer flex items-center gap-2 border-emerald-600 bg-gradient-to-b from-emerald-800 to-emerald-950 hover:from-emerald-700 hover:to-emerald-900"
                 >

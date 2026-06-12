@@ -1,9 +1,7 @@
 "use client";
 
-import React from 'react';
-import { SDGBadge } from "@/components/ui/SDGBadge";
 import { Heart } from "lucide-react";
-import { GeometricMedallion } from '@/components/ui/GeometricMedallion';
+import { SDGBadge } from "@/components/ui/SDGBadge";
 
 export function Footer() {
   return (

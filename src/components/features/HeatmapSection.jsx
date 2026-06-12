@@ -49,11 +49,11 @@ export function HeatmapSection() {
     : 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png';
 
   const geoJsonStyle = {
-    fillColor: isDark ? '#C5A059' : '#FAF6EE',
+    fillColor: '#C5A059',
     weight: 1.5,
-    opacity: isDark ? 0.6 : 1,
-    color: isDark ? '#C5A059' : '#C5B69C',
-    fillOpacity: isDark ? 0.08 : 0.75
+    opacity: isDark ? 0.6 : 0.8,
+    color: '#C5A059',
+    fillOpacity: isDark ? 0.08 : 0.12
   };
 
   return (
