@@ -99,7 +99,7 @@ export function ComplaintInput({ onAnalyze, loading }) {
                 placeholder={isUrduMode ? "اپنی شکایت یہاں لکھیں یا مائیک کا بٹن دبا کر بولیں..." : "Type or click the microphone to speak your complaint..."}
                 className={cn(
                   "w-full min-h-[170px] bg-transparent resize-none outline-none leading-relaxed placeholder:text-amber-900/30 dark:placeholder:text-amber-100/25 transition-all border-none focus:ring-0 mt-2",
-                  isUrduMode ? "font-urdu text-2xl md:text-3xl leading-[2.5] text-amber-950 dark:text-amber-100" : "font-garamond text-xl md:text-2xl font-bold text-amber-950 dark:text-amber-100"
+                  isUrduMode ? "font-urdu text-2xl md:text-3xl leading-[2.2] text-amber-950 dark:text-amber-100" : "font-garamond text-xl md:text-2xl font-bold text-amber-950 dark:text-amber-100"
                 )}
                 dir={isUrduMode ? "rtl" : "ltr"}
                 disabled={loading}
