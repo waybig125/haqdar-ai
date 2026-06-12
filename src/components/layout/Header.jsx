@@ -57,7 +57,7 @@ export function Header() {
         </Link>
 
         {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center gap-6">
+        <nav className="hidden lg:flex items-center gap-6">
           <div className="flex gap-6 items-center border-e border-accent/20 dark:border-accent/10 pe-6">
             {NAV_LINKS.map((link) => {
               const isActive = pathname === link.href;
@@ -91,7 +91,7 @@ export function Header() {
         </nav>
 
         {/* Mobile Navigation */}
-        <div className="flex md:hidden items-center gap-2">
+        <div className="flex lg:hidden items-center gap-2">
           <ThemeToggle />
           
           <Sheet>
