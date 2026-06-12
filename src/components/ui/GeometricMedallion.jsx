@@ -179,47 +179,25 @@ export function GeometricMedallion({ className, size = 120 }) {
       <circle cx="100" cy="100" r="55" stroke={g} strokeWidth="2.5" fill="none" />
       <circle cx="100" cy="100" r="51" stroke={g} strokeWidth="0.5" fill="none" opacity="0.3" />
 
-      {/* ====== LAYER 5: Scales of Justice (center emblem) ====== */}
-      <g filter={`url(#glow-${id})`}>
-        {/* Central pillar */}
-        <line x1="100" y1="68" x2="100" y2="128" stroke={g} strokeWidth="3" strokeLinecap="round" />
-
-        {/* Base platform — wider, with a decorative serif */}
-        <path d="M85 128 L115 128" stroke={g} strokeWidth="3.5" strokeLinecap="round" />
-        <path d="M90 131 L110 131" stroke={g} strokeWidth="1.5" strokeLinecap="round" opacity="0.5" />
-
-        {/* Top finial — ornate circle with small point */}
-        <circle cx="100" cy="66" r="5" fill={g} />
-        <circle cx="100" cy="66" r="3" fill="#1A100A" />
-        <circle cx="100" cy="66" r="1.5" fill={g} />
-
-        {/* Crossbeam — slightly curved for elegance */}
-        <path d="M72 79 Q100 74 128 79" stroke={g} strokeWidth="2.5" strokeLinecap="round" fill="none" />
-
-        {/* Left chain and pan */}
-        <line x1="72" y1="79" x2="64" y2="105" stroke={g} strokeWidth="0.8" opacity="0.65" />
-        <line x1="72" y1="79" x2="80" y2="105" stroke={g} strokeWidth="0.8" opacity="0.65" />
-        <path d="M60 105 Q72 114 84 105" stroke={g} strokeWidth="1.8" fill="none" />
-        {/* Pan rim detail */}
-        <path d="M63 105 Q72 108 81 105" stroke={g} strokeWidth="0.5" fill="none" opacity="0.4" />
-
-        {/* Right chain and pan */}
-        <line x1="128" y1="79" x2="120" y2="105" stroke={g} strokeWidth="0.8" opacity="0.65" />
-        <line x1="128" y1="79" x2="136" y2="105" stroke={g} strokeWidth="0.8" opacity="0.65" />
-        <path d="M116 105 Q128 114 140 105" stroke={g} strokeWidth="1.8" fill="none" />
-        {/* Pan rim detail */}
-        <path d="M119 105 Q128 108 137 105" stroke={g} strokeWidth="0.5" fill="none" opacity="0.4" />
+      {/* ====== LAYER 5: Crescent & Star (center emblem) ====== */}
+      <g filter={`url(#glow-${id})`} transform="translate(100, 100) rotate(-20)">
+        <g transform="translate(10, 0)">
+          {/* Crescent */}
+          <path
+            d="M-4,-25 A28,28 0 1,0 -4,25 A22,22 0 1,1 -4,-25 Z"
+            fill={g}
+            fillOpacity="0.95"
+          />
+          {/* Star */}
+          <path
+            d={starPath(15, 2, 9, 3.5, 5)}
+            fill={g}
+            transform="rotate(18 15 2)"
+          />
+        </g>
       </g>
 
-      {/* ====== LAYER 6: Small Urdu-style crescent accent at top ====== */}
-      <path
-        d={`M${pt(100, 100, 55, 0).join(',')} A5,5 0 1,1 ${pt(100, 100, 55, 0)[0] - 0.01},${pt(100, 100, 55, 0)[1]}`}
-        fill="none"
-        stroke={g}
-        strokeWidth="0"
-      />
-
-      {/* Subtle corner flourishes — tiny arcs at 4 corners of the inner ring */}
+      {/* Subtle flourishes at cardinal points of inner ring */}
       {[0, 90, 180, 270].map((angle) => {
         const [x, y] = pt(100, 100, 55, angle);
         return (

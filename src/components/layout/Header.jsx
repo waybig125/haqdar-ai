@@ -48,11 +48,11 @@ export function Header() {
       <div className="container mx-auto px-4 max-w-6xl flex items-center justify-between relative z-10">
         
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-2.5 hover:opacity-95 transition-opacity group">
-          <GeometricMedallion size={32} className="shrink-0 drop-shadow-[0_2px_8px_rgba(197,160,89,0.3)] transition-transform duration-300 group-hover:scale-110" />
-          <div className="flex flex-col items-start gap-0.5 pt-1">
-            <span className="font-urdu text-2xl font-bold text-foreground leading-tight group-hover:text-accent transition-colors">حق دار</span>
-            <span className="text-[9px] font-garamond italic font-bold tracking-[0.18em] text-accent uppercase leading-none mt-0.5">HaqDar AI</span>
+        <Link href="/" className="flex items-center gap-3 hover:opacity-95 transition-opacity group pb-1">
+          <GeometricMedallion size={36} className="shrink-0 drop-shadow-[0_2px_8px_rgba(197,160,89,0.3)] transition-transform duration-300 group-hover:scale-110" />
+          <div className="flex flex-col items-start gap-1.5 pt-1">
+            <span className="font-urdu text-3xl font-bold text-foreground leading-normal group-hover:text-accent transition-colors">حق دار</span>
+            <span className="text-[10px] font-garamond italic font-bold tracking-[0.18em] text-accent uppercase leading-none">HaqDar AI</span>
           </div>
         </Link>
 
@@ -101,11 +101,11 @@ export function Header() {
             <SheetContent side="start" className="w-[300px] sm:w-[400px] bg-[#FAF4E5] dark:bg-[#1D120E] border-e border-[#C5B69C] dark:border-[#523225]">
               <SheetTitle className="sr-only">Navigation Menu</SheetTitle>
               <div className="flex flex-col gap-8 mt-8">
-                <Link href="/" className="flex items-center gap-3">
-                  <GeometricMedallion size={36} className="shrink-0 drop-shadow-[0_2px_8px_rgba(197,160,89,0.3)]" />
-                  <div className="flex flex-col items-start gap-0.5 pt-1">
-                    <span className="font-urdu text-3xl font-bold text-foreground leading-tight">حق دار</span>
-                    <span className="text-[10px] font-garamond italic font-bold tracking-[0.18em] text-accent uppercase leading-none mt-0.5">HaqDar AI</span>
+                <Link href="/" className="flex items-center gap-3 pb-1">
+                  <GeometricMedallion size={40} className="shrink-0 drop-shadow-[0_2px_8px_rgba(197,160,89,0.3)]" />
+                  <div className="flex flex-col items-start gap-1.5 pt-1">
+                    <span className="font-urdu text-4xl font-bold text-foreground leading-normal">حق دار</span>
+                    <span className="text-[11px] font-garamond italic font-bold tracking-[0.18em] text-accent uppercase leading-none">HaqDar AI</span>
                   </div>
                 </Link>
 

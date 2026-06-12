@@ -74,9 +74,6 @@ export function HeroSection() {
               <h2 className="font-urdu text-4xl md:text-5xl lg:text-6xl font-bold leading-[1.4] text-foreground drop-shadow-sm">
                 آواز میں انصاف کی طاقت
               </h2>
-              <p className="text-sm md:text-base text-muted-foreground max-w-xl leading-relaxed font-inter bg-background/40 backdrop-blur-sm p-4 rounded-xl border border-white/5 dark:border-white/5 shadow-inner text-right" dir="ltr">
-                Pakistan's first voice-enabled AI legal rights assistant. Speak your complaint in Urdu or English, know your rights, and draft formal legal petitions instantly.
-              </p>
             </AnimatedContainer>
 
             <AnimatedContainer variant="fadeUp" delay={0.4} className="mt-8 relative z-10">
