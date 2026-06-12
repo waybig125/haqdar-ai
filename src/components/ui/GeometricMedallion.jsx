@@ -68,11 +68,11 @@ export function GeometricMedallion({ className, size = 120 }) {
           <stop offset="100%" stopColor="var(--medallion-bg-end)" />
         </radialGradient>
 
-        {/* Jade Green Gradient for Center Disc */}
-        <radialGradient id={`jade-${id}`} cx="50%" cy="50%" r="50%">
-          <stop offset="0%" stopColor="#22C55E" />
-          <stop offset="65%" stopColor="#15803D" />
-          <stop offset="100%" stopColor="#14532D" />
+        {/* Theme-adapted Center Disc Gradient */}
+        <radialGradient id={`center-disc-${id}`} cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stopColor="var(--medallion-center-start)" />
+          <stop offset="65%" stopColor="var(--medallion-center-mid)" />
+          <stop offset="100%" stopColor="var(--medallion-center-end)" />
         </radialGradient>
 
         {/* Warm inner glow */}
@@ -187,8 +187,8 @@ export function GeometricMedallion({ className, size = 120 }) {
         );
       })}
 
-      {/* ====== LAYER 4: Inner disc (jade field for icon) ====== */}
-      <circle cx="100" cy="100" r="55" fill={`url(#jade-${id})`} />
+      {/* ====== LAYER 4: Inner disc (theme field for icon) ====== */}
+      <circle cx="100" cy="100" r="55" fill={`url(#center-disc-${id})`} />
       <circle cx="100" cy="100" r="55" fill={`url(#innerglow-${id})`} />
       <circle cx="100" cy="100" r="55" stroke={g} strokeWidth="2.5" fill="none" />
       <circle cx="100" cy="100" r="51" stroke={g} strokeWidth="0.5" fill="none" opacity="0.3" />
@@ -199,13 +199,13 @@ export function GeometricMedallion({ className, size = 120 }) {
           {/* Crescent */}
           <path
             d="M-4,-25 A28,28 0 1,0 -4,25 A22,22 0 1,1 -4,-25 Z"
-            fill="#000000"
+            fill="var(--medallion-emblem)"
             fillOpacity="0.95"
           />
           {/* Star */}
           <path
             d={starPath(15, 2, 9, 3.5, 5)}
-            fill="#000000"
+            fill="var(--medallion-emblem)"
             transform="rotate(18 15 2)"
           />
         </g>
@@ -217,7 +217,7 @@ export function GeometricMedallion({ className, size = 120 }) {
         return (
           <g key={`flourish-${angle}`} opacity="0.6">
             <circle cx={x} cy={y} r="2.5" fill={g} />
-            <circle cx={x} cy={y} r="1" fill="#14532D" />
+            <circle cx={x} cy={y} r="1" fill="var(--medallion-center-end)" />
           </g>
         );
       })}

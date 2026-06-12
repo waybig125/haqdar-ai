@@ -104,6 +104,16 @@
     --medallion-bg-start: #5A3E2F;
     --medallion-bg-mid: #3D271D;
     --medallion-bg-end: #241610;
+
+    /* Medallion Center (Light Theme - Ivory/Marble) */
+    --medallion-center-start: #FFFFFF;
+    --medallion-center-mid: #F9F6F0;
+    --medallion-center-end: #EBE5D9;
+    --medallion-emblem: #B8922A;
+
+    /* Background Grunge Particles (Light Theme) */
+    --grunge-color-1: rgba(60, 40, 30, 0.25);
+    --grunge-color-2: rgba(120, 90, 70, 0.15);
   }
 
   .dark {
@@ -145,6 +155,16 @@
     --medallion-bg-start: #21130B;
     --medallion-bg-mid: #120905;
     --medallion-bg-end: #050201;
+
+    /* Medallion Center (Dark Theme - Warm Obsidian/Brown) */
+    --medallion-center-start: #2A1F1A;
+    --medallion-center-mid: #1A120E;
+    --medallion-center-end: #0D0907;
+    --medallion-emblem: #D4AF37;
+
+    /* Background Grunge Particles (Dark Theme) */
+    --grunge-color-1: rgba(212, 175, 55, 0.12);
+    --grunge-color-2: rgba(0, 0, 0, 0.35);
   }
 }
 
