@@ -11,79 +11,90 @@ export function GeometricMedallion({ className, size = 120 }) {
       viewBox="0 0 200 200" 
       fill="none" 
       xmlns="http://www.w3.org/2000/svg"
-      className={cn("drop-shadow-[0_8px_25px_rgba(0,0,0,0.3)] select-none pointer-events-none", className)}
+      className={cn("drop-shadow-[0_8px_25px_rgba(197,160,89,0.3)] select-none pointer-events-none animate-[pulse_4s_ease-in-out_infinite]", className)}
     >
       <defs>
-        <radialGradient id="bronzeGold" cx="50%" cy="50%" r="50%" fx="35%" fy="35%">
-          <stop offset="0%" stopColor="#FFF3D6" />
-          <stop offset="25%" stopColor="#E5C180" />
-          <stop offset="60%" stopColor="#C5A059" />
-          <stop offset="85%" stopColor="#8A6635" />
-          <stop offset="100%" stopColor="#4A331A" />
+        <radialGradient id="premiumGold" cx="50%" cy="50%" r="50%" fx="30%" fy="30%">
+          <stop offset="0%" stopColor="#FFF7D6" />
+          <stop offset="20%" stopColor="#F5D08B" />
+          <stop offset="50%" stopColor="#D4AF37" />
+          <stop offset="85%" stopColor="#AA7C11" />
+          <stop offset="100%" stopColor="#5A4208" />
         </radialGradient>
-        <filter id="medallionShadow" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="5" stdDeviation="6" floodColor="#000000" floodOpacity="0.45" />
+        <radialGradient id="emeraldGlow" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stopColor="#10B981" stopOpacity="0.4" />
+          <stop offset="100%" stopColor="#047857" stopOpacity="0" />
+        </radialGradient>
+        <filter id="glowEffect" x="-20%" y="-20%" width="140%" height="140%">
+          <feDropShadow dx="0" dy="0" stdDeviation="8" floodColor="#D4AF37" floodOpacity="0.5" />
+        </filter>
+        <filter id="innerShadow">
+          <feOffset dx="0" dy="2"/>
+          <feGaussianBlur stdDeviation="3" result="offset-blur"/>
+          <feComposite operator="out" in="SourceGraphic" in2="offset-blur" result="inverse"/>
+          <feFlood floodColor="black" floodOpacity="0.7" result="color"/>
+          <feComposite operator="in" in="color" in2="inverse" result="shadow"/>
+          <feComposite operator="over" in="shadow" in2="SourceGraphic"/>
         </filter>
       </defs>
 
-      {/* Decorative Outer Bezel ring */}
-      <circle cx="100" cy="100" r="92" stroke="url(#bronzeGold)" strokeWidth="3" opacity="0.85" />
-      <circle cx="100" cy="100" r="84" stroke="url(#bronzeGold)" strokeWidth="1" strokeDasharray="5 3" opacity="0.6" />
-      <circle cx="100" cy="100" r="76" stroke="url(#bronzeGold)" strokeWidth="1.5" opacity="0.75" />
+      {/* Subtle background glow */}
+      <circle cx="100" cy="100" r="95" fill="url(#emeraldGlow)" />
 
-      {/* Decorative Outer studs */}
-      {Array.from({ length: 12 }).map((_, i) => {
-        const angle = (i * 360) / 12;
+      {/* Outer intricate border rings */}
+      <circle cx="100" cy="100" r="92" stroke="url(#premiumGold)" strokeWidth="1.5" opacity="0.6" />
+      <circle cx="100" cy="100" r="88" stroke="url(#premiumGold)" strokeWidth="4" filter="url(#glowEffect)" />
+      <circle cx="100" cy="100" r="82" stroke="url(#premiumGold)" strokeWidth="1" strokeDasharray="2 4" opacity="0.8" />
+      <circle cx="100" cy="100" r="76" stroke="url(#premiumGold)" strokeWidth="2" />
+
+      {/* Geometric 8-pointed star base */}
+      <g stroke="url(#premiumGold)" strokeWidth="2" fill="#1A110A" fillOpacity="0.6">
+        <path d="M100 24 L115 76 L176 76 L127 106 L145 158 L100 125 L55 158 L73 106 L24 76 L85 76 Z" />
+        <path d="M100 176 L85 124 L24 124 L73 94 L55 42 L100 75 L145 42 L127 94 L176 124 L115 124 Z" />
+      </g>
+
+      {/* Inner circular crest */}
+      <circle cx="100" cy="100" r="48" fill="#2C1B11" stroke="url(#premiumGold)" strokeWidth="3" filter="url(#innerShadow)" />
+      <circle cx="100" cy="100" r="42" stroke="url(#premiumGold)" strokeWidth="1" strokeDasharray="4 2" opacity="0.5" />
+
+      {/* Center scales of justice icon, highly refined */}
+      <g filter="url(#glowEffect)">
+        {/* Base and stand */}
+        <path d="M100 75 L100 120" stroke="url(#premiumGold)" strokeWidth="3.5" strokeLinecap="round" />
+        <path d="M90 120 L110 120" stroke="url(#premiumGold)" strokeWidth="4.5" strokeLinecap="round" />
+        <circle cx="100" cy="73" r="4" fill="url(#premiumGold)" />
+        
+        {/* Crossbeam */}
+        <path d="M78 82 Q100 76 122 82" stroke="url(#premiumGold)" strokeWidth="3" strokeLinecap="round" />
+        
+        {/* Left Pan */}
+        <path d="M78 82 L70 102" stroke="url(#premiumGold)" strokeWidth="1" opacity="0.7" />
+        <path d="M78 82 L86 102" stroke="url(#premiumGold)" strokeWidth="1" opacity="0.7" />
+        <path d="M66 102 Q78 108 90 102 Z" fill="url(#premiumGold)" />
+        
+        {/* Right Pan */}
+        <path d="M122 82 L114 102" stroke="url(#premiumGold)" strokeWidth="1" opacity="0.7" />
+        <path d="M122 82 L130 102" stroke="url(#premiumGold)" strokeWidth="1" opacity="0.7" />
+        <path d="M110 102 Q122 108 134 102 Z" fill="url(#premiumGold)" />
+      </g>
+
+      {/* Decorative corner studs inside the rings */}
+      {Array.from({ length: 16 }).map((_, i) => {
+        const angle = (i * 360) / 16;
         const rad = (angle * Math.PI) / 180;
-        const x = 100 + 84 * Math.cos(rad);
-        const y = 100 + 84 * Math.sin(rad);
+        const x = 100 + 62 * Math.cos(rad);
+        const y = 100 + 62 * Math.sin(rad);
         return (
           <circle 
             key={`stud-${i}`} 
             cx={x} 
             cy={y} 
-            r="3.5" 
-            fill="url(#bronzeGold)" 
+            r={i % 2 === 0 ? "2.5" : "1.5"} 
+            fill="url(#premiumGold)" 
+            opacity={i % 2 === 0 ? "1" : "0.5"}
           />
         );
       })}
-
-      {/* Center Shield Container */}
-      <g filter="url(#medallionShadow)">
-        {/* Shield Backing */}
-        <path 
-          d="M100 45 C125 45 150 40 150 70 C150 115 100 148 100 158 C100 148 50 115 50 70 C50 40 75 45 100 45 Z" 
-          stroke="url(#bronzeGold)" 
-          strokeWidth="3.5"
-          fill="#3A231A"
-          fillOpacity="0.4"
-        />
-        
-        {/* Scale of Justice Path */}
-        {/* Central Stand */}
-        <path d="M100 65 L100 130" stroke="url(#bronzeGold)" strokeWidth="3" strokeLinecap="round" />
-        <path d="M88 130 L112 130" stroke="url(#bronzeGold)" strokeWidth="4" strokeLinecap="round" />
-        <circle cx="100" cy="62" r="5" fill="url(#bronzeGold)" />
-        
-        {/* Crossbeam */}
-        <path d="M72 76 Q100 68 128 76" stroke="url(#bronzeGold)" strokeWidth="3.5" strokeLinecap="round" />
-        
-        {/* Left Pan */}
-        <path d="M72 76 L62 108" stroke="url(#bronzeGold)" strokeWidth="1" opacity="0.8" />
-        <path d="M72 76 L82 108" stroke="url(#bronzeGold)" strokeWidth="1" opacity="0.8" />
-        <path d="M58 108 Q72 116 86 108 Z" fill="url(#bronzeGold)" stroke="url(#bronzeGold)" strokeWidth="1" />
-        
-        {/* Right Pan */}
-        <path d="M128 76 L118 108" stroke="url(#bronzeGold)" strokeWidth="1" opacity="0.8" />
-        <path d="M128 76 L138 108" stroke="url(#bronzeGold)" strokeWidth="1" opacity="0.8" />
-        <path d="M114 108 Q128 116 142 108 Z" fill="url(#bronzeGold)" stroke="url(#bronzeGold)" strokeWidth="1" />
-      </g>
-
-      {/* Decorative center small star */}
-      <path 
-        d="M100 138 L102 142 L106 142 L103 144 L104 148 L100 145 L96 148 L97 144 L94 142 L98 142 Z" 
-        fill="url(#bronzeGold)" 
-      />
     </svg>
   );
 }
