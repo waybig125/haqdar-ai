@@ -4,6 +4,8 @@ import React from 'react';
 import { cn } from '@/lib/utils';
 
 export function GeometricMedallion({ className, size = 120 }) {
+  const id = React.useId().replace(/:/g, '');
+  
   return (
     <svg 
       width={size} 
@@ -11,90 +13,100 @@ export function GeometricMedallion({ className, size = 120 }) {
       viewBox="0 0 200 200" 
       fill="none" 
       xmlns="http://www.w3.org/2000/svg"
-      className={cn("drop-shadow-[0_8px_25px_rgba(197,160,89,0.3)] select-none pointer-events-none animate-[pulse_4s_ease-in-out_infinite]", className)}
+      className={cn("select-none pointer-events-none", className)}
     >
       <defs>
-        <radialGradient id="premiumGold" cx="50%" cy="50%" r="50%" fx="30%" fy="30%">
-          <stop offset="0%" stopColor="#FFF7D6" />
-          <stop offset="20%" stopColor="#F5D08B" />
-          <stop offset="50%" stopColor="#D4AF37" />
-          <stop offset="85%" stopColor="#AA7C11" />
-          <stop offset="100%" stopColor="#5A4208" />
+        <radialGradient id={`gold-${id}`} cx="50%" cy="50%" r="50%" fx="35%" fy="35%">
+          <stop offset="0%" stopColor="#FFF3D6" />
+          <stop offset="30%" stopColor="#E5C180" />
+          <stop offset="65%" stopColor="#C5A059" />
+          <stop offset="90%" stopColor="#8A6635" />
+          <stop offset="100%" stopColor="#5A3D1A" />
         </radialGradient>
-        <radialGradient id="emeraldGlow" cx="50%" cy="50%" r="50%">
-          <stop offset="0%" stopColor="#10B981" stopOpacity="0.4" />
-          <stop offset="100%" stopColor="#047857" stopOpacity="0" />
+        <radialGradient id={`bg-${id}`} cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stopColor="#2C1B11" />
+          <stop offset="100%" stopColor="#1A100A" />
         </radialGradient>
-        <filter id="glowEffect" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="0" stdDeviation="8" floodColor="#D4AF37" floodOpacity="0.5" />
-        </filter>
-        <filter id="innerShadow">
-          <feOffset dx="0" dy="2"/>
-          <feGaussianBlur stdDeviation="3" result="offset-blur"/>
-          <feComposite operator="out" in="SourceGraphic" in2="offset-blur" result="inverse"/>
-          <feFlood floodColor="black" floodOpacity="0.7" result="color"/>
-          <feComposite operator="in" in="color" in2="inverse" result="shadow"/>
-          <feComposite operator="over" in="shadow" in2="SourceGraphic"/>
+        <filter id={`glow-${id}`} x="-30%" y="-30%" width="160%" height="160%">
+          <feGaussianBlur stdDeviation="4" result="blur" />
+          <feFlood floodColor="#D4AF37" floodOpacity="0.35" result="color" />
+          <feComposite in="color" in2="blur" operator="in" result="shadow" />
+          <feComposite in="SourceGraphic" in2="shadow" operator="over" />
         </filter>
       </defs>
 
-      {/* Subtle background glow */}
-      <circle cx="100" cy="100" r="95" fill="url(#emeraldGlow)" />
+      {/* Dark background circle */}
+      <circle cx="100" cy="100" r="94" fill={`url(#bg-${id})`} />
 
-      {/* Outer intricate border rings */}
-      <circle cx="100" cy="100" r="92" stroke="url(#premiumGold)" strokeWidth="1.5" opacity="0.6" />
-      <circle cx="100" cy="100" r="88" stroke="url(#premiumGold)" strokeWidth="4" filter="url(#glowEffect)" />
-      <circle cx="100" cy="100" r="82" stroke="url(#premiumGold)" strokeWidth="1" strokeDasharray="2 4" opacity="0.8" />
-      <circle cx="100" cy="100" r="76" stroke="url(#premiumGold)" strokeWidth="2" />
+      {/* Outer rings */}
+      <circle cx="100" cy="100" r="94" stroke={`url(#gold-${id})`} strokeWidth="3" />
+      <circle cx="100" cy="100" r="86" stroke={`url(#gold-${id})`} strokeWidth="1" strokeDasharray="3 5" opacity="0.5" />
+      <circle cx="100" cy="100" r="80" stroke={`url(#gold-${id})`} strokeWidth="1.5" opacity="0.7" />
 
-      {/* Geometric 8-pointed star base */}
-      <g stroke="url(#premiumGold)" strokeWidth="2" fill="#1A110A" fillOpacity="0.6">
-        <path d="M100 24 L115 76 L176 76 L127 106 L145 158 L100 125 L55 158 L73 106 L24 76 L85 76 Z" />
-        <path d="M100 176 L85 124 L24 124 L73 94 L55 42 L100 75 L145 42 L127 94 L176 124 L115 124 Z" />
-      </g>
+      {/* Inner circle border */}
+      <circle cx="100" cy="100" r="56" stroke={`url(#gold-${id})`} strokeWidth="2" opacity="0.6" />
+      <circle cx="100" cy="100" r="52" fill="#1A100A" stroke={`url(#gold-${id})`} strokeWidth="2.5" />
 
-      {/* Inner circular crest */}
-      <circle cx="100" cy="100" r="48" fill="#2C1B11" stroke="url(#premiumGold)" strokeWidth="3" filter="url(#innerShadow)" />
-      <circle cx="100" cy="100" r="42" stroke="url(#premiumGold)" strokeWidth="1" strokeDasharray="4 2" opacity="0.5" />
-
-      {/* Center scales of justice icon, highly refined */}
-      <g filter="url(#glowEffect)">
-        {/* Base and stand */}
-        <path d="M100 75 L100 120" stroke="url(#premiumGold)" strokeWidth="3.5" strokeLinecap="round" />
-        <path d="M90 120 L110 120" stroke="url(#premiumGold)" strokeWidth="4.5" strokeLinecap="round" />
-        <circle cx="100" cy="73" r="4" fill="url(#premiumGold)" />
-        
-        {/* Crossbeam */}
-        <path d="M78 82 Q100 76 122 82" stroke="url(#premiumGold)" strokeWidth="3" strokeLinecap="round" />
-        
-        {/* Left Pan */}
-        <path d="M78 82 L70 102" stroke="url(#premiumGold)" strokeWidth="1" opacity="0.7" />
-        <path d="M78 82 L86 102" stroke="url(#premiumGold)" strokeWidth="1" opacity="0.7" />
-        <path d="M66 102 Q78 108 90 102 Z" fill="url(#premiumGold)" />
-        
-        {/* Right Pan */}
-        <path d="M122 82 L114 102" stroke="url(#premiumGold)" strokeWidth="1" opacity="0.7" />
-        <path d="M122 82 L130 102" stroke="url(#premiumGold)" strokeWidth="1" opacity="0.7" />
-        <path d="M110 102 Q122 108 134 102 Z" fill="url(#premiumGold)" />
-      </g>
-
-      {/* Decorative corner studs inside the rings */}
-      {Array.from({ length: 16 }).map((_, i) => {
-        const angle = (i * 360) / 16;
+      {/* Radial lines between inner and outer ring (like a compass) */}
+      {Array.from({ length: 8 }).map((_, i) => {
+        const angle = (i * 360) / 8 - 90;
         const rad = (angle * Math.PI) / 180;
-        const x = 100 + 62 * Math.cos(rad);
-        const y = 100 + 62 * Math.sin(rad);
+        const x1 = 100 + 56 * Math.cos(rad);
+        const y1 = 100 + 56 * Math.sin(rad);
+        const x2 = 100 + 80 * Math.cos(rad);
+        const y2 = 100 + 80 * Math.sin(rad);
         return (
-          <circle 
-            key={`stud-${i}`} 
-            cx={x} 
-            cy={y} 
-            r={i % 2 === 0 ? "2.5" : "1.5"} 
-            fill="url(#premiumGold)" 
-            opacity={i % 2 === 0 ? "1" : "0.5"}
+          <line
+            key={`ray-${i}`}
+            x1={x1} y1={y1} x2={x2} y2={y2}
+            stroke={`url(#gold-${id})`}
+            strokeWidth={i % 2 === 0 ? "2" : "1"}
+            opacity={i % 2 === 0 ? "0.8" : "0.4"}
           />
         );
       })}
+
+      {/* Small studs on the outer ring */}
+      {Array.from({ length: 16 }).map((_, i) => {
+        const angle = (i * 360) / 16;
+        const rad = (angle * Math.PI) / 180;
+        const x = 100 + 83 * Math.cos(rad);
+        const y = 100 + 83 * Math.sin(rad);
+        return (
+          <circle
+            key={`stud-${i}`}
+            cx={x} cy={y}
+            r={i % 2 === 0 ? "2" : "1.2"}
+            fill={`url(#gold-${id})`}
+            opacity={i % 2 === 0 ? "0.9" : "0.4"}
+          />
+        );
+      })}
+
+      {/* Scales of Justice — centered and clean */}
+      <g filter={`url(#glow-${id})`}>
+        {/* Stand */}
+        <line x1="100" y1="72" x2="100" y2="125" stroke={`url(#gold-${id})`} strokeWidth="3" strokeLinecap="round" />
+        {/* Base */}
+        <line x1="88" y1="125" x2="112" y2="125" stroke={`url(#gold-${id})`} strokeWidth="4" strokeLinecap="round" />
+        {/* Top circle */}
+        <circle cx="100" cy="70" r="4.5" fill={`url(#gold-${id})`} />
+
+        {/* Crossbeam */}
+        <line x1="74" y1="80" x2="126" y2="80" stroke={`url(#gold-${id})`} strokeWidth="2.5" strokeLinecap="round" />
+
+        {/* Left pan strings */}
+        <line x1="74" y1="80" x2="66" y2="104" stroke={`url(#gold-${id})`} strokeWidth="1" opacity="0.7" />
+        <line x1="74" y1="80" x2="82" y2="104" stroke={`url(#gold-${id})`} strokeWidth="1" opacity="0.7" />
+        {/* Left pan bowl */}
+        <path d="M62 104 Q74 112 86 104" stroke={`url(#gold-${id})`} strokeWidth="1.5" fill="none" />
+
+        {/* Right pan strings */}
+        <line x1="126" y1="80" x2="118" y2="104" stroke={`url(#gold-${id})`} strokeWidth="1" opacity="0.7" />
+        <line x1="126" y1="80" x2="134" y2="104" stroke={`url(#gold-${id})`} strokeWidth="1" opacity="0.7" />
+        {/* Right pan bowl */}
+        <path d="M114 104 Q126 112 138 104" stroke={`url(#gold-${id})`} strokeWidth="1.5" fill="none" />
+      </g>
     </svg>
   );
 }

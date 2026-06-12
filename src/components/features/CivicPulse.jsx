@@ -91,6 +91,7 @@ export function CivicPulse({ data }) {
                     contentStyle={{ backgroundColor: 'hsl(var(--card))', borderColor: 'hsl(var(--accent))', borderRadius: '8px', borderWidth: '1.5px', boxShadow: '0 4px 12px rgba(0,0,0,0.15)' }}
                     labelStyle={{ color: 'hsl(var(--foreground))', fontFamily: 'var(--font-inter)', fontWeight: 'bold', fontSize: '12px' }}
                     itemStyle={{ color: 'hsl(var(--foreground))', fontFamily: 'var(--font-inter)', fontSize: '12px' }}
+                    cursor={{ stroke: 'rgba(197, 160, 89, 0.3)', strokeWidth: 1 }}
                   />
                   <Area type="monotone" dataKey="count" stroke={THEME.colors.accent.DEFAULT} strokeWidth={2.5} fillOpacity={1} fill="url(#colorCount)" />
                 </AreaChart>
@@ -118,6 +119,7 @@ export function CivicPulse({ data }) {
                   <Tooltip 
                     contentStyle={{ backgroundColor: 'hsl(var(--card))', borderColor: 'hsl(var(--accent))', borderRadius: '8px', borderWidth: '1.5px' }}
                     itemStyle={{ color: 'hsl(var(--foreground))', fontFamily: 'var(--font-inter)', fontSize: '12px' }}
+                    cursor={{ fill: 'rgba(197, 160, 89, 0.08)' }}
                   />
                   <Legend wrapperStyle={{ fontFamily: 'var(--font-inter)', fontSize: '10px', paddingTop: '15px' }} />
                   <Bar dataKey="Urdu Voice" stackId="a" fill="#107C41" radius={[0, 0, 0, 0]} />
@@ -147,6 +149,7 @@ export function CivicPulse({ data }) {
                   <Tooltip 
                     contentStyle={{ backgroundColor: 'hsl(var(--card))', borderColor: 'hsl(var(--accent))', borderRadius: '8px', borderWidth: '1.5px' }}
                     itemStyle={{ color: 'hsl(var(--foreground))', fontFamily: 'var(--font-inter)', fontSize: '12px' }}
+                    cursor={{ fill: 'rgba(197, 160, 89, 0.08)' }}
                   />
                   <Bar dataKey="count" fill="#C5A059" radius={[0, 4, 4, 0]}>
                     {pipelineData.map((entry, index) => (
@@ -197,7 +200,7 @@ export function CivicPulse({ data }) {
             {/* Center Legend Tag */}
             <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none select-none z-10 mt-[-10px]">
               <span className="text-[8px] font-bold text-muted-foreground uppercase tracking-widest font-inter">Live Share</span>
-              <span className="font-garamond italic text-base font-bold text-accent">HaqDar AI</span>
+              <span className="font-inter text-sm font-bold text-accent">HaqDar AI</span>
             </div>
           </CardContent>
         </Card>
@@ -241,7 +244,7 @@ export function CivicPulse({ data }) {
             {/* Center Legend Tag */}
             <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none select-none z-10 mt-[-10px]">
               <span className="text-[8px] font-bold text-muted-foreground uppercase tracking-widest font-inter">Resolved</span>
-              <span className="font-garamond italic text-lg font-bold text-emerald-600 dark:text-emerald-450">68%</span>
+              <span className="font-inter text-lg font-bold text-emerald-600 dark:text-emerald-400">68%</span>
             </div>
           </CardContent>
         </Card>
@@ -292,9 +295,8 @@ export function CivicPulse({ data }) {
             </div>
             <CardTitle className="font-urdu text-2xl font-bold text-foreground">اداروں کی کارکردگی / Dept Performance</CardTitle>
           </CardHeader>
-          <CardContent className="w-full h-[300px] relative pt-6 min-w-0 min-h-0 z-10">
-            <div className="w-full h-full">
-              <ResponsiveContainer width="99%" height="100%" minWidth={0} minHeight={0}>
+          <CardContent className="w-full h-[300px] pt-4 min-w-0 min-h-0 z-10 relative">
+            <ResponsiveContainer width="99%" height="100%">
                 <BarChart data={[
                   { name: 'تعلیم (Education)', rate: 85, fill: '#107C41' },
                   { name: 'بجلی (Electricity)', rate: 78, fill: '#C5A059' },
@@ -308,6 +310,7 @@ export function CivicPulse({ data }) {
                   <Tooltip 
                     contentStyle={{ backgroundColor: 'hsl(var(--card))', borderColor: 'hsl(var(--accent))', borderRadius: '8px', borderWidth: '1.5px' }}
                     itemStyle={{ color: 'hsl(var(--foreground))', fontFamily: 'var(--font-inter)', fontSize: '12px' }}
+                    cursor={{ fill: 'rgba(197, 160, 89, 0.08)' }}
                     formatter={(value) => [`${value}%`, 'Resolution Rate']}
                   />
                   <Bar dataKey="rate" radius={[0, 4, 4, 0]}>
@@ -323,7 +326,6 @@ export function CivicPulse({ data }) {
                   </Bar>
                 </BarChart>
               </ResponsiveContainer>
-            </div>
           </CardContent>
         </Card>
       </AnimatedContainer>

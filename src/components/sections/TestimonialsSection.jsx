@@ -61,17 +61,17 @@ export function TestimonialsSection() {
             <AnimatedContainer key={idx} variant="fadeUp" delay={0.1 * (idx + 1)}>
               <div className="parchment-sheet rounded-2xl p-6 md:p-8 flex flex-col h-full border border-[#C5B69C] dark:border-[#36221A] shadow-lg relative transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
                 
-                {/* Quote Icon */}
-                <Quote className="w-8 h-8 text-accent/20 absolute top-6 right-6" />
+                {/* Quote Icon — large, subtle watermark */}
+                <Quote className="w-10 h-10 text-accent/10 absolute top-5 right-5 pointer-events-none" />
 
                 {/* Complaint Type and Emerald Check Badge */}
-                <div className="flex items-center justify-between mb-6">
-                  <span className="text-[10px] font-bold tracking-wider font-inter text-accent uppercase bg-[#C5A059]/10 px-2.5 py-1 rounded">
-                    {t.complaintEnglish}
-                  </span>
-                  <span className="inline-flex items-center gap-1 text-[10px] font-bold text-emerald-600 dark:text-emerald-450 bg-emerald-500/10 px-2 py-0.5 rounded-full">
+                <div className="flex flex-col gap-2 mb-6 relative z-10">
+                  <span className="inline-flex items-center gap-1 text-[10px] font-bold text-emerald-600 dark:text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-full w-fit">
                     <CheckCircle2 className="w-3.5 h-3.5" />
-                    پٹیشن تیار ✓
+                    پٹیشن تیار
+                  </span>
+                  <span className="text-[10px] font-bold tracking-wider font-inter text-accent uppercase">
+                    {t.complaintEnglish}
                   </span>
                 </div>
 

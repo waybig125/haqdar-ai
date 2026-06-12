@@ -128,18 +128,18 @@ export function HeroSection() {
 
           </div>
 
-          {/* Right Column: Decorative Gold Rosette Medallion (now responsive) */}
-          <div className="col-span-1 md:col-span-4 flex items-center justify-center relative mt-12 md:mt-0">
+          {/* Right Column: Decorative Gold Medallion */}
+          <div className="col-span-1 md:col-span-4 flex items-center justify-center relative mt-8 md:mt-0">
             <AnimatedContainer variant="fadeUp" delay={0.3} className="relative z-10">
-              <div className="relative group perspective-1000">
-                <div className="absolute inset-0 bg-gradient-to-tr from-accent/20 to-emerald-500/20 rounded-full blur-[60px] opacity-40 animate-pulse pointer-events-none transform -rotate-12 scale-110" />
+              <div className="relative">
+                <div className="absolute -inset-8 bg-accent/10 rounded-full blur-3xl opacity-40 pointer-events-none" />
                 <GeometricMedallion 
-                  size={160} 
-                  className="md:hidden shrink-0 transition-transform duration-700 hover:scale-105 hover:rotate-3" 
+                  size={140} 
+                  className="md:hidden shrink-0 drop-shadow-[0_4px_20px_rgba(197,160,89,0.3)]" 
                 />
                 <GeometricMedallion 
-                  size={340} 
-                  className="hidden md:block shrink-0 transition-transform duration-700 hover:scale-105 hover:rotate-3" 
+                  size={280} 
+                  className="hidden md:block shrink-0 drop-shadow-[0_4px_30px_rgba(197,160,89,0.3)]" 
                 />
               </div>
             </AnimatedContainer>
