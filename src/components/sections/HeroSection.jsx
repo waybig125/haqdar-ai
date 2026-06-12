@@ -42,13 +42,13 @@ export function HeroSection() {
   };
 
   return (
-    <section className="relative pt-20 pb-16 md:pt-32 md:pb-24 overflow-hidden">
+    <section className="relative pt-12 pb-16 md:pt-16 md:pb-24 overflow-hidden">
       
-      <div className="container mx-auto px-4 max-w-6xl relative z-10">
+      <div className="container mx-auto px-4 max-w-7xl relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
           
           {/* Left / Center content */}
-          <div className="col-span-1 md:col-span-8 flex flex-col items-center md:items-start text-center md:text-start relative">
+          <div className="col-span-1 md:col-span-7 flex flex-col items-center md:items-start text-center md:text-start relative">
             
             {/* Floating Decorative Elements */}
             <div className="absolute -top-10 -left-10 w-24 h-24 bg-emerald-500/10 dark:bg-emerald-500/20 rounded-full blur-2xl animate-pulse" />
@@ -62,7 +62,7 @@ export function HeroSection() {
                 </span>
                 <span className="text-[10px] font-bold text-accent uppercase tracking-widest font-inter">Live Beta / لائیو بیٹا</span>
               </div>
-              <h1 className="font-garamond text-6xl md:text-8xl lg:text-[7rem] font-black mb-1 tracking-wider uppercase gold-gradient-text-light leading-none select-none drop-shadow-[0_0_25px_rgba(197,160,89,0.2)]">
+              <h1 className="font-garamond text-6xl md:text-8xl lg:text-[7.5rem] font-black mb-1 tracking-wider uppercase gold-gradient-text-light leading-none select-none drop-shadow-[0_0_25px_rgba(197,160,89,0.2)]" dir="ltr">
                 HaqDar AI
               </h1>
               <p className="font-garamond italic text-lg md:text-2xl font-bold tracking-[0.25em] text-accent uppercase mb-6" dir="ltr">
@@ -129,16 +129,16 @@ export function HeroSection() {
           </div>
 
           {/* Right Column: Decorative Gold Medallion */}
-          <div className="col-span-1 md:col-span-4 flex items-center justify-center relative mt-8 md:mt-0">
+          <div className="col-span-1 md:col-span-5 flex items-center justify-center relative mt-12 md:mt-0">
             <AnimatedContainer variant="fadeUp" delay={0.3} className="relative z-10">
               <div className="relative">
                 <div className="absolute -inset-8 bg-accent/10 rounded-full blur-3xl opacity-40 pointer-events-none" />
                 <GeometricMedallion 
-                  size={140} 
+                  size={220} 
                   className="md:hidden shrink-0 drop-shadow-[0_4px_20px_rgba(197,160,89,0.3)]" 
                 />
                 <GeometricMedallion 
-                  size={280} 
+                  size={420} 
                   className="hidden md:block shrink-0 drop-shadow-[0_4px_30px_rgba(197,160,89,0.3)]" 
                 />
               </div>
