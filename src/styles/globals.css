@@ -285,6 +285,16 @@
 @layer utilities {
   /* Rich Mahogany Wood Panel Console styling */
   .wood-console {
+    background: linear-gradient(135deg, #FCFAF2 0%, #F5EFEB 50%, #EDE4DC 100%);
+    border: 3px solid #C5B69C;
+    box-shadow: 
+      0 15px 40px rgba(90, 60, 40, 0.08), 
+      inset 0 1px 0 rgba(255,255,255,0.6),
+      inset 0 -1px 0 rgba(0,0,0,0.05),
+      0 0 0 1px rgba(197, 160, 89, 0.2);
+  }
+
+  .dark .wood-console {
     background: linear-gradient(135deg, #1C0F0A 0%, #2A170F 50%, #170C08 100%);
     border: 3px solid #361F15;
     box-shadow: 
@@ -339,24 +349,43 @@
 
   /* Custom bezeled buttons */
   .bezel-btn {
+    border: 1.5px solid #C5B69C;
+    background: linear-gradient(to bottom, #FCFAF2 0%, #EDE4DC 100%);
+    color: #4D3325;
+    box-shadow: 
+      0 3px 6px rgba(90, 60, 40, 0.08),
+      inset 0 1px 0 rgba(255,255,255,0.8);
+    transition: all 0.2s ease;
+  }
+
+  .bezel-btn:hover {
+    background: linear-gradient(to bottom, #FAF8F2 0%, #E1D6C7 100%);
+    border-color: #C5A059;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 10px rgba(197,160,89,0.15);
+  }
+
+  .bezel-btn:active {
+    transform: translateY(1px);
+    box-shadow: 0 1px 2px rgba(90, 60, 40, 0.1);
+  }
+
+  .dark .bezel-btn {
     border: 1.5px solid #C5A059;
     background: linear-gradient(to bottom, #3E291F 0%, #2A1A13 100%);
     color: #FAF4E5;
     box-shadow: 
       0 3px 6px rgba(0,0,0,0.2),
       inset 0 1px 0 rgba(255,255,255,0.05);
-    transition: all 0.2s ease;
   }
 
-  .bezel-btn:hover {
+  .dark .bezel-btn:hover {
     background: linear-gradient(to bottom, #4A3328 0%, #36221A 100%);
     border-color: #DFBA73;
-    transform: translateY(-1px);
     box-shadow: 0 4px 10px rgba(197,160,89,0.25);
   }
 
-  .bezel-btn:active {
-    transform: translateY(1px);
+  .dark .bezel-btn:active {
     box-shadow: 0 1px 2px rgba(0,0,0,0.2);
   }
 

@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 
 export default function NotFound() {
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-background text-center px-4">
+    <div className="min-h-screen flex flex-col items-center justify-center text-center px-4">
       <div className="w-24 h-24 bg-muted rounded-full flex items-center justify-center mb-8 text-muted-foreground">
         <FileQuestion className="w-12 h-12" />
       </div>
@@ -16,7 +16,7 @@ export default function NotFound() {
         The page you are looking for might have been removed, had its name changed, or is temporarily unavailable.
       </p>
       
-      <Button render={<Link href="/" />} size="lg" className="rounded-full px-8">
+      <Button render={<Link href="/" />} nativeButton={false} size="lg" className="rounded-full px-8">
         <ArrowLeft className="w-4 h-4 mr-2" />
         واپس ہوم پیج پر جائیں (Go Home)
       </Button>

@@ -146,7 +146,7 @@ export function ComplaintInput({ onAnalyze, loading }) {
                     key={i}
                     type="button"
                     onClick={() => handleExampleClick(ex)}
-                    className="text-xs font-inter px-3.5 py-1.5 rounded bg-[#3A231A]/60 text-accent hover:bg-[#3A231A] border border-[#523225] hover:border-[#C5A059]/40 transition-all cursor-pointer shadow-[0_2px_4px_rgba(0,0,0,0.2)] font-semibold"
+                    className="text-xs font-inter px-3.5 py-1.5 rounded bg-accent/10 dark:bg-[#3A231A]/60 text-amber-950 dark:text-accent hover:bg-accent/20 dark:hover:bg-[#3A231A] border border-accent/30 dark:border-[#523225] hover:border-accent/60 dark:hover:border-[#C5A059]/40 transition-all cursor-pointer shadow-[0_2px_4px_rgba(0,0,0,0.1)] dark:shadow-[0_2px_4px_rgba(0,0,0,0.2)] font-semibold"
                   >
                     {ex}
                   </button>
@@ -183,7 +183,7 @@ export function ComplaintInput({ onAnalyze, loading }) {
                     {isListening ? <Square className="w-4 h-4 text-white" /> : <Mic className="w-4.5 h-4.5 text-accent" />}
                   </Button>
                 ) : (
-                  <div className="text-xs text-muted-foreground flex items-center justify-center border border-[#523225] rounded-full w-10 h-10 bg-[#3A231A]" title="Voice input not supported in this browser">
+                  <div className="text-xs text-muted-foreground flex items-center justify-center border border-amber-900/10 dark:border-[#523225] rounded-full w-10 h-10 bg-amber-900/5 dark:bg-[#3A231A]" title="Voice input not supported in this browser">
                     <AlertCircle className="w-4.5 h-4.5 text-muted-foreground/30" />
                   </div>
                 )}
@@ -191,7 +191,7 @@ export function ComplaintInput({ onAnalyze, loading }) {
                 <Button
                   type="submit"
                   disabled={!text.trim() || loading}
-                  className="bezel-btn px-8 h-10 font-urdu font-bold rounded-lg cursor-pointer flex items-center gap-2 border-emerald-600 bg-gradient-to-b from-emerald-800 to-emerald-950 hover:from-emerald-700 hover:to-emerald-900"
+                  className="bezel-btn px-8 h-10 font-urdu font-bold rounded-lg cursor-pointer flex items-center gap-2 border-emerald-600 dark:border-emerald-700 bg-gradient-to-b from-emerald-600 to-emerald-700 dark:from-emerald-800 dark:to-emerald-950 hover:from-emerald-500 hover:to-emerald-600 dark:hover:from-emerald-700 dark:hover:to-emerald-900 text-white dark:text-emerald-100 disabled:opacity-50 disabled:pointer-events-none"
                 >
                   {loading ? (
                     <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />

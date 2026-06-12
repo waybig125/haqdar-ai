@@ -6,7 +6,7 @@ import { Scale, Users2 } from 'lucide-react';
 
 export function SdgFocusSection() {
   return (
-    <section className="w-full py-16 bg-background relative overflow-hidden">
+    <section className="w-full py-16 relative overflow-hidden">
       
       {/* Background Watermark/Aesthetic */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-accent/2 rounded-full blur-3xl pointer-events-none" />
@@ -46,7 +46,7 @@ export function SdgFocusSection() {
                   <Scale className="w-6 h-6" />
                 </div>
                 <div>
-                  <h3 className="font-urdu text-3xl font-bold text-[#E6DBC6] leading-none mb-1" dir="rtl">
+                  <h3 className="font-urdu text-3xl font-bold text-primary dark:text-[#E6DBC6] leading-none mb-1" dir="rtl">
                     امن، انصاف اور مضبوط ادارے
                   </h3>
                   <span className="font-garamond text-sm italic text-accent font-bold uppercase tracking-wider">
@@ -93,7 +93,7 @@ export function SdgFocusSection() {
                   <Users2 className="w-6 h-6" />
                 </div>
                 <div>
-                  <h3 className="font-urdu text-3xl font-bold text-[#E6DBC6] leading-none mb-1" dir="rtl">
+                  <h3 className="font-urdu text-3xl font-bold text-primary dark:text-[#E6DBC6] leading-none mb-1" dir="rtl">
                     نابرابری میں کمی
                   </h3>
                   <span className="font-garamond text-sm italic text-accent font-bold uppercase tracking-wider">

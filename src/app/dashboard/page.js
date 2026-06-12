@@ -48,7 +48,7 @@ export default async function DashboardPage() {
     <div className="min-h-screen flex flex-col selection:bg-primary/20 selection:text-primary">
       <Header />
       
-      <main className="flex-grow bg-background">
+      <main className="flex-grow">
         
         {/* Dashboard Header */}
         <div className="border-b border-accent/20 dark:border-accent/10 pb-10 pt-16 bg-muted/20 relative">
