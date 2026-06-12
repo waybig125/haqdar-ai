@@ -81,8 +81,13 @@ export function ComplaintInput({ onAnalyze, loading }) {
           <form onSubmit={handleSubmit} className="flex flex-col gap-5 relative z-10">
             
             {/* Aged Parchment Sheet Textarea Box */}
-            <div className="parchment-sheet rounded-xl p-5 md:p-8 relative">
+            <div className="parchment-sheet rounded-xl p-5 md:p-8 pt-10 relative">
               
+              {/* Language Badge Chip */}
+              <div className="absolute top-3 left-4 flex items-center gap-1.5 px-2.5 py-0.5 rounded-full border border-accent/20 bg-accent/5 text-[9px] font-bold text-accent font-inter select-none">
+                {isUrduMode ? '🇵🇰 اردو' : '🇬🇧 English'}
+              </div>
+
               {/* Official Document Seal Watermark */}
               <div className="absolute top-3 right-5 text-[9px] uppercase tracking-[0.25em] font-bold text-amber-900/15 dark:text-amber-100/10 font-inter select-none pointer-events-none">
                 Official Petition Form
@@ -90,7 +95,7 @@ export function ComplaintInput({ onAnalyze, loading }) {
 
               <textarea
                 value={text}
-                onChange={(e) => setText(e.target.value)}
+                onChange={(e) => setText(e.target.value.slice(0, 800))}
                 placeholder={isUrduMode ? "اپنی شکایت یہاں لکھیں یا مائیک کا بٹن دبا کر بولیں..." : "Type or click the microphone to speak your complaint..."}
                 className={cn(
                   "w-full min-h-[170px] bg-transparent resize-none outline-none leading-relaxed placeholder:text-amber-900/30 dark:placeholder:text-amber-100/25 transition-all border-none focus:ring-0",
@@ -98,14 +103,25 @@ export function ComplaintInput({ onAnalyze, loading }) {
                 )}
                 dir={isUrduMode ? "rtl" : "ltr"}
                 disabled={loading}
+                maxLength={800}
               />
               
-              {!text && (
-                <div className="absolute bottom-3 right-4 text-amber-900/40 dark:text-amber-100/30 text-xs flex items-center gap-1.5 font-inter">
-                  <Sparkles className="w-3.5 h-3.5" />
-                  Auto-detects Urdu & English
+              {isListening && (
+                <div className="absolute bottom-3 left-4 flex items-center gap-1.5 text-xs text-red-600 dark:text-red-400 font-semibold animate-pulse">
+                  <span className="w-2 h-2 rounded-full bg-red-600 dark:bg-red-400" />
+                  <span className="font-urdu leading-none">{isUrduMode ? "سن رہا ہوں..." : "Listening..."}</span>
                 </div>
               )}
+
+              <div className="absolute bottom-3 right-4 flex items-center gap-3 text-xs text-amber-900/40 dark:text-amber-100/30 font-inter">
+                {!text && (
+                  <span className="hidden sm:flex items-center gap-1.5">
+                    <Sparkles className="w-3.5 h-3.5" />
+                    Auto-detects Urdu & English
+                  </span>
+                )}
+                <span className="font-semibold">{text.length} / 800</span>
+              </div>
             </div>
 
             {speechError === 'not-allowed' && (
@@ -158,13 +174,13 @@ export function ComplaintInput({ onAnalyze, loading }) {
                     size="icon"
                     className={cn(
                       "bezel-btn rounded-full w-10 h-10 transition-all duration-300 relative cursor-pointer",
-                      isListening && "animate-pulse ring-2 ring-red-500/50 scale-105"
+                      isListening && "ring-4 ring-red-500/60 scale-110 shadow-[0_0_15px_rgba(239,68,68,0.5)] bg-red-600 border-red-500 hover:bg-red-700 hover:border-red-600"
                     )}
                     onClick={startListening}
                     disabled={loading}
                     title={isListening ? "Stop voice input" : "Start speaking"}
                   >
-                    {isListening ? <Square className="w-4 h-4 text-red-400" /> : <Mic className="w-4.5 h-4.5 text-accent" />}
+                    {isListening ? <Square className="w-4 h-4 text-white" /> : <Mic className="w-4.5 h-4.5 text-accent" />}
                   </Button>
                 ) : (
                   <div className="text-xs text-muted-foreground flex items-center justify-center border border-[#523225] rounded-full w-10 h-10 bg-[#3A231A]" title="Voice input not supported in this browser">
