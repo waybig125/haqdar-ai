@@ -17,8 +17,8 @@ import { cn } from '@/lib/utils';
 import { GeometricMedallion } from '@/components/ui/GeometricMedallion';
 
 const NAV_LINKS = [
-  { name: 'شکایت درج کریں (Home)', href: '/' },
-  { name: 'سول نبض (Dashboard)', href: '/dashboard' },
+  { urdu: 'شکایت درج کریں', english: 'Home', href: '/' },
+  { urdu: 'سول نبض', english: 'Dashboard', href: '/dashboard' },
 ];
 
 export function Header() {
@@ -49,7 +49,7 @@ export function Header() {
         
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2.5 hover:opacity-95 transition-opacity group">
-          <GeometricMedallion size={32} className="shrink-0 drop-shadow-[0_2px_8px_rgba(197,160,89,0.3)]" />
+          <GeometricMedallion size={32} className="shrink-0 drop-shadow-[0_2px_8px_rgba(197,160,89,0.3)] transition-transform duration-300 group-hover:scale-110" />
           <div className="flex flex-col items-start gap-0.5 pt-1">
             <span className="font-urdu text-2xl font-bold text-foreground leading-tight group-hover:text-accent transition-colors">حق دار</span>
             <span className="text-[9px] font-garamond italic font-bold tracking-[0.18em] text-accent uppercase leading-none mt-0.5">HaqDar AI</span>
@@ -59,18 +59,29 @@ export function Header() {
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center gap-6">
           <div className="flex gap-6 items-center border-e border-accent/20 dark:border-accent/10 pe-6">
-            {NAV_LINKS.map((link) => (
-              <Link 
-                key={link.href} 
-                href={link.href}
-                className={cn(
-                  "text-xs font-semibold uppercase tracking-widest transition-colors hover:text-accent font-inter",
-                  pathname === link.href ? "text-accent" : "text-muted-foreground"
-                )}
-              >
-                {link.name}
-              </Link>
-            ))}
+            {NAV_LINKS.map((link) => {
+              const isActive = pathname === link.href;
+              return (
+                <Link 
+                  key={link.href} 
+                  href={link.href}
+                  className={cn(
+                    "flex flex-col items-center justify-center transition-all duration-300 relative py-1 px-1 group/item",
+                    isActive ? "text-accent" : "text-muted-foreground hover:text-accent"
+                  )}
+                >
+                  <span className="font-urdu text-[15px] font-bold leading-none tracking-normal mb-0.5">{link.urdu}</span>
+                  <span className="text-[8px] font-semibold tracking-wider font-inter uppercase opacity-80 leading-none">{link.english}</span>
+                  {/* Glowing gold underline indicator */}
+                  <span 
+                    className={cn(
+                      "absolute bottom-[-12px] left-0 right-0 h-[2px] bg-accent transition-all duration-300 shadow-[0_0_8px_#C5A059]",
+                      isActive ? "scale-x-100 opacity-100" : "scale-x-0 opacity-0 group-hover/item:scale-x-50 group-hover/item:opacity-50"
+                    )}
+                  />
+                </Link>
+              );
+            })}
           </div>
           
           <div className="flex items-center gap-3">
@@ -98,19 +109,25 @@ export function Header() {
                   </div>
                 </Link>
 
-                <nav className="flex flex-col gap-2">
-                  {NAV_LINKS.map((link) => (
-                    <Link 
-                      key={link.href} 
-                      href={link.href}
-                      className={cn(
-                        "text-sm font-semibold uppercase tracking-widest py-2.5 border-b border-accent/10 transition-colors hover:text-accent font-inter",
-                        pathname === link.href ? "text-accent border-accent/30" : "text-muted-foreground"
-                      )}
-                    >
-                      {link.name}
-                    </Link>
-                  ))}
+                <nav className="flex flex-col gap-3">
+                  {NAV_LINKS.map((link) => {
+                    const isActive = pathname === link.href;
+                    return (
+                      <Link 
+                        key={link.href} 
+                        href={link.href}
+                        className={cn(
+                          "flex flex-col items-start py-2.5 px-3 border-l-2 transition-all font-inter duration-200",
+                          isActive 
+                            ? "border-accent bg-accent/5 pl-5 text-accent font-semibold" 
+                            : "border-transparent text-muted-foreground hover:text-accent hover:border-accent/30"
+                        )}
+                      >
+                        <span className="font-urdu text-[15px] font-bold leading-normal">{link.urdu}</span>
+                        <span className="text-[9px] font-semibold tracking-widest uppercase opacity-85">{link.english}</span>
+                      </Link>
+                    );
+                  })}
                 </nav>
 
                 <div className="flex flex-col gap-3 mt-auto pt-8 border-t border-accent/10">
