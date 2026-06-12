@@ -62,19 +62,19 @@ export function HeroSection() {
                 </span>
                 <span className="text-[10px] font-bold text-accent uppercase tracking-widest font-inter">Live Beta / لائیو بیٹا</span>
               </div>
-              <h1 className="font-garamond text-6xl md:text-8xl lg:text-[7.5rem] font-black mb-1 tracking-wider uppercase gold-gradient-text-light leading-none select-none drop-shadow-[0_0_25px_rgba(197,160,89,0.2)]" dir="ltr">
+              <h1 className="font-garamond text-5xl md:text-7xl lg:text-[6rem] font-black mb-1 tracking-wider uppercase gold-gradient-text-light leading-none select-none drop-shadow-[0_0_25px_rgba(197,160,89,0.2)] text-right" dir="ltr">
                 HaqDar AI
               </h1>
-              <p className="font-garamond italic text-lg md:text-2xl font-bold tracking-[0.25em] text-accent uppercase mb-6" dir="ltr">
+              <p className="font-garamond italic text-base md:text-xl lg:text-2xl font-bold tracking-[0.2em] text-accent uppercase mb-6 text-right" dir="ltr">
                 AI-Powered Rights Empowerment
               </p>
             </AnimatedContainer>
 
             <AnimatedContainer variant="fadeUp" delay={0.3} className="space-y-5 relative z-10">
-              <h2 className="font-urdu text-4xl md:text-6xl font-bold leading-[1.4] text-foreground drop-shadow-sm">
+              <h2 className="font-urdu text-4xl md:text-5xl lg:text-6xl font-bold leading-[1.4] text-foreground drop-shadow-sm">
                 آواز میں انصاف کی طاقت
               </h2>
-              <p className="text-sm md:text-base text-muted-foreground max-w-xl leading-relaxed font-inter bg-background/40 backdrop-blur-sm p-4 rounded-xl border border-white/5 dark:border-white/5 shadow-inner" dir="ltr">
+              <p className="text-sm md:text-base text-muted-foreground max-w-xl leading-relaxed font-inter bg-background/40 backdrop-blur-sm p-4 rounded-xl border border-white/5 dark:border-white/5 shadow-inner text-right" dir="ltr">
                 Pakistan's first voice-enabled AI legal rights assistant. Speak your complaint in Urdu or English, know your rights, and draft formal legal petitions instantly.
               </p>
             </AnimatedContainer>
@@ -134,11 +134,11 @@ export function HeroSection() {
               <div className="relative">
                 <div className="absolute -inset-8 bg-accent/10 rounded-full blur-3xl opacity-40 pointer-events-none" />
                 <GeometricMedallion 
-                  size={220} 
+                  size={200} 
                   className="md:hidden shrink-0 drop-shadow-[0_4px_20px_rgba(197,160,89,0.3)]" 
                 />
                 <GeometricMedallion 
-                  size={420} 
+                  size={360} 
                   className="hidden md:block shrink-0 drop-shadow-[0_4px_30px_rgba(197,160,89,0.3)]" 
                 />
               </div>
