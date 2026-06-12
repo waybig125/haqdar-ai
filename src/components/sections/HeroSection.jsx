@@ -50,23 +50,17 @@ export function HeroSection() {
           {/* Left / Center content */}
           <div className="col-span-1 md:col-span-8 flex flex-col items-center md:items-start text-center md:text-start">
             
-            <AnimatedContainer variant="fadeUp" delay={0.1}>
-              <div className="mb-6 flex justify-center md:justify-start">
-                <SDGBadge variant="both" />
-              </div>
-            </AnimatedContainer>
-
             <AnimatedContainer variant="fadeUp" delay={0.2}>
               <h1 className="font-garamond text-5xl md:text-8xl font-black mb-1 tracking-wider uppercase gold-gradient-text-light leading-none select-none">
                 HaqDar AI
               </h1>
-              <p className="font-garamond italic text-lg md:text-xl font-bold tracking-widest text-accent uppercase mb-8" dir="ltr">
+              <p className="font-garamond italic text-lg md:text-xl font-bold tracking-widest text-accent uppercase mb-4" dir="ltr">
                 AI-Powered Rights Empowerment for Pakistan
               </p>
             </AnimatedContainer>
 
-            <AnimatedContainer variant="fadeUp" delay={0.3} className="space-y-6">
-              <h2 className="font-urdu text-4xl md:text-6xl font-bold leading-[1.5] text-foreground">
+            <AnimatedContainer variant="fadeUp" delay={0.3} className="space-y-4">
+              <h2 className="font-urdu text-4xl md:text-6xl font-bold leading-[1.4] text-foreground">
                 آواز میں انصاف کی طاقت
               </h2>
               <p className="text-sm md:text-base text-muted-foreground max-w-xl leading-relaxed font-inter" dir="ltr">
@@ -74,7 +68,7 @@ export function HeroSection() {
               </p>
             </AnimatedContainer>
 
-            <AnimatedContainer variant="fadeUp" delay={0.4} className="mt-10">
+            <AnimatedContainer variant="fadeUp" delay={0.4} className="mt-6">
               <Button 
                 size="lg" 
                 onClick={scrollToInput}
