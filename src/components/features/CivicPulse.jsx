@@ -88,9 +88,9 @@ export function CivicPulse({ data }) {
                   <XAxis dataKey="month" stroke="#C5B69C" fontSize={11} tickLine={false} axisLine={false} className="font-inter font-semibold uppercase tracking-wider" />
                   <YAxis stroke="#C5B69C" fontSize={11} tickLine={false} axisLine={false} className="font-inter font-semibold" />
                   <Tooltip 
-                    contentStyle={{ backgroundColor: 'var(--color-card)', borderColor: 'var(--color-accent)', borderRadius: '8px', borderWidth: '1.5px', boxShadow: '0 4px 12px rgba(0,0,0,0.15)' }}
-                    labelStyle={{ color: 'var(--color-foreground)', fontFamily: 'var(--font-inter)', fontWeight: 'bold', fontSize: '12px' }}
-                    itemStyle={{ color: 'var(--color-foreground)', fontFamily: 'var(--font-inter)', fontSize: '12px' }}
+                    contentStyle={{ backgroundColor: 'hsl(var(--card))', borderColor: 'hsl(var(--accent))', borderRadius: '8px', borderWidth: '1.5px', boxShadow: '0 4px 12px rgba(0,0,0,0.15)' }}
+                    labelStyle={{ color: 'hsl(var(--foreground))', fontFamily: 'var(--font-inter)', fontWeight: 'bold', fontSize: '12px' }}
+                    itemStyle={{ color: 'hsl(var(--foreground))', fontFamily: 'var(--font-inter)', fontSize: '12px' }}
                   />
                   <Area type="monotone" dataKey="count" stroke={THEME.colors.accent.DEFAULT} strokeWidth={2.5} fillOpacity={1} fill="url(#colorCount)" />
                 </AreaChart>
@@ -116,8 +116,8 @@ export function CivicPulse({ data }) {
                   <XAxis dataKey="month" stroke="#C5B69C" fontSize={11} tickLine={false} axisLine={false} className="font-inter font-semibold" />
                   <YAxis stroke="#C5B69C" fontSize={11} tickLine={false} axisLine={false} className="font-inter font-semibold" />
                   <Tooltip 
-                    contentStyle={{ backgroundColor: 'var(--color-card)', borderColor: 'var(--color-accent)', borderRadius: '8px', borderWidth: '1.5px' }}
-                    itemStyle={{ color: 'var(--color-foreground)', fontFamily: 'var(--font-inter)', fontSize: '12px' }}
+                    contentStyle={{ backgroundColor: 'hsl(var(--card))', borderColor: 'hsl(var(--accent))', borderRadius: '8px', borderWidth: '1.5px' }}
+                    itemStyle={{ color: 'hsl(var(--foreground))', fontFamily: 'var(--font-inter)', fontSize: '12px' }}
                   />
                   <Legend wrapperStyle={{ fontFamily: 'var(--font-inter)', fontSize: '10px', paddingTop: '15px' }} />
                   <Bar dataKey="Urdu Voice" stackId="a" fill="#107C41" radius={[0, 0, 0, 0]} />
@@ -145,8 +145,8 @@ export function CivicPulse({ data }) {
                   <XAxis type="number" stroke="#C5B69C" fontSize={11} tickLine={false} axisLine={false} className="font-inter font-semibold" />
                   <YAxis dataKey="name" type="category" stroke="#C5B69C" fontSize={10} tickLine={false} axisLine={false} width={150} className="font-urdu font-semibold" />
                   <Tooltip 
-                    contentStyle={{ backgroundColor: 'var(--color-card)', borderColor: 'var(--color-accent)', borderRadius: '8px', borderWidth: '1.5px' }}
-                    itemStyle={{ color: 'var(--color-foreground)', fontFamily: 'var(--font-inter)', fontSize: '12px' }}
+                    contentStyle={{ backgroundColor: 'hsl(var(--card))', borderColor: 'hsl(var(--accent))', borderRadius: '8px', borderWidth: '1.5px' }}
+                    itemStyle={{ color: 'hsl(var(--foreground))', fontFamily: 'var(--font-inter)', fontSize: '12px' }}
                   />
                   <Bar dataKey="count" fill="#C5A059" radius={[0, 4, 4, 0]}>
                     {pipelineData.map((entry, index) => (
@@ -187,8 +187,8 @@ export function CivicPulse({ data }) {
                     ))}
                   </Pie>
                   <Tooltip 
-                    contentStyle={{ backgroundColor: 'var(--color-card)', borderColor: 'var(--color-accent)', borderRadius: '8px', borderWidth: '1.5px' }}
-                    itemStyle={{ color: 'var(--color-foreground)', fontFamily: 'var(--font-inter)', fontSize: '12px' }}
+                    contentStyle={{ backgroundColor: 'hsl(var(--card))', borderColor: 'hsl(var(--accent))', borderRadius: '8px', borderWidth: '1.5px' }}
+                    itemStyle={{ color: 'hsl(var(--foreground))', fontFamily: 'var(--font-inter)', fontSize: '12px' }}
                   />
                   <Legend wrapperStyle={{ fontFamily: 'var(--font-inter)', fontSize: '10px', paddingTop: '15px' }} />
                 </PieChart>
@@ -231,8 +231,8 @@ export function CivicPulse({ data }) {
                     ))}
                   </Pie>
                   <Tooltip 
-                    contentStyle={{ backgroundColor: 'var(--color-card)', borderColor: 'var(--color-accent)', borderRadius: '8px', borderWidth: '1.5px' }}
-                    itemStyle={{ color: 'var(--color-foreground)', fontFamily: 'var(--font-inter)', fontSize: '12px' }}
+                    contentStyle={{ backgroundColor: 'hsl(var(--card))', borderColor: 'hsl(var(--accent))', borderRadius: '8px', borderWidth: '1.5px' }}
+                    itemStyle={{ color: 'hsl(var(--foreground))', fontFamily: 'var(--font-inter)', fontSize: '12px' }}
                   />
                   <Legend wrapperStyle={{ fontFamily: 'var(--font-inter)', fontSize: '10px', paddingTop: '15px' }} />
                 </PieChart>
@@ -306,8 +306,8 @@ export function CivicPulse({ data }) {
                   <XAxis type="number" domain={[0, 100]} stroke="#C5B69C" fontSize={11} tickLine={false} axisLine={false} className="font-inter font-semibold" unit="%" />
                   <YAxis dataKey="name" type="category" stroke="#C5B69C" fontSize={10} tickLine={false} axisLine={false} width={120} className="font-urdu font-semibold" />
                   <Tooltip 
-                    contentStyle={{ backgroundColor: 'var(--color-card)', borderColor: 'var(--color-accent)', borderRadius: '8px', borderWidth: '1.5px' }}
-                    itemStyle={{ color: 'var(--color-foreground)', fontFamily: 'var(--font-inter)', fontSize: '12px' }}
+                    contentStyle={{ backgroundColor: 'hsl(var(--card))', borderColor: 'hsl(var(--accent))', borderRadius: '8px', borderWidth: '1.5px' }}
+                    itemStyle={{ color: 'hsl(var(--foreground))', fontFamily: 'var(--font-inter)', fontSize: '12px' }}
                     formatter={(value) => [`${value}%`, 'Resolution Rate']}
                   />
                   <Bar dataKey="rate" radius={[0, 4, 4, 0]}>
