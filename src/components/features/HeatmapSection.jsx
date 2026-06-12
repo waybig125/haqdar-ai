@@ -49,11 +49,11 @@ export function HeatmapSection() {
     : 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png';
 
   const geoJsonStyle = {
-    fillColor: isDark ? '#0E1411' : '#F5F1EB',
+    fillColor: isDark ? '#120A07' : '#FAF6EE',
     weight: 1.5,
     opacity: 1,
-    color: isDark ? '#1E2B23' : '#DDD2C0',
-    fillOpacity: 0.6
+    color: isDark ? '#36221A' : '#C5B69C',
+    fillOpacity: 0.75
   };
 
   return (
@@ -69,7 +69,7 @@ export function HeatmapSection() {
 
         <AnimatedContainer variant="fadeUp" delay={0.2} className="relative">
           
-          <div className="h-[500px] md:h-[600px] w-full rounded-2xl overflow-hidden shadow-2xl border border-border/60 relative z-10 bg-background">
+          <div className="h-[500px] md:h-[600px] w-full rounded-2xl overflow-hidden shadow-2xl border border-[#C5B69C] dark:border-[#523225] relative z-10 bg-[#FAF6EE] dark:bg-[#120A07]">
             <MapWrapper 
               tileUrl={tileUrl}
               geoJsonStyle={geoJsonStyle}
