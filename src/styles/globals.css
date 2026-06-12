@@ -32,6 +32,9 @@
   --color-card: hsl(var(--card));
   --color-card-foreground: hsl(var(--card-foreground));
 
+  --color-emerald: hsl(var(--emerald));
+  --color-emerald-foreground: hsl(var(--emerald-foreground));
+
   --radius-lg: var(--radius);
   --radius-md: calc(var(--radius) - 2px);
   --radius-sm: calc(var(--radius) - 4px);
@@ -92,6 +95,10 @@
     /* SDGs */
     --sdg-16: 22 42% 12%;
     --sdg-10: 38 52% 56%;
+
+    /* Emerald */
+    --emerald: 145 77% 30%;
+    --emerald-foreground: 0 0% 100%;
   }
 
   .dark {
@@ -124,6 +131,10 @@
     --border: 22 18% 18%;
     --input: 22 18% 18%;
     --ring: 38 70% 60%;
+
+    /* Emerald */
+    --emerald: 145 77% 40%;
+    --emerald-foreground: 22 30% 6%;
   }
 }
 
@@ -242,8 +253,8 @@
   }
 
   .dark .parchment-sheet {
-    background: linear-gradient(to bottom, #1D1410 0%, #150E0A 100%);
-    border: 1.5px solid #36221A;
+    background: linear-gradient(to bottom, #261A15 0%, #1C120D 100%);
+    border: 1.5px solid #452D23;
     box-shadow: 
       inset 0 3px 12px rgba(0,0,0,0.7),
       0 1px 1px rgba(255,255,255,0.02);
@@ -325,6 +336,44 @@
 }
 ::-webkit-scrollbar-thumb:hover {
   @apply bg-muted-foreground/50;
+}
+
+/* Print Media Styles for Petition Letter */
+@media print {
+  body {
+    background: white !important;
+    color: black !important;
+    background-image: none !important;
+  }
+  body::before,
+  header,
+  footer,
+  nav,
+  button,
+  .no-print,
+  .bezel-btn,
+  .theme-toggle-btn,
+  #theme-toggle {
+    display: none !important;
+  }
+  .print-only {
+    display: block !important;
+  }
+  .parchment-sheet {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    color: black !important;
+    padding: 0 !important;
+  }
+  .print-container {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    box-shadow: none !important;
+    background: transparent !important;
+  }
 }
 
 
