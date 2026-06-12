@@ -83,7 +83,7 @@ export function HeatmapSection() {
             <div className="bg-background border border-border/80 shadow-2xl rounded-full px-6 py-3 flex items-center gap-3 whitespace-nowrap">
               <span className="w-2.5 h-2.5 rounded-full bg-red-500 animate-ping" />
               <span className="font-bold text-lg font-garamond tracking-tight">{1247}</span>
-              <span className="text-xs font-semibold text-muted-foreground uppercase tracking-widest font-inter">Reports this month</span>
+              <span className="text-xs font-semibold text-muted-foreground uppercase tracking-widest font-inter">Anonymous reports this month</span>
             </div>
           </div>
 

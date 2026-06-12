@@ -78,7 +78,7 @@ export default async function DashboardPage() {
                   <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-accent/30 bg-[#3A231A]/30 text-accent font-semibold text-[10px] uppercase tracking-widest font-inter">
                     Dashboard Overview
                   </div>
-                  <h2 className="font-garamond text-2xl md:text-3xl font-black text-[#E6DBC6] leading-tight">
+                  <h2 className="font-garamond text-2xl md:text-3xl font-black text-primary dark:text-[#E6DBC6] leading-tight">
                     How Civic Pulse Maps to Sustainable Goals (SDGs)
                   </h2>
                   <p className="font-inter text-xs text-muted-foreground leading-relaxed">
@@ -199,7 +199,7 @@ export default async function DashboardPage() {
                 <div className="grunge-overlay" />
                 <div className="flex items-center gap-3 mb-6 relative z-10">
                   <Clock className="w-5 h-5 text-accent" />
-                  <h3 className="font-urdu text-2xl font-bold text-[#E6DBC6] m-0" dir="rtl">حالیہ شکایات لاگ / Activity Ledger</h3>
+                  <h3 className="font-urdu text-2xl font-bold text-primary dark:text-[#E6DBC6] m-0" dir="rtl">حالیہ شکایات لاگ / Activity Ledger</h3>
                 </div>
                 
                 <div className="parchment-sheet rounded-xl overflow-hidden border border-accent/20 relative z-10">
@@ -237,7 +237,7 @@ export default async function DashboardPage() {
                 <div className="grunge-overlay" />
                 <div className="flex items-center gap-3 mb-6 relative z-10">
                   <ShieldCheck className="w-5 h-5 text-accent" />
-                  <h3 className="font-urdu text-2xl font-bold text-[#E6DBC6] m-0" dir="rtl">گلوبل ٹارگٹ بلیو پرنٹ / SDG Targets</h3>
+                  <h3 className="font-urdu text-2xl font-bold text-primary dark:text-[#E6DBC6] m-0" dir="rtl">گلوبل ٹارگٹ بلیو پرنٹ / SDG Targets</h3>
                 </div>
 
                 <div className="flex flex-col gap-4 relative z-10">
