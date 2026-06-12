@@ -30,7 +30,7 @@ export function ResultCard({ result }) {
   };
 
   return (
-    <AnimatedContainer variant="fadeUp" className="w-full max-w-4xl mx-auto px-4 pb-16">
+    <AnimatedContainer variant="fadeUp" className="w-full max-w-6xl mx-auto px-4 pb-16">
       <Card className="wood-console shadow-[0_20px_50px_rgba(0,0,0,0.5)] overflow-hidden rounded-2xl relative border-accent/20">
         
         {/* Header - Trust Score & Badges */}

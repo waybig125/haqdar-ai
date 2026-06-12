@@ -49,16 +49,16 @@ export function HeatmapSection() {
     : 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png';
 
   const geoJsonStyle = {
-    fillColor: isDark ? '#120A07' : '#FAF6EE',
+    fillColor: isDark ? '#C5A059' : '#FAF6EE',
     weight: 1.5,
-    opacity: 1,
-    color: isDark ? '#36221A' : '#C5B69C',
-    fillOpacity: 0.75
+    opacity: isDark ? 0.6 : 1,
+    color: isDark ? '#C5A059' : '#C5B69C',
+    fillOpacity: isDark ? 0.08 : 0.75
   };
 
   return (
     <section className="py-16 md:py-24 bg-transparent relative overflow-hidden border-t border-border/40">
-      <div className="container mx-auto px-4 max-w-5xl">
+      <div className="container mx-auto px-4 max-w-6xl">
         
         <AnimatedContainer variant="fadeUp" className="text-center mb-12">
           <h2 className="font-urdu text-4xl md:text-5xl font-bold text-foreground mb-4" dir="rtl">کرپشن ہیٹ میپ</h2>

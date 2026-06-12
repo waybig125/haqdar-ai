@@ -49,8 +49,7 @@ export function Header() {
 
         {/* Logo */}
         <Link href="/" className="flex items-center gap-3 hover:opacity-95 transition-opacity group pb-1">
-          <GeometricMedallion size={36} className="shrink-0 drop-shadow-[0_2px_8px_rgba(197,160,89,0.3)] transition-transform duration-300 group-hover:scale-110" />
-          <div className="flex flex-col items-start gap-1.5 pt-1">
+          <div className="flex flex-col items-start gap-3 pt-1">
             <span className="font-urdu text-3xl font-bold text-foreground leading-normal group-hover:text-accent transition-colors">حق دار</span>
             <span className="text-[10px] font-garamond italic font-bold tracking-[0.18em] text-accent uppercase leading-none">HaqDar AI</span>
           </div>
@@ -71,7 +70,7 @@ export function Header() {
                   )}
                 >
                   <span className="font-urdu text-sm font-bold leading-[1.8] tracking-normal">{link.urdu}</span>
-                  <span className="text-[9px] font-semibold tracking-widest font-inter uppercase opacity-85 leading-none mt-1">{link.english}</span>
+                  <span className="text-[9px] font-semibold tracking-widest font-inter uppercase opacity-85 leading-none mt-2.5">{link.english}</span>
                   {/* Glowing gold underline indicator */}
                   <span
                     className={cn(
@@ -102,8 +101,7 @@ export function Header() {
               <SheetTitle className="sr-only">Navigation Menu</SheetTitle>
               <div className="flex flex-col gap-8 mt-8">
                 <Link href="/" className="flex items-center gap-3 pb-1">
-                  <GeometricMedallion size={40} className="shrink-0 drop-shadow-[0_2px_8px_rgba(197,160,89,0.3)]" />
-                  <div className="flex flex-col items-start gap-1.5 pt-1">
+                  <div className="flex flex-col items-start gap-3 pt-1">
                     <span className="font-urdu text-4xl font-bold text-foreground leading-normal">حق دار</span>
                     <span className="text-[11px] font-garamond italic font-bold tracking-[0.18em] text-accent uppercase leading-none">HaqDar AI</span>
                   </div>
@@ -124,7 +122,7 @@ export function Header() {
                         )}
                       >
                         <span className="font-urdu text-base font-bold leading-[1.8]">{link.urdu}</span>
-                        <span className="text-[9px] font-semibold tracking-widest uppercase opacity-85 mt-1">{link.english}</span>
+                        <span className="text-[9px] font-semibold tracking-widest uppercase opacity-85 mt-2.5">{link.english}</span>
                       </Link>
                     );
                   })}

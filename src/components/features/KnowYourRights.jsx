@@ -10,7 +10,7 @@ export function KnowYourRights({ result }) {
   if (!result) return null;
 
   return (
-    <AnimatedContainer variant="fadeUp" className="w-full max-w-4xl mx-auto px-4 pb-24">
+    <AnimatedContainer variant="fadeUp" className="w-full max-w-6xl mx-auto px-4 pb-24">
       
       <div className="mb-8 text-center">
         <h2 className="font-urdu text-4xl font-bold text-foreground" dir="rtl">اپنے حقوق جانیں</h2>

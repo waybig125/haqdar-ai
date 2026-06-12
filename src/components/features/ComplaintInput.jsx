@@ -69,7 +69,7 @@ export function ComplaintInput({ onAnalyze, loading }) {
   const isUrduMode = language === 'ur-PK';
 
   return (
-    <div id="complaint-section" className="w-full max-w-4xl mx-auto px-4 py-12 scroll-mt-24">
+    <div id="complaint-section" className="w-full max-w-6xl mx-auto px-4 py-12 scroll-mt-24">
       <AnimatedContainer variant="fadeUp">
         
         {/* Mahogany Wood Console Outer Frame */}
@@ -99,7 +99,7 @@ export function ComplaintInput({ onAnalyze, loading }) {
                 placeholder={isUrduMode ? "اپنی شکایت یہاں لکھیں یا مائیک کا بٹن دبا کر بولیں..." : "Type or click the microphone to speak your complaint..."}
                 className={cn(
                   "w-full min-h-[170px] bg-transparent resize-none outline-none leading-relaxed placeholder:text-amber-900/30 dark:placeholder:text-amber-100/25 transition-all border-none focus:ring-0 mt-2",
-                  isUrduMode ? "font-urdu text-2xl md:text-3xl leading-[2.2] text-amber-950 dark:text-amber-100" : "font-garamond text-xl md:text-2xl font-bold text-amber-950 dark:text-amber-100"
+                  isUrduMode ? "font-urdu text-2xl md:text-3xl leading-[2.2] text-amber-950 dark:text-amber-100" : "font-garamond text-xl md:text-2xl font-bold leading-[2.2] text-amber-950 dark:text-amber-100"
                 )}
                 dir={isUrduMode ? "rtl" : "ltr"}
                 disabled={loading}
@@ -198,7 +198,7 @@ export function ComplaintInput({ onAnalyze, loading }) {
                   ) : (
                     <>
                       تجزیہ کریں
-                      <Send className="w-4 h-4 ms-2 rotate-180 rtl:rotate-0 text-emerald-400" />
+                      <Send className="w-4 h-4 ms-2 rotate-0 rtl:rotate-180 text-emerald-400" />
                     </>
                   )}
                 </Button>

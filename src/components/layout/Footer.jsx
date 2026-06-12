@@ -19,10 +19,9 @@ export function Footer() {
           {/* Logo & Branding - Takes up more space */}
           <div className="md:col-span-5 flex flex-col items-center md:items-start gap-3" dir="ltr">
             <div className="flex items-center gap-3">
-              <GeometricMedallion size={36} className="shrink-0 drop-shadow-[0_4px_12px_rgba(197,160,89,0.3)]" />
-              <div className="flex flex-col">
+              <div className="flex flex-col gap-2.5">
                 <h3 className="font-urdu text-3xl font-bold text-foreground leading-none" dir="rtl">حق دار</h3>
-                <p className="text-[10px] font-garamond italic font-bold tracking-[0.2em] text-accent uppercase mt-1">HaqDar AI</p>
+                <p className="text-[10px] font-garamond italic font-bold tracking-[0.2em] text-accent uppercase">HaqDar AI</p>
               </div>
             </div>
             <p className="text-xs text-muted-foreground/80 leading-relaxed font-inter max-w-xs text-center md:text-left mt-2">
@@ -41,10 +40,10 @@ export function Footer() {
             </span>
             <div className="flex flex-col gap-3 text-sm font-medium font-inter">
               <a href="/" className="text-muted-foreground hover:text-accent transition-all hover:translate-x-1 flex items-center gap-2">
-                Home <span dir="rtl" className="font-urdu text-xs font-bold text-accent/70">/ شکایت</span>
+                <span className="font-urdu text-xs font-bold text-accent/70" dir="rtl">شکایت</span> / Home
               </a>
               <a href="/dashboard" className="text-muted-foreground hover:text-accent transition-all hover:translate-x-1 flex items-center gap-2">
-                Dashboard <span dir="rtl" className="font-urdu text-xs font-bold text-accent/70">/ سول نبض</span>
+                <span className="font-urdu text-xs font-bold text-accent/70" dir="rtl">سول نبض</span> / Dashboard
               </a>
             </div>
           </div>

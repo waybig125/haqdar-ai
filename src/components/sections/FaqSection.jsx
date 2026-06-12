@@ -44,7 +44,7 @@ const FAQS = [
 export function FaqSection() {
   return (
     <section className="w-full py-16 bg-[#3A231A]/5 border-t border-accent/10 relative overflow-hidden">
-      <div className="container mx-auto px-4 max-w-4xl relative z-10">
+      <div className="container mx-auto px-4 max-w-6xl relative z-10">
         
         {/* Section Header */}
         <div className="text-center max-w-2xl mx-auto mb-12">

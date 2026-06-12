@@ -46,7 +46,7 @@ export function TestimonialsSection() {
             <h2 className="font-urdu text-4xl md:text-5xl font-bold text-foreground mb-4" dir="rtl">
               شہریوں کی آوازیں
             </h2>
-            <p className="font-garamond italic text-lg md:text-xl font-bold tracking-widest text-accent uppercase mb-2">
+            <p className="font-garamond italic text-lg md:text-xl font-bold tracking-widest text-accent uppercase mt-2.5 mb-2">
               Community Voices & Impact
             </p>
             <p className="text-xs md:text-sm text-muted-foreground font-inter max-w-md mx-auto">
