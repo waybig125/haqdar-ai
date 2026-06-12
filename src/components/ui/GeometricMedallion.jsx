@@ -9,7 +9,12 @@ export function GeometricMedallion({ className, size = 120 }) {
   // Helper: point on circle
   const pt = (cx, cy, r, angleDeg) => {
     const rad = ((angleDeg - 90) * Math.PI) / 180;
-    return [cx + r * Math.cos(rad), cy + r * Math.sin(rad)];
+    const x = cx + r * Math.cos(rad);
+    const y = cy + r * Math.sin(rad);
+    return [
+      parseFloat(x.toFixed(4)),
+      parseFloat(y.toFixed(4))
+    ];
   };
 
   // Generate an N-pointed star polygon as SVG path
@@ -168,10 +173,12 @@ export function GeometricMedallion({ className, size = 120 }) {
       {Array.from({ length: 8 }).map((_, i) => {
         const [cx, cy] = pt(100, 100, 72, i * 45);
         const s = i % 2 === 0 ? 4 : 2.5;
+        const rx = parseFloat((cx - s / 2).toFixed(4));
+        const ry = parseFloat((cy - s / 2).toFixed(4));
         return (
           <rect
             key={`diamond-${i}`}
-            x={cx - s / 2} y={cy - s / 2}
+            x={rx} y={ry}
             width={s} height={s}
             fill={g}
             opacity={i % 2 === 0 ? 0.8 : 0.4}
@@ -192,13 +199,13 @@ export function GeometricMedallion({ className, size = 120 }) {
           {/* Crescent */}
           <path
             d="M-4,-25 A28,28 0 1,0 -4,25 A22,22 0 1,1 -4,-25 Z"
-            fill={g}
+            fill="#000000"
             fillOpacity="0.95"
           />
           {/* Star */}
           <path
             d={starPath(15, 2, 9, 3.5, 5)}
-            fill={g}
+            fill="#000000"
             transform="rotate(18 15 2)"
           />
         </g>
