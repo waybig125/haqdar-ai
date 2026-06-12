@@ -29,14 +29,27 @@ export function GeometricMedallion({ className, size = 120 }) {
     return `M${pts.join('L')}Z`;
   };
 
-  // Islamic-style interlocking hexagonal rosette petal
-  const petalPath = (cx, cy, r, angleDeg) => {
-    const a1 = angleDeg - 15;
-    const a2 = angleDeg + 15;
-    const [x1, y1] = pt(cx, cy, r * 0.45, a1);
-    const [x2, y2] = pt(cx, cy, r, angleDeg);
-    const [x3, y3] = pt(cx, cy, r * 0.45, a2);
-    return `M${cx},${cy} Q${x1},${y1} ${x2},${y2} Q${x3},${y3} ${cx},${cy}`;
+  // Parametric wave along a circle path for the interlocking wavy guilloche band
+  const wavePath = (cx, cy, baseR, amplitude, frequency) => {
+    const pts = [];
+    for (let angle = 0; angle <= 360; angle += 2) {
+      const rad = ((angle - 90) * Math.PI) / 180;
+      const r = baseR + amplitude * Math.sin((frequency * angle * Math.PI) / 180);
+      const x = cx + r * Math.cos(rad);
+      const y = cy + r * Math.sin(rad);
+      pts.push(`${x.toFixed(4)},${y.toFixed(4)}`);
+    }
+    return `M${pts.join('L')}Z`;
+  };
+
+  // Marquetry-style leaf/petal path
+  const leafPath = (cx, cy, rStart, rEnd, angleDeg) => {
+    const [xStart, yStart] = pt(cx, cy, rStart, angleDeg);
+    const [xEnd, yEnd] = pt(cx, cy, rEnd, angleDeg);
+    // Control points to swell the leaf outwards on left and right sides
+    const [xLeft, yLeft] = pt(cx, cy, (rStart + rEnd) * 0.62, angleDeg - 22.5);
+    const [xRight, yRight] = pt(cx, cy, (rStart + rEnd) * 0.62, angleDeg + 22.5);
+    return `M${xStart},${yStart} Q${xLeft},${yLeft} ${xEnd},${yEnd} Q${xRight},${yRight} ${xStart},${yStart}`;
   };
 
   const g = `url(#gold-${id})`;
@@ -124,55 +137,78 @@ export function GeometricMedallion({ className, size = 120 }) {
         <circle cx="100" cy="100" r="89" stroke={g} strokeWidth="1.5" fill="none" opacity="0.6" />
       </g>
 
-      {/* Knurled edge — tiny marks around outer rim */}
-      {Array.from({ length: 60 }).map((_, i) => {
-        const [x1, y1] = pt(100, 100, 93, i * 6);
-        const [x2, y2] = pt(100, 100, 96, i * 6);
+      {/* Interlocking Wavy Guilloche Band (Guilloche / Cable Pattern) */}
+      <g opacity="0.65">
+        <path
+          d={wavePath(100, 100, 86, 3, 16)}
+          stroke={g}
+          strokeWidth="1.1"
+          fill="none"
+        />
+        <path
+          d={wavePath(100, 100, 86, -3, 16)}
+          stroke={g}
+          strokeWidth="1.1"
+          fill="none"
+        />
+      </g>
+
+      {/* Decorative Diamond Knots at Guilloche Crossing Points */}
+      {Array.from({ length: 8 }).map((_, i) => {
+        const [cx, cy] = pt(100, 100, 86, i * 45);
+        const s = 4.5;
+        const rx = parseFloat((cx - s / 2).toFixed(4));
+        const ry = parseFloat((cy - s / 2).toFixed(4));
         return (
-          <line
-            key={`knurl-${i}`}
-            x1={x1} y1={y1} x2={x2} y2={y2}
-            stroke={g} strokeWidth="0.6" opacity="0.35"
+          <rect
+            key={`knot-${i}`}
+            x={rx} y={ry}
+            width={s} height={s}
+            fill={`url(#bg-${id})`}
+            stroke={g}
+            strokeWidth="1"
+            opacity="0.85"
+            transform={`rotate(45 ${cx} ${cy})`}
           />
         );
       })}
 
-      {/* ====== LAYER 3: Decorative band between outer and inner ====== */}
-      {/* Geometric Islamic-inspired 12-petaled rosette */}
-      <g opacity="0.5">
-        {Array.from({ length: 12 }).map((_, i) => (
+      {/* ====== LAYER 3: Overlapping 8-Petaled Floral Rosette ====== */}
+      {/* Outer/Back leaf layer */}
+      <g opacity="0.75">
+        {Array.from({ length: 8 }).map((_, i) => (
           <path
-            key={`petal-${i}`}
-            d={petalPath(100, 100, 87, i * 30)}
+            key={`leaf-back-${i}`}
+            d={leafPath(100, 100, 58, 80, i * 45)}
             stroke={g}
             strokeWidth="1"
             fill={g}
-            fillOpacity="0.06"
+            fillOpacity="0.07"
           />
         ))}
       </g>
 
-      {/* Mid-ring dashed circle */}
-      <circle cx="100" cy="100" r="83" stroke={g} strokeWidth="0.7" strokeDasharray="2 3" opacity="0.35" />
+      {/* Inner/Front leaf layer (interlacing) */}
+      <g opacity="0.85">
+        {Array.from({ length: 8 }).map((_, i) => (
+          <path
+            key={`leaf-front-${i}`}
+            d={leafPath(100, 100, 58, 70, i * 45 + 22.5)}
+            stroke={g}
+            strokeWidth="1.2"
+            fill={g}
+            fillOpacity="0.04"
+          />
+        ))}
+      </g>
 
-      {/* 12-pointed star ring — the showpiece geometric pattern */}
-      <path
-        d={starPath(100, 100, 80, 68, 12)}
-        stroke={g}
-        strokeWidth="1.2"
-        fill={g}
-        fillOpacity="0.04"
-        opacity="0.7"
-      />
+      {/* Sprout boundary circle */}
+      <circle cx="100" cy="100" r="58" stroke={g} strokeWidth="1" opacity="0.4" />
 
-      {/* Inner decorative circle */}
-      <circle cx="100" cy="100" r="64" stroke={g} strokeWidth="1.5" opacity="0.5" />
-      <circle cx="100" cy="100" r="60" stroke={g} strokeWidth="0.7" strokeDasharray="4 3" opacity="0.3" />
-
-      {/* Diamond studs at cardinal and ordinal points */}
+      {/* Gold diamond studs at the tips of the back leaves */}
       {Array.from({ length: 8 }).map((_, i) => {
-        const [cx, cy] = pt(100, 100, 72, i * 45);
-        const s = i % 2 === 0 ? 4 : 2.5;
+        const [cx, cy] = pt(100, 100, 80, i * 45);
+        const s = i % 2 === 0 ? 4.5 : 3;
         const rx = parseFloat((cx - s / 2).toFixed(4));
         const ry = parseFloat((cy - s / 2).toFixed(4));
         return (
@@ -181,7 +217,7 @@ export function GeometricMedallion({ className, size = 120 }) {
             x={rx} y={ry}
             width={s} height={s}
             fill={g}
-            opacity={i % 2 === 0 ? 0.8 : 0.4}
+            opacity={i % 2 === 0 ? 0.9 : 0.5}
             transform={`rotate(45 ${cx} ${cy})`}
           />
         );
