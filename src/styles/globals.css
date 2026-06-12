@@ -105,11 +105,22 @@
     --medallion-bg-mid: #3D271D;
     --medallion-bg-end: #241610;
 
-    /* Medallion Center (Light Theme - Ivory/Marble) */
+    /* Medallion Center & Stroke (Light Theme - Ivory & Dark Walnut) */
+    --medallion-bg-start: #FCFAF2;
+    --medallion-bg-mid: #F5EFEB;
+    --medallion-bg-end: #EDE4DC;
     --medallion-center-start: #FFFFFF;
-    --medallion-center-mid: #F9F6F0;
-    --medallion-center-end: #EBE5D9;
-    --medallion-emblem: #B8922A;
+    --medallion-center-mid: #FAF8F5;
+    --medallion-center-end: #F2EDE4;
+    --medallion-emblem: #3E271D;
+    
+    --medallion-stroke-start: #5A3E2F;
+    --medallion-stroke-mid-1: #4D3325;
+    --medallion-stroke-mid-2: #3E271D;
+    --medallion-stroke-end: #241610;
+    
+    --medallion-glow-color: #000000;
+    --medallion-glow-opacity: 0.08;
 
     /* Background Grunge Particles (Light Theme) */
     --grunge-color-1: rgba(60, 40, 30, 0.25);
@@ -156,11 +167,22 @@
     --medallion-bg-mid: #120905;
     --medallion-bg-end: #050201;
 
-    /* Medallion Center (Dark Theme - Warm Obsidian/Brown) */
+    /* Medallion Center & Stroke (Dark Theme - Warm Obsidian & Gold) */
+    --medallion-bg-start: #21130B;
+    --medallion-bg-mid: #120905;
+    --medallion-bg-end: #050201;
     --medallion-center-start: #2A1F1A;
     --medallion-center-mid: #1A120E;
     --medallion-center-end: #0D0907;
     --medallion-emblem: #D4AF37;
+
+    --medallion-stroke-start: #FFFBE6;
+    --medallion-stroke-mid-1: #F5D98C;
+    --medallion-stroke-mid-2: #D4AF37;
+    --medallion-stroke-end: #634D14;
+    
+    --medallion-glow-color: #D4AF37;
+    --medallion-glow-opacity: 0.4;
 
     /* Background Grunge Particles (Dark Theme) */
     --grunge-color-1: rgba(212, 175, 55, 0.12);
@@ -181,9 +203,9 @@
       radial-gradient(circle at 85% 72%, rgba(16, 124, 65, 0.05) 0%, transparent 8%),
       radial-gradient(circle at 45% 85%, rgba(16, 124, 65, 0.03) 0%, transparent 10%),
       radial-gradient(circle at 50% 20%, rgba(197, 160, 89, 0.02) 0%, transparent 50%),
-      linear-gradient(to right, rgba(16, 124, 65, 0.035) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(16, 124, 65, 0.035) 1px, transparent 1px);
-    background-size: 100% 100%, 100% 100%, 100% 100%, 100% 100%, 32px 32px, 32px 32px;
+      linear-gradient(to right, rgba(90, 60, 40, 0.045) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(90, 60, 40, 0.045) 1px, transparent 1px);
+    background-size: 100% 100%, 100% 100%, 100% 100%, 100% 100%, 40px 40px, 40px 40px;
     background-attachment: fixed;
     position: relative;
   }
@@ -195,9 +217,9 @@
       radial-gradient(circle at 80% 65%, rgba(212, 175, 55, 0.04) 0%, transparent 10%),
       radial-gradient(circle at 40% 75%, rgba(212, 175, 55, 0.02) 0%, transparent 12%),
       radial-gradient(circle at 50% 30%, rgba(212, 175, 55, 0.03) 0%, transparent 60%),
-      linear-gradient(to right, rgba(212, 175, 55, 0.015) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(212, 175, 55, 0.015) 1px, transparent 1px);
-    background-size: 100% 100%, 100% 100%, 100% 100%, 100% 100%, 32px 32px, 32px 32px;
+      linear-gradient(to right, rgba(212, 175, 55, 0.025) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(212, 175, 55, 0.025) 1px, transparent 1px);
+    background-size: 100% 100%, 100% 100%, 100% 100%, 100% 100%, 40px 40px, 40px 40px;
   }
 
   /* Custom base64 SVG noise overlay for tactile grunge/paper texture */

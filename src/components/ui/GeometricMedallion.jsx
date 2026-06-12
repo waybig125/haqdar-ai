@@ -65,13 +65,12 @@ export function GeometricMedallion({ className, size = 120 }) {
     >
       <defs>
         {/* Rich multi-stop gold gradient */}
+        {/* Rich theme-adapted stroke gradient */}
         <radialGradient id={`gold-${id}`} cx="50%" cy="50%" r="50%" fx="38%" fy="38%">
-          <stop offset="0%" stopColor="#FFFBE6" />
-          <stop offset="15%" stopColor="#F5D98C" />
-          <stop offset="40%" stopColor="#D4AF37" />
-          <stop offset="70%" stopColor="#B8922A" />
-          <stop offset="90%" stopColor="#8A6B1D" />
-          <stop offset="100%" stopColor="#634D14" />
+          <stop offset="0%" stopColor="var(--medallion-stroke-start)" />
+          <stop offset="20%" stopColor="var(--medallion-stroke-mid-1)" />
+          <stop offset="60%" stopColor="var(--medallion-stroke-mid-2)" />
+          <stop offset="100%" stopColor="var(--medallion-stroke-end)" />
         </radialGradient>
 
         {/* Dark mahogany background (theme-adapted via CSS variables) */}
@@ -104,7 +103,7 @@ export function GeometricMedallion({ className, size = 120 }) {
         {/* Golden glow filter for the center icon */}
         <filter id={`glow-${id}`} x="-40%" y="-40%" width="180%" height="180%">
           <feGaussianBlur stdDeviation="2.5" result="blur" />
-          <feFlood floodColor="#D4AF37" floodOpacity="0.4" result="color" />
+          <feFlood floodColor="var(--medallion-glow-color)" floodOpacity="var(--medallion-glow-opacity)" result="color" />
           <feComposite in="color" in2="blur" operator="in" result="shadow" />
           <feComposite in="SourceGraphic" in2="shadow" operator="over" />
         </filter>
