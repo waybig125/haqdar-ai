@@ -81,7 +81,7 @@ export function ComplaintInput({ onAnalyze, loading }) {
           <form onSubmit={handleSubmit} className="flex flex-col gap-5 relative z-10">
             
             {/* Aged Parchment Sheet Textarea Box */}
-            <div className="parchment-sheet rounded-xl p-5 md:p-8 pt-10 relative">
+            <div className="parchment-sheet rounded-xl p-5 md:p-8 pt-14 pb-10 relative">
               
               {/* Language Badge Chip */}
               <div className="absolute top-3 left-4 flex items-center gap-1.5 px-2.5 py-0.5 rounded-full border border-accent/20 bg-accent/5 text-[9px] font-bold text-accent font-inter select-none">
@@ -98,7 +98,7 @@ export function ComplaintInput({ onAnalyze, loading }) {
                 onChange={(e) => setText(e.target.value.slice(0, 800))}
                 placeholder={isUrduMode ? "اپنی شکایت یہاں لکھیں یا مائیک کا بٹن دبا کر بولیں..." : "Type or click the microphone to speak your complaint..."}
                 className={cn(
-                  "w-full min-h-[170px] bg-transparent resize-none outline-none leading-relaxed placeholder:text-amber-900/30 dark:placeholder:text-amber-100/25 transition-all border-none focus:ring-0",
+                  "w-full min-h-[170px] bg-transparent resize-none outline-none leading-relaxed placeholder:text-amber-900/30 dark:placeholder:text-amber-100/25 transition-all border-none focus:ring-0 mt-2",
                   isUrduMode ? "font-urdu text-2xl md:text-3xl leading-[2.5] text-amber-950 dark:text-amber-100" : "font-garamond text-xl md:text-2xl font-bold text-amber-950 dark:text-amber-100"
                 )}
                 dir={isUrduMode ? "rtl" : "ltr"}
