@@ -125,6 +125,37 @@ export default async function DashboardPage() {
             </div>
           </AnimatedContainer>
           
+          {/* Today's Pulse Live Banner */}
+          <AnimatedContainer variant="fadeUp" className="mb-10 no-print">
+            <div className="bg-[#C5A059]/10 border border-[#C5A059]/30 rounded-2xl p-4 md:p-6 flex flex-col md:flex-row items-center justify-between gap-4 relative overflow-hidden">
+              <div className="absolute top-0 right-0 w-32 h-32 bg-accent/5 rounded-full blur-2xl pointer-events-none" />
+              <div className="flex items-center gap-3">
+                <span className="flex h-3 w-3 relative shrink-0">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-3 w-3 bg-emerald-500"></span>
+                </span>
+                <div className="text-left">
+                  <h4 className="font-urdu text-xl font-bold text-accent mb-0.5" dir="rtl">آج کی سرگرمی / Today's Pulse</h4>
+                  <p className="text-xs text-muted-foreground font-inter leading-none">Real-time status updates from across Pakistan's districts.</p>
+                </div>
+              </div>
+              <div className="flex flex-wrap items-center gap-3 md:gap-6 text-xs font-semibold font-inter">
+                <div className="px-4 py-2 bg-[#3A231A]/20 dark:bg-black/20 rounded-lg border border-accent/10">
+                  <span className="text-[10px] text-muted-foreground uppercase block mb-0.5">Today's Reports</span>
+                  <span className="text-accent text-sm font-bold">۲۴ شکایات / 24 Reports</span>
+                </div>
+                <div className="px-4 py-2 bg-[#3A231A]/20 dark:bg-black/20 rounded-lg border border-accent/10">
+                  <span className="text-[10px] text-muted-foreground uppercase block mb-0.5">Active City</span>
+                  <span className="text-accent text-sm font-bold">Karachi / کراچی</span>
+                </div>
+                <div className="px-4 py-2 bg-[#3A231A]/20 dark:bg-black/20 rounded-lg border border-accent/10">
+                  <span className="text-[10px] text-muted-foreground uppercase block mb-0.5">Primary Issue</span>
+                  <span className="text-accent text-sm font-bold">Utility Billing / یوٹیلیٹی بلنگ</span>
+                </div>
+              </div>
+            </div>
+          </AnimatedContainer>
+
           {/* Top Stat Cards */}
           <AnimatedContainer variant="staggerChildren" className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
             
@@ -134,6 +165,7 @@ export default async function DashboardPage() {
               iconName="FileWarning"
               trend="up"
               trendLabel="12% this month"
+              sparklineData={[35, 45, 40, 55, 60, 75, 90]}
             />
             
             <StatCard 
@@ -142,6 +174,7 @@ export default async function DashboardPage() {
               iconName="Target"
               trend="up"
               trendLabel="0.4% improvement"
+              sparklineData={[80, 81, 82, 82.5, 83, 83.5, 84]}
             />
 
             <StatCard 
@@ -149,6 +182,7 @@ export default async function DashboardPage() {
               value={stats.top_issues[0].name} 
               iconName="TrendingUp"
               className="border-accent bg-accent/5"
+              sparklineData={[20, 35, 45, 30, 60, 70, 85]}
             />
             
           </AnimatedContainer>

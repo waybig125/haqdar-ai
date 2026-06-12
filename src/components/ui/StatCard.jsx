@@ -18,7 +18,8 @@ export function StatCard({
   iconName, 
   trend, 
   trendLabel, 
-  className 
+  className,
+  sparklineData
 }) {
   const Icon = iconName ? ICONS[iconName] : null;
 
@@ -57,9 +58,21 @@ export function StatCard({
             </div>
           )}
         </div>
+
+        {/* Optional Mini Sparkline trend bar */}
+        {sparklineData && sparklineData.length > 0 && (
+          <div className="mt-4 flex items-end justify-between gap-1 h-6 w-full no-print">
+            {sparklineData.map((val, i) => (
+              <div 
+                key={i} 
+                className="bg-accent/30 hover:bg-accent rounded-sm flex-1 transition-all"
+                style={{ height: `${val}%` }}
+                title={`Value: ${val}`}
+              />
+            ))}
+          </div>
+        )}
       </CardContent>
     </Card>
   );
-
-
 }
