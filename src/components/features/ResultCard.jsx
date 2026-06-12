@@ -94,23 +94,32 @@ export function ResultCard({ result }) {
                 <AccordionContent className="pt-3">
                   <div className="parchment-sheet rounded-xl overflow-hidden relative shadow-inner">
                     
-                    {/* Copy Button */}
-                    <div className="absolute top-3 left-3 rtl:left-auto rtl:right-3 z-10">
+                    {/* Actions Row */}
+                    <div className="absolute top-3 left-3 rtl:left-auto rtl:right-3 z-10 flex items-center gap-2 no-print">
                       <Button 
                         variant="secondary" 
                         size="sm" 
-                        className="shadow-md font-urdu border border-[#C5B69C] dark:border-[#36221A] h-9 px-4 rounded-md cursor-pointer hover:bg-accent/10 hover:text-accent hover:border-accent/30"
+                        className="shadow-md font-urdu border border-[#C5B69C] dark:border-[#36221A] h-9 px-3.5 rounded-md cursor-pointer hover:bg-accent/10 hover:text-accent hover:border-accent/30 flex items-center gap-1.5"
                         onClick={handleCopy}
                       >
                         {copied ? (
-                          <><Check className="w-4 h-4 mr-2 text-emerald-600" /> نقل ہو گئی</>
+                          <><Check className="w-4 h-4 text-emerald-600" /> نقل ہو گئی</>
                         ) : (
-                          <><Copy className="w-4 h-4 mr-2" /> کاپی کریں</>
+                          <><Copy className="w-4 h-4" /> کاپی کریں</>
                         )}
+                      </Button>
+                      <Button 
+                        variant="secondary" 
+                        size="sm" 
+                        className="shadow-md font-urdu border border-[#C5B69C] dark:border-[#36221A] h-9 px-3.5 rounded-md cursor-pointer hover:bg-accent/10 hover:text-accent hover:border-accent/30 flex items-center gap-1.5"
+                        onClick={() => window.print()}
+                      >
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4"><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><path d="M6 9V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v5"/><rect x="6" y="14" width="12" height="8" rx="1"/></svg>
+                        پرنٹ کریں
                       </Button>
                     </div>
 
-                    <div className="p-6 pt-16 md:p-10 md:pt-12 overflow-x-auto">
+                    <div className="p-6 pt-16 md:p-10 md:pt-12 overflow-x-auto print-container">
                       <pre className="font-urdu text-xl md:text-2xl leading-[2.6] whitespace-pre-wrap break-words max-w-full font-medium" dir="rtl">
                         {result.complaint_letter}
                       </pre>
@@ -119,6 +128,24 @@ export function ResultCard({ result }) {
                 </AccordionContent>
               </AccordionItem>
             </Accordion>
+          </div>
+
+          {/* Step-by-Step Guide "What to do next" */}
+          <div className="px-4 pb-6 pt-2 no-print">
+            <div className="parchment-sheet rounded-xl p-5 md:p-6 border border-[#C5B69C] dark:border-[#36221A]">
+              <h4 className="font-urdu text-2xl font-bold text-accent mb-3" dir="rtl">اگلا اقدام (What to do next)</h4>
+              <ol className="font-urdu text-base md:text-lg leading-[2.2] space-y-3 list-decimal list-inside" dir="rtl">
+                <li className="text-foreground">
+                  <strong className="text-accent">خط نقل یا پرنٹ کریں:</strong> اوپر موجود بٹن کا استعمال کرتے ہوئے شکایتی خط کو کاپی کریں یا پی ڈی ایف کے طور پر محفوظ کر کے پرنٹ کریں۔
+                </li>
+                <li className="text-foreground">
+                  <strong className="text-accent font-urdu">متعلقہ ادارے کو ارسال کریں:</strong> شکایتی خط پر دستخط کریں اور اسے اوپر بتائے گئے متعلقہ ادارے (<span className="text-accent">{result.responsible_authority}</span>) کے دفتر میں ڈاک/ای میل کے ذریعے جمع کروائیں۔
+                </li>
+                <li className="text-foreground">
+                  <strong className="text-accent font-urdu">رسید اور پیروی:</strong> شکایت جمع کرواتے وقت رسید حاصل کریں اور پندرہ کام کے دنوں کے بعد ادارے سے پیش رفت دریافت کریں۔
+                </li>
+              </ol>
+            </div>
           </div>
 
 
