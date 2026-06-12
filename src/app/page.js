@@ -6,6 +6,7 @@ import { Footer } from '@/components/layout/Footer';
 import { HeroSection } from '@/components/sections/HeroSection';
 import { HowItWorksSection } from '@/components/sections/HowItWorksSection';
 import { SdgFocusSection } from '@/components/sections/SdgFocusSection';
+import { TestimonialsSection } from '@/components/sections/TestimonialsSection';
 import { FaqSection } from '@/components/sections/FaqSection';
 import { ComplaintInput } from '@/components/features/ComplaintInput';
 import { ResultCard } from '@/components/features/ResultCard';
@@ -50,6 +51,8 @@ export default function Home() {
         </div>
 
         <SdgFocusSection />
+
+        <TestimonialsSection />
 
         <FaqSection />
       </main>
