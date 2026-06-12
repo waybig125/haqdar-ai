@@ -3,12 +3,12 @@ import { cn } from "@/lib/utils";
 
 const SDG_DATA = {
   sdg16: {
-    label: "SDG 16: Peace & Justice",
+    label: "UN SDG 16: Peace, Justice, & Strong Institutions. Focuses on reducing corruption, ensuring equal access to justice, and promoting transparent institutions.",
     colorClass: "bg-[#1F6FEB] text-white",
     short: "SDG 16"
   },
   sdg10: {
-    label: "SDG 10: Reduced Inequalities",
+    label: "UN SDG 10: Reduced Inequalities. Aims to empower all citizens equally, eliminating language and literacy barriers in public legal access.",
     colorClass: "bg-[#DA3B8A] text-white",
     short: "SDG 10"
   }

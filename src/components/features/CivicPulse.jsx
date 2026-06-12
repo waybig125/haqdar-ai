@@ -48,26 +48,28 @@ export function CivicPulse({ data }) {
           <CardHeader className="pb-2">
             <CardTitle className="font-urdu text-2xl font-bold text-foreground">شکایات کا رجحان (6 ماہ)</CardTitle>
           </CardHeader>
-          <CardContent className="h-[300px] min-w-0 min-h-0 pt-4">
-            <ResponsiveContainer width="100%" height="100%">
-              <AreaChart data={data.monthly_trend} margin={{ top: 10, right: 30, left: -20, bottom: 0 }}>
-                <defs>
-                  <linearGradient id="colorCount" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="5%" stopColor={THEME.colors.accent.DEFAULT} stopOpacity={0.25}/>
-                    <stop offset="95%" stopColor={THEME.colors.accent.DEFAULT} stopOpacity={0}/>
-                  </linearGradient>
-                </defs>
-                <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="rgba(197, 160, 89, 0.15)" />
-                <XAxis dataKey="month" stroke="hsl(var(--muted-foreground))" fontSize={11} tickLine={false} axisLine={false} className="font-inter font-semibold uppercase tracking-wider" />
-                <YAxis stroke="hsl(var(--muted-foreground))" fontSize={11} tickLine={false} axisLine={false} className="font-inter font-semibold" />
-                <Tooltip 
-                  contentStyle={{ backgroundColor: 'var(--color-card)', borderColor: 'var(--color-accent)', borderRadius: '6px', borderWidth: '1px' }}
-                  labelStyle={{ color: 'var(--color-foreground)', fontFamily: 'var(--font-inter)', fontWeight: 'bold', fontSize: '12px' }}
-                  itemStyle={{ color: 'var(--color-foreground)', fontFamily: 'var(--font-inter)', fontSize: '12px' }}
-                />
-                <Area type="monotone" dataKey="count" stroke={THEME.colors.accent.DEFAULT} strokeWidth={2.5} fillOpacity={1} fill="url(#colorCount)" />
-              </AreaChart>
-            </ResponsiveContainer>
+          <CardContent className="w-full h-[300px] relative pt-0 min-w-0 min-h-0">
+            <div className="absolute inset-0 w-full h-full p-4">
+              <ResponsiveContainer width="99%" height="100%">
+                <AreaChart data={data.monthly_trend} margin={{ top: 10, right: 30, left: -20, bottom: 0 }}>
+                  <defs>
+                    <linearGradient id="colorCount" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="5%" stopColor={THEME.colors.accent.DEFAULT} stopOpacity={0.25}/>
+                      <stop offset="95%" stopColor={THEME.colors.accent.DEFAULT} stopOpacity={0}/>
+                    </linearGradient>
+                  </defs>
+                  <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="rgba(197, 160, 89, 0.15)" />
+                  <XAxis dataKey="month" stroke="hsl(var(--muted-foreground))" fontSize={11} tickLine={false} axisLine={false} className="font-inter font-semibold uppercase tracking-wider" />
+                  <YAxis stroke="hsl(var(--muted-foreground))" fontSize={11} tickLine={false} axisLine={false} className="font-inter font-semibold" />
+                  <Tooltip 
+                    contentStyle={{ backgroundColor: 'var(--color-card)', borderColor: 'var(--color-accent)', borderRadius: '6px', borderWidth: '1px' }}
+                    labelStyle={{ color: 'var(--color-foreground)', fontFamily: 'var(--font-inter)', fontWeight: 'bold', fontSize: '12px' }}
+                    itemStyle={{ color: 'var(--color-foreground)', fontFamily: 'var(--font-inter)', fontSize: '12px' }}
+                  />
+                  <Area type="monotone" dataKey="count" stroke={THEME.colors.accent.DEFAULT} strokeWidth={2.5} fillOpacity={1} fill="url(#colorCount)" />
+                </AreaChart>
+              </ResponsiveContainer>
+            </div>
           </CardContent>
         </Card>
       </AnimatedContainer>
@@ -78,32 +80,34 @@ export function CivicPulse({ data }) {
           <CardHeader className="pb-2">
             <CardTitle className="font-urdu text-2xl font-bold text-foreground">اقسام (Categories)</CardTitle>
           </CardHeader>
-          <CardContent className="h-[300px] flex items-center justify-center min-w-0 min-h-0 relative">
-            <ResponsiveContainer width="100%" height="100%">
-              <PieChart>
-                <Pie
-                  data={data.category_breakdown}
-                  cx="50%"
-                  cy="50%"
-                  innerRadius={75}
-                  outerRadius={105}
-                  paddingAngle={4}
-                  dataKey="value"
-                  stroke="none"
-                >
-                  {data.category_breakdown.map((entry, index) => (
-                    <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-                  ))}
-                </Pie>
-                <Tooltip 
-                  contentStyle={{ backgroundColor: 'var(--color-card)', borderColor: 'var(--color-accent)', borderRadius: '6px', borderWidth: '1px' }}
-                  itemStyle={{ color: 'var(--color-foreground)', fontFamily: 'var(--font-inter)', fontSize: '12px' }}
-                />
-              </PieChart>
-            </ResponsiveContainer>
+          <CardContent className="w-full h-[300px] relative min-w-0 min-h-0">
+            <div className="absolute inset-0 w-full h-full p-4">
+              <ResponsiveContainer width="99%" height="100%">
+                <PieChart>
+                  <Pie
+                    data={data.category_breakdown}
+                    cx="50%"
+                    cy="50%"
+                    innerRadius={75}
+                    outerRadius={105}
+                    paddingAngle={4}
+                    dataKey="value"
+                    stroke="none"
+                  >
+                    {data.category_breakdown.map((entry, index) => (
+                      <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                    ))}
+                  </Pie>
+                  <Tooltip 
+                    contentStyle={{ backgroundColor: 'var(--color-card)', borderColor: 'var(--color-accent)', borderRadius: '6px', borderWidth: '1px' }}
+                    itemStyle={{ color: 'var(--color-foreground)', fontFamily: 'var(--font-inter)', fontSize: '12px' }}
+                  />
+                </PieChart>
+              </ResponsiveContainer>
+            </div>
             
             {/* Center Legend Tag */}
-            <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none select-none">
+            <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none select-none z-10">
               <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest font-inter">Live Share</span>
               <span className="font-garamond italic text-2xl font-bold text-accent">HaqDar AI</span>
             </div>

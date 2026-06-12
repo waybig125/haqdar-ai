@@ -62,7 +62,7 @@ export function FaqSection() {
         {/* FAQs Accordion Container */}
         <AnimatedContainer variant="fadeUp" delay={0.2}>
           <div className="wood-console rounded-2xl p-4 md:p-6 border border-accent/20 shadow-2xl">
-            <Accordion type="single" collapsible className="space-y-4">
+            <Accordion type="single" collapsible="true" className="space-y-4">
               {FAQS.map((faq) => (
                 <AccordionItem 
                   key={faq.value} 

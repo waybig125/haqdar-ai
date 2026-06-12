@@ -83,7 +83,7 @@ export function ResultCard({ result }) {
 
           {/* Complaint Letter Accordion */}
           <div className="px-4 py-4 bg-[#23150F]/20">
-            <Accordion type="single" collapsible defaultValue="letter">
+            <Accordion type="single" collapsible="true" defaultValue="letter">
               <AccordionItem value="letter" className="border-none">
                 <AccordionTrigger className="hover:no-underline py-3 px-4 rounded-lg bg-[#3A231A]/30 hover:bg-[#3A231A]/50 transition-colors group flex items-center justify-between cursor-pointer border border-[#523225]">
                   <div className="flex items-center gap-3 text-accent transition-colors">

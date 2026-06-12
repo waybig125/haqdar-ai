@@ -53,12 +53,12 @@
 
 @layer base {
   :root {
-    /* Analog Mahogany & Brass Parchment - Light (Warm Parchment / Mahogany Gold / Deep Coffee Ink) */
-    --background: 37 32% 93%; /* #F3ECD8 */
+    /* Analog Mahogany & Brass Parchment - Light (Warm Ivory Parchment / Mahogany Gold / Deep Coffee Ink) */
+    --background: 45 28% 95%; /* #FAF6EE - Warm Premium Ivory */
     --foreground: 22 40% 10%; /* #22120B */
-    --card: 37 36% 95%; /* #FAF4E5 */
+    --card: 45 32% 97%; /* #FAF8F2 */
     --card-foreground: 22 40% 10%;
-    --popover: 37 36% 95%;
+    --popover: 45 32% 97%;
     --popover-foreground: 22 40% 10%;
     
     /* Deep Mahogany Wood / Forest Ink */
@@ -69,7 +69,7 @@
     --secondary: 22 30% 20%;
     --secondary-foreground: 37 36% 98%;
     
-    --muted: 37 20% 88%;
+    --muted: 45 15% 88%;
     --muted-foreground: 22 15% 40%;
     
     /* Wax Gold Accent */
@@ -79,8 +79,8 @@
     --destructive: 0 74% 45%;
     --destructive-foreground: 0 0% 100%;
     
-    --border: 37 22% 80%; /* Aged gold-ivory border */
-    --input: 37 22% 80%;
+    --border: 45 18% 82%; /* Aged gold-ivory border */
+    --input: 45 18% 82%;
     --ring: 38 52% 56%;
     --radius: 0.5rem;
 
@@ -95,34 +95,34 @@
   }
 
   .dark {
-    /* Analog Mahogany & Brass Parchment - Dark (Obsidian Mahogany / Glowing Gold) */
-    --background: 22 30% 6%; /* #120A07 */
+    /* Analog Mahogany & Brass Parchment - Dark (Obsidian Emerald / Glowing Gold) */
+    --background: 145 35% 5%; /* #06100B - Rich Obsidian Emerald / Deep Jade */
     --foreground: 37 28% 88%; /* #ECE5D5 */
-    --card: 22 28% 10%; /* #1D120E */
+    --card: 145 22% 7.5%; /* #0B1911 */
     --card-foreground: 37 28% 88%;
-    --popover: 22 28% 10%;
+    --popover: 145 22% 7.5%;
     --popover-foreground: 37 28% 88%;
     
     /* Glowing Gold */
     --primary: 38 70% 60%; /* #D4AF37 */
-    --primary-foreground: 22 30% 6%;
+    --primary-foreground: 145 35% 5%;
     
     /* Dark Mahogany Panel */
     --secondary: 22 24% 15%; /* #281710 */
     --secondary-foreground: 37 28% 88%;
     
-    --muted: 22 20% 12%;
+    --muted: 145 18% 10%;
     --muted-foreground: 37 10% 60%;
     
     /* Wax Gold */
     --accent: 38 70% 60%;
-    --accent-foreground: 22 30% 6%;
+    --accent-foreground: 145 35% 5%;
     
     --destructive: 0 62% 40%;
     --destructive-foreground: 37 28% 88%;
     
-    --border: 22 18% 18%;
-    --input: 22 18% 18%;
+    --border: 145 15% 13%;
+    --input: 145 15% 13%;
     --ring: 38 70% 60%;
   }
 }
@@ -134,19 +134,23 @@
   
   body {
     @apply bg-background text-foreground;
-    /* Ledger-paper lines watermark pattern */
+    /* Soft warm radial glow with official light-green ledger lines watermark pattern */
     background-image: 
-      linear-gradient(to right, rgba(197, 160, 89, 0.04) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(197, 160, 89, 0.04) 1px, transparent 1px);
-    background-size: 32px 32px;
+      radial-gradient(circle at 50% 20%, rgba(197, 160, 89, 0.03) 0%, transparent 60%),
+      linear-gradient(to right, rgba(16, 124, 65, 0.035) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(16, 124, 65, 0.035) 1px, transparent 1px);
+    background-size: 100% 100%, 32px 32px, 32px 32px;
     background-attachment: fixed;
     position: relative;
   }
 
   .dark body {
+    /* Deep emerald background with subtle gold lines and a very soft green radial glow in the center */
     background-image: 
-      linear-gradient(to right, rgba(212, 175, 55, 0.02) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(212, 175, 55, 0.02) 1px, transparent 1px);
+      radial-gradient(circle at 50% 30%, rgba(16, 124, 65, 0.06) 0%, transparent 65%),
+      linear-gradient(to right, rgba(212, 175, 55, 0.015) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(212, 175, 55, 0.015) 1px, transparent 1px);
+    background-size: 100% 100%, 32px 32px, 32px 32px;
   }
 
   /* Custom base64 SVG noise overlay for tactile grunge/paper texture */
@@ -165,8 +169,12 @@
   }
 
   .dark body::before {
-    opacity: 0.15;
+    opacity: 0.16;
     mix-blend-mode: overlay;
+    /* Subtle green-tinted paper noise overlay */
+    background-image: 
+      url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E"),
+      linear-gradient(to bottom, rgba(16, 124, 65, 0.08), rgba(16, 124, 65, 0.02));
   }
   
   .grunge-overlay {
@@ -180,7 +188,11 @@
   
   .dark .grunge-overlay {
     mix-blend-mode: overlay;
-    opacity: 0.2;
+    opacity: 0.22;
+    /* Green-tinted local card grunge */
+    background-image: 
+      url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E"),
+      linear-gradient(to bottom, rgba(16, 124, 65, 0.1), rgba(16, 124, 65, 0.03));
   }
   
   /* Urdu Typography Adjustments */
