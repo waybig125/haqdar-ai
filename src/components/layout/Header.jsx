@@ -36,7 +36,7 @@ export function Header() {
   return (
     <header 
       className={cn(
-        "sticky top-0 z-50 w-full transition-all duration-300 border-b h-16 flex items-center relative overflow-hidden",
+        "sticky top-0 z-50 w-full transition-all duration-300 border-b h-16 flex items-center relative",
         isScrolled 
           ? "bg-[#FAF4E5]/95 border-[#C5B69C] dark:bg-[#1D120E]/95 dark:border-[#523225] shadow-lg shadow-black/15" 
           : "bg-[#FAF4E5]/80 border-transparent dark:bg-[#1D120E]/80 backdrop-blur-md"
@@ -66,16 +66,16 @@ export function Header() {
                   key={link.href} 
                   href={link.href}
                   className={cn(
-                    "flex flex-col items-center justify-center transition-all duration-300 relative py-1 px-1 group/item",
+                    "flex flex-col items-center justify-center transition-all duration-300 relative py-2 px-3 group/item min-w-[110px]",
                     isActive ? "text-accent" : "text-muted-foreground hover:text-accent"
                   )}
                 >
-                  <span className="font-urdu text-[15px] font-bold leading-none tracking-normal mb-0.5">{link.urdu}</span>
-                  <span className="text-[8px] font-semibold tracking-wider font-inter uppercase opacity-80 leading-none">{link.english}</span>
+                  <span className="font-urdu text-sm font-bold leading-[1.8] tracking-normal">{link.urdu}</span>
+                  <span className="text-[9px] font-semibold tracking-widest font-inter uppercase opacity-85 leading-none mt-1">{link.english}</span>
                   {/* Glowing gold underline indicator */}
                   <span 
                     className={cn(
-                      "absolute bottom-[-12px] left-0 right-0 h-[2px] bg-accent transition-all duration-300 shadow-[0_0_8px_#C5A059]",
+                      "absolute bottom-0 left-2 right-2 h-[2px] bg-accent transition-all duration-300 shadow-[0_0_8px_#C5A059]",
                       isActive ? "scale-x-100 opacity-100" : "scale-x-0 opacity-0 group-hover/item:scale-x-50 group-hover/item:opacity-50"
                     )}
                   />
@@ -123,8 +123,8 @@ export function Header() {
                             : "border-transparent text-muted-foreground hover:text-accent hover:border-accent/30"
                         )}
                       >
-                        <span className="font-urdu text-[15px] font-bold leading-normal">{link.urdu}</span>
-                        <span className="text-[9px] font-semibold tracking-widest uppercase opacity-85">{link.english}</span>
+                        <span className="font-urdu text-base font-bold leading-[1.8]">{link.urdu}</span>
+                        <span className="text-[9px] font-semibold tracking-widest uppercase opacity-85 mt-1">{link.english}</span>
                       </Link>
                     );
                   })}
