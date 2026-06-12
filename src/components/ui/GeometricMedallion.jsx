@@ -27,81 +27,63 @@ export function GeometricMedallion({ className, size = 120 }) {
       </defs>
 
       {/* Decorative Outer Bezel ring */}
-      <circle cx="100" cy="100" r="92" stroke="url(#bronzeGold)" strokeWidth="2.5" opacity="0.8" />
-      <circle cx="100" cy="100" r="86" stroke="url(#bronzeGold)" strokeWidth="0.75" strokeDasharray="4 3" opacity="0.5" />
+      <circle cx="100" cy="100" r="92" stroke="url(#bronzeGold)" strokeWidth="3" opacity="0.85" />
+      <circle cx="100" cy="100" r="84" stroke="url(#bronzeGold)" strokeWidth="1" strokeDasharray="5 3" opacity="0.6" />
+      <circle cx="100" cy="100" r="76" stroke="url(#bronzeGold)" strokeWidth="1.5" opacity="0.75" />
 
-      {/* Concentric detail rings */}
-      <circle cx="100" cy="100" r="76" stroke="url(#bronzeGold)" strokeWidth="1" opacity="0.6" />
-
-      {/* Multi-layered interlocking rosette rings */}
-      <g filter="url(#medallionShadow)">
-        {/* Core center loop */}
-        <circle cx="100" cy="100" r="32" stroke="url(#bronzeGold)" strokeWidth="3" />
-        
-        {/* 6 primary interlocking rings */}
-        {[0, 60, 120, 180, 240, 300].map((angle, idx) => {
-          const rad = (angle * Math.PI) / 180;
-          const cx = 100 + 32 * Math.cos(rad);
-          const cy = 100 + 32 * Math.sin(rad);
-          return (
-            <circle 
-              key={`ring-1-${idx}`} 
-              cx={cx} 
-              cy={cy} 
-              r="32" 
-              stroke="url(#bronzeGold)" 
-              strokeWidth="2.5" 
-              opacity="0.9" 
-            />
-          );
-        })}
-
-        {/* 6 secondary interlocking outer rings */}
-        {[30, 90, 150, 210, 270, 330].map((angle, idx) => {
-          const rad = (angle * Math.PI) / 180;
-          const cx = 100 + 55 * Math.cos(rad);
-          const cy = 100 + 55 * Math.sin(rad);
-          return (
-            <circle 
-              key={`ring-2-${idx}`} 
-              cx={cx} 
-              cy={cy} 
-              r="32" 
-              stroke="url(#bronzeGold)" 
-              strokeWidth="1.5" 
-              opacity="0.7" 
-            />
-          );
-        })}
-      </g>
-
-      {/* Center core seal */}
-      <circle cx="100" cy="100" r="14" fill="url(#bronzeGold)" />
-      <circle cx="100" cy="100" r="16" stroke="url(#bronzeGold)" strokeWidth="1" opacity="0.8" />
-      <path 
-        d="M100 93 L102 99 L109 99 L104 102 L106 108 L100 104 L94 108 L96 102 L91 99 L98 99 Z" 
-        fill="#3A231A" 
-      />
-
-      {/* Outer clock ticks / gold studs */}
-      {Array.from({ length: 16 }).map((_, i) => {
-        const angle = (i * 360) / 16;
+      {/* Decorative Outer studs */}
+      {Array.from({ length: 12 }).map((_, i) => {
+        const angle = (i * 360) / 12;
         const rad = (angle * Math.PI) / 180;
-        const x = 100 + 82 * Math.cos(rad);
-        const y = 100 + 82 * Math.sin(rad);
+        const x = 100 + 84 * Math.cos(rad);
+        const y = 100 + 84 * Math.sin(rad);
         return (
           <circle 
             key={`stud-${i}`} 
             cx={x} 
             cy={y} 
-            r="3" 
+            r="3.5" 
             fill="url(#bronzeGold)" 
           />
         );
       })}
 
-      {/* Concentric thin innermost details */}
-      <circle cx="100" cy="100" r="6" stroke="url(#bronzeGold)" strokeWidth="0.5" opacity="0.4" />
+      {/* Center Shield Container */}
+      <g filter="url(#medallionShadow)">
+        {/* Shield Backing */}
+        <path 
+          d="M100 45 C125 45 150 40 150 70 C150 115 100 148 100 158 C100 148 50 115 50 70 C50 40 75 45 100 45 Z" 
+          stroke="url(#bronzeGold)" 
+          strokeWidth="3.5"
+          fill="#3A231A"
+          fillOpacity="0.4"
+        />
+        
+        {/* Scale of Justice Path */}
+        {/* Central Stand */}
+        <path d="M100 65 L100 130" stroke="url(#bronzeGold)" strokeWidth="3" strokeLinecap="round" />
+        <path d="M88 130 L112 130" stroke="url(#bronzeGold)" strokeWidth="4" strokeLinecap="round" />
+        <circle cx="100" cy="62" r="5" fill="url(#bronzeGold)" />
+        
+        {/* Crossbeam */}
+        <path d="M72 76 Q100 68 128 76" stroke="url(#bronzeGold)" strokeWidth="3.5" strokeLinecap="round" />
+        
+        {/* Left Pan */}
+        <path d="M72 76 L62 108" stroke="url(#bronzeGold)" strokeWidth="1" opacity="0.8" />
+        <path d="M72 76 L82 108" stroke="url(#bronzeGold)" strokeWidth="1" opacity="0.8" />
+        <path d="M58 108 Q72 116 86 108 Z" fill="url(#bronzeGold)" stroke="url(#bronzeGold)" strokeWidth="1" />
+        
+        {/* Right Pan */}
+        <path d="M128 76 L118 108" stroke="url(#bronzeGold)" strokeWidth="1" opacity="0.8" />
+        <path d="M128 76 L138 108" stroke="url(#bronzeGold)" strokeWidth="1" opacity="0.8" />
+        <path d="M114 108 Q128 116 142 108 Z" fill="url(#bronzeGold)" stroke="url(#bronzeGold)" strokeWidth="1" />
+      </g>
+
+      {/* Decorative center small star */}
+      <path 
+        d="M100 138 L102 142 L106 142 L103 144 L104 148 L100 145 L96 148 L97 144 L94 142 L98 142 Z" 
+        fill="url(#bronzeGold)" 
+      />
     </svg>
   );
 }
