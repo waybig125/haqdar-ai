@@ -74,10 +74,10 @@ export function HowItWorksSection() {
 
                   {/* Urdu Content */}
                   <div className="mb-4">
-                    <h3 className="font-urdu text-2xl font-bold text-amber-950 dark:text-amber-100 mb-2 leading-relaxed">
+                    <h3 className="font-urdu text-2xl font-bold text-amber-950 dark:text-amber-100 mb-2 leading-relaxed" dir="rtl">
                       {step.titleUrdu}
                     </h3>
-                    <p className="font-urdu text-[15px] text-amber-900/70 dark:text-amber-100/60 leading-[2.1]">
+                    <p className="font-urdu text-[15px] text-amber-900/70 dark:text-amber-100/60 leading-[2.1]" dir="rtl">
                       {step.descUrdu}
                     </p>
                   </div>

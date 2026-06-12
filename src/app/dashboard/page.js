@@ -54,7 +54,7 @@ export default async function DashboardPage() {
         <div className="border-b border-accent/20 dark:border-accent/10 pb-10 pt-16 bg-muted/20 relative">
           <div className="container mx-auto px-4 max-w-7xl">
             <AnimatedContainer variant="fadeUp">
-              <h1 className="font-urdu text-4xl md:text-5xl font-bold text-foreground mb-3 leading-[1.3] flex flex-wrap items-center">
+              <h1 className="font-urdu text-4xl md:text-5xl font-bold text-foreground mb-3 leading-[1.3] flex flex-wrap items-center" dir="rtl">
                 سول نبض <span className="gold-gradient-text-light font-garamond italic text-3xl font-bold ml-3">— Civic Pulse</span>
               </h1>
               <p className="text-sm md:text-base text-muted-foreground max-w-2xl leading-relaxed font-inter">
@@ -95,7 +95,7 @@ export default async function DashboardPage() {
                       <Scale className="w-5 h-5" />
                     </div>
                     <div>
-                      <h4 className="font-urdu text-lg font-bold text-amber-950 dark:text-amber-100 leading-normal mb-1">
+                      <h4 className="font-urdu text-lg font-bold text-amber-950 dark:text-amber-100 leading-normal mb-1" dir="rtl">
                         امن، انصاف اور مضبوط ادارے (SDG 16)
                       </h4>
                       <p className="font-inter text-[11px] text-amber-900/70 dark:text-amber-100/50 leading-relaxed">
@@ -110,7 +110,7 @@ export default async function DashboardPage() {
                       <Users2 className="w-5 h-5" />
                     </div>
                     <div>
-                      <h4 className="font-urdu text-lg font-bold text-amber-950 dark:text-amber-100 leading-normal mb-1">
+                      <h4 className="font-urdu text-lg font-bold text-amber-950 dark:text-amber-100 leading-normal mb-1" dir="rtl">
                         نابرابری میں کمی (SDG 10)
                       </h4>
                       <p className="font-inter text-[11px] text-amber-900/70 dark:text-amber-100/50 leading-relaxed">
@@ -199,7 +199,7 @@ export default async function DashboardPage() {
                 <div className="grunge-overlay" />
                 <div className="flex items-center gap-3 mb-6 relative z-10">
                   <Clock className="w-5 h-5 text-accent" />
-                  <h3 className="font-urdu text-2xl font-bold text-[#E6DBC6] m-0">حالیہ شکایات لاگ / Activity Ledger</h3>
+                  <h3 className="font-urdu text-2xl font-bold text-[#E6DBC6] m-0" dir="rtl">حالیہ شکایات لاگ / Activity Ledger</h3>
                 </div>
                 
                 <div className="parchment-sheet rounded-xl overflow-hidden border border-accent/20 relative z-10">
@@ -237,7 +237,7 @@ export default async function DashboardPage() {
                 <div className="grunge-overlay" />
                 <div className="flex items-center gap-3 mb-6 relative z-10">
                   <ShieldCheck className="w-5 h-5 text-accent" />
-                  <h3 className="font-urdu text-2xl font-bold text-[#E6DBC6] m-0">گلوبل ٹارگٹ بلیو پرنٹ / SDG Targets</h3>
+                  <h3 className="font-urdu text-2xl font-bold text-[#E6DBC6] m-0" dir="rtl">گلوبل ٹارگٹ بلیو پرنٹ / SDG Targets</h3>
                 </div>
 
                 <div className="flex flex-col gap-4 relative z-10">
@@ -250,7 +250,7 @@ export default async function DashboardPage() {
                         <span className="text-[10px] font-bold text-amber-900/50 dark:text-accent/60 uppercase tracking-widest block font-inter">
                           {target.title}
                         </span>
-                        <p className="font-urdu text-[13px] leading-relaxed text-amber-950 dark:text-amber-100">
+                        <p className="font-urdu text-[13px] leading-relaxed text-amber-950 dark:text-amber-100" dir="rtl">
                           {target.descUrdu}
                         </p>
                         <p className="font-inter text-[10px] text-amber-900/60 dark:text-amber-100/40 leading-normal pt-1">

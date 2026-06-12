@@ -46,7 +46,7 @@ export function SdgFocusSection() {
                   <Scale className="w-6 h-6" />
                 </div>
                 <div>
-                  <h3 className="font-urdu text-3xl font-bold text-[#E6DBC6] leading-none mb-1">
+                  <h3 className="font-urdu text-3xl font-bold text-[#E6DBC6] leading-none mb-1" dir="rtl">
                     امن، انصاف اور مضبوط ادارے
                   </h3>
                   <span className="font-garamond text-sm italic text-accent font-bold uppercase tracking-wider">
@@ -60,7 +60,7 @@ export function SdgFocusSection() {
                 
                 {/* Urdu */}
                 <div>
-                  <p className="font-urdu text-[15px] leading-[2.1] text-amber-950 dark:text-amber-100">
+                  <p className="font-urdu text-[15px] leading-[2.1] text-amber-950 dark:text-amber-100" dir="rtl">
                     حق دار کا بنیادی مقصد ہر شہری تک قانونی رہنمائی اور آسان انصاف کی رسائی کو ممکن بنانا ہے۔ آواز پر مبنی سمارٹ مائیکرو پٹیشن فارمیٹ کے ذریعے ہم پسماندہ طبقات کو اپنے حقوق کے تحفظ کا اختیار دیتے ہیں۔
                   </p>
                 </div>
@@ -93,7 +93,7 @@ export function SdgFocusSection() {
                   <Users2 className="w-6 h-6" />
                 </div>
                 <div>
-                  <h3 className="font-urdu text-3xl font-bold text-[#E6DBC6] leading-none mb-1">
+                  <h3 className="font-urdu text-3xl font-bold text-[#E6DBC6] leading-none mb-1" dir="rtl">
                     نابرابری میں کمی
                   </h3>
                   <span className="font-garamond text-sm italic text-accent font-bold uppercase tracking-wider">
@@ -107,7 +107,7 @@ export function SdgFocusSection() {
                 
                 {/* Urdu */}
                 <div>
-                  <p className="font-urdu text-[15px] leading-[2.1] text-amber-950 dark:text-amber-100">
+                  <p className="font-urdu text-[15px] leading-[2.1] text-amber-950 dark:text-amber-100" dir="rtl">
                     اردو صوتی ان پٹ کی مدد سے ہم خواندگی اور زبان کی رکاوٹ کو دور کر رہے ہیں۔ اب کوئی بھی عام شہری جو لکھ پڑھ نہیں سکتا، صرف بول کر اپنی شکایت درج کروا سکتا ہے اور برابری کا حق حاصل کر سکتا ہے۔
                   </p>
                 </div>

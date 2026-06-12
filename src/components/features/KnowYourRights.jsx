@@ -13,7 +13,7 @@ export function KnowYourRights({ result }) {
     <AnimatedContainer variant="fadeUp" className="w-full max-w-4xl mx-auto px-4 pb-24">
       
       <div className="mb-8 text-center">
-        <h2 className="font-urdu text-4xl font-bold text-foreground">اپنے حقوق جانیں</h2>
+        <h2 className="font-urdu text-4xl font-bold text-foreground" dir="rtl">اپنے حقوق جانیں</h2>
         <p className="text-muted-foreground mt-2">Know your rights and next steps</p>
       </div>
 

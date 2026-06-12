@@ -74,7 +74,7 @@ export function FaqSection() {
                       <HelpCircle className="w-5 h-5 text-accent shrink-0 mt-1.5 md:mt-1 group-hover:scale-110 transition-transform" />
                       <div className="space-y-1.5 w-full">
                         {/* Urdu Q */}
-                        <h3 className="font-urdu text-xl md:text-2xl font-bold text-[#E6DBC6] leading-snug">
+                        <h3 className="font-urdu text-xl md:text-2xl font-bold text-[#E6DBC6] leading-snug" dir="rtl">
                           {faq.qUrdu}
                         </h3>
                         {/* English Q */}
@@ -88,7 +88,7 @@ export function FaqSection() {
                     <div className="parchment-sheet rounded-xl p-5 md:p-6 border border-accent/20 shadow-inner space-y-4">
                       
                       {/* Urdu A */}
-                      <p className="font-urdu text-[16px] md:text-lg leading-[2.2] text-amber-950 dark:text-amber-100 font-medium">
+                      <p className="font-urdu text-[16px] md:text-lg leading-[2.2] text-amber-950 dark:text-amber-100 font-medium" dir="rtl">
                         {faq.aUrdu}
                       </p>
                       

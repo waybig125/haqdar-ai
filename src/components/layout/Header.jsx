@@ -34,11 +34,11 @@ export function Header() {
   }, []);
 
   return (
-    <header 
+    <header
       className={cn(
-        "sticky top-0 z-50 w-full transition-all duration-300 border-b h-16 flex items-center relative",
-        isScrolled 
-          ? "bg-[#FAF4E5]/95 border-[#C5B69C] dark:bg-[#1D120E]/95 dark:border-[#523225] shadow-lg shadow-black/15" 
+        "sticky top-0 z-50 w-full transition-all duration-300 border-b h-20 flex items-center relative",
+        isScrolled
+          ? "bg-[#FAF4E5]/95 border-[#C5B69C] dark:bg-[#1D120E]/95 dark:border-[#523225] shadow-lg shadow-black/15"
           : "bg-[#FAF4E5]/80 border-transparent dark:bg-[#1D120E]/80 backdrop-blur-md"
       )}
     >
@@ -46,7 +46,7 @@ export function Header() {
       <div className="absolute inset-0 opacity-[0.03] dark:opacity-[0.02] pointer-events-none bg-[linear-gradient(to_right,rgba(197,160,89,0.2)_1px,transparent_1px),linear-gradient(to_bottom,rgba(197,160,89,0.2)_1px,transparent_1px)] bg-[size:16px_16px]" />
 
       <div className="container mx-auto px-4 max-w-6xl flex items-center justify-between relative z-10">
-        
+
         {/* Logo */}
         <Link href="/" className="flex items-center gap-3 hover:opacity-95 transition-opacity group pb-1">
           <GeometricMedallion size={36} className="shrink-0 drop-shadow-[0_2px_8px_rgba(197,160,89,0.3)] transition-transform duration-300 group-hover:scale-110" />
@@ -62,8 +62,8 @@ export function Header() {
             {NAV_LINKS.map((link) => {
               const isActive = pathname === link.href;
               return (
-                <Link 
-                  key={link.href} 
+                <Link
+                  key={link.href}
                   href={link.href}
                   className={cn(
                     "flex flex-col items-center justify-center transition-all duration-300 relative py-2 px-3 group/item min-w-[110px]",
@@ -73,7 +73,7 @@ export function Header() {
                   <span className="font-urdu text-sm font-bold leading-[1.8] tracking-normal">{link.urdu}</span>
                   <span className="text-[9px] font-semibold tracking-widest font-inter uppercase opacity-85 leading-none mt-1">{link.english}</span>
                   {/* Glowing gold underline indicator */}
-                  <span 
+                  <span
                     className={cn(
                       "absolute bottom-0 left-2 right-2 h-[2px] bg-accent transition-all duration-300 shadow-[0_0_8px_#C5A059]",
                       isActive ? "scale-x-100 opacity-100" : "scale-x-0 opacity-0 group-hover/item:scale-x-50 group-hover/item:opacity-50"
@@ -83,7 +83,7 @@ export function Header() {
               );
             })}
           </div>
-          
+
           <div className="flex items-center gap-3">
             <SDGBadge variant="sdg16" className="hidden lg:flex" />
             <ThemeToggle />
@@ -93,7 +93,7 @@ export function Header() {
         {/* Mobile Navigation */}
         <div className="flex lg:hidden items-center gap-2">
           <ThemeToggle />
-          
+
           <Sheet>
             <SheetTrigger render={<Button variant="ghost" size="icon" aria-label="Open Menu" className="cursor-pointer" />}>
               <Menu className="w-5 h-5 text-foreground" />
@@ -113,13 +113,13 @@ export function Header() {
                   {NAV_LINKS.map((link) => {
                     const isActive = pathname === link.href;
                     return (
-                      <Link 
-                        key={link.href} 
+                      <Link
+                        key={link.href}
                         href={link.href}
                         className={cn(
                           "flex flex-col items-start py-2.5 px-3 border-l-2 transition-all font-inter duration-200",
-                          isActive 
-                            ? "border-accent bg-accent/5 pl-5 text-accent font-semibold" 
+                          isActive
+                            ? "border-accent bg-accent/5 pl-5 text-accent font-semibold"
                             : "border-transparent text-muted-foreground hover:text-accent hover:border-accent/30"
                         )}
                       >

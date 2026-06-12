@@ -48,9 +48,9 @@ export function ResultCard({ result }) {
             <div className="parchment-sheet rounded-xl p-6 flex flex-col gap-4">
               <div className="flex items-center gap-3 text-amber-950 dark:text-amber-100">
                 <Scale className="w-5.5 h-5.5 text-accent" />
-                <h3 className="font-urdu text-2xl font-bold m-0">قانون کی خلاف ورزی</h3>
+                <h3 className="font-urdu text-2xl font-bold m-0" dir="rtl">قانون کی خلاف ورزی</h3>
               </div>
-              <p className="font-urdu text-xl leading-[2.4] font-medium pt-2">
+              <p className="font-urdu text-xl leading-[2.4] font-medium pt-2" dir="rtl">
                 {result.violation_summary}
               </p>
               
@@ -68,12 +68,12 @@ export function ResultCard({ result }) {
             <div className="parchment-sheet rounded-xl p-6 flex flex-col gap-4">
               <div className="flex items-center gap-3 text-amber-950 dark:text-amber-100">
                 <Building2 className="w-5.5 h-5.5 text-accent" />
-                <h3 className="font-urdu text-2xl font-bold m-0">متعلقہ ادارہ</h3>
+                <h3 className="font-urdu text-2xl font-bold m-0" dir="rtl">متعلقہ ادارہ</h3>
               </div>
-              <p className="font-urdu text-lg text-amber-900/60 dark:text-amber-100/50 pt-2">
+              <p className="font-urdu text-lg text-amber-900/60 dark:text-amber-100/50 pt-2" dir="rtl">
                 شکایت جمع کروانے کے لیے نامزد کردہ ادارہ:
               </p>
-              <div className="p-5 rounded-lg bg-card border border-[#C5B69C] dark:border-[#36221A] text-xl font-bold text-center mt-3 shadow-md font-urdu text-foreground relative overflow-hidden">
+              <div className="p-5 rounded-lg bg-card border border-[#C5B69C] dark:border-[#36221A] text-xl font-bold text-center mt-3 shadow-md font-urdu text-foreground relative overflow-hidden" dir="rtl">
                 <div className="absolute left-0 top-0 h-full w-1 bg-accent" />
                 {result.responsible_authority}
               </div>
@@ -88,7 +88,7 @@ export function ResultCard({ result }) {
                 <AccordionTrigger className="hover:no-underline py-3 px-4 rounded-lg bg-[#3A231A]/30 hover:bg-[#3A231A]/50 transition-colors group flex items-center justify-between cursor-pointer border border-[#523225]">
                   <div className="flex items-center gap-3 text-accent transition-colors">
                     <FileText className="w-5 h-5 text-accent animate-pulse" />
-                    <span className="font-urdu text-2xl font-bold m-0">تیار کردہ شکایتی خط</span>
+                    <span className="font-urdu text-2xl font-bold m-0" dir="rtl">تیار کردہ شکایتی خط</span>
                   </div>
                 </AccordionTrigger>
                 <AccordionContent className="pt-3">

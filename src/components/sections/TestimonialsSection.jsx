@@ -43,7 +43,7 @@ export function TestimonialsSection() {
         {/* Section Heading */}
         <div className="text-center mb-16">
           <AnimatedContainer variant="fadeUp">
-            <h2 className="font-urdu text-4xl md:text-5xl font-bold text-foreground mb-4">
+            <h2 className="font-urdu text-4xl md:text-5xl font-bold text-foreground mb-4" dir="rtl">
               شہریوں کی آوازیں
             </h2>
             <p className="font-garamond italic text-lg md:text-xl font-bold tracking-widest text-accent uppercase mb-2">

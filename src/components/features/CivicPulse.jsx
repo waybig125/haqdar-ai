@@ -73,10 +73,10 @@ export function CivicPulse({ data }) {
             <div className="w-8 h-8 rounded bg-[#3A231A]/10 dark:bg-accent/10 flex items-center justify-center text-accent">
               <FileWarning className="w-4 h-4" />
             </div>
-            <CardTitle className="font-urdu text-2xl font-bold text-foreground">شکایات کا رجحان (6 ماہ) / Complaint Trend</CardTitle>
+            <CardTitle className="font-urdu text-2xl font-bold text-foreground" dir="rtl">شکایات کا رجحان (6 ماہ) / Complaint Trend</CardTitle>
           </CardHeader>
           <CardContent className="w-full h-[300px] pt-4 min-w-0 min-h-0 z-10 relative">
-            <ResponsiveContainer width="99%" height="100%">
+            <ResponsiveContainer width="99%" height="100%" minWidth={0} minHeight={0}>
                 <AreaChart data={data.monthly_trend} margin={{ top: 10, right: 20, left: -25, bottom: 0 }}>
                   <defs>
                     <linearGradient id="colorCount" x1="0" y1="0" x2="0" y2="1">
@@ -108,10 +108,10 @@ export function CivicPulse({ data }) {
             <div className="w-8 h-8 rounded bg-[#3A231A]/10 dark:bg-accent/10 flex items-center justify-center text-accent">
               <Languages className="w-4 h-4" />
             </div>
-            <CardTitle className="font-urdu text-2xl font-bold text-foreground">صوتی زبان کا تجزیہ / Input Language Distribution</CardTitle>
+            <CardTitle className="font-urdu text-2xl font-bold text-foreground" dir="rtl">صوتی زبان کا تجزیہ / Input Language Distribution</CardTitle>
           </CardHeader>
           <CardContent className="w-full h-[300px] pt-4 min-w-0 min-h-0 z-10 relative">
-            <ResponsiveContainer width="99%" height="100%">
+            <ResponsiveContainer width="99%" height="100%" minWidth={0} minHeight={0}>
                 <BarChart data={languageData} margin={{ top: 10, right: 10, left: -25, bottom: 0 }}>
                   <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="rgba(197, 160, 89, 0.1)" />
                   <XAxis dataKey="month" stroke="#C5B69C" fontSize={11} tickLine={false} axisLine={false} className="font-inter font-semibold" />
@@ -138,10 +138,10 @@ export function CivicPulse({ data }) {
             <div className="w-8 h-8 rounded bg-[#3A231A]/10 dark:bg-accent/10 flex items-center justify-center text-accent">
               <Milestone className="w-4 h-4" />
             </div>
-            <CardTitle className="font-urdu text-2xl font-bold text-foreground">پروسیسنگ پائپ لائن / Processing Funnel</CardTitle>
+            <CardTitle className="font-urdu text-2xl font-bold text-foreground" dir="rtl">پروسیسنگ پائپ لائن / Processing Funnel</CardTitle>
           </CardHeader>
           <CardContent className="w-full h-[300px] pt-4 min-w-0 min-h-0 z-10 relative">
-            <ResponsiveContainer width="99%" height="100%">
+            <ResponsiveContainer width="99%" height="100%" minWidth={0} minHeight={0}>
                 <BarChart data={pipelineData} layout="vertical" margin={{ top: 15, right: 30, left: 10, bottom: 5 }}>
                   <CartesianGrid strokeDasharray="3 3" horizontal={false} stroke="rgba(197, 160, 89, 0.1)" />
                   <XAxis type="number" stroke="#C5B69C" fontSize={11} tickLine={false} axisLine={false} className="font-inter font-semibold" />
@@ -170,10 +170,10 @@ export function CivicPulse({ data }) {
             <div className="w-8 h-8 rounded bg-[#3A231A]/10 dark:bg-accent/10 flex items-center justify-center text-accent">
               <PieIcon className="w-4 h-4" />
             </div>
-            <CardTitle className="font-urdu text-2xl font-bold text-foreground">شکایات کی اقسام / Categories</CardTitle>
+            <CardTitle className="font-urdu text-2xl font-bold text-foreground" dir="rtl">شکایات کی اقسام / Categories</CardTitle>
           </CardHeader>
           <CardContent className="w-full h-[300px] pt-4 min-w-0 min-h-0 z-10 relative">
-            <ResponsiveContainer width="99%" height="100%">
+            <ResponsiveContainer width="99%" height="100%" minWidth={0} minHeight={0}>
                 <PieChart>
                   <Pie
                     data={data.category_breakdown}
@@ -214,10 +214,10 @@ export function CivicPulse({ data }) {
             <div className="w-8 h-8 rounded bg-[#3A231A]/10 dark:bg-accent/10 flex items-center justify-center text-accent">
               <CheckCircle2 className="w-4 h-4" />
             </div>
-            <CardTitle className="font-urdu text-2xl font-bold text-foreground">شکایات کے حل کی شرح / Resolution Rate</CardTitle>
+            <CardTitle className="font-urdu text-2xl font-bold text-foreground" dir="rtl">شکایات کے حل کی شرح / Resolution Rate</CardTitle>
           </CardHeader>
           <CardContent className="w-full h-[300px] pt-4 min-w-0 min-h-0 z-10 relative">
-            <ResponsiveContainer width="99%" height="100%">
+            <ResponsiveContainer width="99%" height="100%" minWidth={0} minHeight={0}>
                 <PieChart>
                   <Pie
                     data={resolutionData}
@@ -255,7 +255,7 @@ export function CivicPulse({ data }) {
         <Card className="border border-accent/20 dark:border-[#523225] shadow-lg bg-card rounded-xl overflow-hidden relative h-full">
           <div className="grunge-overlay" />
           <CardHeader className="pb-2 relative z-10">
-            <CardTitle className="font-urdu text-2xl font-bold text-foreground">متاثرہ اضلاع (Top Districts)</CardTitle>
+            <CardTitle className="font-urdu text-2xl font-bold text-foreground" dir="rtl">متاثرہ اضلاع (Top Districts)</CardTitle>
           </CardHeader>
           <CardContent className="pt-6 relative z-10">
             <div className="flex flex-col gap-6">
@@ -293,10 +293,10 @@ export function CivicPulse({ data }) {
             <div className="w-8 h-8 rounded bg-[#3A231A]/10 dark:bg-accent/10 flex items-center justify-center text-accent">
               <CheckCircle2 className="w-4 h-4" />
             </div>
-            <CardTitle className="font-urdu text-2xl font-bold text-foreground">اداروں کی کارکردگی / Dept Performance</CardTitle>
+            <CardTitle className="font-urdu text-2xl font-bold text-foreground" dir="rtl">اداروں کی کارکردگی / Dept Performance</CardTitle>
           </CardHeader>
           <CardContent className="w-full h-[300px] pt-4 min-w-0 min-h-0 z-10 relative">
-            <ResponsiveContainer width="99%" height="100%">
+            <ResponsiveContainer width="99%" height="100%" minWidth={0} minHeight={0}>
                 <BarChart data={[
                   { name: 'تعلیم (Education)', rate: 85, fill: '#107C41' },
                   { name: 'بجلی (Electricity)', rate: 78, fill: '#C5A059' },
