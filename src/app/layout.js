@@ -10,7 +10,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="ur" dir="rtl" suppressHydrationWarning data-scroll-behavior="smooth" style={{ scrollBehavior: 'smooth' }}>
+    <html lang="ur" dir="rtl" suppressHydrationWarning data-scroll-behavior="smooth">
       <body
         className={`${urduFont.variable} ${interFont.variable} ${ebGaramondFont.variable} font-inter antialiased bg-background text-foreground relative min-h-screen`}
       >
