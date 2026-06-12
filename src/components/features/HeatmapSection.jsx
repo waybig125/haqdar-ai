@@ -57,11 +57,11 @@ export function HeatmapSection() {
   };
 
   return (
-    <section className="py-16 md:py-24 bg-muted/20 relative overflow-hidden border-t border-border/40">
+    <section className="py-16 md:py-24 bg-transparent relative overflow-hidden border-t border-border/40">
       <div className="container mx-auto px-4 max-w-5xl">
         
         <AnimatedContainer variant="fadeUp" className="text-center mb-12">
-          <h2 className="font-urdu text-4xl md:text-5xl font-bold text-foreground mb-4">کرپشن ہیٹ میپ</h2>
+          <h2 className="font-urdu text-4xl md:text-5xl font-bold text-foreground mb-4" dir="rtl">کرپشن ہیٹ میپ</h2>
           <p className="text-muted-foreground text-base max-w-lg mx-auto font-inter">
             Live anonymous corruption mapping and reporting hotspots across Pakistan.
           </p>

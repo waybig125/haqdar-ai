@@ -376,4 +376,37 @@
   }
 }
 
+/* Leaflet custom map container and tiles color blending */
+.leaflet-container {
+  background: var(--background) !important;
+}
+
+.leaflet-tile-container {
+  will-change: filter, mix-blend-mode;
+}
+
+/* Light mode tiles blending: blend CartoDB light tiles into the warm parchment background */
+:root:not(.dark) .leaflet-tile {
+  filter: sepia(0.3) saturate(0.85) contrast(1.05) brightness(0.98);
+  mix-blend-mode: multiply;
+  opacity: 0.9;
+}
+
+/* Dark mode tiles blending: blend CartoDB dark tiles into the deep mahogany background */
+.dark .leaflet-tile {
+  filter: hue-rotate(335deg) saturate(0.65) brightness(0.65) contrast(1.2);
+  mix-blend-mode: screen;
+  opacity: 0.85;
+}
+
+/* Fix leaflet pane z-indexes to stay below headers/dialogs */
+.leaflet-pane {
+  z-index: 1 !important;
+}
+.leaflet-top,
+.leaflet-bottom {
+  z-index: 2 !important;
+}
+
+
 
