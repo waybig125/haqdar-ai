@@ -50,7 +50,7 @@ export function ResultCard({ result }) {
                 <Scale className="w-5.5 h-5.5 text-accent" />
                 <h3 className="font-urdu text-2xl font-bold m-0">قانون کی خلاف ورزی</h3>
               </div>
-              <p className="font-urdu text-xl leading-[1.8] font-medium pt-2">
+              <p className="font-urdu text-xl leading-[2.4] font-medium pt-2">
                 {result.violation_summary}
               </p>
               
@@ -111,7 +111,7 @@ export function ResultCard({ result }) {
                     </div>
 
                     <div className="p-6 pt-16 md:p-10 md:pt-12 overflow-x-auto">
-                      <pre className="font-urdu text-xl md:text-2xl leading-[2.1] whitespace-pre-wrap break-words max-w-full font-medium" dir="rtl">
+                      <pre className="font-urdu text-xl md:text-2xl leading-[2.6] whitespace-pre-wrap break-words max-w-full font-medium" dir="rtl">
                         {result.complaint_letter}
                       </pre>
                     </div>

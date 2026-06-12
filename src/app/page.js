@@ -4,6 +4,9 @@ import React from 'react';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { HeroSection } from '@/components/sections/HeroSection';
+import { HowItWorksSection } from '@/components/sections/HowItWorksSection';
+import { SdgFocusSection } from '@/components/sections/SdgFocusSection';
+import { FaqSection } from '@/components/sections/FaqSection';
 import { ComplaintInput } from '@/components/features/ComplaintInput';
 import { ResultCard } from '@/components/features/ResultCard';
 import { KnowYourRights } from '@/components/features/KnowYourRights';
@@ -29,6 +32,8 @@ export default function Home() {
       <main className="flex-grow">
         <HeroSection />
         
+        <HowItWorksSection />
+        
         <ComplaintInput onAnalyze={handleAnalyze} loading={loading} />
         
         <div id="result-section" className="scroll-mt-24">
@@ -43,6 +48,10 @@ export default function Home() {
         <div className="mt-12">
           <HeatmapSection />
         </div>
+
+        <SdgFocusSection />
+
+        <FaqSection />
       </main>
 
       <Footer />

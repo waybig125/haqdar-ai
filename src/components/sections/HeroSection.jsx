@@ -31,7 +31,7 @@ export function HeroSection() {
             </AnimatedContainer>
 
             <AnimatedContainer variant="fadeUp" delay={0.2}>
-              <h1 className="font-garamond text-5xl md:text-8xl font-black mb-1 tracking-wider uppercase bg-gradient-to-b from-[#FAF4E5] via-[#C5A059] to-[#8A6635] text-transparent bg-clip-text filter drop-shadow-[0_4px_8px_rgba(0,0,0,0.4)] leading-none select-none">
+              <h1 className="font-garamond text-5xl md:text-8xl font-black mb-1 tracking-wider uppercase gold-gradient-text-light leading-none select-none">
                 HaqDar AI
               </h1>
               <p className="font-garamond italic text-lg md:text-xl font-bold tracking-widest text-accent uppercase mb-8" dir="ltr">
@@ -40,7 +40,7 @@ export function HeroSection() {
             </AnimatedContainer>
 
             <AnimatedContainer variant="fadeUp" delay={0.3} className="space-y-6">
-              <h2 className="font-urdu text-4xl md:text-6xl font-bold leading-[1.3] text-foreground">
+              <h2 className="font-urdu text-4xl md:text-6xl font-bold leading-[1.5] text-foreground">
                 آواز میں انصاف کی طاقت
               </h2>
               <p className="text-sm md:text-base text-muted-foreground max-w-xl leading-relaxed font-inter" dir="ltr">
