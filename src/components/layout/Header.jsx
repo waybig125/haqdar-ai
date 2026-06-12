@@ -36,23 +36,25 @@ export function Header() {
   return (
     <header 
       className={cn(
-        "sticky top-0 z-50 w-full transition-all duration-300 border-b h-16 flex items-center",
+        "sticky top-0 z-50 w-full transition-all duration-300 border-b h-16 flex items-center relative overflow-hidden",
         isScrolled 
-          ? "bg-background/95 backdrop-blur-lg border-accent/20 dark:border-accent/10 shadow-md shadow-black/5" 
-          : "bg-background/80 backdrop-blur-md border-transparent"
+          ? "bg-[#FAF4E5]/95 border-[#C5B69C] dark:bg-[#1D120E]/95 dark:border-[#523225] shadow-lg shadow-black/15" 
+          : "bg-[#FAF4E5]/80 border-transparent dark:bg-[#1D120E]/80 backdrop-blur-md"
       )}
     >
-      <div className="container mx-auto px-4 max-w-6xl flex items-center justify-between">
+      {/* Background Subtle Lines */}
+      <div className="absolute inset-0 opacity-[0.03] dark:opacity-[0.02] pointer-events-none bg-[linear-gradient(to_right,rgba(197,160,89,0.2)_1px,transparent_1px),linear-gradient(to_bottom,rgba(197,160,89,0.2)_1px,transparent_1px)] bg-[size:16px_16px]" />
+
+      <div className="container mx-auto px-4 max-w-6xl flex items-center justify-between relative z-10">
         
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2.5 hover:opacity-95 transition-opacity group">
           <GeometricMedallion size={32} className="shrink-0 drop-shadow-[0_2px_8px_rgba(197,160,89,0.3)]" />
-          <div className="flex flex-col items-start gap-0">
-            <span className="font-urdu text-2xl font-bold text-foreground leading-none group-hover:text-accent transition-colors">حق دار</span>
-            <span className="text-[9px] font-garamond italic font-bold tracking-widest text-accent uppercase leading-none">HaqDar AI</span>
+          <div className="flex flex-col items-start gap-0.5 pt-1">
+            <span className="font-urdu text-2xl font-bold text-foreground leading-tight group-hover:text-accent transition-colors">حق دار</span>
+            <span className="text-[9px] font-garamond italic font-bold tracking-[0.18em] text-accent uppercase leading-none mt-0.5">HaqDar AI</span>
           </div>
         </Link>
-
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center gap-6">
@@ -85,18 +87,17 @@ export function Header() {
             <SheetTrigger render={<Button variant="ghost" size="icon" aria-label="Open Menu" className="cursor-pointer" />}>
               <Menu className="w-5 h-5 text-foreground" />
             </SheetTrigger>
-            <SheetContent side="start" className="w-[300px] sm:w-[400px] bg-card border-e border-border">
+            <SheetContent side="start" className="w-[300px] sm:w-[400px] bg-[#FAF4E5] dark:bg-[#1D120E] border-e border-[#C5B69C] dark:border-[#523225]">
               <SheetTitle className="sr-only">Navigation Menu</SheetTitle>
               <div className="flex flex-col gap-8 mt-8">
                 <Link href="/" className="flex items-center gap-3">
                   <GeometricMedallion size={36} className="shrink-0 drop-shadow-[0_2px_8px_rgba(197,160,89,0.3)]" />
-                  <div className="flex flex-col items-start gap-0">
-                    <span className="font-urdu text-3xl font-bold text-foreground">حق دار</span>
-                    <span className="text-[10px] font-garamond italic font-bold tracking-widest text-accent uppercase">HaqDar AI</span>
+                  <div className="flex flex-col items-start gap-0.5 pt-1">
+                    <span className="font-urdu text-3xl font-bold text-foreground leading-tight">حق دار</span>
+                    <span className="text-[10px] font-garamond italic font-bold tracking-[0.18em] text-accent uppercase leading-none mt-0.5">HaqDar AI</span>
                   </div>
                 </Link>
 
-                
                 <nav className="flex flex-col gap-2">
                   {NAV_LINKS.map((link) => (
                     <Link 
@@ -123,6 +124,5 @@ export function Header() {
 
       </div>
     </header>
-
   );
 }

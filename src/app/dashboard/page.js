@@ -5,12 +5,41 @@ import { StatCard } from '@/components/ui/StatCard';
 import { CivicPulse } from '@/components/features/CivicPulse';
 import { AnimatedContainer } from '@/components/ui/AnimatedContainer';
 import { getStats } from '@/lib/api';
-import { Scale, Users2, Landmark, HelpCircle } from 'lucide-react';
+import { Scale, Users2, Landmark, Clock, CheckCircle2, ShieldCheck, BadgeInfo } from 'lucide-react';
 
 export const metadata = {
   title: "Civic Pulse | HaqDar AI",
   description: "Live dashboard tracking institutional corruption and complaints across Pakistan.",
 };
+
+const RECENT_REPORTS = [
+  { id: "REP-9831", timestamp: "Today, 05:12 PM", category: "Police Extortion", district: "Karachi", status: "In Review", statusColor: "text-amber-500" },
+  { id: "REP-9828", timestamp: "Today, 03:45 PM", category: "Utility Overcharge", district: "Rawalpindi", status: "Draft Crafted", statusColor: "text-emerald-500" },
+  { id: "REP-9825", timestamp: "Yesterday, 06:12 PM", category: "Healthcare Denial", district: "Lahore", status: "Resolved", statusColor: "text-blue-500" },
+  { id: "REP-9821", timestamp: "Yesterday, 11:20 AM", category: "Labour Exploitation", district: "Faisalabad", status: "Draft Crafted", statusColor: "text-emerald-500" },
+  { id: "REP-9819", timestamp: "10 Jun 2026, 04:30 PM", category: "Education Fees Dispute", district: "Islamabad", status: "In Review", statusColor: "text-amber-500" }
+];
+
+const SDG_TARGETS = [
+  {
+    target: "16.3",
+    title: "Access to Justice",
+    descUrdu: "تمام لوگوں کے لیے مساوی انصاف کی فراہمی کو یقینی بنانا اور قانون کی بالادستی کو فروغ دینا۔",
+    descEnglish: "Promote the rule of law at the national and international levels and ensure equal access to justice for all."
+  },
+  {
+    target: "16.5",
+    title: "Reduce Corruption",
+    descUrdu: "رشوت ستانی اور ہر قسم کی کرپشن کو کافی حد تک کم کرنا اور شفافیت لانا۔",
+    descEnglish: "Substantially reduce corruption and bribery in all their forms across civic institutions."
+  },
+  {
+    target: "10.2",
+    title: "Promote Inclusion",
+    descUrdu: "خواندگی، صنف، یا آمدن سے بالاتر ہو کر تمام شہریوں کی سماجی اور قانونی شمولیت کو فروغ دینا۔",
+    descEnglish: "Empower and promote the social, economic and political inclusion of all, irrespective of age, sex, disability, race, ethnicity, origin, religion or economic status."
+  }
+];
 
 export default async function DashboardPage() {
   const stats = await getStats();
@@ -37,7 +66,7 @@ export default async function DashboardPage() {
 
         <div className="container mx-auto px-4 max-w-7xl py-12">
           
-          {/* SDG Impact Banner / Explainer Box (Dashboard Revamp Feature) */}
+          {/* SDG Impact Banner / Explainer Box */}
           <AnimatedContainer variant="fadeUp" className="mb-10">
             <div className="wood-console rounded-2xl p-6 md:p-8 border border-accent/20 shadow-xl relative overflow-hidden">
               <div className="absolute top-0 right-0 w-64 h-64 bg-accent/2 rounded-full blur-3xl pointer-events-none" />
@@ -126,6 +155,81 @@ export default async function DashboardPage() {
 
           {/* Main Visualizations */}
           <CivicPulse data={stats} />
+
+          {/* NEW DASHBOARD SECTIONS */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 mt-12">
+            
+            {/* Left side: Recent Reports registry log (Ledger Style) */}
+            <AnimatedContainer variant="fadeUp" className="lg:col-span-7">
+              <div className="wood-console rounded-2xl p-6 border border-accent/20 shadow-xl relative overflow-hidden h-full">
+                <div className="grunge-overlay" />
+                <div className="flex items-center gap-3 mb-6 relative z-10">
+                  <Clock className="w-5 h-5 text-accent" />
+                  <h3 className="font-urdu text-2xl font-bold text-[#E6DBC6] m-0">حالیہ شکایات لاگ / Activity Ledger</h3>
+                </div>
+                
+                <div className="parchment-sheet rounded-xl overflow-hidden border border-accent/20 relative z-10">
+                  <div className="overflow-x-auto">
+                    <table className="w-full text-left border-collapse">
+                      <thead>
+                        <tr className="border-b border-accent/20 bg-[#3A231A]/10 text-amber-950 dark:text-accent font-garamond text-xs font-bold uppercase tracking-wider">
+                          <th className="p-4">Report ID</th>
+                          <th className="p-4">Timestamp</th>
+                          <th className="p-4">Category</th>
+                          <th className="p-4">District</th>
+                          <th className="p-4 text-right">Status</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {RECENT_REPORTS.map((rep) => (
+                          <tr key={rep.id} className="border-b border-accent/10 hover:bg-[#3A231A]/5 transition-colors font-inter text-xs text-amber-950 dark:text-amber-100/90">
+                            <td className="p-4 font-bold">{rep.id}</td>
+                            <td className="p-4 text-amber-900/60 dark:text-amber-100/40">{rep.timestamp}</td>
+                            <td className="p-4 font-semibold">{rep.category}</td>
+                            <td className="p-4">{rep.district}</td>
+                            <td className={`p-4 text-right font-bold ${rep.statusColor}`}>{rep.status}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </AnimatedContainer>
+
+            {/* Right side: SDG Target Blueprint */}
+            <AnimatedContainer variant="fadeUp" className="lg:col-span-5">
+              <div className="wood-console rounded-2xl p-6 border border-accent/20 shadow-xl relative overflow-hidden h-full">
+                <div className="grunge-overlay" />
+                <div className="flex items-center gap-3 mb-6 relative z-10">
+                  <ShieldCheck className="w-5 h-5 text-accent" />
+                  <h3 className="font-urdu text-2xl font-bold text-[#E6DBC6] m-0">گلوبل ٹارگٹ بلیو پرنٹ / SDG Targets</h3>
+                </div>
+
+                <div className="flex flex-col gap-4 relative z-10">
+                  {SDG_TARGETS.map((target, idx) => (
+                    <div key={idx} className="parchment-sheet rounded-xl p-4 border border-accent/20 flex gap-3.5">
+                      <div className="w-10 h-10 rounded-full bg-accent/15 border border-accent/35 flex items-center justify-center font-garamond font-black text-sm text-accent shrink-0">
+                        {target.target}
+                      </div>
+                      <div className="space-y-1">
+                        <span className="text-[10px] font-bold text-amber-900/50 dark:text-accent/60 uppercase tracking-widest block font-inter">
+                          {target.title}
+                        </span>
+                        <p className="font-urdu text-[13px] leading-relaxed text-amber-950 dark:text-amber-100">
+                          {target.descUrdu}
+                        </p>
+                        <p className="font-inter text-[10px] text-amber-900/60 dark:text-amber-100/40 leading-normal pt-1">
+                          {target.descEnglish}
+                        </p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </AnimatedContainer>
+
+          </div>
 
         </div>
       </main>

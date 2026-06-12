@@ -95,34 +95,34 @@
   }
 
   .dark {
-    /* Analog Mahogany & Brass Parchment - Dark (Obsidian Emerald / Glowing Gold) */
-    --background: 145 35% 5%; /* #06100B - Rich Obsidian Emerald / Deep Jade */
+    /* Analog Mahogany & Brass Parchment - Dark (Obsidian Mahogany / Glowing Gold) */
+    --background: 22 30% 6%; /* #120A07 - Reverted to deep obsidian mahogany */
     --foreground: 37 28% 88%; /* #ECE5D5 */
-    --card: 145 22% 7.5%; /* #0B1911 */
+    --card: 22 28% 10%; /* #1D120E */
     --card-foreground: 37 28% 88%;
-    --popover: 145 22% 7.5%;
+    --popover: 22 28% 10%;
     --popover-foreground: 37 28% 88%;
     
     /* Glowing Gold */
     --primary: 38 70% 60%; /* #D4AF37 */
-    --primary-foreground: 145 35% 5%;
+    --primary-foreground: 22 30% 6%;
     
     /* Dark Mahogany Panel */
     --secondary: 22 24% 15%; /* #281710 */
     --secondary-foreground: 37 28% 88%;
     
-    --muted: 145 18% 10%;
+    --muted: 22 20% 12%;
     --muted-foreground: 37 10% 60%;
     
     /* Wax Gold */
     --accent: 38 70% 60%;
-    --accent-foreground: 145 35% 5%;
+    --accent-foreground: 22 30% 6%;
     
     --destructive: 0 62% 40%;
     --destructive-foreground: 37 28% 88%;
     
-    --border: 145 15% 13%;
-    --input: 145 15% 13%;
+    --border: 22 18% 18%;
+    --input: 22 18% 18%;
     --ring: 38 70% 60%;
   }
 }
@@ -134,23 +134,29 @@
   
   body {
     @apply bg-background text-foreground;
-    /* Soft warm radial glow with official light-green ledger lines watermark pattern */
+    /* Soft warm radial glow with official light-green ledger lines watermark pattern and sprinkles of green dust */
     background-image: 
-      radial-gradient(circle at 50% 20%, rgba(197, 160, 89, 0.03) 0%, transparent 60%),
+      radial-gradient(circle at 12% 18%, rgba(16, 124, 65, 0.04) 0%, transparent 6%),
+      radial-gradient(circle at 85% 72%, rgba(16, 124, 65, 0.05) 0%, transparent 8%),
+      radial-gradient(circle at 45% 85%, rgba(16, 124, 65, 0.03) 0%, transparent 10%),
+      radial-gradient(circle at 50% 20%, rgba(197, 160, 89, 0.02) 0%, transparent 50%),
       linear-gradient(to right, rgba(16, 124, 65, 0.035) 1px, transparent 1px),
       linear-gradient(to bottom, rgba(16, 124, 65, 0.035) 1px, transparent 1px);
-    background-size: 100% 100%, 32px 32px, 32px 32px;
+    background-size: 100% 100%, 100% 100%, 100% 100%, 100% 100%, 32px 32px, 32px 32px;
     background-attachment: fixed;
     position: relative;
   }
 
   .dark body {
-    /* Deep emerald background with subtle gold lines and a very soft green radial glow in the center */
+    /* Reverted to obsidian mahogany background with sprinkles of gold dust and gold grid lines */
     background-image: 
-      radial-gradient(circle at 50% 30%, rgba(16, 124, 65, 0.06) 0%, transparent 65%),
+      radial-gradient(circle at 15% 25%, rgba(212, 175, 55, 0.03) 0%, transparent 8%),
+      radial-gradient(circle at 80% 65%, rgba(212, 175, 55, 0.04) 0%, transparent 10%),
+      radial-gradient(circle at 40% 75%, rgba(212, 175, 55, 0.02) 0%, transparent 12%),
+      radial-gradient(circle at 50% 30%, rgba(212, 175, 55, 0.03) 0%, transparent 60%),
       linear-gradient(to right, rgba(212, 175, 55, 0.015) 1px, transparent 1px),
       linear-gradient(to bottom, rgba(212, 175, 55, 0.015) 1px, transparent 1px);
-    background-size: 100% 100%, 32px 32px, 32px 32px;
+    background-size: 100% 100%, 100% 100%, 100% 100%, 100% 100%, 32px 32px, 32px 32px;
   }
 
   /* Custom base64 SVG noise overlay for tactile grunge/paper texture */
@@ -165,34 +171,40 @@
     mix-blend-mode: multiply;
     z-index: 9999;
     pointer-events: none;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    /* Subtle green-tinted paper noise overlay in light theme */
+    background-image: 
+      url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E"),
+      linear-gradient(to bottom, rgba(16, 124, 65, 0.02), rgba(16, 124, 65, 0.005));
   }
 
   .dark body::before {
-    opacity: 0.16;
+    opacity: 0.15;
     mix-blend-mode: overlay;
-    /* Subtle green-tinted paper noise overlay */
+    /* Gold-tinted paper noise overlay in dark theme */
     background-image: 
       url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E"),
-      linear-gradient(to bottom, rgba(16, 124, 65, 0.08), rgba(16, 124, 65, 0.02));
+      linear-gradient(to bottom, rgba(212, 175, 55, 0.05), rgba(212, 175, 55, 0.01));
   }
   
   .grunge-overlay {
     position: absolute;
     inset: 0;
     pointer-events: none;
-    opacity: 0.15;
+    opacity: 0.14;
     mix-blend-mode: multiply;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    /* Green-tinted local card grunge */
+    background-image: 
+      url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E"),
+      linear-gradient(to bottom, rgba(16, 124, 65, 0.06), rgba(16, 124, 65, 0.01));
   }
   
   .dark .grunge-overlay {
     mix-blend-mode: overlay;
-    opacity: 0.22;
-    /* Green-tinted local card grunge */
+    opacity: 0.2;
+    /* Gold/amber tinted local card grunge */
     background-image: 
       url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E"),
-      linear-gradient(to bottom, rgba(16, 124, 65, 0.1), rgba(16, 124, 65, 0.03));
+      linear-gradient(to bottom, rgba(212, 175, 55, 0.08), rgba(212, 175, 55, 0.02));
   }
   
   /* Urdu Typography Adjustments */
