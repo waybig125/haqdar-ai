@@ -16,7 +16,12 @@ export function useAnalyzeComplaint() {
       const result = await analyzeComplaint(text);
       setData(result);
     } catch (err) {
+      console.error(err);
       setError(err.message || 'An error occurred');
+      toast.error('شکایت کا تجزیہ کرنے میں ناکامی / Analysis Failed', {
+        description: 'The backend server is offline or unreachable. Please try again later.',
+        duration: 5000,
+      });
     } finally {
       setLoading(false);
     }
