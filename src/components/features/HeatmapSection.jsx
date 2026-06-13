@@ -5,6 +5,7 @@ import dynamic from 'next/dynamic';
 import { useTheme } from 'next-themes';
 import { AnimatedContainer } from '@/components/ui/AnimatedContainer';
 import { THEME } from '@/lib/theme';
+import { getStats } from '@/lib/api';
 import pakistanGeoJson from '../../../public/data/pakistan.json';
 
 // Single dynamic import for the client-only map component
@@ -31,12 +32,46 @@ const MOCK_CITIES = [
   { name: 'Quetta', coords: [30.1798, 66.9750], count: 34, topIssue: 'Healthcare' },
 ];
 
+const CITY_COORDS = {
+  'Lahore': [31.5204, 74.3587],
+  'Karachi': [24.8607, 67.0011],
+  'Islamabad': [33.6844, 73.0479],
+  'Rawalpindi': [33.5909, 73.0535],
+  'Faisalabad': [31.4181, 73.0776],
+  'Peshawar': [34.0151, 71.5249],
+  'Multan': [30.1978, 71.4697],
+  'Quetta': [30.1798, 66.9750],
+  'Sialkot': [32.4972, 74.5361],
+  'Gujranwala': [32.1617, 74.1883],
+};
+
+const capitalize = (s) => s ? s.charAt(0).toUpperCase() + s.slice(1) : '';
+
 export function HeatmapSection() {
   const { theme, systemTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
+  const [cities, setCities] = useState(MOCK_CITIES);
+  const [totalReports, setTotalReports] = useState(1247);
 
   useEffect(() => {
     setMounted(true);
+
+    getStats().then(statsData => {
+      if (statsData && statsData.total_reports > 0) {
+        setTotalReports(statsData.total_reports);
+        const liveCities = (statsData.district_rankings || [])
+          .filter(d => d.district !== 'All Districts' && CITY_COORDS[capitalize(d.district)])
+          .map(d => ({
+            name: capitalize(d.district),
+            coords: CITY_COORDS[capitalize(d.district)],
+            count: d.count,
+            topIssue: 'Reported Grievances'
+          }));
+        if (liveCities.length > 0) {
+          setCities(liveCities);
+        }
+      }
+    }).catch(err => console.error("Failed to load heatmap stats", err));
   }, []);
 
   if (!mounted) return <div className="h-[500px] w-full bg-muted/20 animate-pulse rounded-2xl" />;
@@ -74,7 +109,7 @@ export function HeatmapSection() {
               tileUrl={tileUrl}
               geoJsonStyle={geoJsonStyle}
               pakistanGeoJson={pakistanGeoJson}
-              cities={MOCK_CITIES}
+              cities={cities}
               accentColor={THEME.colors.accent.alt}
             />
           </div>
@@ -82,7 +117,7 @@ export function HeatmapSection() {
           <div className="absolute -bottom-5 left-1/2 -translate-x-1/2 z-20">
             <div className="bg-background border border-border/80 shadow-2xl rounded-full px-6 py-3 flex items-center gap-3 whitespace-nowrap">
               <span className="w-2.5 h-2.5 rounded-full bg-red-500 animate-ping" />
-              <span className="font-bold text-lg font-garamond tracking-tight">{1247}</span>
+              <span className="font-bold text-lg font-garamond tracking-tight">{totalReports}</span>
               <span className="text-xs font-semibold text-muted-foreground uppercase tracking-widest font-inter">Anonymous reports this month</span>
             </div>
           </div>
@@ -93,4 +128,3 @@ export function HeatmapSection() {
     </section>
   );
 }
-

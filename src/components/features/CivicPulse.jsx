@@ -71,6 +71,8 @@ export function CivicPulse({ data }) {
     'Women': 'خواتین (Women)',
     'Consumer': 'صارفین (Consumer)',
     'Traffic': 'ٹریفک (Traffic)',
+    'Rti': 'معلومات (RTI)',
+    'Municipal': 'بلدیات (Municipal)',
     'General': 'عام (General)',
     'Other': 'دیگر (Other)'
   };
