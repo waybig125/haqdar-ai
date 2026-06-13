@@ -35,7 +35,7 @@ export function HowItWorksSection() {
   return (
     <section className="w-full py-16 bg-[#3A231A]/5 border-y border-accent/10 relative overflow-hidden">
       <div className="container mx-auto px-4 max-w-6xl relative z-10">
-        
+
         {/* Section Header */}
         <div className="text-center max-w-2xl mx-auto mb-16">
           <AnimatedContainer variant="fadeUp">
@@ -54,17 +54,17 @@ export function HowItWorksSection() {
           {STEPS.map((step, idx) => {
             const IconComponent = step.icon;
             return (
-              <AnimatedContainer 
-                key={idx} 
-                variant="fadeUp" 
+              <AnimatedContainer
+                key={idx}
+                variant="fadeUp"
                 delay={idx * 0.15}
                 className="flex"
               >
                 <div className="parchment-sheet rounded-2xl p-6 md:p-8 flex flex-col items-center text-center relative w-full border border-accent/20 hover:border-accent/40 shadow-lg hover:shadow-xl transition-all duration-300 group">
-                  
+
                   {/* Step Number Badge */}
-                  <div className="absolute -top-5 left-1/2 -translate-x-1/2 w-10 h-10 rounded-full bg-gradient-to-b from-[#2A170F] to-[#1C0F0A] border-2 border-accent flex items-center justify-center text-accent font-urdu text-xl font-bold shadow-md">
-                    {step.num}
+                  <div className="absolute -top-5 left-1/2 -translate-x-1/2 w-10 h-10 rounded-full bg-gradient-to-b from-[#2A170F] to-[#1C0F0A] border-2 border-accent text-accent font-urdu text-xl font-bold shadow-md">
+                    <span className="flex items-center justify-center text-center align-center">{step.num}</span>
                   </div>
 
                   {/* Icon Wrapper */}
@@ -73,17 +73,17 @@ export function HowItWorksSection() {
                   </div>
 
                   {/* Urdu Content */}
-                  <div className="mb-4">
+                  <div className="mb-6">
                     <h3 className="font-urdu text-2xl font-bold text-amber-950 dark:text-amber-100 mb-2 leading-relaxed" dir="rtl">
                       {step.titleUrdu}
                     </h3>
-                    <p className="font-urdu text-[15px] text-amber-900/70 dark:text-amber-100/60 leading-[2.1]" dir="rtl">
+                    <p className="font-urdu text-[15px] text-amber-900/70 dark:text-amber-100/60 leading-[2.4]" dir="rtl">
                       {step.descUrdu}
                     </p>
                   </div>
 
                   {/* Divider line */}
-                  <div className="w-12 h-[1px] bg-accent/20 my-3" />
+                  <div className="w-12 h-[1px] bg-accent/20 my-4" />
 
                   {/* English Content */}
                   <div>

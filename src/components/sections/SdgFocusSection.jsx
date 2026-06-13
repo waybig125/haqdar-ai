@@ -37,7 +37,7 @@ export function SdgFocusSection() {
             <div className="wood-console rounded-2xl p-6 md:p-8 flex flex-col h-full border border-accent/20 relative group hover:scale-[1.01] transition-transform duration-300">
               
               {/* Badge Anchor */}
-              <div className="absolute top-4 right-4 bg-[#0A2540] border border-[#103D69] text-white px-3 py-1 rounded text-[10px] font-bold tracking-widest uppercase font-inter">
+              <div className="absolute top-4 right-4 bg-emerald-800/10 dark:bg-emerald-500/10 border border-emerald-600/30 dark:border-emerald-400/20 text-emerald-800 dark:text-emerald-400 px-3 py-1 rounded text-[10px] font-bold tracking-widest uppercase font-inter">
                 Goal 16: Peace & Justice
               </div>
 
@@ -60,7 +60,7 @@ export function SdgFocusSection() {
                 
                 {/* Urdu */}
                 <div>
-                  <p className="font-urdu text-[15px] leading-[2.1] text-amber-950 dark:text-amber-100" dir="rtl">
+                  <p className="font-urdu text-[15px] leading-[2.4] text-amber-950 dark:text-amber-100" dir="rtl">
                     حق دار کا بنیادی مقصد ہر شہری تک قانونی رہنمائی اور آسان انصاف کی رسائی کو ممکن بنانا ہے۔ آواز پر مبنی سمارٹ مائیکرو پٹیشن فارمیٹ کے ذریعے ہم پسماندہ طبقات کو اپنے حقوق کے تحفظ کا اختیار دیتے ہیں۔
                   </p>
                 </div>
@@ -84,7 +84,7 @@ export function SdgFocusSection() {
             <div className="wood-console rounded-2xl p-6 md:p-8 flex flex-col h-full border border-accent/20 relative group hover:scale-[1.01] transition-transform duration-300">
               
               {/* Badge Anchor */}
-              <div className="absolute top-4 right-4 bg-[#DD133B] border border-[#FF375F] text-white px-3 py-1 rounded text-[10px] font-bold tracking-widest uppercase font-inter">
+              <div className="absolute top-4 right-4 bg-accent/10 dark:bg-accent/10 border border-accent/30 dark:border-accent/20 text-[#8A6635] dark:text-[#DFBA73] px-3 py-1 rounded text-[10px] font-bold tracking-widest uppercase font-inter">
                 Goal 10: Reduced Inequalities
               </div>
 
@@ -107,7 +107,7 @@ export function SdgFocusSection() {
                 
                 {/* Urdu */}
                 <div>
-                  <p className="font-urdu text-[15px] leading-[2.1] text-amber-950 dark:text-amber-100" dir="rtl">
+                  <p className="font-urdu text-[15px] leading-[2.4] text-amber-950 dark:text-amber-100" dir="rtl">
                     اردو صوتی ان پٹ کی مدد سے ہم خواندگی اور زبان کی رکاوٹ کو دور کر رہے ہیں۔ اب کوئی بھی عام شہری جو لکھ پڑھ نہیں سکتا، صرف بول کر اپنی شکایت درج کروا سکتا ہے اور برابری کا حق حاصل کر سکتا ہے۔
                   </p>
                 </div>

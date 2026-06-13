@@ -69,16 +69,16 @@ export function FaqSection() {
                   value={faq.value}
                   className="border-none"
                 >
-                  <AccordionTrigger className="w-full text-start py-4 px-5 rounded-xl bg-accent/5 dark:bg-[#3A231A]/30 hover:bg-accent/10 dark:hover:bg-[#3A231A]/50 border border-accent/20 dark:border-[#523225] flex items-center justify-between cursor-pointer group transition-all duration-200">
+                  <AccordionTrigger className="w-full text-start py-4 px-5 rounded-xl bg-accent/5 dark:bg-[#3A231A]/30 hover:bg-accent/10 dark:hover:bg-[#3A231A]/50 border border-accent/20 dark:border-[#523225] flex items-center justify-between cursor-pointer group transition-all duration-200 hover:no-underline">
                     <div className="flex items-start gap-3 flex-grow">
                       <HelpCircle className="w-5 h-5 text-accent shrink-0 mt-1.5 md:mt-1 group-hover:scale-110 transition-transform" />
                       <div className="space-y-1.5 w-full">
                         {/* Urdu Q */}
-                        <h3 className="font-urdu text-xl md:text-2xl font-bold text-primary dark:text-[#E6DBC6] leading-snug" dir="rtl">
+                        <h3 className="font-urdu text-xl md:text-2xl font-bold text-primary dark:text-[#E6DBC6] leading-snug group-hover:text-accent transition-colors" dir="rtl">
                           {faq.qUrdu}
                         </h3>
                         {/* English Q */}
-                        <p className="font-inter text-xs text-accent/80 group-hover:text-accent font-semibold tracking-wide">
+                        <p className="font-inter text-xs text-accent/80 group-hover:text-accent font-semibold tracking-wide transition-colors">
                           {faq.qEnglish}
                         </p>
                       </div>
