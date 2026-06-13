@@ -46,9 +46,22 @@ export function KnowYourRights({ result }) {
  
             <TabsContent value="evidence" className="mt-0 outline-none">
               <h3 className="font-urdu text-2xl font-bold text-primary mb-4">شکایت سے پہلے کیا ثبوت درکار ہے؟</h3>
-              <p className="font-urdu text-xl leading-[2.4] text-foreground">
-                {result.evidence_to_collect}
-              </p>
+              {Array.isArray(result.evidence_to_collect) ? (
+                <ul className="space-y-4 font-urdu text-xl text-foreground">
+                  {result.evidence_to_collect.map((item, index) => (
+                    <li key={index} className="flex items-start gap-3">
+                      <span className="flex-shrink-0 w-8 h-8 rounded-full bg-primary/10 text-primary flex items-center justify-center font-inter font-bold text-sm mt-1">
+                        ✓
+                      </span>
+                      <span className="leading-[2.4] pt-1">{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <p className="font-urdu text-xl leading-[2.4] text-foreground">
+                  {result.evidence_to_collect}
+                </p>
+              )}
             </TabsContent>
  
             <TabsContent value="steps" className="mt-0 outline-none">
