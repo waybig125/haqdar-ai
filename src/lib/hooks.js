@@ -12,6 +12,7 @@ export function useAnalyzeComplaint() {
   const analyze = async (text) => {
     setLoading(true);
     setError(null);
+    setData(null); // Reset previous results on new analyze request
     try {
       const result = await analyzeComplaint(text);
       setData(result);
@@ -19,7 +20,7 @@ export function useAnalyzeComplaint() {
       console.error(err);
       setError(err.message || 'An error occurred');
       toast.error('شکایت کا تجزیہ کرنے میں ناکامی / Analysis Failed', {
-        description: 'The backend server is offline or unreachable. Please try again later.',
+        description: 'Backend server is down or connection offline.',
         duration: 5000,
       });
     } finally {
