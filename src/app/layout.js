@@ -17,7 +17,7 @@ export default function RootLayout({ children }) {
       >
         <AmbientBackground />
         <Providers>
-          <div className="relative z-10 flex flex-col min-h-screen">
+          <div className="relative z-10 flex flex-col min-h-screen print:block print:min-h-0 print:h-auto">
             {children}
           </div>
           <Toaster richColors position="bottom-right" />

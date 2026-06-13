@@ -36,7 +36,7 @@ export const AmbientBackground = React.memo(function AmbientBackground() {
   }, []);
 
   return (
-    <div className="fixed inset-0 overflow-hidden pointer-events-none -z-10">
+    <div className="fixed inset-0 overflow-hidden pointer-events-none -z-10 no-print">
       {/* Subtle Grunge Texture Specks (800 particles in collision-free grid layout) */}
       <div className="absolute inset-0 opacity-[0.6] dark:opacity-[0.4] mix-blend-multiply dark:mix-blend-screen">
         <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">

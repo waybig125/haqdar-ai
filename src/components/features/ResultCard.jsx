@@ -16,6 +16,12 @@ import { SDGBadge } from '@/components/ui/SDGBadge';
 
 export function ResultCard({ result, editedLetter, setEditedLetter }) {
   const [copied, setCopied] = useState(false);
+  const [openItems, setOpenItems] = useState(["letter"]);
+
+  // Open the petition letter accordion by default when a new result loads
+  React.useEffect(() => {
+    setOpenItems(["letter"]);
+  }, [result]);
 
   if (!result) return null;
 
@@ -73,7 +79,7 @@ export function ResultCard({ result, editedLetter, setEditedLetter }) {
               <p className="font-urdu text-lg text-amber-900/60 dark:text-amber-100/50 pt-2" dir="rtl">
                 شکایت جمع کروانے کے لیے نامزد کردہ ادارہ:
               </p>
-              <div className="p-5 rounded-lg bg-card border border-[#C5B69C] dark:border-[#36221A] text-xl font-bold text-center mt-3 shadow-md font-urdu text-foreground relative overflow-hidden" dir="rtl">
+              <div className="p-5 rounded-lg bg-card border border-[#C5B69C] dark:border-[#36221A] text-xl font-bold text-center mt-3 shadow-md font-urdu text-foreground relative overflow-hidden leading-[2.4]" dir="rtl">
                 <div className="absolute left-0 top-0 h-full w-1 bg-accent" />
                 {result.responsible_authority}
               </div>
@@ -83,7 +89,11 @@ export function ResultCard({ result, editedLetter, setEditedLetter }) {
 
           {/* Complaint Letter Accordion */}
           <div className="px-4 py-4 bg-[#23150F]/20">
-            <Accordion type="single" collapsible="true" defaultValue="letter">
+            <Accordion 
+              type="single" 
+              value={openItems}
+              onValueChange={setOpenItems}
+            >
               <AccordionItem value="letter" className="border-none">
                 <AccordionTrigger className="hover:no-underline py-3 px-4 rounded-lg bg-[#3A231A]/30 hover:bg-[#3A231A]/50 transition-colors group flex items-center justify-between cursor-pointer border border-[#523225]">
                   <div className="flex items-center gap-3 text-accent transition-colors">

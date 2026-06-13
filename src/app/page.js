@@ -35,7 +35,7 @@ export default function Home() {
 
   return (
     <>
-      <div className="min-h-screen flex flex-col selection:bg-primary/20 selection:text-primary">
+      <div className="min-h-screen flex flex-col selection:bg-primary/20 selection:text-primary no-print">
         <Header />
         
         <main className="flex-grow">

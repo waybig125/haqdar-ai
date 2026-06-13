@@ -422,7 +422,6 @@
 /* Print Media Styles for Petition Letter */
 @media print {
   /* Hide the entire website screen wrapper and overlays */
-  div.min-h-screen,
   body::before,
   .no-print {
     display: none !important;
