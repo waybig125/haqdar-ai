@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from 'react';
-import { Copy, Check, Scale, Building2, FileText, ChevronDown } from 'lucide-react';
+import { Copy, Check, Scale, Building2, FileText, ChevronDown, Download } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import {
@@ -13,9 +13,12 @@ import {
 import { TrustScore } from './TrustScore';
 import { AnimatedContainer } from '@/components/ui/AnimatedContainer';
 import { SDGBadge } from '@/components/ui/SDGBadge';
+import { downloadLetterPdf } from '@/lib/api';
+import { toast } from 'sonner';
 
 export function ResultCard({ result, editedLetter, setEditedLetter }) {
   const [copied, setCopied] = useState(false);
+  const [downloading, setDownloading] = useState(false);
   const [openItems, setOpenItems] = useState(["letter"]);
 
   // Open the petition letter accordion by default when a new result loads
@@ -32,6 +35,47 @@ export function ResultCard({ result, editedLetter, setEditedLetter }) {
       setTimeout(() => setCopied(false), 2000);
     } catch (err) {
       console.error('Failed to copy', err);
+    }
+  };
+
+  const handleDownloadPdf = async () => {
+    if (downloading) return;
+    setDownloading(true);
+    try {
+      const { blob, isFallback } = await downloadLetterPdf({
+        reference_id: result.reference_id || "HQD-2026-0001",
+        complaint_letter: editedLetter,
+        law_reference: result.law_reference || "",
+        responsible_authority: result.responsible_authority || "",
+      });
+
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = isFallback
+        ? `${result.reference_id || 'HQD-2026-0001'}.txt`
+        : `${result.reference_id || 'HQD-2026-0001'}.pdf`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      window.URL.revokeObjectURL(url);
+
+      if (isFallback) {
+        toast.warning('شکایتی خط ڈاؤنلوڈ کر لیا گیا (بغیر فارمیٹ / ٹیکسٹ فارمیٹ میں)', {
+          description: 'پی ڈی ایف سروس دستیاب نہیں تھی، اس لیے خط ٹیکسٹ فائل کے طور پر ڈاؤنلوڈ کیا گیا ہے۔',
+        });
+      } else {
+        toast.success('پی ڈی ایف ڈاؤن لوڈ کر لی گئی ہے / PDF Downloaded', {
+          description: 'سرکاری شکایتی خط کامیابی کے ساتھ ڈاؤن لوڈ ہو گیا ہے۔',
+        });
+      }
+    } catch (err) {
+      console.error('Failed to download PDF', err);
+      toast.error('ڈاؤن لوڈ ناکام / Download Failed', {
+        description: 'فائل ڈاؤن لوڈ کرنے میں کوئی مسئلہ پیش آیا ہے۔',
+      });
+    } finally {
+      setDownloading(false);
     }
   };
 
@@ -122,10 +166,15 @@ export function ResultCard({ result, editedLetter, setEditedLetter }) {
                         variant="secondary" 
                         size="sm" 
                         className="shadow-md font-urdu border border-[#C5B69C] dark:border-[#36221A] h-9 px-3.5 rounded-md cursor-pointer hover:bg-accent/10 hover:text-accent hover:border-accent/30 flex items-center gap-1.5"
-                        onClick={() => window.print()}
+                        onClick={handleDownloadPdf}
+                        disabled={downloading}
                       >
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4"><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><path d="M6 9V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v5"/><rect x="6" y="14" width="12" height="8" rx="1"/></svg>
-                        پرنٹ کریں
+                        {downloading ? (
+                          <div className="w-4 h-4 border-2 border-accent border-t-transparent rounded-full animate-spin" />
+                        ) : (
+                          <Download className="w-4 h-4 text-accent" />
+                        )}
+                        پی ڈی ایف ڈاؤن لوڈ
                       </Button>
                     </div>
 

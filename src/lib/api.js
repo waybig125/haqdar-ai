@@ -266,3 +266,46 @@ export async function getStats() {
     return initialMockStats;
   }
 }
+
+/**
+ * Renders the complaint letter as a downloadable PDF from the backend.
+ * @param {Object} params
+ * @param {string} params.reference_id
+ * @param {string} params.complaint_letter
+ * @param {string} [params.law_reference]
+ * @param {string} [params.responsible_authority]
+ * @returns {Promise<{blob: Blob, isFallback: boolean}>}
+ */
+export async function downloadLetterPdf({ reference_id, complaint_letter, law_reference = '', responsible_authority = '' }) {
+  try {
+    const response = await fetch(`${API_BASE_URL}/letter/pdf`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        reference_id,
+        complaint_letter,
+        law_reference,
+        responsible_authority,
+      }),
+    });
+
+    if (!response.ok) {
+      throw new Error(`PDF generation failed: ${response.status}`);
+    }
+
+    const blob = await response.blob();
+    return { blob, isFallback: false };
+  } catch (error) {
+    console.error("PDF API failed, falling back to text file download", error);
+    // Fallback: Return a text blob of the letter
+    const txtContent = `HAQDAR AI — OFFICIAL COMPLAINT RECORD\n` +
+      `Reference ID: ${reference_id}\n` +
+      `Authority: ${responsible_authority}\n` +
+      `Law Reference: ${law_reference}\n` +
+      `--------------------------------------------------\n\n` +
+      complaint_letter;
+    const blob = new Blob([txtContent], { type: 'text/plain;charset=utf-8' });
+    return { blob, isFallback: true };
+  }
+}
+
