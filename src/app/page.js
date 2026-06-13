@@ -14,13 +14,31 @@ import { KnowYourRights } from '@/components/features/KnowYourRights';
 import { HeatmapSection } from '@/components/features/HeatmapSection';
 import { useAnalyzeComplaint } from '@/lib/hooks';
 
+function formatUrduLetter(letter) {
+  if (!letter) return '';
+  // If it already has newlines, don't modify it
+  if (letter.includes('\n')) return letter;
+
+  let formatted = letter;
+  
+  // Insert newlines before key structural Urdu letter phrases
+  formatted = formatted.replace(/(حوالہ نمبر:)/g, '\n$1');
+  formatted = formatted.replace(/(بتاریخ:)/g, '\n$1');
+  formatted = formatted.replace(/(بخدمت جناب)/g, '\n$1');
+  formatted = formatted.replace(/(موضوع:)/g, '\n\n$1');
+  formatted = formatted.replace(/(جنابِ? عالی،)/g, '\n\n$1\n');
+  formatted = formatted.replace(/(والسلام،)/g, '\n\n$1\n');
+  
+  return formatted.trim();
+}
+
 export default function Home() {
   const { data: analysisResult, loading, analyze } = useAnalyzeComplaint();
   const [editedLetter, setEditedLetter] = React.useState('');
 
   React.useEffect(() => {
     if (analysisResult?.complaint_letter) {
-      setEditedLetter(analysisResult.complaint_letter);
+      setEditedLetter(formatUrduLetter(analysisResult.complaint_letter));
     }
   }, [analysisResult?.complaint_letter]);
 
