@@ -96,7 +96,7 @@ export function Header() {
             <SheetTrigger render={<Button variant="ghost" size="icon" aria-label="Open Menu" className="cursor-pointer" />}>
               <Menu className="w-5 h-5 text-foreground" />
             </SheetTrigger>
-            <SheetContent side="left" className="w-[300px] sm:w-[400px] bg-[#FAF4E5] dark:bg-[#1D120E] border-e border-[#C5B69C] dark:border-[#523225]">
+            <SheetContent side="left" className="w-[300px] sm:w-[400px] bg-[#FAF4E5] dark:bg-[#1D120E] border-e border-[#C5B69C] dark:border-[#523225] pl-2">
               <SheetTitle className="sr-only">Navigation Menu</SheetTitle>
               <div className="flex flex-col gap-8 mt-8">
                 <Link href="/" className="flex items-center gap-3 pb-1">

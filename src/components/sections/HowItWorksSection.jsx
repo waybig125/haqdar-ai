@@ -63,7 +63,7 @@ export function HowItWorksSection() {
                 <div className="parchment-sheet rounded-2xl p-6 md:p-8 flex flex-col items-center text-center relative w-full border border-accent/20 hover:border-accent/40 shadow-lg hover:shadow-xl transition-all duration-300 group">
 
                   {/* Step Number Badge */}
-                  <div className="absolute -top-5 left-1/2 -translate-x-1/2 w-10 h-10 rounded-full bg-gradient-to-b from-[#2A170F] to-[#1C0F0A] border-2 border-accent text-accent font-urdu text-xl font-bold shadow-md">
+                  <div className="absolute -top-5 left-1/2 -translate-x-1/2 w-10 h-10 rounded-full bg-background border-2 border-accent text-accent font-urdu text-xl font-bold shadow-md">
                     <span className="flex items-center justify-center text-center align-center">{step.num}</span>
                   </div>
 

@@ -42,7 +42,7 @@ export function HeroSection() {
   };
 
   return (
-    <section className="relative pt-12 pb-16 md:pt-16 md:pb-24 overflow-hidden">
+    <section className="relative min-h-[calc(100vh-5rem)] flex items-center pt-8 pb-12 overflow-hidden">
 
       <div className="container mx-auto px-4 max-w-7xl relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">

@@ -98,7 +98,7 @@ export function ComplaintInput({ onAnalyze, loading }) {
                 onChange={(e) => setText(e.target.value.slice(0, 800))}
                 placeholder={isUrduMode ? "اپنی شکایت یہاں لکھیں یا مائیک کا بٹن دبا کر بولیں..." : "Type or click the microphone to speak your complaint..."}
                 className={cn(
-                  "w-full min-h-[170px] bg-transparent resize-none outline-none leading-relaxed placeholder:text-amber-900/30 dark:placeholder:text-amber-100/25 transition-all border-none focus:ring-0 mt-2",
+                  "w-full min-h-[170px] bg-transparent resize-none outline-none leading-relaxed placeholder:text-amber-900/30 dark:placeholder:text-amber-100/25 transition-all border-none focus:ring-0 mt-2 px-4",
                   isUrduMode ? "font-urdu text-2xl md:text-3xl leading-[2.8] py-2 text-amber-950 dark:text-amber-100" : "font-garamond text-2xl md:text-3xl font-bold leading-[2.2] py-2 text-amber-950 dark:text-amber-100"
                 )}
                 dir={isUrduMode ? "rtl" : "ltr"}
