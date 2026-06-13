@@ -2,6 +2,7 @@ import { urduFont, interFont, ebGaramondFont } from "@/lib/fonts";
 import "@/styles/globals.css";
 import { Providers } from "./providers";
 import { AmbientBackground } from "@/components/ui/AmbientBackground";
+import { Toaster } from "@/components/ui/sonner";
 
 export const metadata = {
   title: "HaqDar AI | حق دار",
@@ -19,6 +20,7 @@ export default function RootLayout({ children }) {
           <div className="relative z-10 flex flex-col min-h-screen">
             {children}
           </div>
+          <Toaster richColors position="bottom-right" />
         </Providers>
       </body>
     </html>

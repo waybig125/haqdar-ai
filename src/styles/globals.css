@@ -421,39 +421,34 @@
 
 /* Print Media Styles for Petition Letter */
 @media print {
-  body {
-    background: white !important;
-    color: black !important;
-    background-image: none !important;
-  }
+  /* Hide the entire website screen wrapper and overlays */
+  div.min-h-screen,
   body::before,
-  header,
-  footer,
-  nav,
-  button,
-  .no-print,
-  .bezel-btn,
-  .theme-toggle-btn,
-  #theme-toggle {
+  .no-print {
     display: none !important;
   }
-  .print-only {
+  
+  /* Setup clean white printable page body */
+  body {
+    background: #ffffff !important;
+    color: #000000 !important;
+    background-image: none !important;
+  }
+  
+  /* Style the print letter target with official margins and typography */
+  #print-letter-target {
     display: block !important;
-  }
-  .parchment-sheet {
-    background: transparent !important;
-    border: none !important;
-    box-shadow: none !important;
-    color: black !important;
-    padding: 0 !important;
-  }
-  .print-container {
+    color: #000000 !important;
+    background: #ffffff !important;
+    font-family: var(--font-urdu), serif !important;
+    font-size: 16pt !important;
+    line-height: 2.2 !important;
+    white-space: pre-wrap !important;
+    direction: rtl !important;
+    padding: 1.2in 1in 1in 1in !important; /* Standard margins */
     width: 100% !important;
-    max-width: 100% !important;
     margin: 0 !important;
-    padding: 0 !important;
     box-shadow: none !important;
-    background: transparent !important;
   }
 }
 

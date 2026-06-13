@@ -2,6 +2,7 @@
 
 import { useState, useCallback, useEffect, useRef } from 'react';
 import { analyzeComplaint, getStats } from './api';
+import { toast } from 'sonner';
 
 export function useAnalyzeComplaint() {
   const [data, setData] = useState(null);
@@ -67,15 +68,34 @@ export function useSpeechRecognition() {
     };
 
     recognition.onerror = (event) => {
-      if (event.error !== 'no-speech') {
-        console.error('Speech recognition error', event.error);
-        if (event.error === 'not-allowed') {
-          setSpeechError('not-allowed');
-        } else {
-          setSpeechError(event.error);
-        }
+      // Ignore normal timeouts ('no-speech') and user cancellations ('aborted')
+      if (event.error === 'no-speech' || event.error === 'aborted') {
+        setIsListening(false);
+        return;
       }
+
+      console.warn('Speech recognition warning/error:', event.error);
       setIsListening(false);
+
+      if (event.error === 'not-allowed') {
+        setSpeechError('not-allowed');
+        toast.error('مائیکروفون بلاک ہے! براہ کرم براؤزر کی سیٹنگز میں مائیکروفون کی اجازت دیں۔', {
+          description: 'Microphone permission denied. Please allow microphone access in browser settings.',
+          duration: 5000,
+        });
+      } else if (event.error === 'network') {
+        setSpeechError('network');
+        toast.error('انٹرنیٹ کا مسئلہ! براہ کرم اپنا انٹرنیٹ کنکشن چیک کریں۔', {
+          description: 'Speech recognition network error. Check your connection.',
+          duration: 4000,
+        });
+      } else {
+        setSpeechError(event.error);
+        toast.error('صوتی شناخت میں خرابی! دوبارہ کوشش کریں۔', {
+          description: `Speech recognition error: ${event.error}`,
+          duration: 4000,
+        });
+      }
     };
 
     recognition.onend = () => {

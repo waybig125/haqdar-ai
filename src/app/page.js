@@ -16,6 +16,13 @@ import { useAnalyzeComplaint } from '@/lib/hooks';
 
 export default function Home() {
   const { data: analysisResult, loading, analyze } = useAnalyzeComplaint();
+  const [editedLetter, setEditedLetter] = React.useState('');
+
+  React.useEffect(() => {
+    if (analysisResult?.complaint_letter) {
+      setEditedLetter(analysisResult.complaint_letter);
+    }
+  }, [analysisResult?.complaint_letter]);
 
   const handleAnalyze = (text) => {
     analyze(text);
@@ -27,37 +34,49 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col selection:bg-primary/20 selection:text-primary">
-      <Header />
-      
-      <main className="flex-grow">
-        <HeroSection />
+    <>
+      <div className="min-h-screen flex flex-col selection:bg-primary/20 selection:text-primary">
+        <Header />
         
-        <HowItWorksSection />
-        
-        <ComplaintInput onAnalyze={handleAnalyze} loading={loading} />
-        
-        <div id="result-section" className="scroll-mt-24">
-          {analysisResult && (
-            <>
-              <ResultCard result={analysisResult} />
-              <KnowYourRights result={analysisResult} />
-            </>
-          )}
+        <main className="flex-grow">
+          <HeroSection />
+          
+          <HowItWorksSection />
+          
+          <ComplaintInput onAnalyze={handleAnalyze} loading={loading} />
+          
+          <div id="result-section" className="scroll-mt-24">
+            {analysisResult && (
+              <>
+                <ResultCard 
+                  result={analysisResult} 
+                  editedLetter={editedLetter} 
+                  setEditedLetter={setEditedLetter} 
+                />
+                <KnowYourRights result={analysisResult} />
+              </>
+            )}
+          </div>
+
+          <div className="mt-12">
+            <HeatmapSection />
+          </div>
+
+          <SdgFocusSection />
+
+          <TestimonialsSection />
+
+          <FaqSection />
+        </main>
+
+        <Footer />
+      </div>
+
+      {analysisResult && (
+        <div id="print-letter-target" className="hidden print:block font-urdu">
+          {editedLetter}
         </div>
-
-        <div className="mt-12">
-          <HeatmapSection />
-        </div>
-
-        <SdgFocusSection />
-
-        <TestimonialsSection />
-
-        <FaqSection />
-      </main>
-
-      <Footer />
-    </div>
+      )}
+    </>
   );
 }

@@ -14,14 +14,14 @@ import { TrustScore } from './TrustScore';
 import { AnimatedContainer } from '@/components/ui/AnimatedContainer';
 import { SDGBadge } from '@/components/ui/SDGBadge';
 
-export function ResultCard({ result }) {
+export function ResultCard({ result, editedLetter, setEditedLetter }) {
   const [copied, setCopied] = useState(false);
 
   if (!result) return null;
 
   const handleCopy = async () => {
     try {
-      await navigator.clipboard.writeText(result.complaint_letter);
+      await navigator.clipboard.writeText(editedLetter);
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     } catch (err) {
@@ -120,9 +120,17 @@ export function ResultCard({ result }) {
                     </div>
 
                     <div className="p-6 pt-16 md:p-10 md:pt-12 overflow-x-auto print-container">
-                      <pre className="font-urdu text-xl md:text-2xl leading-[2.6] whitespace-pre-wrap break-words max-w-full font-medium" dir="rtl">
-                        {result.complaint_letter}
-                      </pre>
+                      <div className="text-right text-xs text-muted-foreground/60 mb-3 font-inter no-print flex items-center gap-1 justify-end select-none">
+                        <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
+                        بٹورِ تحریر ترمیم کر سکتے ہیں / Click directly on text to edit
+                      </div>
+                      <textarea
+                        className="w-full bg-transparent border-none focus:outline-none focus:ring-0 focus-visible:ring-0 font-urdu text-xl md:text-2xl leading-[2.6] whitespace-pre-wrap break-words max-w-full font-medium resize-none min-h-[500px] text-foreground text-right"
+                        dir="rtl"
+                        value={editedLetter}
+                        onChange={(e) => setEditedLetter(e.target.value)}
+                        placeholder="شکایتی خط لکھیں..."
+                      />
                     </div>
                   </div>
                 </AccordionContent>
