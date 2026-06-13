@@ -34,19 +34,19 @@ const TESTIMONIALS = [
 export function TestimonialsSection() {
   return (
     <section className="py-16 md:py-24 relative overflow-hidden">
-      
+
       {/* Background Subtle Lines */}
       <div className="absolute inset-0 opacity-[0.02] dark:opacity-[0.01] pointer-events-none bg-[linear-gradient(to_right,rgba(197,160,89,0.2)_1px,transparent_1px),linear-gradient(to_bottom,rgba(197,160,89,0.2)_1px,transparent_1px)] bg-[size:16px_16px]" />
 
       <div className="container mx-auto px-4 max-w-6xl relative z-10">
-        
+
         {/* Section Heading */}
         <div className="text-center mb-16">
           <AnimatedContainer variant="fadeUp">
             <h2 className="font-urdu text-4xl md:text-5xl font-bold text-foreground mb-4" dir="rtl">
               شہریوں کی آوازیں
             </h2>
-            <p className="font-garamond italic text-lg md:text-xl font-bold tracking-widest text-accent uppercase mt-2.5 mb-2">
+            <p className="font-garamond italic text-lg md:text-xl font-bold tracking-widest text-accent uppercase mt-2.5 mb-8">
               Community Voices & Impact
             </p>
             <p className="text-xs md:text-sm text-muted-foreground font-inter max-w-md mx-auto">
@@ -60,7 +60,7 @@ export function TestimonialsSection() {
           {TESTIMONIALS.map((t, idx) => (
             <AnimatedContainer key={idx} variant="fadeUp" delay={0.1 * (idx + 1)}>
               <div className="parchment-sheet rounded-2xl p-6 md:p-8 flex flex-col h-full border border-[#C5B69C] dark:border-[#36221A] shadow-lg relative transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
-                
+
                 {/* Quote Icon — large, subtle watermark */}
                 <Quote className="w-10 h-10 text-accent/10 absolute top-5 right-5 pointer-events-none" />
 
