@@ -12,9 +12,9 @@ export function KnowYourRights({ result }) {
   return (
     <AnimatedContainer variant="fadeUp" className="w-full max-w-6xl mx-auto px-4 pb-24">
       
-      <div className="mb-8 text-center">
-        <h2 className="font-urdu text-4xl font-bold text-foreground" dir="rtl">اپنے حقوق جانیں</h2>
-        <p className="text-muted-foreground mt-2">Know your rights and next steps</p>
+      <div className="mb-8 text-center flex flex-col items-center gap-1.5">
+        <h2 className="font-urdu text-4xl font-bold text-foreground leading-normal" dir="rtl">اپنے حقوق جانیں</h2>
+        <p className="text-muted-foreground text-sm font-inter mt-1">Know your rights and next steps</p>
       </div>
 
       <Tabs defaultValue="rights" className="w-full" dir="rtl">
@@ -35,7 +35,7 @@ export function KnowYourRights({ result }) {
         </TabsList>
 
         <Card className="border-border/50 shadow-md">
-          <CardContent className="p-6 md:p-8">
+          <CardContent className="p-6 md:p-8 h-[280px] md:h-[300px] overflow-y-auto relative pr-6 pl-8">
             
             <TabsContent value="rights" className="mt-0 outline-none">
               <h3 className="font-urdu text-2xl font-bold text-primary mb-4">قانون آپ کو کیا حق دیتا ہے؟</h3>
@@ -49,8 +49,8 @@ export function KnowYourRights({ result }) {
               {Array.isArray(result.evidence_to_collect) ? (
                 <ul className="space-y-4 font-urdu text-xl text-foreground">
                   {result.evidence_to_collect.map((item, index) => (
-                    <li key={index} className="flex items-start gap-3">
-                      <span className="flex-shrink-0 w-8 h-8 rounded-full bg-primary/10 text-primary flex items-center justify-center font-inter font-bold text-sm mt-1">
+                    <li key={index} className="flex items-start gap-4">
+                      <span className="flex-shrink-0 w-8 h-8 rounded-full bg-primary/10 text-primary flex items-center justify-center font-inter font-bold text-sm mt-2">
                         ✓
                       </span>
                       <span className="leading-[2.4] pt-1">{item}</span>
@@ -68,8 +68,8 @@ export function KnowYourRights({ result }) {
               <h3 className="font-urdu text-2xl font-bold text-primary mb-4">اب آپ کو کیا کرنا چاہیے؟</h3>
               <ul className="space-y-4 font-urdu text-xl text-foreground">
                 {result.next_steps?.map((step, index) => (
-                  <li key={index} className="flex items-start gap-3">
-                    <span className="flex-shrink-0 w-8 h-8 rounded-full bg-primary/10 text-primary flex items-center justify-center font-inter font-bold text-sm mt-1">
+                  <li key={index} className="flex items-start gap-4">
+                    <span className="flex-shrink-0 w-8 h-8 rounded-full bg-primary/10 text-primary flex items-center justify-center font-inter font-bold text-sm mt-2">
                       {index + 1}
                     </span>
                     <span className="leading-[2.4] pt-1">{step}</span>

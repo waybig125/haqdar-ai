@@ -41,8 +41,45 @@ const SDG_TARGETS = [
   }
 ];
 
+const toUrduDigits = (num) => {
+  const urduDigits = ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹'];
+  const safeNum = num !== undefined && num !== null ? num : 0;
+  return safeNum.toString().split('').map(d => urduDigits[parseInt(d, 10)] || d).join('');
+};
+
+const districtUrduMap = {
+  'Karachi': 'کراچی',
+  'Lahore': 'لاہور',
+  'Islamabad': 'اسلام آباد',
+  'Rawalpindi': 'راولپنڈی',
+  'Faisalabad': 'فیصل آباد',
+  'Peshawar': 'پشاور',
+  'Multan': 'ملتان',
+  'Quetta': 'کوئٹہ'
+};
+
+const categoryUrduMap = {
+  'Police': 'پولیس ہراساں کرنا',
+  'Police Extortion': 'پولیس ہراساں کرنا',
+  'Utilities': 'یوٹیلیٹی بلنگ',
+  'Utility Overcharging': 'یوٹیلیٹی بلنگ',
+  'Healthcare': 'صحت کی سہولیات',
+  'Labour': 'مزدور کا استحصال',
+  'Labour Exploitation': 'مزدور کا استحصال',
+  'Education': 'تعلیمی فیسیں',
+  'Education Fees': 'تعلیمی فیسیں',
+  'General': 'عام شکایات',
+  'Other': 'دیگر'
+};
+
 export default async function DashboardPage() {
   const stats = await getStats();
+
+  const activeCity = stats.district_rankings?.[0]?.district || 'Karachi';
+  const activeCityUrdu = districtUrduMap[activeCity] || activeCity;
+
+  const primaryIssue = stats.top_issues?.[0]?.name || 'General';
+  const primaryIssueUrdu = categoryUrduMap[primaryIssue] || primaryIssue;
 
   return (
     <div className="min-h-screen flex flex-col selection:bg-primary/20 selection:text-primary">
@@ -142,15 +179,21 @@ export default async function DashboardPage() {
               <div className="flex flex-wrap items-center gap-3 md:gap-6 text-xs font-semibold font-inter">
                 <div className="px-4 py-2 bg-[#3A231A]/20 dark:bg-black/20 rounded-lg border border-accent/10">
                   <span className="text-[10px] text-muted-foreground uppercase block mb-0.5">Today's Reports</span>
-                  <span className="text-accent text-sm font-bold">۲۴ شکایات / 24 Reports</span>
+                  <span className="text-accent text-sm font-bold">
+                    {toUrduDigits(stats.total_reports)} شکایات / {stats.total_reports} Reports
+                  </span>
                 </div>
                 <div className="px-4 py-2 bg-[#3A231A]/20 dark:bg-black/20 rounded-lg border border-accent/10">
                   <span className="text-[10px] text-muted-foreground uppercase block mb-0.5">Active City</span>
-                  <span className="text-accent text-sm font-bold">Karachi / کراچی</span>
+                  <span className="text-accent text-sm font-bold">
+                    {activeCity} / {activeCityUrdu}
+                  </span>
                 </div>
                 <div className="px-4 py-2 bg-[#3A231A]/20 dark:bg-black/20 rounded-lg border border-accent/10">
                   <span className="text-[10px] text-muted-foreground uppercase block mb-0.5">Primary Issue</span>
-                  <span className="text-accent text-sm font-bold">Utility Billing / یوٹیلیٹی بلنگ</span>
+                  <span className="text-accent text-sm font-bold">
+                    {primaryIssue} / {primaryIssueUrdu}
+                  </span>
                 </div>
               </div>
             </div>
