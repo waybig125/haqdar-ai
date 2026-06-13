@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Menu, X } from 'lucide-react';
+import { Menu } from 'lucide-react';
 import { ThemeToggle } from '@/components/ui/ThemeToggle';
 import { SDGBadge } from '@/components/ui/SDGBadge';
 import { Button } from '@/components/ui/button';
@@ -96,7 +96,7 @@ export function Header() {
             <SheetTrigger render={<Button variant="ghost" size="icon" aria-label="Open Menu" className="cursor-pointer" />}>
               <Menu className="w-5 h-5 text-foreground" />
             </SheetTrigger>
-            <SheetContent side="start" className="w-[300px] sm:w-[400px] bg-[#FAF4E5] dark:bg-[#1D120E] border-e border-[#C5B69C] dark:border-[#523225]">
+            <SheetContent side="left" className="w-[300px] sm:w-[400px] bg-[#FAF4E5] dark:bg-[#1D120E] border-e border-[#C5B69C] dark:border-[#523225]">
               <SheetTitle className="sr-only">Navigation Menu</SheetTitle>
               <div className="flex flex-col gap-8 mt-8">
                 <Link href="/" className="flex items-center gap-3 pb-1">

@@ -17,9 +17,9 @@ export function Footer() {
           {/* Logo & Branding - Takes up more space */}
           <div className="md:col-span-5 flex flex-col items-center md:items-start gap-3" dir="ltr">
             <div className="flex items-center gap-3">
-              <div className="flex flex-col gap-2.5">
-                <h3 className="font-urdu text-3xl font-bold text-foreground leading-none" dir="rtl">حق دار</h3>
-                <p className="text-[10px] font-garamond italic font-bold tracking-[0.2em] text-accent uppercase">HaqDar AI</p>
+              <div className="flex flex-col gap-4">
+                <h3 className="font-urdu text-3xl font-bold text-foreground leading-normal" dir="rtl">حق دار</h3>
+                <p className="text-[10px] font-garamond italic font-bold tracking-[0.2em] text-accent uppercase -mt-1">HaqDar AI</p>
               </div>
             </div>
             <p className="text-xs text-muted-foreground/80 leading-relaxed font-inter max-w-xs text-center md:text-left mt-2">

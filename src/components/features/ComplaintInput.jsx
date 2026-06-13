@@ -99,7 +99,7 @@ export function ComplaintInput({ onAnalyze, loading }) {
                 placeholder={isUrduMode ? "اپنی شکایت یہاں لکھیں یا مائیک کا بٹن دبا کر بولیں..." : "Type or click the microphone to speak your complaint..."}
                 className={cn(
                   "w-full min-h-[170px] bg-transparent resize-none outline-none leading-relaxed placeholder:text-amber-900/30 dark:placeholder:text-amber-100/25 transition-all border-none focus:ring-0 mt-2",
-                  isUrduMode ? "font-urdu text-2xl md:text-3xl leading-[2.2] text-amber-950 dark:text-amber-100" : "font-garamond text-2xl md:text-3xl font-bold leading-[2.2] text-amber-950 dark:text-amber-100"
+                  isUrduMode ? "font-urdu text-2xl md:text-3xl leading-[2.8] py-2 text-amber-950 dark:text-amber-100" : "font-garamond text-2xl md:text-3xl font-bold leading-[2.2] py-2 text-amber-950 dark:text-amber-100"
                 )}
                 dir={isUrduMode ? "rtl" : "ltr"}
                 disabled={loading}
@@ -180,11 +180,11 @@ export function ComplaintInput({ onAnalyze, loading }) {
                     disabled={loading}
                     title={isListening ? "Stop voice input" : "Start speaking"}
                   >
-                    {isListening ? <Square className="w-4 h-4 text-white" /> : <Mic className="w-4.5 h-4.5 text-accent" />}
+                    {isListening ? <Square className="w-4 h-4 text-white" /> : <Mic className="w-5 h-5 text-accent" />}
                   </Button>
                 ) : (
                   <div className="text-xs text-muted-foreground flex items-center justify-center border border-amber-900/10 dark:border-[#523225] rounded-full w-10 h-10 bg-amber-900/5 dark:bg-[#3A231A]" title="Voice input not supported in this browser">
-                    <AlertCircle className="w-4.5 h-4.5 text-muted-foreground/30" />
+                    <AlertCircle className="w-5 h-5 text-muted-foreground/30" />
                   </div>
                 )}
 
