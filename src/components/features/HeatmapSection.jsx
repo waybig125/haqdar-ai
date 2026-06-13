@@ -10,7 +10,7 @@ import pakistanGeoJson from '../../../public/data/pakistan.json';
 // Single dynamic import for the client-only map component
 const MapWrapper = dynamic(
   () => import('./MapWrapper'),
-  { 
+  {
     ssr: false,
     loading: () => (
       <div className="h-full w-full bg-muted/10 animate-pulse rounded-2xl flex items-center justify-center text-muted-foreground/60 font-garamond text-lg italic">
@@ -59,18 +59,18 @@ export function HeatmapSection() {
   return (
     <section className="py-16 md:py-24 bg-transparent relative overflow-hidden border-t border-border/40">
       <div className="container mx-auto px-4 max-w-6xl">
-        
+
         <AnimatedContainer variant="fadeUp" className="text-center mb-12">
-          <h2 className="font-urdu text-4xl md:text-5xl font-bold text-foreground mb-4" dir="rtl">کرپشن ہیٹ میپ</h2>
+          <h2 className="font-urdu text-4xl md:text-5xl font-bold text-foreground mb-8" dir="rtl">کرپشن ہیٹ میپ</h2>
           <p className="text-muted-foreground text-base max-w-lg mx-auto font-inter">
             Live anonymous corruption mapping and reporting hotspots across Pakistan.
           </p>
         </AnimatedContainer>
 
         <AnimatedContainer variant="fadeUp" delay={0.2} className="relative">
-          
+
           <div className="h-[500px] md:h-[600px] w-full rounded-2xl overflow-hidden shadow-2xl border border-[#C5B69C] dark:border-[#523225] relative z-10 bg-[#FAF6EE] dark:bg-[#120A07]">
-            <MapWrapper 
+            <MapWrapper
               tileUrl={tileUrl}
               geoJsonStyle={geoJsonStyle}
               pakistanGeoJson={pakistanGeoJson}

@@ -84,9 +84,9 @@ export default async function DashboardPage() {
   return (
     <div className="min-h-screen flex flex-col selection:bg-primary/20 selection:text-primary">
       <Header />
-      
+
       <main className="flex-grow">
-        
+
         {/* Dashboard Header */}
         <div className="border-b border-accent/20 dark:border-accent/10 pb-10 pt-16 bg-muted/20 relative">
           <div className="container mx-auto px-4 max-w-7xl">
@@ -102,17 +102,17 @@ export default async function DashboardPage() {
         </div>
 
         <div className="container mx-auto px-4 max-w-7xl py-12">
-          
+
           {/* SDG Impact Banner / Explainer Box */}
           <AnimatedContainer variant="fadeUp" className="mb-10">
             <div className="wood-console rounded-2xl p-6 md:p-8 border border-accent/20 shadow-xl relative overflow-hidden">
               <div className="absolute top-0 right-0 w-64 h-64 bg-accent/2 rounded-full blur-3xl pointer-events-none" />
-              
+
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
-                
+
                 {/* Left Side: General Info */}
                 <div className="lg:col-span-4 space-y-3">
-                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-accent/30 bg-[#3A231A]/30 text-accent font-semibold text-[10px] uppercase tracking-widest font-inter">
+                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-accent/30 bg-accent/10 dark:bg-[#3A231A]/30 text-amber-950 dark:text-accent font-semibold text-[10px] uppercase tracking-widest font-inter">
                     Dashboard Overview
                   </div>
                   <h2 className="font-garamond text-2xl md:text-3xl font-black text-primary dark:text-[#E6DBC6] leading-tight">
@@ -125,7 +125,7 @@ export default async function DashboardPage() {
 
                 {/* Right Side: Grid detailing goals */}
                 <div className="lg:col-span-8 grid grid-cols-1 md:grid-cols-2 gap-4">
-                  
+
                   {/* Goal 16 Card */}
                   <div className="parchment-sheet rounded-xl p-5 border border-accent/20 flex gap-4">
                     <div className="w-10 h-10 rounded-full bg-[#1F6FEB]/10 flex items-center justify-center text-[#1F6FEB] shrink-0">
@@ -161,7 +161,7 @@ export default async function DashboardPage() {
               </div>
             </div>
           </AnimatedContainer>
-          
+
           {/* Today's Pulse Live Banner */}
           <AnimatedContainer variant="fadeUp" className="mb-10 no-print">
             <div className="bg-[#C5A059]/10 border border-[#C5A059]/30 rounded-2xl p-4 md:p-6 flex flex-col md:flex-row items-center justify-between gap-4 relative overflow-hidden">
@@ -172,26 +172,26 @@ export default async function DashboardPage() {
                   <span className="relative inline-flex rounded-full h-3 w-3 bg-emerald-500"></span>
                 </span>
                 <div className="text-left">
-                  <h4 className="font-urdu text-xl font-bold text-accent mb-0.5" dir="rtl">آج کی سرگرمی / Today's Pulse</h4>
+                  <h4 className="font-urdu text-xl font-bold text-accent mb-2" dir="rtl">آج کی سرگرمی / Today's Pulse</h4>
                   <p className="text-xs text-muted-foreground font-inter leading-none">Real-time status updates from across Pakistan's districts.</p>
                 </div>
               </div>
               <div className="flex flex-wrap items-center gap-3 md:gap-6 text-xs font-semibold font-inter">
-                <div className="px-4 py-2 bg-[#3A231A]/20 dark:bg-black/20 rounded-lg border border-accent/10">
+                <div className="px-4 py-2 bg-[#3A231A]/5 dark:bg-black/20 rounded-lg border border-accent/20 dark:border-accent/10">
                   <span className="text-[10px] text-muted-foreground uppercase block mb-0.5">Today's Reports</span>
-                  <span className="text-accent text-sm font-bold">
+                  <span className="text-amber-950 dark:text-accent text-sm font-bold">
                     {toUrduDigits(stats.total_reports)} شکایات / {stats.total_reports} Reports
                   </span>
                 </div>
-                <div className="px-4 py-2 bg-[#3A231A]/20 dark:bg-black/20 rounded-lg border border-accent/10">
+                <div className="px-4 py-2 bg-[#3A231A]/5 dark:bg-black/20 rounded-lg border border-accent/20 dark:border-accent/10">
                   <span className="text-[10px] text-muted-foreground uppercase block mb-0.5">Active City</span>
-                  <span className="text-accent text-sm font-bold">
+                  <span className="text-amber-950 dark:text-accent text-sm font-bold">
                     {activeCity} / {activeCityUrdu}
                   </span>
                 </div>
-                <div className="px-4 py-2 bg-[#3A231A]/20 dark:bg-black/20 rounded-lg border border-accent/10">
+                <div className="px-4 py-2 bg-[#3A231A]/5 dark:bg-black/20 rounded-lg border border-accent/20 dark:border-accent/10">
                   <span className="text-[10px] text-muted-foreground uppercase block mb-0.5">Primary Issue</span>
-                  <span className="text-accent text-sm font-bold">
+                  <span className="text-amber-950 dark:text-accent text-sm font-bold">
                     {primaryIssue} / {primaryIssueUrdu}
                   </span>
                 </div>
@@ -201,33 +201,33 @@ export default async function DashboardPage() {
 
           {/* Top Stat Cards */}
           <AnimatedContainer variant="staggerChildren" className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-            
-            <StatCard 
-              title="Total Anonymous Reports" 
-              value={stats.total_reports.toLocaleString()} 
+
+            <StatCard
+              title="Total Anonymous Reports"
+              value={stats.total_reports.toLocaleString()}
               iconName="FileWarning"
               trend="up"
               trendLabel="12% this month"
               sparklineData={[35, 45, 40, 55, 60, 75, 90]}
             />
-            
-            <StatCard 
-              title="SDG 16 Progress Metric" 
-              value={`${stats.sdg16_progress}%`} 
+
+            <StatCard
+              title="SDG 16 Progress Metric"
+              value={`${stats.sdg16_progress}%`}
               iconName="Target"
               trend="up"
               trendLabel="0.4% improvement"
               sparklineData={[80, 81, 82, 82.5, 83, 83.5, 84]}
             />
 
-            <StatCard 
-              title="Most Reported Issue" 
-              value={stats.top_issues[0].name} 
+            <StatCard
+              title="Most Reported Issue"
+              value={stats.top_issues[0].name}
               iconName="TrendingUp"
               className="border-accent bg-accent/5"
               sparklineData={[20, 35, 45, 30, 60, 70, 85]}
             />
-            
+
           </AnimatedContainer>
 
           {/* Main Visualizations */}
@@ -235,7 +235,7 @@ export default async function DashboardPage() {
 
           {/* NEW DASHBOARD SECTIONS */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 mt-12">
-            
+
             {/* Left side: Recent Reports registry log (Ledger Style) */}
             <AnimatedContainer variant="fadeUp" className="lg:col-span-7">
               <div className="wood-console rounded-2xl p-6 border border-accent/20 shadow-xl relative overflow-hidden h-full">
@@ -244,7 +244,7 @@ export default async function DashboardPage() {
                   <Clock className="w-5 h-5 text-accent" />
                   <h3 className="font-urdu text-2xl font-bold text-primary dark:text-[#E6DBC6] m-0" dir="rtl">حالیہ شکایات لاگ / Activity Ledger</h3>
                 </div>
-                
+
                 <div className="parchment-sheet rounded-xl overflow-hidden border border-accent/20 relative z-10">
                   <div className="overflow-x-auto">
                     <table className="w-full text-left border-collapse">
