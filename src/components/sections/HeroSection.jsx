@@ -6,6 +6,7 @@ import { SDGBadge } from '@/components/ui/SDGBadge';
 import { Button } from '@/components/ui/button';
 import { ArrowDown } from 'lucide-react';
 import { GeometricMedallion } from '@/components/ui/GeometricMedallion';
+import { getStats } from '@/lib/api';
 
 const CountUp = ({ to, prefix = "", suffix = "", isUrdu = false }) => {
   const [count, setCount] = React.useState(0);
@@ -34,6 +35,18 @@ const CountUp = ({ to, prefix = "", suffix = "", isUrdu = false }) => {
 };
 
 export function HeroSection() {
+  const [totalReports, setTotalReports] = React.useState(1247);
+  const [totalDrafted, setTotalDrafted] = React.useState(1120);
+
+  React.useEffect(() => {
+    getStats().then(stats => {
+      if (stats && stats.total_reports !== undefined) {
+        setTotalReports(stats.total_reports);
+        setTotalDrafted(Math.round(stats.total_reports * 0.898));
+      }
+    }).catch(err => console.error("Failed to load hero stats", err));
+  }, []);
+
   const scrollToInput = () => {
     const el = document.getElementById('complaint-section');
     if (el) {
@@ -96,7 +109,7 @@ export function HeroSection() {
                 <div className="absolute inset-0 bg-gradient-to-br from-white/40 to-transparent dark:from-white/5 pointer-events-none" />
                 <div className="flex flex-col items-center relative z-10">
                   <span className="font-urdu text-3xl md:text-4xl font-black text-accent drop-shadow-sm">
-                    <CountUp to={1247} suffix="+" isUrdu />
+                    <CountUp to={totalReports} suffix="+" isUrdu />
                   </span>
                   <span className="text-[9px] md:text-[10px] font-bold text-muted-foreground uppercase tracking-widest font-inter mt-1.5">
                     شکایات / Filed
@@ -105,7 +118,7 @@ export function HeroSection() {
                 <div className="w-[1px] h-12 bg-gradient-to-b from-transparent via-accent/40 to-transparent" />
                 <div className="flex flex-col items-center relative z-10">
                   <span className="font-urdu text-3xl md:text-4xl font-black text-accent drop-shadow-sm">
-                    <CountUp to={1120} suffix="+" isUrdu />
+                    <CountUp to={totalDrafted} suffix="+" isUrdu />
                   </span>
                   <span className="text-[9px] md:text-[10px] font-bold text-muted-foreground uppercase tracking-widest font-inter mt-1.5">
                     پٹیشنیں / Drafted

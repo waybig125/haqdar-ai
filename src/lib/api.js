@@ -309,3 +309,22 @@ export async function downloadLetterPdf({ reference_id, complaint_letter, law_re
   }
 }
 
+/**
+ * Looks up an anonymous report by its reference ID.
+ * @param {string} reference_id
+ * @returns {Promise<Object>}
+ */
+export async function lookupReport(reference_id) {
+  try {
+    const response = await fetch(`${API_BASE_URL}/report/${encodeURIComponent(reference_id)}`);
+    if (!response.ok) {
+      throw new Error(`Report lookup failed: ${response.status}`);
+    }
+    return await response.json();
+  } catch (error) {
+    console.error("Report lookup failed", error);
+    throw error;
+  }
+}
+
+

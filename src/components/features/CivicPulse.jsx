@@ -62,6 +62,24 @@ export function CivicPulse({ data }) {
     '#DA3B8A'                     // Crimson
   ];
 
+  const categoryUrduMap = {
+    'Police': 'پولیس (Police)',
+    'Healthcare': 'صحت (Healthcare)',
+    'Labour': 'مزدور (Labour)',
+    'Education': 'تعلیم (Education)',
+    'Utility': 'بلنگ (Utility)',
+    'Women': 'خواتین (Women)',
+    'Consumer': 'صارفین (Consumer)',
+    'Traffic': 'ٹریفک (Traffic)',
+    'General': 'عام (General)',
+    'Other': 'دیگر (Other)'
+  };
+
+  const categoryData = data.category_breakdown.map(entry => ({
+    name: categoryUrduMap[entry.category] || entry.category,
+    value: entry.value
+  }));
+
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 w-full max-w-7xl mx-auto">
       
@@ -176,7 +194,7 @@ export function CivicPulse({ data }) {
             <ResponsiveContainer width="99%" height="100%" minWidth={0} minHeight={0}>
                 <PieChart>
                   <Pie
-                    data={data.category_breakdown}
+                    data={categoryData}
                     cx="50%"
                     cy="50%"
                     innerRadius={80}
@@ -185,7 +203,7 @@ export function CivicPulse({ data }) {
                     dataKey="value"
                     stroke="none"
                   >
-                    {data.category_breakdown.map((entry, index) => (
+                    {categoryData.map((entry, index) => (
                       <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                     ))}
                   </Pie>
