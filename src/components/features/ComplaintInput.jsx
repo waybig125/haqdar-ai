@@ -160,7 +160,9 @@ export function ComplaintInput({ onAnalyze, loading }) {
                 placeholder={isRtl ? "اپنی شکایت یہاں لکھیں یا مائیک کا بٹن دبا کر بولیں..." : "Type or click the microphone to speak your complaint..."}
                 className={cn(
                   "w-full min-h-[170px] bg-transparent resize-none outline-none leading-relaxed placeholder:text-amber-900/30 dark:placeholder:text-amber-100/25 transition-all border-none focus:ring-0 mt-2 px-4",
-                  isRtl ? "font-urdu text-2xl md:text-3xl leading-[2.8] py-2 text-amber-950 dark:text-amber-100" : "font-garamond text-2xl md:text-3xl font-bold leading-[2.2] py-2 text-amber-950 dark:text-amber-100"
+                  isRtl 
+                    ? "font-urdu text-lg sm:text-2xl md:text-3xl leading-[2.2] sm:leading-[2.5] md:leading-[2.8] py-2 text-amber-950 dark:text-amber-100" 
+                    : "font-garamond text-lg sm:text-2xl md:text-3xl font-bold leading-[1.6] sm:leading-[1.9] md:leading-[2.2] py-2 text-amber-950 dark:text-amber-100"
                 )}
                 dir={isRtl ? "rtl" : "ltr"}
                 disabled={loading}
