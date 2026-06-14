@@ -148,17 +148,21 @@ export async function analyzeComplaint(text, options = {}) {
     // Map Roman option to fit backend schema max_length limit (20 chars)
     const apiLanguage = rawLanguage === 'Roman (Urdu/Regional)' ? 'Roman' : rawLanguage;
 
+    const payload = {
+      complaint: text,
+      language: apiLanguage,
+      letter_language: options.letter_language || 'Urdu',
+      district: options.district || null,
+      name: options.name || null,
+      incident_date: options.incident_date || null
+    };
+
+    console.log("HaqDar AI API Request Payload:", payload);
+
     const response = await fetch(`${API_BASE_URL}/analyze`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        complaint: text,
-        language: apiLanguage,
-        letter_language: options.letter_language || 'Urdu',
-        district: options.district || null,
-        name: options.name || null,
-        incident_date: options.incident_date || null
-      }),
+      body: JSON.stringify(payload),
     });
 
     if (!response.ok) {
