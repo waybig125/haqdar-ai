@@ -220,86 +220,94 @@ export function ComplaintInput({ onAnalyze, loading }) {
               </div>
 
               {/* Action Controls */}
-              <div className="flex items-end gap-3 self-end md:self-auto shrink-0">
+              <div className="flex flex-col sm:flex-row items-stretch sm:items-end gap-4 w-full md:w-auto shrink-0">
 
-                {/* Input/Response Language Dropdown */}
-                <div className="flex flex-col gap-1 shrink-0 align-bottom">
-                  <span className="text-[8px] font-bold uppercase tracking-wider text-accent/80 font-inter leading-none">Response Language</span>
-                  <select
-                    value={selectedLanguage}
-                    onChange={(e) => handleLanguageChange(e.target.value)}
-                    className="bezel-btn rounded px-3 h-10 font-bold text-[11px] font-inter text-accent cursor-pointer bg-[#FAF6EE] dark:bg-[#20120B] border border-accent/30 outline-none pr-8 appearance-none relative shadow-[0_2px_4px_rgba(0,0,0,0.15)] dark:shadow-[0_2px_4px_rgba(0,0,0,0.3)] min-w-[125px]"
-                    style={{
-                      backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23C5A059'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'/%3E%3C/svg%3E")`,
-                      backgroundPosition: 'right 8px center',
-                      backgroundSize: '12px',
-                      backgroundRepeat: 'no-repeat'
-                    }}
-                  >
-                    <option value="Urdu" className="bg-[#FAF3E0] dark:bg-[#1C120D] text-amber-950 dark:text-[#E6DBC6] font-urdu text-sm">اردو (Urdu)</option>
-                    <option value="English" className="bg-[#FAF3E0] dark:bg-[#1C120D] text-amber-950 dark:text-[#E6DBC6] font-inter">English</option>
-                    <option value="Roman (Urdu/Regional)" className="bg-[#FAF3E0] dark:bg-[#1C120D] text-amber-950 dark:text-[#E6DBC6] font-inter">Roman (Urdu/Punjabi/etc.)</option>
-                    <option value="Sindhi" className="bg-[#FAF3E0] dark:bg-[#1C120D] text-amber-950 dark:text-[#E6DBC6] font-urdu text-sm">سنڌي (Sindhi)</option>
-                    <option value="Punjabi" className="bg-[#FAF3E0] dark:bg-[#1C120D] text-amber-950 dark:text-[#E6DBC6] font-urdu text-sm">پنجابی (Punjabi)</option>
-                    <option value="Pashto" className="bg-[#FAF3E0] dark:bg-[#1C120D] text-amber-950 dark:text-[#E6DBC6] font-urdu text-sm">پښتو (Pashto)</option>
-                  </select>
-                </div>
+                {/* Dropdowns Wrapper: Grid on mobile, Flex on desktop */}
+                <div className="grid grid-cols-2 sm:flex sm:flex-row gap-3 w-full sm:w-auto">
 
-                {/* Complaint Letter Language Dropdown */}
-                <div className="flex flex-col gap-1 shrink-0 align-bottom">
-                  <span className="text-[8px] font-bold uppercase tracking-wider text-accent/80 font-inter leading-none">Letter Language</span>
-                  <select
-                    value={letterLanguage}
-                    onChange={(e) => setLetterLanguage(e.target.value)}
-                    className="bezel-btn rounded px-3 h-10 font-bold text-[11px] font-inter text-accent cursor-pointer bg-[#FAF6EE] dark:bg-[#20120B] border border-accent/30 outline-none pr-8 appearance-none relative shadow-[0_2px_4px_rgba(0,0,0,0.15)] dark:shadow-[0_2px_4px_rgba(0,0,0,0.3)] min-w-[115px]"
-                    style={{
-                      backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23C5A059'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'/%3E%3C/svg%3E")`,
-                      backgroundPosition: 'right 8px center',
-                      backgroundSize: '12px',
-                      backgroundRepeat: 'no-repeat'
-                    }}
-                  >
-                    <option value="Urdu" className="bg-[#FAF3E0] dark:bg-[#1C120D] text-amber-950 dark:text-[#E6DBC6] font-urdu text-sm">Urdu Letter</option>
-                    <option value="English" className="bg-[#FAF3E0] dark:bg-[#1C120D] text-amber-950 dark:text-[#E6DBC6] font-inter">English Letter</option>
-                  </select>
-                </div>
-
-                {supported ? (
-                  <Button
-                    type="button"
-                    variant={isListening ? "destructive" : "secondary"}
-                    size="icon"
-                    className={cn(
-                      "bezel-btn rounded-full w-10 h-10 transition-all duration-300 relative cursor-pointer",
-                      isListening && "ring-4 ring-red-500/60 scale-110 shadow-[0_0_15px_rgba(239,68,68,0.5)] bg-red-600 border-red-500 hover:bg-red-700 hover:border-red-600",
-                      isMicDisabled && "opacity-40 cursor-not-allowed pointer-events-none"
-                    )}
-                    onClick={startListening}
-                    disabled={loading || isMicDisabled}
-                    title={isMicDisabled ? "Voice input not yet supported for this language" : (isListening ? "Stop voice input" : "Start speaking")}
-                  >
-                    {isListening ? <Square className="w-4 h-4 text-white" /> : <Mic className="w-5 h-5 text-accent" />}
-                  </Button>
-                ) : (
-                  <div className="text-xs text-muted-foreground flex items-center justify-center border border-amber-900/10 dark:border-[#523225] rounded-full w-10 h-10 bg-amber-900/5 dark:bg-[#3A231A]" title="Voice input not supported in this browser">
-                    <AlertCircle className="w-5 h-5 text-muted-foreground/30" />
+                  {/* Input/Response Language Dropdown */}
+                  <div className="flex flex-col gap-1 w-full sm:w-auto shrink-0 align-bottom">
+                    <span className="text-[8px] font-bold uppercase tracking-wider text-accent/80 font-inter leading-none">Response Language</span>
+                    <select
+                      value={selectedLanguage}
+                      onChange={(e) => handleLanguageChange(e.target.value)}
+                      className="bezel-btn rounded px-3 h-10 font-bold text-[11px] font-inter text-accent cursor-pointer bg-[#FAF6EE] dark:bg-[#20120B] border border-accent/30 outline-none pr-8 appearance-none relative shadow-[0_2px_4px_rgba(0,0,0,0.15)] dark:shadow-[0_2px_4px_rgba(0,0,0,0.3)] w-full sm:w-[130px]"
+                      style={{
+                        backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23C5A059'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'/%3E%3C/svg%3E")`,
+                        backgroundPosition: 'right 8px center',
+                        backgroundSize: '12px',
+                        backgroundRepeat: 'no-repeat'
+                      }}
+                    >
+                      <option value="Urdu" className="bg-[#FAF3E0] dark:bg-[#1C120D] text-amber-950 dark:text-[#E6DBC6] font-urdu text-sm">اردو (Urdu)</option>
+                      <option value="English" className="bg-[#FAF3E0] dark:bg-[#1C120D] text-amber-950 dark:text-[#E6DBC6] font-inter">English</option>
+                      <option value="Roman (Urdu/Regional)" className="bg-[#FAF3E0] dark:bg-[#1C120D] text-amber-950 dark:text-[#E6DBC6] font-inter">Roman (Urdu/Punjabi/etc.)</option>
+                      <option value="Sindhi" className="bg-[#FAF3E0] dark:bg-[#1C120D] text-amber-950 dark:text-[#E6DBC6] font-urdu text-sm">سنڌي (Sindhi)</option>
+                      <option value="Punjabi" className="bg-[#FAF3E0] dark:bg-[#1C120D] text-amber-950 dark:text-[#E6DBC6] font-urdu text-sm">پنجابی (Punjabi)</option>
+                      <option value="Pashto" className="bg-[#FAF3E0] dark:bg-[#1C120D] text-amber-950 dark:text-[#E6DBC6] font-urdu text-sm">پښتو (Pashto)</option>
+                    </select>
                   </div>
-                )}
 
-                <Button
-                  type="submit"
-                  disabled={!text.trim() || loading}
-                  className="bezel-btn px-8 h-10 font-urdu font-bold rounded-lg cursor-pointer flex items-center gap-2 border-emerald-600 dark:border-emerald-700 bg-gradient-to-b from-emerald-600 to-emerald-700 dark:from-emerald-800 dark:to-emerald-950 hover:from-emerald-500 hover:to-emerald-600 dark:hover:from-emerald-700 dark:hover:to-emerald-900 text-white dark:text-emerald-100 disabled:opacity-50 disabled:pointer-events-none"
-                >
-                  {loading ? (
-                    <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                  {/* Complaint Letter Language Dropdown */}
+                  <div className="flex flex-col gap-1 w-full sm:w-auto shrink-0 align-bottom">
+                    <span className="text-[8px] font-bold uppercase tracking-wider text-accent/80 font-inter leading-none">Letter Language</span>
+                    <select
+                      value={letterLanguage}
+                      onChange={(e) => setLetterLanguage(e.target.value)}
+                      className="bezel-btn rounded px-3 h-10 font-bold text-[11px] font-inter text-accent cursor-pointer bg-[#FAF6EE] dark:bg-[#20120B] border border-accent/30 outline-none pr-8 appearance-none relative shadow-[0_2px_4px_rgba(0,0,0,0.15)] dark:shadow-[0_2px_4px_rgba(0,0,0,0.3)] w-full sm:w-[120px]"
+                      style={{
+                        backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23C5A059'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'/%3E%3C/svg%3E")`,
+                        backgroundPosition: 'right 8px center',
+                        backgroundSize: '12px',
+                        backgroundRepeat: 'no-repeat'
+                      }}
+                    >
+                      <option value="Urdu" className="bg-[#FAF3E0] dark:bg-[#1C120D] text-amber-950 dark:text-[#E6DBC6] font-urdu text-sm">Urdu Letter</option>
+                      <option value="English" className="bg-[#FAF3E0] dark:bg-[#1C120D] text-amber-950 dark:text-[#E6DBC6] font-inter">English Letter</option>
+                    </select>
+                  </div>
+
+                </div>
+
+                {/* Buttons Wrapper: Flex row on all sizes */}
+                <div className="flex items-center justify-end gap-3 w-full sm:w-auto shrink-0">
+                  {supported ? (
+                    <Button
+                      type="button"
+                      variant={isListening ? "destructive" : "secondary"}
+                      size="icon"
+                      className={cn(
+                        "bezel-btn rounded-full w-10 h-10 transition-all duration-300 relative cursor-pointer shrink-0",
+                        isListening && "ring-4 ring-red-500/60 scale-110 shadow-[0_0_15px_rgba(239,68,68,0.5)] bg-red-600 border-red-500 hover:bg-red-700 hover:border-red-600",
+                        isMicDisabled && "opacity-40 cursor-not-allowed pointer-events-none"
+                      )}
+                      onClick={startListening}
+                      disabled={loading || isMicDisabled}
+                      title={isMicDisabled ? "Voice input not yet supported for this language" : (isListening ? "Stop voice input" : "Start speaking")}
+                    >
+                      {isListening ? <Square className="w-4 h-4 text-white" /> : <Mic className="w-5 h-5 text-accent" />}
+                    </Button>
                   ) : (
-                    <>
-                      تجزیہ کریں
-                      <Send className="w-4 h-4 ms-2 rotate-0 rtl:rotate-180 text-emerald-400" />
-                    </>
+                    <div className="text-xs text-muted-foreground flex items-center justify-center border border-amber-900/10 dark:border-[#523225] rounded-full w-10 h-10 bg-amber-900/5 dark:bg-[#3A231A] shrink-0" title="Voice input not supported in this browser">
+                      <AlertCircle className="w-5 h-5 text-muted-foreground/30" />
+                    </div>
                   )}
-                </Button>
+
+                  <Button
+                    type="submit"
+                    disabled={!text.trim() || loading}
+                    className="bezel-btn px-8 h-10 font-urdu font-bold rounded-lg cursor-pointer flex items-center justify-center gap-2 border-emerald-600 dark:border-emerald-700 bg-gradient-to-b from-emerald-600 to-emerald-700 dark:from-emerald-800 dark:to-emerald-950 hover:from-emerald-500 hover:to-emerald-600 dark:hover:from-emerald-700 dark:hover:to-emerald-900 text-white dark:text-emerald-100 disabled:opacity-50 disabled:pointer-events-none flex-grow sm:flex-grow-0 sm:w-auto text-center"
+                  >
+                    {loading ? (
+                      <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                    ) : (
+                      <>
+                        تجزیہ کریں
+                        <Send className="w-4 h-4 ms-2 rotate-0 rtl:rotate-180 text-emerald-400" />
+                      </>
+                    )}
+                  </Button>
+                </div>
               </div>
 
             </div>
