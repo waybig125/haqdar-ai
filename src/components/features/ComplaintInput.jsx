@@ -31,6 +31,34 @@ export function ComplaintInput({ onAnalyze, loading }) {
   const [selectedLanguage, setSelectedLanguage] = useState('Urdu');
   const [letterLanguage, setLetterLanguage] = useState('Urdu');
 
+  const [activeStepIndex, setActiveStepIndex] = useState(-1);
+
+  const steps = [
+    { ur: "شکایت پڑھی جا رہی ہے...", en: "Analyzing complaint description" },
+    { ur: "متعلقہ قوانین تلاش ہو رہے ہیں...", en: "Querying Pakistan law registry" },
+    { ur: "قانونی تجزیہ ہو رہا ہے...", en: "Running legal rights check" },
+    { ur: "شکایتی خط تیار ہو رہا ہے...", en: "Generating petition document" }
+  ];
+
+  useEffect(() => {
+    let interval;
+    if (loading) {
+      setActiveStepIndex(0);
+      let currentStep = 1;
+      interval = setInterval(() => {
+        if (currentStep < steps.length) {
+          setActiveStepIndex(currentStep);
+          currentStep++;
+        }
+      }, 1800);
+    } else {
+      setActiveStepIndex(-1);
+    }
+    return () => {
+      if (interval) clearInterval(interval);
+    };
+  }, [loading]);
+
   const handleLanguageChange = (lang) => {
     setSelectedLanguage(lang);
     if (['Sindhi', 'Punjabi', 'Pashto'].includes(lang)) {
@@ -169,35 +197,47 @@ export function ComplaintInput({ onAnalyze, loading }) {
               </div>
             )}
 
-            {loading && (
-              <div className="w-full bg-[#FAF3E0]/40 dark:bg-[#1C120D]/40 border border-accent/20 rounded-xl p-4 md:p-5 flex flex-col gap-3 animate-in fade-in duration-300">
-                <style dangerouslySetInnerHTML={{__html: `
-                  @keyframes loading-progress {
-                    0% { width: 0%; }
-                    10% { width: 20%; }
-                    30% { width: 45%; }
-                    60% { width: 70%; }
-                    90% { width: 90%; }
-                    98% { width: 96%; }
-                  }
-                  .animate-progress-bar {
-                    animation: loading-progress 8s cubic-bezier(0.1, 0.8, 0.1, 1) forwards;
-                  }
-                `}} />
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1.5 text-xs text-amber-950 dark:text-[#E6DBC6] font-semibold font-inter">
-                  <span className="flex items-center gap-1.5 font-urdu text-sm">
-                    <Sparkles className="w-3.5 h-3.5 text-accent animate-spin" />
-                    شکایت کا تجزیہ اور قانونی خط تیار کیا جا رہا ہے...
-                  </span>
-                  <span className="text-[10px] sm:text-xs text-accent/90 uppercase tracking-wider">
-                    Analyzing complaint & drafting petition...
-                  </span>
+            {loading && activeStepIndex >= 0 && (
+              <div className="w-full bg-[#FAF3E0]/40 dark:bg-[#1C120D]/40 border border-accent/20 rounded-xl p-6 flex flex-col items-center justify-center text-center gap-4 animate-in fade-in duration-300 shadow-lg">
+                
+                {/* Custom Elegant Medallion Spinner */}
+                <div className="relative w-14 h-14 flex items-center justify-center">
+                  {/* Outer rotating decorative ring */}
+                  <div className="absolute inset-0 border-2 border-dashed border-accent/40 rounded-full animate-[spin_12s_linear_infinite]" />
+                  {/* Inner fast spinning loader */}
+                  <div className="absolute w-11 h-11 border-4 border-emerald-600 dark:border-emerald-500 border-t-transparent rounded-full animate-spin shadow-md" />
+                  {/* Center core pulsing glow */}
+                  <div className="absolute w-6 h-6 rounded-full bg-accent/10 animate-ping" />
+                  <Sparkles className="w-4 h-4 text-accent relative z-10" />
                 </div>
-                <div className="w-full h-2 bg-[#E8DFCB] dark:bg-[#2C1A11] rounded-full overflow-hidden border border-accent/10 shadow-[inset_0_1px_3px_rgba(0,0,0,0.1)]">
-                  <div className="h-full bg-gradient-to-r from-accent to-emerald-600 dark:from-accent dark:to-emerald-500 rounded-full animate-progress-bar" />
+
+                {/* Step Content */}
+                <div className="flex flex-col items-center gap-1.5 max-w-md">
+                  <p className="font-urdu text-xl md:text-2xl font-bold text-amber-950 dark:text-[#E6DBC6] leading-relaxed animate-pulse">
+                    {steps[activeStepIndex]?.ur}
+                  </p>
+                  <p className="font-inter text-xs text-accent/80 tracking-wider uppercase font-bold">
+                    {steps[activeStepIndex]?.en}
+                  </p>
                 </div>
-                <p className="text-[10px] text-amber-900/50 dark:text-[#E6DBC6]/40 leading-none">
-                  Please hold on, our legal AI is researching the verified Pakistan law registry.
+
+                {/* Progress Indicators (Pills) */}
+                <div className="flex justify-center gap-2 mt-1">
+                  {steps.map((_, i) => (
+                    <div
+                      key={i}
+                      className={cn(
+                        "h-2 w-10 rounded-full transition-all duration-500 shadow-sm",
+                        i <= activeStepIndex
+                          ? "bg-gradient-to-r from-accent to-emerald-600 dark:from-accent dark:to-emerald-500 shadow-[0_0_8px_rgba(197,160,89,0.4)] animate-pulse"
+                          : "bg-amber-900/15 dark:bg-amber-100/10 border border-amber-900/5 dark:border-amber-100/5"
+                      )}
+                    />
+                  ))}
+                </div>
+
+                <p className="text-[10px] text-amber-900/50 dark:text-[#E6DBC6]/40 max-w-sm mt-1 leading-normal font-inter">
+                  Our legal AI is verifying laws in real-time. Please keep this window active.
                 </p>
               </div>
             )}
