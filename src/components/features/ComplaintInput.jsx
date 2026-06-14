@@ -20,6 +20,7 @@ export function ComplaintInput({ onAnalyze, loading }) {
     isListening,
     transcript,
     startListening,
+    stopListening,
     supported,
     setTranscript,
     language,
@@ -32,6 +33,11 @@ export function ComplaintInput({ onAnalyze, loading }) {
 
   const handleLanguageChange = (lang) => {
     setSelectedLanguage(lang);
+    if (['Sindhi', 'Punjabi', 'Pashto'].includes(lang)) {
+      if (isListening) {
+        stopListening();
+      }
+    }
     if (lang === 'English') {
       setLanguage('en-US');
       setLetterLanguage('English');
@@ -83,6 +89,7 @@ export function ComplaintInput({ onAnalyze, loading }) {
   };
 
   const isRtl = ['Urdu', 'Sindhi', 'Punjabi', 'Pashto'].includes(selectedLanguage);
+  const isMicDisabled = ['Sindhi', 'Punjabi', 'Pashto'].includes(selectedLanguage);
 
   return (
     <div id="complaint-section" className="w-full max-w-6xl mx-auto px-4 py-12 scroll-mt-24">
@@ -225,11 +232,12 @@ export function ComplaintInput({ onAnalyze, loading }) {
                     size="icon"
                     className={cn(
                       "bezel-btn rounded-full w-10 h-10 transition-all duration-300 relative cursor-pointer",
-                      isListening && "ring-4 ring-red-500/60 scale-110 shadow-[0_0_15px_rgba(239,68,68,0.5)] bg-red-600 border-red-500 hover:bg-red-700 hover:border-red-600"
+                      isListening && "ring-4 ring-red-500/60 scale-110 shadow-[0_0_15px_rgba(239,68,68,0.5)] bg-red-600 border-red-500 hover:bg-red-700 hover:border-red-600",
+                      isMicDisabled && "opacity-40 cursor-not-allowed pointer-events-none"
                     )}
                     onClick={startListening}
-                    disabled={loading}
-                    title={isListening ? "Stop voice input" : "Start speaking"}
+                    disabled={loading || isMicDisabled}
+                    title={isMicDisabled ? "Voice input not yet supported for this language" : (isListening ? "Stop voice input" : "Start speaking")}
                   >
                     {isListening ? <Square className="w-4 h-4 text-white" /> : <Mic className="w-5 h-5 text-accent" />}
                   </Button>

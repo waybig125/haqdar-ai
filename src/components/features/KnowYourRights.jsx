@@ -20,17 +20,17 @@ export function KnowYourRights({ result }) {
       <Tabs defaultValue="rights" className="w-full" dir="rtl">
         
         <TabsList className="grid w-full grid-cols-3 h-auto p-1 bg-muted/50 rounded-xl mb-6">
-          <TabsTrigger value="rights" className="font-urdu text-lg py-3 rounded-lg data-[state=active]:bg-background data-[state=active]:shadow-sm">
-            <ShieldAlert className="w-4 h-4 ml-2" />
-            آپ کے حقوق
+          <TabsTrigger value="rights" className="font-urdu text-[11px] sm:text-base md:text-lg py-2.5 sm:py-3 rounded-lg data-[state=active]:bg-background data-[state=active]:shadow-sm flex items-center justify-center">
+            <ShieldAlert className="w-4 h-4 sm:ml-2 hidden sm:inline-block" />
+            <span>آپ کے حقوق</span>
           </TabsTrigger>
-          <TabsTrigger value="evidence" className="font-urdu text-lg py-3 rounded-lg data-[state=active]:bg-background data-[state=active]:shadow-sm">
-            <Camera className="w-4 h-4 ml-2" />
-            ثبوت جمع کریں
+          <TabsTrigger value="evidence" className="font-urdu text-[11px] sm:text-base md:text-lg py-2.5 sm:py-3 rounded-lg data-[state=active]:bg-background data-[state=active]:shadow-sm flex items-center justify-center">
+            <Camera className="w-4 h-4 sm:ml-2 hidden sm:inline-block" />
+            <span>ثبوت جمع کریں</span>
           </TabsTrigger>
-          <TabsTrigger value="steps" className="font-urdu text-lg py-3 rounded-lg data-[state=active]:bg-background data-[state=active]:shadow-sm">
-            <ArrowRightCircle className="w-4 h-4 ml-2" />
-            اگلے اقدامات
+          <TabsTrigger value="steps" className="font-urdu text-[11px] sm:text-base md:text-lg py-2.5 sm:py-3 rounded-lg data-[state=active]:bg-background data-[state=active]:shadow-sm flex items-center justify-center">
+            <ArrowRightCircle className="w-4 h-4 sm:ml-2 hidden sm:inline-block" />
+            <span>اگلے اقدامات</span>
           </TabsTrigger>
         </TabsList>
 
