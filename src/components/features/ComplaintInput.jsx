@@ -56,11 +56,17 @@ export function ComplaintInput({ onAnalyze, loading }) {
   // Smart language auto-detect when user types
   useEffect(() => {
     const urduRegex = /[\u0600-\u06FF]/;
-    if (text.trim() && ['Urdu', 'English'].includes(selectedLanguage)) {
-      const isUrdu = urduRegex.test(text);
-      if (isUrdu && selectedLanguage !== 'Urdu') {
+    if (text.trim()) {
+      const containsUrduScript = urduRegex.test(text);
+      
+      // If typing Urdu script while in LTR modes -> switch to Urdu
+      if (containsUrduScript && ['English', 'Roman Urdu'].includes(selectedLanguage)) {
         handleLanguageChange('Urdu');
-      } else if (!isUrdu && selectedLanguage !== 'English') {
+      }
+      
+      // If typing English/Latin while in RTL modes -> switch to English
+      const isRtlLang = ['Urdu', 'Sindhi', 'Punjabi', 'Pashto'].includes(selectedLanguage);
+      if (!containsUrduScript && isRtlLang) {
         handleLanguageChange('English');
       }
     }
@@ -160,6 +166,39 @@ export function ComplaintInput({ onAnalyze, loading }) {
                     Mobile browsers strictly block microphone access on insecure connections (HTTP). Please access HaqDar AI via the secure <strong className="text-foreground">HTTPS</strong> localtunnel URL or grant microphone permissions in your mobile browser settings.
                   </p>
                 </div>
+              </div>
+            )}
+
+            {loading && (
+              <div className="w-full bg-[#FAF3E0]/40 dark:bg-[#1C120D]/40 border border-accent/20 rounded-xl p-4 md:p-5 flex flex-col gap-3 animate-in fade-in duration-300">
+                <style dangerouslySetInnerHTML={{__html: `
+                  @keyframes loading-progress {
+                    0% { width: 0%; }
+                    10% { width: 20%; }
+                    30% { width: 45%; }
+                    60% { width: 70%; }
+                    90% { width: 90%; }
+                    98% { width: 96%; }
+                  }
+                  .animate-progress-bar {
+                    animation: loading-progress 8s cubic-bezier(0.1, 0.8, 0.1, 1) forwards;
+                  }
+                `}} />
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1.5 text-xs text-amber-950 dark:text-[#E6DBC6] font-semibold font-inter">
+                  <span className="flex items-center gap-1.5 font-urdu text-sm">
+                    <Sparkles className="w-3.5 h-3.5 text-accent animate-spin" />
+                    شکایت کا تجزیہ اور قانونی خط تیار کیا جا رہا ہے...
+                  </span>
+                  <span className="text-[10px] sm:text-xs text-accent/90 uppercase tracking-wider">
+                    Analyzing complaint & drafting petition...
+                  </span>
+                </div>
+                <div className="w-full h-2 bg-[#E8DFCB] dark:bg-[#2C1A11] rounded-full overflow-hidden border border-accent/10 shadow-[inset_0_1px_3px_rgba(0,0,0,0.1)]">
+                  <div className="h-full bg-gradient-to-r from-accent to-emerald-600 dark:from-accent dark:to-emerald-500 rounded-full animate-progress-bar" />
+                </div>
+                <p className="text-[10px] text-amber-900/50 dark:text-[#E6DBC6]/40 leading-none">
+                  Please hold on, our legal AI is researching the verified Pakistan law registry.
+                </p>
               </div>
             )}
 
