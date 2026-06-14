@@ -28,6 +28,46 @@ export function ResultCard({ result, editedLetter, setEditedLetter }) {
 
   if (!result) return null;
 
+  if (result.status === "needs_more_info") {
+    return (
+      <AnimatedContainer variant="fadeUp" className="w-full max-w-6xl mx-auto px-4 pb-16">
+        <Card className="wood-console shadow-[0_20px_50px_rgba(0,0,0,0.5)] overflow-hidden rounded-2xl border border-accent/20">
+          <CardHeader className="bg-[#3A231A]/30 border-b border-[#523225] py-5">
+            <CardTitle className="font-urdu text-3xl font-bold text-foreground text-right flex items-center justify-end gap-2" dir="rtl">
+              <span className="w-2.5 h-2.5 rounded-full bg-amber-500 animate-pulse" />
+              مزید تفصیلات درکار ہیں / More Information Needed
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="p-6 md:p-8 flex flex-col gap-6">
+            <div className="parchment-sheet rounded-xl p-6 md:p-8 flex flex-col gap-4">
+              <h3 className="font-urdu text-2xl font-bold text-amber-950 dark:text-[#E6DBC6]" dir="rtl">
+                قانونی تجزیہ کے لیے درج ذیل معلومات کی ضرورت ہے:
+              </h3>
+              <p className="text-sm text-amber-900/60 dark:text-amber-100/50 font-inter">
+                Your complaint is too brief or missing essential context. Please check the suggestions below and submit a revised version.
+              </p>
+              
+              <ul className="space-y-4 font-urdu text-xl text-amber-950 dark:text-[#E6DBC6] list-none pr-0 mt-2" dir="rtl">
+                {result.questions?.map((q, index) => (
+                  <li key={index} className="flex items-start gap-4">
+                    <span className="flex-shrink-0 w-8 h-8 rounded-full bg-accent/20 text-accent flex items-center justify-center font-bold text-sm mt-1.5 font-inter">
+                      {index + 1}
+                    </span>
+                    <span className="leading-[2.4] pt-1">{q}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            
+            <div className="text-right text-xs text-amber-900/40 dark:text-[#E6DBC6]/30 font-inter" dir="rtl">
+              Reference ID: {result.meta?.request_id ? `HQD-REF-${result.meta.request_id.toUpperCase()}` : "Pending"} | Checked against Law DB {result.meta?.db_version || "June 2026"}
+            </div>
+          </CardContent>
+        </Card>
+      </AnimatedContainer>
+    );
+  }
+
   const handleCopy = async () => {
     try {
       await navigator.clipboard.writeText(editedLetter);
@@ -85,8 +125,18 @@ export function ResultCard({ result, editedLetter, setEditedLetter }) {
         
         {/* Header - Trust Score & Badges */}
         <div className="bg-[#3A231A]/30 px-6 py-5 border-b border-[#523225] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-          <TrustScore score={result.confidence_score} reason={result.confidence_reason} />
-          {result.sdg_alignment && <SDGBadge variant={result.sdg_alignment} />}
+          <div className="flex flex-col gap-1">
+            <span className="text-[9px] uppercase tracking-widest text-accent font-bold font-inter leading-none">
+              Official Reference Number
+            </span>
+            <span className="text-sm font-bold font-inter text-amber-950 dark:text-accent">
+              {result.reference_id || (result.meta?.request_id ? `HQD-REF-${result.meta.request_id.toUpperCase()}` : "HQD-2026-0001")}
+            </span>
+          </div>
+          <div className="flex items-center gap-3 self-end sm:self-auto">
+            <TrustScore score={result.confidence_score} reason={result.confidence_reason} />
+            {result.sdg_alignment && <SDGBadge variant={result.sdg_alignment} />}
+          </div>
         </div>
 
         <CardContent className="p-0">
@@ -131,10 +181,10 @@ export function ResultCard({ result, editedLetter, setEditedLetter }) {
             
           </div>
 
-          {/* Complaint Letter Accordion */}
+          {/* Accordions Container */}
           <div className="px-4 py-4 bg-[#23150F]/20">
             <Accordion 
-              type="single" 
+              type="multiple" 
               value={openItems}
               onValueChange={setOpenItems}
             >
@@ -142,7 +192,7 @@ export function ResultCard({ result, editedLetter, setEditedLetter }) {
                 <AccordionTrigger className="hover:no-underline py-3 px-4 rounded-lg bg-[#3A231A]/30 hover:bg-[#3A231A]/50 transition-colors group flex items-center justify-between cursor-pointer border border-[#523225]">
                   <div className="flex items-center gap-3 text-accent transition-colors">
                     <FileText className="w-5 h-5 text-accent animate-pulse" />
-                    <span className="font-urdu text-2xl font-bold m-0" dir="rtl">تیار کردہ شکایتی خط</span>
+                    <span className="font-urdu text-2xl font-bold m-0" dir="rtl">تیار کردہ شکایتی خط (Official Petition)</span>
                   </div>
                 </AccordionTrigger>
                 <AccordionContent className="pt-3">
@@ -194,6 +244,63 @@ export function ResultCard({ result, editedLetter, setEditedLetter }) {
                   </div>
                 </AccordionContent>
               </AccordionItem>
+
+              {result.relevant_laws && result.relevant_laws.length > 0 && (
+                <AccordionItem value="laws" className="border-none mt-3">
+                  <AccordionTrigger className="hover:no-underline py-3 px-4 rounded-lg bg-[#3A231A]/30 hover:bg-[#3A231A]/50 transition-colors group flex items-center justify-between cursor-pointer border border-[#523225]">
+                    <div className="flex items-center gap-3 text-accent transition-colors">
+                      <Scale className="w-5 h-5 text-accent" />
+                      <span className="font-urdu text-2xl font-bold m-0" dir="rtl">حکومتی قوانین کا ریکارڈ (Verified Laws)</span>
+                    </div>
+                  </AccordionTrigger>
+                  <AccordionContent className="pt-3">
+                    <div className="grid gap-4 mt-2">
+                      {result.relevant_laws.map((lawObj, idx) => (
+                        <div key={idx} className="parchment-sheet rounded-xl p-5 border border-accent/20 flex flex-col gap-2 shadow-sm">
+                          <div className="flex items-center justify-between gap-4 border-b border-[#C5B69C]/40 dark:border-accent/10 pb-2">
+                            <span className="font-bold text-amber-950 dark:text-[#E6DBC6] text-lg font-inter">
+                              ⚖️ {lawObj.law}
+                            </span>
+                            <span className="text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded border border-accent/20 bg-accent/5 text-accent font-inter">
+                              Registry Entry #{idx + 1}
+                            </span>
+                          </div>
+                          
+                          <div className="flex flex-col gap-1 pt-1">
+                            <span className="text-[9px] uppercase tracking-wider text-amber-900/50 dark:text-amber-100/40 font-bold font-inter">
+                              Law Provision (قانون کی دفعہ)
+                            </span>
+                            <p className="font-urdu text-lg leading-relaxed text-amber-950 dark:text-[#E6DBC6]" dir="rtl">
+                              {lawObj.provision}
+                            </p>
+                          </div>
+
+                          <div className="grid sm:grid-cols-2 gap-4 mt-3 pt-3 border-t border-[#C5B69C]/40 dark:border-accent/10">
+                            <div>
+                              <span className="text-[9px] uppercase tracking-wider text-amber-900/50 dark:text-amber-100/40 font-bold font-inter">
+                                Enforcement Authority (مجاز ادارہ)
+                              </span>
+                              <p className="font-urdu text-base font-semibold text-amber-950 dark:text-[#E6DBC6]" dir="rtl">
+                                {lawObj.authority}
+                              </p>
+                            </div>
+                            {lawObj.contact && (
+                              <div>
+                                <span className="text-[9px] uppercase tracking-wider text-amber-900/50 dark:text-amber-100/40 font-bold font-inter">
+                                  Official Contact (رابطہ نمبر / ہیلپ لائن)
+                                </span>
+                                <p className="font-inter text-xs font-semibold text-accent leading-normal mt-0.5">
+                                  {lawObj.contact}
+                                </p>
+                              </div>
+                            )}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </AccordionContent>
+                </AccordionItem>
+              )}
             </Accordion>
           </div>
 
@@ -217,6 +324,24 @@ export function ResultCard({ result, editedLetter, setEditedLetter }) {
 
 
         </CardContent>
+
+        {/* Metadata verification block */}
+        {result.meta && (
+          <div className="px-6 py-4 bg-[#3A231A]/20 border-t border-[#523225] flex flex-wrap items-center justify-between gap-4 text-[10px] text-amber-900/50 dark:text-amber-100/30 font-inter no-print">
+            <div>
+              <span>Database: </span>
+              <strong className="text-accent">{result.meta.db_version}</strong>
+              <span> | Last legal review: </span>
+              <strong className="text-accent">{result.meta.last_legal_review}</strong>
+            </div>
+            <div className="flex gap-3">
+              <span>Model: <strong>{result.meta.model_used}</strong></span>
+              <span>Speed: <strong>{result.meta.processing_ms}ms</strong></span>
+              <span>Cache: <strong>{result.meta.cached ? "HIT" : "MISS"}</strong></span>
+            </div>
+          </div>
+        )}
+
       </Card>
     </AnimatedContainer>
   );

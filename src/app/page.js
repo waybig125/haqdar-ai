@@ -71,7 +71,9 @@ export default function Home() {
                   editedLetter={editedLetter} 
                   setEditedLetter={setEditedLetter} 
                 />
-                <KnowYourRights result={analysisResult} />
+                {analysisResult.status === "ok" && (
+                  <KnowYourRights result={analysisResult} />
+                )}
               </>
             )}
           </div>
