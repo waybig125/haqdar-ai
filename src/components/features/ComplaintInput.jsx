@@ -60,7 +60,7 @@ export function ComplaintInput({ onAnalyze, loading }) {
       const containsUrduScript = urduRegex.test(text);
       
       // If typing Urdu script while in LTR modes -> switch to Urdu
-      if (containsUrduScript && ['English', 'Roman Urdu'].includes(selectedLanguage)) {
+      if (containsUrduScript && ['English', 'Roman (Urdu/Regional)'].includes(selectedLanguage)) {
         handleLanguageChange('Urdu');
       }
       
@@ -116,7 +116,7 @@ export function ComplaintInput({ onAnalyze, loading }) {
               <div className="absolute top-3 left-4 flex items-center gap-1.5 px-2.5 py-0.5 rounded-full border border-accent/20 bg-accent/5 text-[9px] font-bold text-accent font-inter select-none">
                 {selectedLanguage === 'Urdu' ? '🇵🇰 اردو' :
                  selectedLanguage === 'English' ? '🇬🇧 English' :
-                 selectedLanguage === 'Roman Urdu' ? '✍️ Roman Urdu' :
+                 selectedLanguage === 'Roman (Urdu/Regional)' ? '✍️ Roman (Urdu/Regional)' :
                  selectedLanguage === 'Sindhi' ? '🇵🇰 سنڌي' :
                  selectedLanguage === 'Punjabi' ? '🇵🇰 پنجابی' : '🇵🇰 پښتو'}
               </div>
@@ -238,7 +238,7 @@ export function ComplaintInput({ onAnalyze, loading }) {
                   >
                     <option value="Urdu" className="bg-[#FAF3E0] dark:bg-[#1C120D] text-amber-950 dark:text-[#E6DBC6] font-urdu text-sm">اردو (Urdu)</option>
                     <option value="English" className="bg-[#FAF3E0] dark:bg-[#1C120D] text-amber-950 dark:text-[#E6DBC6] font-inter">English</option>
-                    <option value="Roman Urdu" className="bg-[#FAF3E0] dark:bg-[#1C120D] text-amber-950 dark:text-[#E6DBC6] font-inter">Roman Urdu</option>
+                    <option value="Roman (Urdu/Regional)" className="bg-[#FAF3E0] dark:bg-[#1C120D] text-amber-950 dark:text-[#E6DBC6] font-inter">Roman (Urdu/Punjabi/etc.)</option>
                     <option value="Sindhi" className="bg-[#FAF3E0] dark:bg-[#1C120D] text-amber-950 dark:text-[#E6DBC6] font-urdu text-sm">سنڌي (Sindhi)</option>
                     <option value="Punjabi" className="bg-[#FAF3E0] dark:bg-[#1C120D] text-amber-950 dark:text-[#E6DBC6] font-urdu text-sm">پنجابی (Punjabi)</option>
                     <option value="Pashto" className="bg-[#FAF3E0] dark:bg-[#1C120D] text-amber-950 dark:text-[#E6DBC6] font-urdu text-sm">پښتو (Pashto)</option>

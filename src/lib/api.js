@@ -161,7 +161,8 @@ export async function analyzeComplaint(text, options = {}) {
       throw new Error(`API Error: ${response.status}`);
     }
 
-    return await response.json();
+    const data = await response.json();
+    return cleanResponse(data);
   } catch (error) {
     console.error("Analyze API failed", error);
     
@@ -333,6 +334,31 @@ export async function lookupReport(reference_id) {
     console.error("Report lookup failed", error);
     throw error;
   }
+}
+
+function cleanString(str) {
+  if (typeof str !== 'string') return str;
+  // Replace literal \n (backslash + n) with actual newline character,
+  // and clean up any doubled backslashes representing newlines.
+  return str.replace(/\\n/g, '\n');
+}
+
+export function cleanResponse(data) {
+  if (!data) return data;
+  if (typeof data === 'string') {
+    return cleanString(data);
+  }
+  if (Array.isArray(data)) {
+    return data.map(cleanResponse);
+  }
+  if (typeof data === 'object') {
+    const cleaned = {};
+    for (const key of Object.keys(data)) {
+      cleaned[key] = cleanResponse(data[key]);
+    }
+    return cleaned;
+  }
+  return data;
 }
 
 
