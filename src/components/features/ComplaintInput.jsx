@@ -27,18 +27,38 @@ export function ComplaintInput({ onAnalyze, loading }) {
     speechError
   } = useSpeechRecognition();
 
+  const [selectedLanguage, setSelectedLanguage] = useState('Urdu');
+  const [letterLanguage, setLetterLanguage] = useState('Urdu');
+
+  const handleLanguageChange = (lang) => {
+    setSelectedLanguage(lang);
+    if (lang === 'English') {
+      setLanguage('en-US');
+      setLetterLanguage('English');
+    } else if (lang === 'Sindhi') {
+      setLanguage('sd-PK');
+      setLetterLanguage('Urdu');
+    } else if (lang === 'Pashto') {
+      setLanguage('ps-PK');
+      setLetterLanguage('Urdu');
+    } else {
+      setLanguage('ur-PK');
+      setLetterLanguage('Urdu');
+    }
+  };
+
   // Smart language auto-detect when user types
   useEffect(() => {
     const urduRegex = /[\u0600-\u06FF]/;
-    if (text.trim()) {
+    if (text.trim() && ['Urdu', 'English'].includes(selectedLanguage)) {
       const isUrdu = urduRegex.test(text);
-      if (isUrdu && language !== 'ur-PK') {
-        setLanguage('ur-PK');
-      } else if (!isUrdu && language !== 'en-US') {
-        setLanguage('en-US');
+      if (isUrdu && selectedLanguage !== 'Urdu') {
+        handleLanguageChange('Urdu');
+      } else if (!isUrdu && selectedLanguage !== 'English') {
+        handleLanguageChange('English');
       }
     }
-  }, [text, language, setLanguage]);
+  }, [text, selectedLanguage]);
 
   // Update text area when speech transcript updates
   useEffect(() => {
@@ -54,7 +74,7 @@ export function ComplaintInput({ onAnalyze, loading }) {
   const handleSubmit = (e) => {
     e?.preventDefault();
     if (text.trim() && !loading) {
-      onAnalyze(text);
+      onAnalyze(text, { language: selectedLanguage, letter_language: letterLanguage });
     }
   };
 
@@ -62,11 +82,7 @@ export function ComplaintInput({ onAnalyze, loading }) {
     setText(example);
   };
 
-  const toggleLanguage = () => {
-    setLanguage(prev => prev === 'ur-PK' ? 'en-US' : 'ur-PK');
-  };
-
-  const isUrduMode = language === 'ur-PK';
+  const isRtl = ['Urdu', 'Sindhi', 'Punjabi', 'Pashto'].includes(selectedLanguage);
 
   return (
     <div id="complaint-section" className="w-full max-w-6xl mx-auto px-4 py-12 scroll-mt-24">
@@ -85,7 +101,11 @@ export function ComplaintInput({ onAnalyze, loading }) {
 
               {/* Language Badge Chip */}
               <div className="absolute top-3 left-4 flex items-center gap-1.5 px-2.5 py-0.5 rounded-full border border-accent/20 bg-accent/5 text-[9px] font-bold text-accent font-inter select-none">
-                {isUrduMode ? '🇵🇰 اردو' : '🇬🇧 English'}
+                {selectedLanguage === 'Urdu' ? '🇵🇰 اردو' :
+                 selectedLanguage === 'English' ? '🇬🇧 English' :
+                 selectedLanguage === 'Roman Urdu' ? '✍️ Roman Urdu' :
+                 selectedLanguage === 'Sindhi' ? '🇵🇰 سنڌي' :
+                 selectedLanguage === 'Punjabi' ? '🇵🇰 پنجابی' : '🇵🇰 پښتو'}
               </div>
 
               {/* Official Document Seal Watermark */}
@@ -96,12 +116,12 @@ export function ComplaintInput({ onAnalyze, loading }) {
               <textarea
                 value={text}
                 onChange={(e) => setText(e.target.value.slice(0, 800))}
-                placeholder={isUrduMode ? "اپنی شکایت یہاں لکھیں یا مائیک کا بٹن دبا کر بولیں..." : "Type or click the microphone to speak your complaint..."}
+                placeholder={isRtl ? "اپنی شکایت یہاں لکھیں یا مائیک کا بٹن دبا کر بولیں..." : "Type or click the microphone to speak your complaint..."}
                 className={cn(
                   "w-full min-h-[170px] bg-transparent resize-none outline-none leading-relaxed placeholder:text-amber-900/30 dark:placeholder:text-amber-100/25 transition-all border-none focus:ring-0 mt-2 px-4",
-                  isUrduMode ? "font-urdu text-2xl md:text-3xl leading-[2.8] py-2 text-amber-950 dark:text-amber-100" : "font-garamond text-2xl md:text-3xl font-bold leading-[2.2] py-2 text-amber-950 dark:text-amber-100"
+                  isRtl ? "font-urdu text-2xl md:text-3xl leading-[2.8] py-2 text-amber-950 dark:text-amber-100" : "font-garamond text-2xl md:text-3xl font-bold leading-[2.2] py-2 text-amber-950 dark:text-amber-100"
                 )}
-                dir={isUrduMode ? "rtl" : "ltr"}
+                dir={isRtl ? "rtl" : "ltr"}
                 disabled={loading}
                 maxLength={800}
               />
@@ -109,7 +129,7 @@ export function ComplaintInput({ onAnalyze, loading }) {
               {isListening && (
                 <div className="absolute bottom-3 left-4 flex items-center gap-1.5 text-xs text-red-600 dark:text-red-400 font-semibold animate-pulse">
                   <span className="w-2 h-2 rounded-full bg-red-600 dark:bg-red-400" />
-                  <span className="font-urdu leading-none">{isUrduMode ? "سن رہا ہوں..." : "Listening..."}</span>
+                  <span className="font-urdu leading-none">{isRtl ? "سن رہا ہوں..." : "Listening..."}</span>
                 </div>
               )}
 
@@ -154,18 +174,49 @@ export function ComplaintInput({ onAnalyze, loading }) {
               </div>
 
               {/* Action Controls */}
-              <div className="flex items-center gap-3 self-end md:self-auto shrink-0">
+              <div className="flex items-end gap-3 self-end md:self-auto shrink-0">
 
-                {/* Language Manual Override (Gold bezeled) */}
-                <Button
-                  type="button"
-                  variant="ghost"
-                  onClick={toggleLanguage}
-                  className="bezel-btn rounded px-4 h-10 font-bold tracking-widest text-xs font-inter text-accent cursor-pointer"
-                  title="Toggle Language"
-                >
-                  {isUrduMode ? 'اردو' : 'ENGLISH'}
-                </Button>
+                {/* Input/Response Language Dropdown */}
+                <div className="flex flex-col gap-1 shrink-0 align-bottom">
+                  <span className="text-[8px] font-bold uppercase tracking-wider text-accent/80 font-inter leading-none">Response Language</span>
+                  <select
+                    value={selectedLanguage}
+                    onChange={(e) => handleLanguageChange(e.target.value)}
+                    className="bezel-btn rounded px-3 h-10 font-bold text-[11px] font-inter text-accent cursor-pointer bg-[#FAF6EE] dark:bg-[#20120B] border border-accent/30 outline-none pr-8 appearance-none relative shadow-[0_2px_4px_rgba(0,0,0,0.15)] dark:shadow-[0_2px_4px_rgba(0,0,0,0.3)] min-w-[125px]"
+                    style={{
+                      backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23C5A059'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'/%3E%3C/svg%3E")`,
+                      backgroundPosition: 'right 8px center',
+                      backgroundSize: '12px',
+                      backgroundRepeat: 'no-repeat'
+                    }}
+                  >
+                    <option value="Urdu" className="bg-[#FAF3E0] dark:bg-[#1C120D] text-amber-950 dark:text-[#E6DBC6] font-urdu text-sm">اردو (Urdu)</option>
+                    <option value="English" className="bg-[#FAF3E0] dark:bg-[#1C120D] text-amber-950 dark:text-[#E6DBC6] font-inter">English</option>
+                    <option value="Roman Urdu" className="bg-[#FAF3E0] dark:bg-[#1C120D] text-amber-950 dark:text-[#E6DBC6] font-inter">Roman Urdu</option>
+                    <option value="Sindhi" className="bg-[#FAF3E0] dark:bg-[#1C120D] text-amber-950 dark:text-[#E6DBC6] font-urdu text-sm">سنڌي (Sindhi)</option>
+                    <option value="Punjabi" className="bg-[#FAF3E0] dark:bg-[#1C120D] text-amber-950 dark:text-[#E6DBC6] font-urdu text-sm">پنجابی (Punjabi)</option>
+                    <option value="Pashto" className="bg-[#FAF3E0] dark:bg-[#1C120D] text-amber-950 dark:text-[#E6DBC6] font-urdu text-sm">پښتو (Pashto)</option>
+                  </select>
+                </div>
+
+                {/* Complaint Letter Language Dropdown */}
+                <div className="flex flex-col gap-1 shrink-0 align-bottom">
+                  <span className="text-[8px] font-bold uppercase tracking-wider text-accent/80 font-inter leading-none">Letter Language</span>
+                  <select
+                    value={letterLanguage}
+                    onChange={(e) => setLetterLanguage(e.target.value)}
+                    className="bezel-btn rounded px-3 h-10 font-bold text-[11px] font-inter text-accent cursor-pointer bg-[#FAF6EE] dark:bg-[#20120B] border border-accent/30 outline-none pr-8 appearance-none relative shadow-[0_2px_4px_rgba(0,0,0,0.15)] dark:shadow-[0_2px_4px_rgba(0,0,0,0.3)] min-w-[115px]"
+                    style={{
+                      backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23C5A059'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'/%3E%3C/svg%3E")`,
+                      backgroundPosition: 'right 8px center',
+                      backgroundSize: '12px',
+                      backgroundRepeat: 'no-repeat'
+                    }}
+                  >
+                    <option value="Urdu" className="bg-[#FAF3E0] dark:bg-[#1C120D] text-amber-950 dark:text-[#E6DBC6] font-urdu text-sm">Urdu Letter</option>
+                    <option value="English" className="bg-[#FAF3E0] dark:bg-[#1C120D] text-amber-950 dark:text-[#E6DBC6] font-inter">English Letter</option>
+                  </select>
+                </div>
 
                 {supported ? (
                   <Button

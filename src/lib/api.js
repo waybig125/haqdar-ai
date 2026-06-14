@@ -139,14 +139,22 @@ const initialMockStats = {
 /**
  * Sends a complaint text to the backend for full legal analysis.
  * @param {string} text The user's complaint in Urdu/Roman Urdu
+ * @param {Object} [options] Optional parameters like language and letter_language
  * @returns {Promise<import('./types').AnalysisResult>}
  */
-export async function analyzeComplaint(text) {
+export async function analyzeComplaint(text, options = {}) {
   try {
     const response = await fetch(`${API_BASE_URL}/analyze`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ complaint: text }),
+      body: JSON.stringify({
+        complaint: text,
+        language: options.language || 'Urdu',
+        letter_language: options.letter_language || 'Urdu',
+        district: options.district || null,
+        name: options.name || null,
+        incident_date: options.incident_date || null
+      }),
     });
 
     if (!response.ok) {

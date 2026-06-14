@@ -9,12 +9,12 @@ export function useAnalyzeComplaint() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const analyze = async (text) => {
+  const analyze = async (text, options = {}) => {
     setLoading(true);
     setError(null);
     setData(null); // Reset previous results on new analyze request
     try {
-      const result = await analyzeComplaint(text);
+      const result = await analyzeComplaint(text, options);
       setData(result);
     } catch (err) {
       console.error(err);

@@ -42,8 +42,8 @@ export default function Home() {
     }
   }, [analysisResult?.complaint_letter]);
 
-  const handleAnalyze = (text) => {
-    analyze(text);
+  const handleAnalyze = (text, options = {}) => {
+    analyze(text, options);
     // Smooth scroll down slightly after analyzing
     setTimeout(() => {
       const resultEl = document.getElementById('result-section');
