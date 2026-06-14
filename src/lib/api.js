@@ -144,12 +144,16 @@ const initialMockStats = {
  */
 export async function analyzeComplaint(text, options = {}) {
   try {
+    const rawLanguage = options.language || 'Urdu';
+    // Map Roman option to fit backend schema max_length limit (20 chars)
+    const apiLanguage = rawLanguage === 'Roman (Urdu/Regional)' ? 'Roman' : rawLanguage;
+
     const response = await fetch(`${API_BASE_URL}/analyze`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         complaint: text,
-        language: options.language || 'Urdu',
+        language: apiLanguage,
         letter_language: options.letter_language || 'Urdu',
         district: options.district || null,
         name: options.name || null,
