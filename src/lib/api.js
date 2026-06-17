@@ -372,11 +372,15 @@ export function cleanResponse(data) {
 /**
  * Transcribes audio blob using the backend /transcribe endpoint
  * @param {Blob} audioBlob The recorded audio blob
+ * @param {string} [language] The spoken language (Urdu, Punjabi, Sindhi, Pashto, English)
  * @returns {Promise<{text: string}>}
  */
-export async function transcribeAudio(audioBlob) {
+export async function transcribeAudio(audioBlob, language = 'Urdu') {
   const formData = new FormData();
   formData.append('audio', audioBlob, 'recording.webm');
+  if (language) {
+    formData.append('language', language);
+  }
   
   const response = await fetch(`${API_BASE_URL}/transcribe`, {
     method: 'POST',

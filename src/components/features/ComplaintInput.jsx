@@ -66,7 +66,7 @@ export function ComplaintInput({ onAnalyze, loading }) {
         toast.promise(
           (async () => {
             const { transcribeAudio } = await import('@/lib/api');
-            const result = await transcribeAudio(audioBlob);
+            const result = await transcribeAudio(audioBlob, selectedLanguage);
             if (result && result.text) {
               setText(prev => {
                 const base = prev.trim();
