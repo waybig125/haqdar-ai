@@ -17,24 +17,28 @@ function HeatLayer({ cities, maxCount }) {
   useEffect(() => {
     if (!cities || cities.length === 0) return;
 
-    // [lat, lng, intensity 0..1]
-    const points = cities.map((c) => [
-      c.coords[0],
-      c.coords[1],
-      Math.max(0.25, (c.count || 0) / (maxCount || 1)),
-    ]);
+    // [lat, lng, intensity 0..1] — use a sharper curve so the busiest
+    // districts truly peak (red) and quiet ones stay low (gold). sqrt on a
+    // small floor keeps small cities visible without flattening the contrast.
+    const points = cities.map((c) => {
+      const norm = (c.count || 0) / (maxCount || 1);
+      const intensity = 0.12 + Math.pow(norm, 0.85) * 0.88; // 0.12..1.0
+      return [c.coords[0], c.coords[1], intensity];
+    });
 
     const layer = L.heatLayer(points, {
-      radius: 38,        // px radius of each point's heat
-      blur: 32,          // smoothness of the blanket
+      radius: 45,        // px radius of each point's heat
+      blur: 28,          // a touch tighter -> punchier cores
+      max: 1.0,          // intensities are already normalised to 0..1
       maxZoom: 9,
-      minOpacity: 0.35,
-      gradient: {        // gold -> orange -> red, matching the legend
-        0.0: 'rgba(240,180,60,0.0)',
-        0.3: '#F0B43C',
-        0.55: '#F0902C',
-        0.8: '#EC5A2A',
-        1.0: '#E5382A',
+      minOpacity: 0.45,  // bolder against the dark map
+      gradient: {        // transparent -> gold -> orange -> deep red
+        0.0: 'rgba(0,0,0,0)',
+        0.2: '#E8A92E',
+        0.45: '#F0902C',
+        0.7: '#EC5A2A',
+        0.9: '#E5382A',
+        1.0: '#C42018',
       },
     });
     layer.addTo(map);
