@@ -1,0 +1,487 @@
+@import "tailwindcss";
+
+@plugin "tailwindcss-animate";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme {
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-ring: hsl(var(--ring));
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+
+  --color-destructive: hsl(var(--destructive));
+  --color-destructive-foreground: hsl(var(--destructive-foreground));
+
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+
+  --color-popover: hsl(var(--popover));
+  --color-popover-foreground: hsl(var(--popover-foreground));
+
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+
+  --color-emerald: hsl(var(--emerald));
+  --color-emerald-foreground: hsl(var(--emerald-foreground));
+
+  --radius-lg: var(--radius);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-sm: calc(var(--radius) - 4px);
+
+  --font-inter: var(--font-inter);
+  --font-urdu: var(--font-urdu);
+  --font-garamond: var(--font-garamond);
+}
+
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentColor);
+  }
+}
+
+@layer base {
+  :root {
+    /* Analog Mahogany & Brass Parchment - Light (Warm Ivory Parchment / Mahogany Gold / Deep Coffee Ink) */
+    --background: 45 28% 95%; /* #FAF6EE - Warm Premium Ivory */
+    --foreground: 22 40% 10%; /* #22120B */
+    --card: 45 32% 97%; /* #FAF8F2 */
+    --card-foreground: 22 40% 10%;
+    --popover: 45 32% 97%;
+    --popover-foreground: 22 40% 10%;
+    
+    /* Deep Mahogany Wood / Forest Ink */
+    --primary: 22 42% 12%; /* #2C160C */
+    --primary-foreground: 37 36% 98%;
+    
+    /* Aged Paper Accent */
+    --secondary: 22 30% 20%;
+    --secondary-foreground: 37 36% 98%;
+    
+    --muted: 45 15% 88%;
+    --muted-foreground: 22 15% 40%;
+    
+    /* Wax Gold Accent */
+    --accent: 38 52% 56%; /* #C5A059 */
+    --accent-foreground: 22 40% 10%;
+    
+    --destructive: 0 74% 45%;
+    --destructive-foreground: 0 0% 100%;
+    
+    --border: 45 18% 82%; /* Aged gold-ivory border */
+    --input: 45 18% 82%;
+    --ring: 38 52% 56%;
+    --radius: 0.5rem;
+
+    /* Confidence / Badges */
+    --confidence-high: 22 42% 12%;
+    --confidence-medium: 38 52% 56%;
+    --confidence-low: 0 74% 45%;
+    
+    /* SDGs */
+    --sdg-16: 22 42% 12%;
+    --sdg-10: 38 52% 56%;
+
+    /* Emerald */
+    --emerald: 145 77% 30%;
+    --emerald-foreground: 0 0% 100%;
+
+    /* Medallion Background Gradient stops (Light theme) */
+    --medallion-bg-start: #5A3E2F;
+    --medallion-bg-mid: #3D271D;
+    --medallion-bg-end: #241610;
+
+    /* Medallion Center & Stroke (Light Theme - Ivory & Dark Walnut) */
+    --medallion-bg-start: #FCFAF2;
+    --medallion-bg-mid: #F5EFEB;
+    --medallion-bg-end: #EDE4DC;
+    --medallion-center-start: #FFFFFF;
+    --medallion-center-mid: #FAF8F5;
+    --medallion-center-end: #F2EDE4;
+    --medallion-emblem: #3E271D;
+    
+    --medallion-stroke-start: #5A3E2F;
+    --medallion-stroke-mid-1: #4D3325;
+    --medallion-stroke-mid-2: #3E271D;
+    --medallion-stroke-end: #241610;
+    
+    --medallion-glow-color: #000000;
+    --medallion-glow-opacity: 0.08;
+
+    /* Background Grunge Particles (Light Theme) */
+    --grunge-color-1: rgba(60, 40, 30, 0.25);
+    --grunge-color-2: rgba(120, 90, 70, 0.15);
+  }
+
+  .dark {
+    /* Analog Mahogany & Brass Parchment - Dark (Obsidian Mahogany / Glowing Gold) */
+    --background: 22 30% 6%; /* #120A07 - Reverted to deep obsidian mahogany */
+    --foreground: 37 28% 88%; /* #ECE5D5 */
+    --card: 22 28% 10%; /* #1D120E */
+    --card-foreground: 37 28% 88%;
+    --popover: 22 28% 10%;
+    --popover-foreground: 37 28% 88%;
+    
+    /* Glowing Gold */
+    --primary: 38 70% 60%; /* #D4AF37 */
+    --primary-foreground: 22 30% 6%;
+    
+    /* Dark Mahogany Panel */
+    --secondary: 22 24% 15%; /* #281710 */
+    --secondary-foreground: 37 28% 88%;
+    
+    --muted: 22 20% 12%;
+    --muted-foreground: 37 10% 60%;
+    
+    /* Wax Gold */
+    --accent: 38 70% 60%;
+    --accent-foreground: 22 30% 6%;
+    
+    --destructive: 0 62% 40%;
+    --destructive-foreground: 37 28% 88%;
+    
+    --border: 22 18% 18%;
+    --input: 22 18% 18%;
+    --ring: 38 70% 60%;
+
+    /* Emerald */
+    --emerald: 145 77% 40%;
+    --emerald-foreground: 22 30% 6%;
+
+    /* Medallion Background Gradient stops (Dark theme) */
+    --medallion-bg-start: #21130B;
+    --medallion-bg-mid: #120905;
+    --medallion-bg-end: #050201;
+
+    /* Medallion Center & Stroke (Dark Theme - Warm Obsidian & Gold) */
+    --medallion-bg-start: #21130B;
+    --medallion-bg-mid: #120905;
+    --medallion-bg-end: #050201;
+    --medallion-center-start: #2A1F1A;
+    --medallion-center-mid: #1A120E;
+    --medallion-center-end: #0D0907;
+    --medallion-emblem: #D4AF37;
+
+    --medallion-stroke-start: #FFFBE6;
+    --medallion-stroke-mid-1: #F5D98C;
+    --medallion-stroke-mid-2: #D4AF37;
+    --medallion-stroke-end: #634D14;
+    
+    --medallion-glow-color: #D4AF37;
+    --medallion-glow-opacity: 0.4;
+
+    /* Background Grunge Particles (Dark Theme) */
+    --grunge-color-1: rgba(212, 175, 55, 0.12);
+    --grunge-color-2: rgba(0, 0, 0, 0.35);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  
+  body {
+    @apply bg-background text-foreground;
+    /* Soft warm radial glow with official light-green ledger lines watermark pattern and sprinkles of green dust */
+    background-image: 
+      radial-gradient(circle at 12% 18%, rgba(16, 124, 65, 0.04) 0%, transparent 6%),
+      radial-gradient(circle at 85% 72%, rgba(16, 124, 65, 0.05) 0%, transparent 8%),
+      radial-gradient(circle at 45% 85%, rgba(16, 124, 65, 0.03) 0%, transparent 10%),
+      radial-gradient(circle at 50% 20%, rgba(197, 160, 89, 0.02) 0%, transparent 50%),
+      linear-gradient(to right, rgba(90, 60, 40, 0.045) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(90, 60, 40, 0.045) 1px, transparent 1px);
+    background-size: 100% 100%, 100% 100%, 100% 100%, 100% 100%, 40px 40px, 40px 40px;
+    background-attachment: fixed;
+    position: relative;
+  }
+
+  .dark body {
+    /* Reverted to obsidian mahogany background with sprinkles of gold dust and gold grid lines */
+    background-image: 
+      radial-gradient(circle at 15% 25%, rgba(212, 175, 55, 0.03) 0%, transparent 8%),
+      radial-gradient(circle at 80% 65%, rgba(212, 175, 55, 0.04) 0%, transparent 10%),
+      radial-gradient(circle at 40% 75%, rgba(212, 175, 55, 0.02) 0%, transparent 12%),
+      radial-gradient(circle at 50% 30%, rgba(212, 175, 55, 0.03) 0%, transparent 60%),
+      linear-gradient(to right, rgba(212, 175, 55, 0.025) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(212, 175, 55, 0.025) 1px, transparent 1px);
+    background-size: 100% 100%, 100% 100%, 100% 100%, 100% 100%, 40px 40px, 40px 40px;
+  }
+
+  /* Custom base64 SVG noise overlay for tactile grunge/paper texture */
+  body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    opacity: 0.12; /* Heavy paper texture overlay */
+    mix-blend-mode: multiply;
+    z-index: 9999;
+    pointer-events: none;
+    /* Subtle green-tinted paper noise overlay in light theme */
+    background-image: 
+      url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E"),
+      linear-gradient(to bottom, rgba(16, 124, 65, 0.02), rgba(16, 124, 65, 0.005));
+  }
+
+  .dark body::before {
+    opacity: 0.15;
+    mix-blend-mode: overlay;
+    /* Gold-tinted paper noise overlay in dark theme */
+    background-image: 
+      url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E"),
+      linear-gradient(to bottom, rgba(212, 175, 55, 0.05), rgba(212, 175, 55, 0.01));
+  }
+  
+  .grunge-overlay {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.14;
+    mix-blend-mode: multiply;
+    /* Green-tinted local card grunge */
+    background-image: 
+      url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E"),
+      linear-gradient(to bottom, rgba(16, 124, 65, 0.06), rgba(16, 124, 65, 0.01));
+  }
+  
+  .dark .grunge-overlay {
+    mix-blend-mode: overlay;
+    opacity: 0.2;
+    /* Gold/amber tinted local card grunge */
+    background-image: 
+      url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E"),
+      linear-gradient(to bottom, rgba(212, 175, 55, 0.08), rgba(212, 175, 55, 0.02));
+  }
+  
+  /* Urdu Typography Adjustments */
+  [lang="ur"] {
+    font-family: var(--font-urdu), system-ui, sans-serif;
+    line-height: 2.4;
+  }
+
+  /* Latin Fallback */
+  [lang="en"] {
+    font-family: var(--font-inter), system-ui, sans-serif;
+  }
+}
+
+@layer utilities {
+  /* Rich Mahogany Wood Panel Console styling */
+  .wood-console {
+    background: linear-gradient(135deg, #FCFAF2 0%, #F5EFEB 50%, #EDE4DC 100%);
+    border: 3px solid #C5B69C;
+    box-shadow: 
+      0 15px 40px rgba(90, 60, 40, 0.08), 
+      inset 0 1px 0 rgba(255,255,255,0.6),
+      inset 0 -1px 0 rgba(0,0,0,0.05),
+      0 0 0 1px rgba(197, 160, 89, 0.2);
+  }
+
+  .dark .wood-console {
+    background: linear-gradient(135deg, #1C0F0A 0%, #2A170F 50%, #170C08 100%);
+    border: 3px solid #361F15;
+    box-shadow: 
+      0 15px 40px rgba(0,0,0,0.5), 
+      inset 0 1px 0 rgba(255,255,255,0.05),
+      inset 0 -1px 0 rgba(0,0,0,0.4),
+      0 0 0 1px rgba(197, 160, 89, 0.15);
+  }
+
+  /* Textured Aged Parchment Sheet styling */
+  .parchment-sheet {
+    background: linear-gradient(to bottom, #FAF3E0 0%, #E8DFCB 100%);
+    border: 1.5px solid #C5B69C;
+    box-shadow: 
+      inset 0 3px 12px rgba(45,30,23,0.18),
+      0 1px 2px rgba(255,255,255,0.3);
+    color: #2D1A10; /* Elegant Dark Brown Ink */
+  }
+
+  .dark .parchment-sheet {
+    background: linear-gradient(to bottom, #261A15 0%, #1C120D 100%);
+    border: 1.5px solid #452D23;
+    box-shadow: 
+      inset 0 3px 12px rgba(0,0,0,0.7),
+      0 1px 1px rgba(255,255,255,0.02);
+    color: #E6DBC6; /* Soft warm gold ink */
+  }
+
+  /* Glowing metallic gold text gradient */
+  .gold-gradient-text {
+    background: linear-gradient(to bottom, #FAE6B9 0%, #C5A059 45%, #92753F 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.15));
+  }
+
+  .gold-gradient-text-light {
+    background: linear-gradient(to bottom, #4D3325 0%, #2E1A11 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .dark .gold-gradient-text-light {
+    background: linear-gradient(to bottom, #FAE6B9 0%, #C5A059 45%, #92753F 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+  }
+
+  /* Custom bezeled buttons */
+  .bezel-btn {
+    border: 1.5px solid #C5B69C;
+    background: linear-gradient(to bottom, #FCFAF2 0%, #EDE4DC 100%);
+    color: #4D3325;
+    box-shadow: 
+      0 3px 6px rgba(90, 60, 40, 0.08),
+      inset 0 1px 0 rgba(255,255,255,0.8);
+    transition: all 0.2s ease;
+  }
+
+  .bezel-btn:hover {
+    background: linear-gradient(to bottom, #FAF8F2 0%, #E1D6C7 100%);
+    border-color: #C5A059;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 10px rgba(197,160,89,0.15);
+  }
+
+  .bezel-btn:active {
+    transform: translateY(1px);
+    box-shadow: 0 1px 2px rgba(90, 60, 40, 0.1);
+  }
+
+  .dark .bezel-btn {
+    border: 1.5px solid #C5A059;
+    background: linear-gradient(to bottom, #3E291F 0%, #2A1A13 100%);
+    color: #FAF4E5;
+    box-shadow: 
+      0 3px 6px rgba(0,0,0,0.2),
+      inset 0 1px 0 rgba(255,255,255,0.05);
+  }
+
+  .dark .bezel-btn:hover {
+    background: linear-gradient(to bottom, #4A3328 0%, #36221A 100%);
+    border-color: #DFBA73;
+    box-shadow: 0 4px 10px rgba(197,160,89,0.25);
+  }
+
+  .dark .bezel-btn:active {
+    box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+  }
+
+  @keyframes gradient-x {
+    0%, 100% {
+      background-size: 200% 200%;
+      background-position: left center;
+    }
+    50% {
+      background-size: 200% 200%;
+      background-position: right center;
+    }
+  }
+  .animate-gradient-x {
+    animation: gradient-x 15s ease infinite;
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  @apply bg-muted-foreground/30 rounded-full;
+}
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-muted-foreground/50;
+}
+
+/* Print Media Styles for Petition Letter */
+@media print {
+  /* Hide the entire website screen wrapper and overlays */
+  body::before,
+  .no-print {
+    display: none !important;
+  }
+  
+  /* Setup clean white printable page body */
+  body {
+    background: #ffffff !important;
+    color: #000000 !important;
+    background-image: none !important;
+  }
+  
+  /* Style the print letter target with official margins and typography */
+  #print-letter-target {
+    display: block !important;
+    color: #000000 !important;
+    background: #ffffff !important;
+    font-family: var(--font-urdu), serif !important;
+    font-size: 16pt !important;
+    line-height: 2.2 !important;
+    white-space: pre-wrap !important;
+    direction: rtl !important;
+    padding: 1.2in 1in 1in 1in !important; /* Standard margins */
+    width: 100% !important;
+    margin: 0 !important;
+    box-shadow: none !important;
+  }
+}
+
+/* Leaflet custom map container and tiles color blending */
+.leaflet-container {
+  background: var(--background) !important;
+}
+
+.leaflet-tile-container {
+  will-change: filter, mix-blend-mode;
+}
+
+/* Light mode tiles blending: blend CartoDB light tiles into the warm parchment background */
+:root:not(.dark) .leaflet-tile {
+  filter: sepia(0.3) saturate(0.85) contrast(1.05) brightness(0.98);
+  mix-blend-mode: multiply;
+  opacity: 0.9;
+}
+
+/* Dark mode tiles blending: blend CartoDB dark tiles into the deep mahogany background */
+.dark .leaflet-tile {
+  filter: hue-rotate(335deg) saturate(0.8) brightness(0.95) contrast(1.15);
+  mix-blend-mode: screen;
+  opacity: 0.9;
+}
+
+/* Fix leaflet pane z-indexes to stay below headers/dialogs */
+.leaflet-pane {
+  z-index: 1 !important;
+}
+.leaflet-top,
+.leaflet-bottom {
+  z-index: 2 !important;
+}
+
+
+

@@ -1,0 +1,3 @@
+# Exclude backend from Vercel deployment
+backend
+embeddings-gen
