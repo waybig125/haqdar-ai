@@ -168,6 +168,9 @@ export function ComplaintInput({ onAnalyze, loading }) {
     } else if (lang === 'Sindhi') {
       setLanguage('sd-PK');
       setLetterLanguage('Urdu');
+    } else if (lang === 'Pashto') {
+      setLanguage('ps-PK');
+      setLetterLanguage('Urdu');
     } else {
       setLanguage('ur-PK');
       setLetterLanguage('Urdu');
@@ -276,7 +279,7 @@ export function ComplaintInput({ onAnalyze, loading }) {
     setText(example);
   };
 
-  const isRtl = ['Urdu', 'Sindhi', 'Punjabi'].includes(selectedLanguage);
+  const isRtl = ['Urdu', 'Sindhi', 'Punjabi', 'Pashto'].includes(selectedLanguage);
   const isWebSpeechLang = ['Urdu', 'English', 'Roman (Urdu/Regional)'].includes(selectedLanguage);
   
   const isRecordingSupported = typeof window !== 'undefined' && !!window.MediaRecorder;
@@ -287,7 +290,7 @@ export function ComplaintInput({ onAnalyze, loading }) {
   // Dynamic direction and font based on text (or selectedLanguage if empty)
   const isTextAreaRtl = text.trim() 
     ? /[\u0600-\u06FF]/.test(text)
-    : ['Urdu', 'Sindhi', 'Punjabi'].includes(selectedLanguage);
+    : ['Urdu', 'Sindhi', 'Punjabi', 'Pashto'].includes(selectedLanguage);
 
   return (
     <div id="complaint-section" className="w-full max-w-6xl mx-auto px-4 py-12 scroll-mt-24">
@@ -309,7 +312,8 @@ export function ComplaintInput({ onAnalyze, loading }) {
                 {selectedLanguage === 'Urdu' ? '🇵🇰 اردو' :
                  selectedLanguage === 'English' ? '🇬🇧 English' :
                  selectedLanguage === 'Roman (Urdu/Regional)' ? '✍️ Roman (Urdu/Regional)' :
-                 selectedLanguage === 'Sindhi' ? '🇵🇰 سنڌي' : '🇵🇰 پنجابی'}
+                 selectedLanguage === 'Sindhi' ? '🇵🇰 سنڌي' :
+                 selectedLanguage === 'Punjabi' ? '🇵🇰 پنجابی' : '🇵🇰 پښتو'}
               </div>
 
               {/* Official Document Seal Watermark */}
@@ -504,6 +508,7 @@ export function ComplaintInput({ onAnalyze, loading }) {
                       <option value="Roman (Urdu/Regional)" className="bg-[#FAF3E0] dark:bg-[#1C120D] text-amber-950 dark:text-[#E6DBC6] font-inter">Roman (Urdu/Punjabi/etc.)</option>
                       <option value="Sindhi" className="bg-[#FAF3E0] dark:bg-[#1C120D] text-amber-950 dark:text-[#E6DBC6] font-urdu text-sm">سنڌي (Sindhi)</option>
                       <option value="Punjabi" className="bg-[#FAF3E0] dark:bg-[#1C120D] text-amber-950 dark:text-[#E6DBC6] font-urdu text-sm">پنجابی (Punjabi)</option>
+                      <option value="Pashto" className="bg-[#FAF3E0] dark:bg-[#1C120D] text-amber-950 dark:text-[#E6DBC6] font-urdu text-sm">پښتو (Pashto)</option>
                     </select>
                   </div>
 
