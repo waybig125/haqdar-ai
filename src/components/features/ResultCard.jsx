@@ -358,9 +358,9 @@ export function ResultCard({ result, editedLetter, setEditedLetter, language = '
               onValueChange={setOpenItems}
             >
               <AccordionItem value="letter" className="border-none">
-                <AccordionTrigger className="hover:no-underline py-3 px-4 rounded-lg bg-[#3A231A]/30 hover:bg-[#3A231A]/50 transition-colors group flex items-center justify-between cursor-pointer border border-[#523225]">
-                  <div className={cn("flex items-center gap-3 text-accent transition-colors", isResponseEnglish ? "justify-start" : "justify-end flex-row-reverse")}>
-                    <FileText className="w-5 h-5 text-accent animate-pulse" />
+                <AccordionTrigger className="hover:no-underline py-3 px-4 rounded-lg bg-accent/10 dark:bg-[#3A231A]/30 hover:bg-accent/20 dark:hover:bg-[#3A231A]/50 transition-colors group flex items-center justify-between cursor-pointer border border-accent/20 dark:border-[#523225]">
+                  <div className={cn("flex items-center gap-3 text-amber-950 dark:text-accent transition-colors", isResponseEnglish ? "justify-start" : "justify-end flex-row-reverse")}>
+                    <FileText className="w-5 h-5 text-amber-950 dark:text-accent animate-pulse" />
                     <span className={cn("text-2xl font-bold m-0", textFontClass)} dir={isResponseEnglish ? "ltr" : "rtl"}>{lang.petitionAccordionTitle}</span>
                   </div>
                 </AccordionTrigger>
@@ -423,9 +423,9 @@ export function ResultCard({ result, editedLetter, setEditedLetter, language = '
 
               {result.relevant_laws && result.relevant_laws.length > 0 && (
                 <AccordionItem value="laws" className="border-none mt-3">
-                  <AccordionTrigger className="hover:no-underline py-3 px-4 rounded-lg bg-[#3A231A]/30 hover:bg-[#3A231A]/50 transition-colors group flex items-center justify-between cursor-pointer border border-[#523225]">
-                    <div className={cn("flex items-center gap-3 text-accent transition-colors", isResponseEnglish ? "justify-start" : "justify-end flex-row-reverse")}>
-                      <Scale className="w-5 h-5 text-accent" />
+                  <AccordionTrigger className="hover:no-underline py-3 px-4 rounded-lg bg-accent/10 dark:bg-[#3A231A]/30 hover:bg-accent/20 dark:hover:bg-[#3A231A]/50 transition-colors group flex items-center justify-between cursor-pointer border border-accent/20 dark:border-[#523225]">
+                    <div className={cn("flex items-center gap-3 text-amber-950 dark:text-accent transition-colors", isResponseEnglish ? "justify-start" : "justify-end flex-row-reverse")}>
+                      <Scale className="w-5 h-5 text-amber-950 dark:text-accent" />
                       <span className={cn("text-2xl font-bold m-0", textFontClass)} dir={isResponseEnglish ? "ltr" : "rtl"}>{lang.verifiedLawsTitle}</span>
                     </div>
                   </AccordionTrigger>
