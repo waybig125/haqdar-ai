@@ -6,6 +6,11 @@ import { Button } from '@/components/ui/button';
 import { AnimatedContainer } from '@/components/ui/AnimatedContainer';
 import { useSpeechRecognition } from '@/lib/hooks';
 import { cn } from '@/lib/utils';
+import { toast } from 'sonner';
+
+const ALL_DISTRICTS = [
+  "Abbottabad", "Attock", "Awaran", "Badin", "Bagh", "Bahawalnagar", "Bahawalpur", "Bajaur", "Bannu", "Barkhan", "Battagram", "Bhimber", "Bhakkar", "Buner", "Chagai", "Chakwal", "Chaman", "Charsadda", "Chiniot", "Dadu", "Dera Bugti", "Dera Ghazi Khan", "Dera Ismail Khan", "Diamer", "Dukki", "Faisalabad", "Ghanche", "Ghizer", "Ghotki", "Gilgit", "Gujranwala", "Gujrat", "Gwadar", "Hafizabad", "Hangu", "Haripur", "Harnai", "Hattian Bala", "Haveli", "Hub", "Hunza", "Hyderabad", "Islamabad", "Jacobabad", "Jafarabad", "Jamshoro", "Jhang", "Jhelum", "Jhal Magsi", "Kalat", "Karachi Central", "Karachi East", "Karachi South", "Karachi West", "Karak", "Kashmore", "Kasur", "Keamari", "Kech", "Khairpur", "Khanewal", "Kharan", "Kharmang", "Khushab", "Khyber", "Khuzdar", "Killa Abdullah", "Killa Saifullah", "Kohat", "Kohlu", "Kolai Pallas", "Korangi", "Kotli", "Kurram", "Lahore", "Lakki Marwat", "Lasbela", "Layyah", "Lodhran", "Loralai", "Lower Dir", "Lower Kohistan", "Malakand", "Malir", "Mandi Bahauddin", "Mansehra", "Mardan", "Mastung", "Matiari", "Mianwali", "Mirpur", "Mirpurkhas", "Mohmand", "Multan", "Musakhel", "Muzaffarabad", "Muzaffargarh", "Nagar", "Nankana Sahib", "Narowal", "Naushahro Feroze", "Neelum", "North Waziristan", "Nushki", "Okara", "Orakzai", "Pakpattan", "Panjgur", "Peshawar", "Pishin", "Poonch", "Punjgur", "Qambar Shahdadkot", "Quetta", "Rahim Yar Khan", "Rajanpur", "Rawalpindi", "Roundu", "Sahiwal", "Sanghar", "Sargodha", "Shangla", "Shigar", "Shikarpur", "Sheikhupura", "Sherani", "Sialkot", "Sibi", "Skardu", "Sohbatpur", "South Waziristan", "Sudhanoti", "Sujawal", "Sukkur", "Surab", "Swabi", "Swat", "Tando Allahyar", "Tando Muhammad Khan", "Tank", "Tharparkar", "Thatta", "Toba Tek Singh", "Torghar", "Umerkot", "Upper Dir", "Upper Kohistan", "Vehari", "Washuk", "Zhob", "Ziarat"
+];
 
 const EXAMPLES = [
   "Police ne bina wajah fine diya",
@@ -31,6 +36,10 @@ export function ComplaintInput({ onAnalyze, loading }) {
   const [selectedLanguage, setSelectedLanguage] = useState('Urdu');
   const [letterLanguage, setLetterLanguage] = useState('Urdu');
   const [isManual, setIsManual] = useState(false);
+
+  const [name, setName] = useState('');
+  const [district, setDistrict] = useState('');
+  const [detectingLocation, setDetectingLocation] = useState(false);
 
   const [activeStepIndex, setActiveStepIndex] = useState(-1);
 
@@ -123,10 +132,69 @@ export function ComplaintInput({ onAnalyze, loading }) {
     }
   }, [transcript, setTranscript]);
 
+  const detectDistrict = () => {
+    if (typeof window === 'undefined' || !navigator.geolocation) {
+      toast.error("Geolocation is not supported by your browser.");
+      return;
+    }
+
+    setDetectingLocation(true);
+    navigator.geolocation.getCurrentPosition(
+      async (position) => {
+        const { latitude, longitude } = position.coords;
+        try {
+          const res = await fetch(`https://nominatim.openstreetmap.org/reverse?lat=${latitude}&lon=${longitude}&format=json&accept-language=en`);
+          const data = await res.json();
+          if (data && data.address) {
+            const rawDistrict = data.address.county || data.address.state_district || data.address.city || data.address.town || "";
+            let cleanDistrict = rawDistrict.replace(/\s+District/gi, "").trim();
+            
+            const matched = ALL_DISTRICTS.find(
+              (d) => d.toLowerCase() === cleanDistrict.toLowerCase()
+            );
+            
+            if (matched) {
+              setDistrict(matched);
+              toast.success(`Location detected: ${matched} District`);
+            } else {
+              const partialMatched = ALL_DISTRICTS.find(
+                (d) => cleanDistrict.toLowerCase().includes(d.toLowerCase()) || d.toLowerCase().includes(cleanDistrict.toLowerCase())
+              );
+              if (partialMatched) {
+                setDistrict(partialMatched);
+                toast.success(`Location matched: ${partialMatched} District`);
+              } else {
+                toast.error(`Could not match location (${cleanDistrict}) to a Pakistani district.`);
+              }
+            }
+          } else {
+            toast.error("Could not fetch location address.");
+          }
+        } catch (err) {
+          console.error(err);
+          toast.error("Failed to reverse geocode location.");
+        } finally {
+          setDetectingLocation(false);
+        }
+      },
+      (error) => {
+        console.error(error);
+        toast.error("Permission denied or failed to retrieve GPS coordinates.");
+        setDetectingLocation(false);
+      },
+      { enableHighAccuracy: true, timeout: 8000 }
+    );
+  };
+
   const handleSubmit = (e) => {
     e?.preventDefault();
     if (text.trim() && !loading) {
-      onAnalyze(text, { language: selectedLanguage, letter_language: letterLanguage });
+      onAnalyze(text, { 
+        language: selectedLanguage, 
+        letter_language: letterLanguage,
+        name: name.trim() || undefined,
+        district: district || undefined
+      });
     }
   };
 
@@ -136,6 +204,9 @@ export function ComplaintInput({ onAnalyze, loading }) {
 
   const isRtl = ['Urdu', 'Sindhi', 'Punjabi', 'Pashto'].includes(selectedLanguage);
   const isMicDisabled = ['Sindhi', 'Punjabi', 'Pashto'].includes(selectedLanguage);
+  
+  // Dynamic direction and font based strictly on user input text
+  const isTextAreaRtl = /[\u0600-\u06FF]/.test(text);
 
   return (
     <div id="complaint-section" className="w-full max-w-6xl mx-auto px-4 py-12 scroll-mt-24">
@@ -169,14 +240,14 @@ export function ComplaintInput({ onAnalyze, loading }) {
               <textarea
                 value={text}
                 onChange={(e) => setText(e.target.value.slice(0, 800))}
-                placeholder={isRtl ? "اپنی شکایت یہاں لکھیں یا مائیک کا بٹن دبا کر بولیں..." : "Type or click the microphone to speak your complaint..."}
+                placeholder={isTextAreaRtl ? "اپنی شکایت یہاں لکھیں یا مائیک کا بٹن دبا کر بولیں..." : "Type or click the microphone to speak your complaint..."}
                 className={cn(
                   "w-full min-h-[170px] bg-transparent resize-none outline-none leading-relaxed placeholder:text-amber-900/30 dark:placeholder:text-amber-100/25 transition-all border-none focus:ring-0 mt-2 px-4",
-                  isRtl 
+                  isTextAreaRtl 
                     ? "font-urdu text-base sm:text-xl md:text-3xl leading-[2.0] sm:leading-[2.5] md:leading-[2.8] py-2 text-amber-950 dark:text-amber-100" 
                     : "font-garamond text-base sm:text-xl md:text-3xl font-bold leading-[1.5] sm:leading-[1.9] md:leading-[2.2] py-2 text-amber-950 dark:text-amber-100"
                 )}
-                dir={isRtl ? "rtl" : "ltr"}
+                dir={isTextAreaRtl ? "rtl" : "ltr"}
                 disabled={loading}
                 maxLength={800}
               />
@@ -197,6 +268,60 @@ export function ComplaintInput({ onAnalyze, loading }) {
                 )}
                 <span className="font-semibold">{text.length} / 800</span>
               </div>
+            </div>
+
+            {/* Optional Applicant Details Section */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 bg-[#FAF6EE]/30 dark:bg-[#20120B]/30 p-4 rounded-xl border border-accent/20">
+              
+              {/* Optional Name Input */}
+              <div className="flex flex-col gap-1.5">
+                <label className="text-[10px] font-bold uppercase tracking-wider text-accent/80 font-inter">
+                  Your Name (Optional / اختیاری نام)
+                </label>
+                <input
+                  type="text"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  placeholder="e.g. Muhammad Ali"
+                  className="rounded px-3 h-10 font-bold text-xs font-inter text-accent bg-[#FAF6EE]/90 dark:bg-[#20120B]/90 border border-accent/30 focus:border-accent outline-none w-full shadow-inner"
+                  disabled={loading}
+                />
+              </div>
+
+              {/* District Dropdown with Location Finder */}
+              <div className="flex flex-col gap-1.5 relative">
+                <div className="flex justify-between items-center w-full">
+                  <label className="text-[10px] font-bold uppercase tracking-wider text-accent/80 font-inter">
+                    District (Optional / اختیاری ضلع)
+                  </label>
+                  <button
+                    type="button"
+                    onClick={detectDistrict}
+                    disabled={detectingLocation || loading}
+                    className="text-[9px] font-bold text-emerald-600 dark:text-emerald-500 hover:text-emerald-500 dark:hover:text-emerald-400 transition-colors uppercase cursor-pointer flex items-center gap-1 bg-emerald-500/5 hover:bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20 font-inter font-bold"
+                  >
+                    {detectingLocation ? "Detecting..." : "🎯 Auto-Detect"}
+                  </button>
+                </div>
+                <select
+                  value={district}
+                  onChange={(e) => setDistrict(e.target.value)}
+                  className="rounded px-3 h-10 font-bold text-xs font-inter text-accent cursor-pointer bg-[#FAF6EE]/90 dark:bg-[#20120B]/90 border border-accent/30 outline-none pr-8 appearance-none relative w-full"
+                  style={{
+                    backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23C5A059'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'/%3E%3C/svg%3E")`,
+                    backgroundPosition: 'right 10px center',
+                    backgroundSize: '12px',
+                    backgroundRepeat: 'no-repeat'
+                  }}
+                  disabled={loading}
+                >
+                  <option value="" className="bg-[#FAF3E0] dark:bg-[#1C120D] text-amber-950 dark:text-[#E6DBC6]">Select District...</option>
+                  {ALL_DISTRICTS.map((d) => (
+                    <option key={d} value={d} className="bg-[#FAF3E0] dark:bg-[#1C120D] text-amber-950 dark:text-[#E6DBC6]">{d}</option>
+                  ))}
+                </select>
+              </div>
+
             </div>
 
             {speechError === 'not-allowed' && (
@@ -266,7 +391,7 @@ export function ComplaintInput({ onAnalyze, loading }) {
                     key={i}
                     type="button"
                     onClick={() => handleExampleClick(ex)}
-                    className="text-xs font-inter px-3.5 py-1.5 rounded bg-accent/10 dark:bg-[#3A231A]/60 text-amber-950 dark:text-accent hover:bg-accent/20 dark:hover:bg-[#3A231A] border border-accent/30 dark:border-[#523225] hover:border-accent/60 dark:hover:border-[#C5A059]/40 transition-all cursor-pointer shadow-[0_2px_4px_rgba(0,0,0,0.1)] dark:shadow-[0_2px_4px_rgba(0,0,0,0.2)] font-semibold"
+                    className="text-xs font-inter px-3.5 py-1.5 rounded bg-accent/10 dark:bg-[#3A231A]/60 text-amber-950 dark:text-accent hover:bg-accent/20 dark:hover:bg-[#3A231A] border border-accent/30 dark:border-[#523225] hover:border-accent/60 dark:hover:border-[#C5A059]/40 transition-all cursor-pointer shadow-[0_2px_4px_rgba(0,0,0,0.15)] dark:shadow-[0_2px_4px_rgba(0,0,0,0.3)] font-semibold"
                   >
                     {ex}
                   </button>
@@ -381,4 +506,3 @@ export function ComplaintInput({ onAnalyze, loading }) {
     </div>
   );
 }
-

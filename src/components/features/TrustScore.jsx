@@ -74,7 +74,7 @@ export function TrustScore({ score, reason, className, language = 'Urdu' }) {
   const labelLang = LABELS[language] || LABELS.Urdu;
   const displayedLabel = labelLang[scoreKey];
 
-  const isReasonEnglish = reason && (reason.match(/[a-zA-Z]/g) || []).length / reason.replace(/\s+/g, '').length > 0.5;
+  const isReasonEnglish = language === 'English' || language === 'Roman (Urdu/Regional)' || (reason && (reason.match(/[a-zA-Z]/g) || []).length / reason.replace(/\s+/g, '').length > 0.5);
 
   return (
     <motion.div 
@@ -112,10 +112,10 @@ export function TrustScore({ score, reason, className, language = 'Urdu' }) {
       {reason && (
         <p 
           className={cn(
-            "text-sm font-medium text-muted-foreground font-urdu m-0 leading-relaxed",
-            language === 'English' || isReasonEnglish ? "text-left" : "text-right"
+            "text-sm font-medium text-muted-foreground m-0 leading-relaxed",
+            isReasonEnglish ? "font-inter text-left" : "font-urdu text-right"
           )}
-          dir={language === 'English' || isReasonEnglish ? "ltr" : "rtl"}
+          dir={isReasonEnglish ? "ltr" : "rtl"}
         >
           {reason}
         </p>

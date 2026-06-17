@@ -30,7 +30,7 @@ const TRANSLATIONS = {
     copiedButton: "نقل ہو گئی",
     downloadPdfButton: "پی ڈی ایف ڈاؤن لوڈ",
     verifiedLawsTitle: "حکومتی قوانین کا ریکارڈ (Verified Laws)",
-    registryEntry: "رجسٹری اندراج نمبر",
+    registryEntry: "رجسٹری اندراج نمبر #",
     lawProvision: "قانون کی دفعہ",
     enforcementAuthority: "مجاز ادارہ",
     officialContact: "رابطہ نمبر / ہیلپ لائن",
@@ -99,7 +99,7 @@ const TRANSLATIONS = {
     copiedButton: "ڪاپي ٿي ويو",
     downloadPdfButton: "پي ڊي ايف ڊائون لوڊ",
     verifiedLawsTitle: "حڪومتي قانونن جو رڪارڊ (تصديق ٿيل قانون)",
-    registryEntry: "رجسٽري داخلائن نمبر",
+    registryEntry: "رجسٽري داخلائن نمبر #",
     lawProvision: "قانون جو دفعو",
     enforcementAuthority: "مجاز ادارو",
     officialContact: "رابطي نمبر / هيلپ لائين",
@@ -122,7 +122,7 @@ const TRANSLATIONS = {
     copiedButton: "کاپی شو",
     downloadPdfButton: "پي ډي ایف ډاونلوډ",
     verifiedLawsTitle: "د دولتي قوانینو ریکارډ (تصدیق شوي قوانین)",
-    registryEntry: "د راجستر نمبر",
+    registryEntry: "د راجستر نمبر #",
     lawProvision: "د قانون ماده",
     enforcementAuthority: "مجاز واک لرونکې اداره",
     officialContact: "اړیکې شمیره / هیلپ لاین",
@@ -145,7 +145,7 @@ const TRANSLATIONS = {
     copiedButton: "کاپی ہو گیا",
     downloadPdfButton: "پی ڈی ایف ڈاؤن لوڈ",
     verifiedLawsTitle: "حکومتی قانوناں دا ریکارڈ (تصدیق شدہ قانون)",
-    registryEntry: "رجسٹری اندراج نمبر",
+    registryEntry: "رجسٹری اندراج نمبر #",
     lawProvision: "قانون دی دفعہ",
     enforcementAuthority: "مجاز ادارہ",
     officialContact: "رابطہ نمبر / ہیلپ لائن",
@@ -184,7 +184,10 @@ export function ResultCard({ result, editedLetter, setEditedLetter, language = '
     ? (result.questions || []).join(" ") 
     : (result.complaint_letter || result.violation_summary || "");
   
-  const isResponseEnglish = isMostlyEnglish(textToTest);
+  const isResponseEnglish = language === 'English' || language === 'Roman (Urdu/Regional)' || isMostlyEnglish(textToTest);
+  
+  // Use English/Latin font classes for English and Roman Urdu, Urdu font for others
+  const textFontClass = isResponseEnglish ? "font-inter" : "font-urdu";
 
   if (result.status === "needs_more_info") {
     return (
@@ -192,7 +195,8 @@ export function ResultCard({ result, editedLetter, setEditedLetter, language = '
         <Card className="wood-console shadow-[0_20px_50px_rgba(0,0,0,0.5)] overflow-hidden rounded-2xl border border-accent/20">
           <CardHeader className="bg-[#3A231A]/30 border-b border-[#523225] py-5">
             <CardTitle className={cn(
-              "font-urdu text-3xl font-bold text-foreground flex items-center gap-2",
+              "text-3xl font-bold text-foreground flex items-center gap-2",
+              textFontClass,
               isResponseEnglish ? "text-left justify-start" : "text-right justify-end flex-row-reverse"
             )} dir={isResponseEnglish ? "ltr" : "rtl"}>
               <span className="w-2.5 h-2.5 rounded-full bg-amber-500 animate-pulse" />
@@ -201,12 +205,13 @@ export function ResultCard({ result, editedLetter, setEditedLetter, language = '
           </CardHeader>
           <CardContent className="p-6 md:p-8 flex flex-col gap-6">
             <div className="parchment-sheet rounded-xl p-6 md:p-8 flex flex-col gap-4">
-              <h3 className="font-urdu text-2xl font-bold text-amber-950 dark:text-[#E6DBC6]" dir={isResponseEnglish ? "ltr" : "rtl"}>
+              <h3 className={cn("text-2xl font-bold text-amber-950 dark:text-[#E6DBC6]", textFontClass)} dir={isResponseEnglish ? "ltr" : "rtl"}>
                 {lang.moreInfoSubtext}
               </h3>
               
               <ul className={cn(
-                "space-y-4 font-urdu text-xl text-amber-950 dark:text-[#E6DBC6] list-none mt-2",
+                "space-y-4 text-xl text-amber-950 dark:text-[#E6DBC6] list-none mt-2",
+                textFontClass,
                 isResponseEnglish ? "pl-0" : "pr-0"
               )} dir={isResponseEnglish ? "ltr" : "rtl"}>
                 {result.questions?.map((q, index) => (
@@ -312,9 +317,9 @@ export function ResultCard({ result, editedLetter, setEditedLetter, language = '
             <div className="parchment-sheet rounded-xl p-6 flex flex-col gap-4">
               <div className={cn("flex items-center gap-3 text-amber-950 dark:text-amber-100", isResponseEnglish ? "justify-start" : "justify-end flex-row-reverse")}>
                 <Scale className="w-5.5 h-5.5 text-accent" />
-                <h3 className="font-urdu text-2xl font-bold m-0" dir={isResponseEnglish ? "ltr" : "rtl"}>{lang.violationSummaryHeader}</h3>
+                <h3 className={cn("text-2xl font-bold m-0", textFontClass)} dir={isResponseEnglish ? "ltr" : "rtl"}>{lang.violationSummaryHeader}</h3>
               </div>
-              <p className="font-urdu text-xl leading-[2.4] font-medium pt-2" dir={isResponseEnglish ? "ltr" : "rtl"}>
+              <p className={cn("text-xl leading-[2.4] font-medium pt-2", textFontClass)} dir={isResponseEnglish ? "ltr" : "rtl"}>
                 {result.violation_summary}
               </p>
               
@@ -332,12 +337,12 @@ export function ResultCard({ result, editedLetter, setEditedLetter, language = '
             <div className="parchment-sheet rounded-xl p-6 flex flex-col gap-4">
               <div className={cn("flex items-center gap-3 text-amber-950 dark:text-amber-100", isResponseEnglish ? "justify-start" : "justify-end flex-row-reverse")}>
                 <Building2 className="w-5.5 h-5.5 text-accent" />
-                <h3 className="font-urdu text-2xl font-bold m-0" dir={isResponseEnglish ? "ltr" : "rtl"}>{lang.responsibleAuthorityHeader}</h3>
+                <h3 className={cn("text-2xl font-bold m-0", textFontClass)} dir={isResponseEnglish ? "ltr" : "rtl"}>{lang.responsibleAuthorityHeader}</h3>
               </div>
-              <p className="font-urdu text-lg text-amber-900/60 dark:text-amber-100/50 pt-2" dir={isResponseEnglish ? "ltr" : "rtl"}>
+              <p className={cn("text-lg text-amber-900/60 dark:text-amber-100/50 pt-2", textFontClass)} dir={isResponseEnglish ? "ltr" : "rtl"}>
                 {lang.responsibleAuthoritySubtext}
               </p>
-              <div className="p-5 rounded-lg bg-card border border-[#C5B69C] dark:border-[#36221A] text-xl font-bold text-center mt-3 shadow-md font-urdu text-foreground relative overflow-hidden leading-[2.4]" dir={isResponseEnglish ? "ltr" : "rtl"}>
+              <div className={cn("p-5 rounded-lg bg-card border border-[#C5B69C] dark:border-[#36221A] text-xl font-bold text-center mt-3 shadow-md text-foreground relative overflow-hidden leading-[2.4]", textFontClass)} dir={isResponseEnglish ? "ltr" : "rtl"}>
                 <div className="absolute left-0 top-0 h-full w-1 bg-accent" />
                 {result.responsible_authority}
               </div>
@@ -356,7 +361,7 @@ export function ResultCard({ result, editedLetter, setEditedLetter, language = '
                 <AccordionTrigger className="hover:no-underline py-3 px-4 rounded-lg bg-[#3A231A]/30 hover:bg-[#3A231A]/50 transition-colors group flex items-center justify-between cursor-pointer border border-[#523225]">
                   <div className={cn("flex items-center gap-3 text-accent transition-colors", isResponseEnglish ? "justify-start" : "justify-end flex-row-reverse")}>
                     <FileText className="w-5 h-5 text-accent animate-pulse" />
-                    <span className="font-urdu text-2xl font-bold m-0" dir={isResponseEnglish ? "ltr" : "rtl"}>{lang.petitionAccordionTitle}</span>
+                    <span className={cn("text-2xl font-bold m-0", textFontClass)} dir={isResponseEnglish ? "ltr" : "rtl"}>{lang.petitionAccordionTitle}</span>
                   </div>
                 </AccordionTrigger>
                 <AccordionContent className="pt-3">
@@ -402,7 +407,8 @@ export function ResultCard({ result, editedLetter, setEditedLetter, language = '
                       </div>
                       <textarea
                         className={cn(
-                          "w-full bg-transparent border-none focus:outline-none focus:ring-0 focus-visible:ring-0 font-urdu text-xl md:text-2xl leading-[2.6] whitespace-pre-wrap break-words max-w-full font-medium resize-none min-h-[500px] text-foreground",
+                          "w-full bg-transparent border-none focus:outline-none focus:ring-0 focus-visible:ring-0 text-xl md:text-2xl leading-[2.6] whitespace-pre-wrap break-words max-w-full font-medium resize-none min-h-[500px] text-foreground",
+                          textFontClass,
                           isResponseEnglish ? "text-left" : "text-right"
                         )}
                         dir={isResponseEnglish ? "ltr" : "rtl"}
@@ -420,7 +426,7 @@ export function ResultCard({ result, editedLetter, setEditedLetter, language = '
                   <AccordionTrigger className="hover:no-underline py-3 px-4 rounded-lg bg-[#3A231A]/30 hover:bg-[#3A231A]/50 transition-colors group flex items-center justify-between cursor-pointer border border-[#523225]">
                     <div className={cn("flex items-center gap-3 text-accent transition-colors", isResponseEnglish ? "justify-start" : "justify-end flex-row-reverse")}>
                       <Scale className="w-5 h-5 text-accent" />
-                      <span className="font-urdu text-2xl font-bold m-0" dir={isResponseEnglish ? "ltr" : "rtl"}>{lang.verifiedLawsTitle}</span>
+                      <span className={cn("text-2xl font-bold m-0", textFontClass)} dir={isResponseEnglish ? "ltr" : "rtl"}>{lang.verifiedLawsTitle}</span>
                     </div>
                   </AccordionTrigger>
                   <AccordionContent className="pt-3">
@@ -432,7 +438,7 @@ export function ResultCard({ result, editedLetter, setEditedLetter, language = '
                               ⚖️ {lawObj.law}
                             </span>
                             <span className="text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded border border-accent/20 bg-accent/5 text-accent font-inter">
-                              {lang.registryEntry} #{idx + 1}
+                              {lang.registryEntry}{idx + 1}
                             </span>
                           </div>
                           
@@ -440,7 +446,7 @@ export function ResultCard({ result, editedLetter, setEditedLetter, language = '
                             <span className={cn("text-[9px] uppercase tracking-wider text-amber-900/50 dark:text-amber-100/40 font-bold font-inter", isResponseEnglish ? "text-left" : "text-right")}>
                               {lang.lawProvision}
                             </span>
-                            <p className="font-urdu text-lg leading-relaxed text-amber-950 dark:text-[#E6DBC6]" dir={isResponseEnglish ? "ltr" : "rtl"}>
+                            <p className={cn("text-lg leading-relaxed text-amber-950 dark:text-[#E6DBC6]", textFontClass)} dir={isResponseEnglish ? "ltr" : "rtl"}>
                               {lawObj.provision}
                             </p>
                           </div>
@@ -450,7 +456,7 @@ export function ResultCard({ result, editedLetter, setEditedLetter, language = '
                               <span className="text-[9px] uppercase tracking-wider text-amber-900/50 dark:text-amber-100/40 font-bold font-inter">
                                 {lang.enforcementAuthority}
                               </span>
-                              <p className="font-urdu text-base font-semibold text-amber-950 dark:text-[#E6DBC6]" dir={isResponseEnglish ? "ltr" : "rtl"}>
+                              <p className={cn("text-base font-semibold text-amber-950 dark:text-[#E6DBC6]", textFontClass)} dir={isResponseEnglish ? "ltr" : "rtl"}>
                                 {lawObj.authority}
                               </p>
                             </div>
@@ -477,8 +483,8 @@ export function ResultCard({ result, editedLetter, setEditedLetter, language = '
           {/* Step-by-Step Guide "What to do next" */}
           <div className="px-4 pb-6 pt-2 no-print">
             <div className="parchment-sheet rounded-xl p-5 md:p-6 border border-[#C5B69C] dark:border-[#36221A]">
-              <h4 className="font-urdu text-2xl font-bold text-accent mb-3" dir={isResponseEnglish ? "ltr" : "rtl"}>{lang.nextStepsTitle}</h4>
-              <ol className="font-urdu text-base md:text-lg leading-[2.2] space-y-3 list-decimal list-inside" dir={isResponseEnglish ? "ltr" : "rtl"}>
+              <h4 className={cn("text-2xl font-bold text-accent mb-3", textFontClass)} dir={isResponseEnglish ? "ltr" : "rtl"}>{lang.nextStepsTitle}</h4>
+              <ol className={cn("text-base md:text-lg leading-[2.2] space-y-3 list-decimal list-inside", textFontClass)} dir={isResponseEnglish ? "ltr" : "rtl"}>
                 <li className="text-foreground">
                   {lang.step1}
                 </li>
