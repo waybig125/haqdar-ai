@@ -8,8 +8,6 @@ import { motion } from 'framer-motion';
 const SCORE_CONFIG = {
   high: {
     percentage: 92,
-    label: "HIGH CONFIDENCE",
-    urduLabel: "اعلیٰ اعتماد",
     colorClass: "text-primary dark:text-emerald-400",
     bgClass: "bg-primary/5 dark:bg-emerald-950/20",
     borderClass: "border-primary/20 dark:border-emerald-800/30",
@@ -18,8 +16,6 @@ const SCORE_CONFIG = {
   },
   medium: {
     percentage: 68,
-    label: "MEDIUM CONFIDENCE",
-    urduLabel: "درمیانہ اعتماد",
     colorClass: "text-accent dark:text-amber-400",
     bgClass: "bg-accent/5 dark:bg-amber-950/20",
     borderClass: "border-accent/20 dark:border-amber-800/30",
@@ -28,8 +24,6 @@ const SCORE_CONFIG = {
   },
   needs_verification: {
     percentage: 42,
-    label: "NEEDS VERIFICATION",
-    urduLabel: "تصدیق درکار ہے",
     colorClass: "text-red-600 dark:text-red-400",
     bgClass: "bg-red-500/5 dark:bg-red-950/20",
     borderClass: "border-red-500/20 dark:border-red-800/30",
@@ -38,10 +32,49 @@ const SCORE_CONFIG = {
   }
 };
 
-export function TrustScore({ score, reason, className }) {
+const LABELS = {
+  Urdu: {
+    high: "اعلیٰ اعتماد",
+    medium: "درمیانہ اعتماد",
+    needs_verification: "تصدیق درکار ہے"
+  },
+  English: {
+    high: "HIGH CONFIDENCE",
+    medium: "MEDIUM CONFIDENCE",
+    needs_verification: "NEEDS VERIFICATION"
+  },
+  "Roman (Urdu/Regional)": {
+    high: "Aala Ehtamad",
+    medium: "Darmiyana Ehtamad",
+    needs_verification: "Tasdeeq Darkar Hai"
+  },
+  Sindhi: {
+    high: "اعليٰ اعتماد",
+    medium: "درميانو اعتماد",
+    needs_verification: "تصديق گهربل آهي"
+  },
+  Pashto: {
+    high: "لوړ باور",
+    medium: "منځنی باور",
+    needs_verification: "تصدیق ته اړتیا ده"
+  },
+  Punjabi: {
+    high: "اعلیٰ اعتماد",
+    medium: "درمیانہ اعتماد",
+    needs_verification: "تصدیق دی لوڑ اے"
+  }
+};
+
+export function TrustScore({ score, reason, className, language = 'Urdu' }) {
   // Safe fallback if API returns unexpected score string
   const config = SCORE_CONFIG[score?.toLowerCase()] || SCORE_CONFIG.needs_verification;
   const { Icon, percentage } = config;
+
+  const scoreKey = score?.toLowerCase() === 'high' ? 'high' : (score?.toLowerCase() === 'medium' ? 'medium' : 'needs_verification');
+  const labelLang = LABELS[language] || LABELS.Urdu;
+  const displayedLabel = labelLang[scoreKey];
+
+  const isReasonEnglish = reason && (reason.match(/[a-zA-Z]/g) || []).length / reason.replace(/\s+/g, '').length > 0.5;
 
   return (
     <motion.div 
@@ -59,7 +92,7 @@ export function TrustScore({ score, reason, className }) {
           config.borderClass
         )}>
           <Icon className="w-4 h-4" />
-          <span>{config.label}</span>
+          <span>{displayedLabel}</span>
         </div>
 
         {/* Progress Meter with fill animation */}
@@ -77,7 +110,13 @@ export function TrustScore({ score, reason, className }) {
       </div>
       
       {reason && (
-        <p className="text-sm font-medium text-muted-foreground font-urdu m-0 leading-relaxed">
+        <p 
+          className={cn(
+            "text-sm font-medium text-muted-foreground font-urdu m-0 leading-relaxed",
+            language === 'English' || isReasonEnglish ? "text-left" : "text-right"
+          )}
+          dir={language === 'English' || isReasonEnglish ? "ltr" : "rtl"}
+        >
           {reason}
         </p>
       )}

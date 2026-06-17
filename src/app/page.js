@@ -35,6 +35,7 @@ function formatUrduLetter(letter) {
 export default function Home() {
   const { data: analysisResult, loading, analyze } = useAnalyzeComplaint();
   const [editedLetter, setEditedLetter] = React.useState('');
+  const [submittedOptions, setSubmittedOptions] = React.useState({ language: 'Urdu', letter_language: 'Urdu' });
 
   React.useEffect(() => {
     if (analysisResult?.complaint_letter) {
@@ -43,6 +44,7 @@ export default function Home() {
   }, [analysisResult?.complaint_letter]);
 
   const handleAnalyze = (text, options = {}) => {
+    setSubmittedOptions(options);
     analyze(text, options);
     // Smooth scroll down slightly after analyzing
     setTimeout(() => {
@@ -70,6 +72,8 @@ export default function Home() {
                   result={analysisResult} 
                   editedLetter={editedLetter} 
                   setEditedLetter={setEditedLetter} 
+                  language={submittedOptions.language}
+                  letterLanguage={submittedOptions.letter_language}
                 />
                 {analysisResult.status === "ok" && (
                   <KnowYourRights result={analysisResult} />

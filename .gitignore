@@ -42,3 +42,6 @@ next-env.d.ts
 
 # backend
 /backend
+
+# Embeddings Gen
+/embeddings-gen

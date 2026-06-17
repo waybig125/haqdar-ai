@@ -30,6 +30,7 @@ export function ComplaintInput({ onAnalyze, loading }) {
 
   const [selectedLanguage, setSelectedLanguage] = useState('Urdu');
   const [letterLanguage, setLetterLanguage] = useState('Urdu');
+  const [isManual, setIsManual] = useState(false);
 
   const [activeStepIndex, setActiveStepIndex] = useState(-1);
 
@@ -59,7 +60,10 @@ export function ComplaintInput({ onAnalyze, loading }) {
     };
   }, [loading]);
 
-  const handleLanguageChange = (lang) => {
+  const handleLanguageChange = (lang, manual = false) => {
+    if (manual) {
+      setIsManual(true);
+    }
     setSelectedLanguage(lang);
     if (['Sindhi', 'Punjabi', 'Pashto'].includes(lang)) {
       if (isListening) {
@@ -81,8 +85,16 @@ export function ComplaintInput({ onAnalyze, loading }) {
     }
   };
 
+  // Reset manual lock if text is cleared
+  useEffect(() => {
+    if (!text.trim()) {
+      setIsManual(false);
+    }
+  }, [text]);
+
   // Smart language auto-detect when user types
   useEffect(() => {
+    if (isManual) return;
     const urduRegex = /[\u0600-\u06FF]/;
     if (text.trim()) {
       const containsUrduScript = urduRegex.test(text);
@@ -98,7 +110,7 @@ export function ComplaintInput({ onAnalyze, loading }) {
         handleLanguageChange('English');
       }
     }
-  }, [text, selectedLanguage]);
+  }, [text, selectedLanguage, isManual]);
 
   // Update text area when speech transcript updates
   useEffect(() => {
@@ -272,7 +284,7 @@ export function ComplaintInput({ onAnalyze, loading }) {
                     <span className="text-[8px] font-bold uppercase tracking-wider text-accent/80 font-inter leading-none">Response Language</span>
                     <select
                       value={selectedLanguage}
-                      onChange={(e) => handleLanguageChange(e.target.value)}
+                      onChange={(e) => handleLanguageChange(e.target.value, true)}
                       className="bezel-btn rounded px-3 h-10 font-bold text-[11px] font-inter text-accent cursor-pointer bg-[#FAF6EE] dark:bg-[#20120B] border border-accent/30 outline-none pr-8 appearance-none relative shadow-[0_2px_4px_rgba(0,0,0,0.15)] dark:shadow-[0_2px_4px_rgba(0,0,0,0.3)] w-full sm:w-[130px]"
                       style={{
                         backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23C5A059'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'/%3E%3C/svg%3E")`,
@@ -295,7 +307,10 @@ export function ComplaintInput({ onAnalyze, loading }) {
                     <span className="text-[8px] font-bold uppercase tracking-wider text-accent/80 font-inter leading-none">Letter Language</span>
                     <select
                       value={letterLanguage}
-                      onChange={(e) => setLetterLanguage(e.target.value)}
+                      onChange={(e) => {
+                        setLetterLanguage(e.target.value);
+                        setIsManual(true);
+                      }}
                       className="bezel-btn rounded px-3 h-10 font-bold text-[11px] font-inter text-accent cursor-pointer bg-[#FAF6EE] dark:bg-[#20120B] border border-accent/30 outline-none pr-8 appearance-none relative shadow-[0_2px_4px_rgba(0,0,0,0.15)] dark:shadow-[0_2px_4px_rgba(0,0,0,0.3)] w-full sm:w-[120px]"
                       style={{
                         backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23C5A059'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'/%3E%3C/svg%3E")`,
