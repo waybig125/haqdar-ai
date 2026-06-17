@@ -443,29 +443,29 @@ export function ResultCard({ result, editedLetter, setEditedLetter, language = '
                           </div>
                           
                           <div className="flex flex-col gap-1 pt-1">
-                            <span className={cn("text-[9px] uppercase tracking-wider text-amber-900/50 dark:text-amber-100/40 font-bold font-inter", isResponseEnglish ? "text-left" : "text-right")}>
+                            <span className={cn("text-[9px] uppercase tracking-wider text-amber-900/50 dark:text-amber-100/40 font-bold font-inter", isMostlyEnglish(lawObj.provision) ? "text-left" : "text-right")}>
                               {lang.lawProvision}
                             </span>
-                            <p className={cn("text-lg leading-relaxed text-amber-950 dark:text-[#E6DBC6]", textFontClass)} dir={isResponseEnglish ? "ltr" : "rtl"}>
+                            <p className={cn("text-lg leading-relaxed text-amber-950 dark:text-[#E6DBC6]", isMostlyEnglish(lawObj.provision) ? "font-inter" : "font-urdu")} dir={isMostlyEnglish(lawObj.provision) ? "ltr" : "rtl"}>
                               {lawObj.provision}
                             </p>
                           </div>
 
                           <div className="grid sm:grid-cols-2 gap-4 mt-3 pt-3 border-t border-[#C5B69C]/40 dark:border-accent/10">
-                            <div className={isResponseEnglish ? "text-left" : "text-right"}>
+                            <div className={isMostlyEnglish(lawObj.authority) ? "text-left" : "text-right"}>
                               <span className="text-[9px] uppercase tracking-wider text-amber-900/50 dark:text-amber-100/40 font-bold font-inter">
                                 {lang.enforcementAuthority}
                               </span>
-                              <p className={cn("text-base font-semibold text-amber-950 dark:text-[#E6DBC6]", textFontClass)} dir={isResponseEnglish ? "ltr" : "rtl"}>
+                              <p className={cn("text-base font-semibold text-amber-950 dark:text-[#E6DBC6]", isMostlyEnglish(lawObj.authority) ? "font-inter" : "font-urdu")} dir={isMostlyEnglish(lawObj.authority) ? "ltr" : "rtl"}>
                                 {lawObj.authority}
                               </p>
                             </div>
                             {lawObj.contact && (
-                              <div className={isResponseEnglish ? "text-left" : "text-right"}>
+                              <div className={isMostlyEnglish(lawObj.contact) ? "text-left" : "text-right"}>
                                 <span className="text-[9px] uppercase tracking-wider text-amber-900/50 dark:text-amber-100/40 font-bold font-inter">
                                   {lang.officialContact}
                                 </span>
-                                <p className="font-inter text-xs font-semibold text-accent leading-normal mt-0.5">
+                                <p className="font-inter text-xs font-semibold text-accent leading-normal mt-0.5" dir={isMostlyEnglish(lawObj.contact) ? "ltr" : "rtl"}>
                                   {lawObj.contact}
                                 </p>
                               </div>

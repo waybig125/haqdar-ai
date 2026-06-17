@@ -112,12 +112,6 @@ export function ComplaintInput({ onAnalyze, loading }) {
       if (containsUrduScript && ['English', 'Roman (Urdu/Regional)'].includes(selectedLanguage)) {
         handleLanguageChange('Urdu');
       }
-      
-      // If typing English/Latin while in RTL modes -> switch to English
-      const isRtlLang = ['Urdu', 'Sindhi', 'Punjabi', 'Pashto'].includes(selectedLanguage);
-      if (!containsUrduScript && isRtlLang) {
-        handleLanguageChange('English');
-      }
     }
   }, [text, selectedLanguage, isManual]);
 
@@ -182,7 +176,7 @@ export function ComplaintInput({ onAnalyze, loading }) {
         toast.error("Permission denied or failed to retrieve GPS coordinates.");
         setDetectingLocation(false);
       },
-      { enableHighAccuracy: true, timeout: 8000 }
+      { enableHighAccuracy: false, timeout: 15000 }
     );
   };
 
@@ -205,8 +199,10 @@ export function ComplaintInput({ onAnalyze, loading }) {
   const isRtl = ['Urdu', 'Sindhi', 'Punjabi', 'Pashto'].includes(selectedLanguage);
   const isMicDisabled = ['Sindhi', 'Punjabi', 'Pashto'].includes(selectedLanguage);
   
-  // Dynamic direction and font based strictly on user input text
-  const isTextAreaRtl = /[\u0600-\u06FF]/.test(text);
+  // Dynamic direction and font based on text (or selectedLanguage if empty)
+  const isTextAreaRtl = text.trim() 
+    ? /[\u0600-\u06FF]/.test(text)
+    : ['Urdu', 'Sindhi', 'Punjabi', 'Pashto'].includes(selectedLanguage);
 
   return (
     <div id="complaint-section" className="w-full max-w-6xl mx-auto px-4 py-12 scroll-mt-24">
