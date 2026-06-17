@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Mic, Send, Square, AlertCircle, Sparkles } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { AnimatedContainer } from '@/components/ui/AnimatedContainer';
@@ -32,6 +32,85 @@ export function ComplaintInput({ onAnalyze, loading }) {
     setLanguage,
     speechError
   } = useSpeechRecognition();
+
+  const [isRecording, setIsRecording] = useState(false);
+  const mediaRecorderRef = useRef(null);
+  const audioChunksRef = useRef([]);
+
+  const startAudioRecording = async () => {
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      audioChunksRef.current = [];
+      
+      let options = {};
+      if (MediaRecorder.isTypeSupported && MediaRecorder.isTypeSupported('audio/webm')) {
+        options = { mimeType: 'audio/webm' };
+      } else if (MediaRecorder.isTypeSupported && MediaRecorder.isTypeSupported('audio/mp4')) {
+        options = { mimeType: 'audio/mp4' };
+      }
+      
+      const mediaRecorder = new MediaRecorder(stream, options);
+      mediaRecorderRef.current = mediaRecorder;
+      
+      mediaRecorder.ondataavailable = (event) => {
+        if (event.data && event.data.size > 0) {
+          audioChunksRef.current.push(event.data);
+        }
+      };
+      
+      mediaRecorder.onstop = async () => {
+        stream.getTracks().forEach(track => track.stop());
+        const audioBlob = new Blob(audioChunksRef.current, { type: options.mimeType || 'audio/webm' });
+        if (audioBlob.size === 0) return;
+        
+        toast.promise(
+          (async () => {
+            const { transcribeAudio } = await import('@/lib/api');
+            const result = await transcribeAudio(audioBlob);
+            if (result && result.text) {
+              setText(prev => {
+                const base = prev.trim();
+                return base ? `${base} ${result.text}` : result.text;
+              });
+            }
+          })(),
+          {
+            loading: 'صوتی شناخت ہو رہی ہے... / Transcribing audio...',
+            success: 'صوتی شناخت مکمل! / Transcription complete!',
+            error: 'ترجمہ کرنے میں ناکامی / Transcription failed.'
+          }
+        );
+      };
+      
+      mediaRecorder.start();
+      setIsRecording(true);
+      toast.success('ریکارڈنگ شروع ہو گئی بولیں... / Recording started, speak now...');
+    } catch (err) {
+      console.error("Error accessing microphone:", err);
+      toast.error('مائیکروفون تک رسائی میں ناکامی / Could not access microphone', {
+        description: 'Please ensure microphone permissions are granted.',
+      });
+    }
+  };
+
+  const stopAudioRecording = () => {
+    if (mediaRecorderRef.current && mediaRecorderRef.current.state !== 'inactive') {
+      mediaRecorderRef.current.stop();
+      setIsRecording(false);
+    }
+  };
+
+  const handleMicClick = () => {
+    if (isWebSpeechLang) {
+      startListening();
+    } else {
+      if (isRecording) {
+        stopAudioRecording();
+      } else {
+        startAudioRecording();
+      }
+    }
+  };
 
   const [selectedLanguage, setSelectedLanguage] = useState('Urdu');
   const [letterLanguage, setLetterLanguage] = useState('Urdu');
@@ -74,19 +153,20 @@ export function ComplaintInput({ onAnalyze, loading }) {
       setIsManual(true);
     }
     setSelectedLanguage(lang);
-    if (['Sindhi', 'Punjabi', 'Pashto'].includes(lang)) {
-      if (isListening) {
-        stopListening();
-      }
+    
+    // Stop any active recordings or speech recognition on language switch
+    if (isListening) {
+      stopListening();
     }
+    if (isRecording) {
+      stopAudioRecording();
+    }
+    
     if (lang === 'English') {
       setLanguage('en-US');
       setLetterLanguage('English');
     } else if (lang === 'Sindhi') {
       setLanguage('sd-PK');
-      setLetterLanguage('Urdu');
-    } else if (lang === 'Pashto') {
-      setLanguage('ps-PK');
       setLetterLanguage('Urdu');
     } else {
       setLanguage('ur-PK');
@@ -196,13 +276,18 @@ export function ComplaintInput({ onAnalyze, loading }) {
     setText(example);
   };
 
-  const isRtl = ['Urdu', 'Sindhi', 'Punjabi', 'Pashto'].includes(selectedLanguage);
-  const isMicDisabled = ['Sindhi', 'Punjabi', 'Pashto'].includes(selectedLanguage);
+  const isRtl = ['Urdu', 'Sindhi', 'Punjabi'].includes(selectedLanguage);
+  const isWebSpeechLang = ['Urdu', 'English', 'Roman (Urdu/Regional)'].includes(selectedLanguage);
+  
+  const isRecordingSupported = typeof window !== 'undefined' && !!window.MediaRecorder;
+  const isMicDisabled = !isWebSpeechLang && !isRecordingSupported;
+  const activeListening = isWebSpeechLang ? isListening : isRecording;
+  const micSupported = isWebSpeechLang ? supported : isRecordingSupported;
   
   // Dynamic direction and font based on text (or selectedLanguage if empty)
   const isTextAreaRtl = text.trim() 
     ? /[\u0600-\u06FF]/.test(text)
-    : ['Urdu', 'Sindhi', 'Punjabi', 'Pashto'].includes(selectedLanguage);
+    : ['Urdu', 'Sindhi', 'Punjabi'].includes(selectedLanguage);
 
   return (
     <div id="complaint-section" className="w-full max-w-6xl mx-auto px-4 py-12 scroll-mt-24">
@@ -211,7 +296,7 @@ export function ComplaintInput({ onAnalyze, loading }) {
         {/* Mahogany Wood Console Outer Frame */}
         <div className={cn(
           "wood-console rounded-2xl p-6 md:p-8 transition-all duration-300 relative overflow-hidden",
-          isListening ? "ring-2 ring-red-500/50" : ""
+          activeListening ? "ring-2 ring-red-500/50" : ""
         )}>
 
           <form onSubmit={handleSubmit} className="flex flex-col gap-5 relative z-10">
@@ -224,8 +309,7 @@ export function ComplaintInput({ onAnalyze, loading }) {
                 {selectedLanguage === 'Urdu' ? '🇵🇰 اردو' :
                  selectedLanguage === 'English' ? '🇬🇧 English' :
                  selectedLanguage === 'Roman (Urdu/Regional)' ? '✍️ Roman (Urdu/Regional)' :
-                 selectedLanguage === 'Sindhi' ? '🇵🇰 سنڌي' :
-                 selectedLanguage === 'Punjabi' ? '🇵🇰 پنجابی' : '🇵🇰 پښتو'}
+                 selectedLanguage === 'Sindhi' ? '🇵🇰 سنڌي' : '🇵🇰 پنجابی'}
               </div>
 
               {/* Official Document Seal Watermark */}
@@ -244,11 +328,12 @@ export function ComplaintInput({ onAnalyze, loading }) {
                     : "font-garamond text-base sm:text-xl md:text-3xl font-bold leading-[1.5] sm:leading-[1.9] md:leading-[2.2] py-2 text-amber-950 dark:text-amber-100"
                 )}
                 dir={isTextAreaRtl ? "rtl" : "ltr"}
+                style={{ unicodeBidi: 'plaintext' }}
                 disabled={loading}
                 maxLength={800}
               />
 
-              {isListening && (
+              {activeListening && (
                 <div className="absolute bottom-3 left-4 flex items-center gap-1.5 text-xs text-red-600 dark:text-red-400 font-semibold animate-pulse">
                   <span className="w-2 h-2 rounded-full bg-red-600 dark:bg-red-400" />
                   <span className="font-urdu leading-none">{isRtl ? "سن رہا ہوں..." : "Listening..."}</span>
@@ -419,7 +504,6 @@ export function ComplaintInput({ onAnalyze, loading }) {
                       <option value="Roman (Urdu/Regional)" className="bg-[#FAF3E0] dark:bg-[#1C120D] text-amber-950 dark:text-[#E6DBC6] font-inter">Roman (Urdu/Punjabi/etc.)</option>
                       <option value="Sindhi" className="bg-[#FAF3E0] dark:bg-[#1C120D] text-amber-950 dark:text-[#E6DBC6] font-urdu text-sm">سنڌي (Sindhi)</option>
                       <option value="Punjabi" className="bg-[#FAF3E0] dark:bg-[#1C120D] text-amber-950 dark:text-[#E6DBC6] font-urdu text-sm">پنجابی (Punjabi)</option>
-                      <option value="Pashto" className="bg-[#FAF3E0] dark:bg-[#1C120D] text-amber-950 dark:text-[#E6DBC6] font-urdu text-sm">پښتو (Pashto)</option>
                     </select>
                   </div>
 
@@ -449,21 +533,21 @@ export function ComplaintInput({ onAnalyze, loading }) {
 
                 {/* Buttons Wrapper: Flex row on all sizes */}
                 <div className="flex items-center justify-end gap-3 w-full sm:w-auto shrink-0">
-                  {supported ? (
+                  {micSupported ? (
                     <Button
                       type="button"
-                      variant={isListening ? "destructive" : "secondary"}
+                      variant={activeListening ? "destructive" : "secondary"}
                       size="icon"
                       className={cn(
                         "bezel-btn rounded-full w-10 h-10 transition-all duration-300 relative cursor-pointer shrink-0",
-                        isListening && "ring-4 ring-red-500/60 scale-110 shadow-[0_0_15px_rgba(239,68,68,0.5)] bg-red-600 border-red-500 hover:bg-red-700 hover:border-red-600",
+                        activeListening && "ring-4 ring-red-500/60 scale-110 shadow-[0_0_15px_rgba(239,68,68,0.5)] bg-red-600 border-red-500 hover:bg-red-700 hover:border-red-600",
                         isMicDisabled && "opacity-40 cursor-not-allowed pointer-events-none"
                       )}
-                      onClick={startListening}
+                      onClick={handleMicClick}
                       disabled={loading || isMicDisabled}
-                      title={isMicDisabled ? "Voice input not yet supported for this language" : (isListening ? "Stop voice input" : "Start speaking")}
+                      title={isMicDisabled ? "Voice input not supported on this device/language" : (activeListening ? "Stop voice input" : "Start speaking")}
                     >
-                      {isListening ? <Square className="w-4 h-4 text-white" /> : <Mic className="w-5 h-5 text-accent" />}
+                      {activeListening ? <Square className="w-4 h-4 text-white" /> : <Mic className="w-5 h-5 text-accent" />}
                     </Button>
                   ) : (
                     <div className="text-xs text-muted-foreground flex items-center justify-center border border-amber-900/10 dark:border-[#523225] rounded-full w-10 h-10 bg-amber-900/5 dark:bg-[#3A231A] shrink-0" title="Voice input not supported in this browser">
@@ -493,7 +577,7 @@ export function ComplaintInput({ onAnalyze, loading }) {
 
 
           {/* Glowing record overlay indicator */}
-          {isListening && (
+          {activeListening && (
             <div className="absolute inset-0 bg-red-500/2 dark:bg-red-500/1 pointer-events-none" />
           )}
 

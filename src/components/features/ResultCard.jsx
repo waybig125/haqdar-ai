@@ -166,6 +166,22 @@ function isMostlyEnglish(text) {
   return (latinCount / cleanText.length) > 0.5;
 }
 
+export function renderMixedText(text) {
+  if (!text) return null;
+  const regex = /([a-zA-Z0-9\s.,:;()/\-@#]+)/g;
+  const parts = text.split(regex);
+  return parts.map((part, index) => {
+    if (/[a-zA-Z0-9]/.test(part)) {
+      return (
+        <span key={index} dir="ltr" className="inline-block font-inter select-text text-left">
+          {part}
+        </span>
+      );
+    }
+    return <span key={index}>{part}</span>;
+  });
+}
+
 export function ResultCard({ result, editedLetter, setEditedLetter, language = 'Urdu', letterLanguage = 'Urdu' }) {
   const [copied, setCopied] = useState(false);
   const [downloading, setDownloading] = useState(false);
@@ -320,7 +336,7 @@ export function ResultCard({ result, editedLetter, setEditedLetter, language = '
                 <h3 className={cn("text-2xl font-bold m-0", textFontClass)} dir={isResponseEnglish ? "ltr" : "rtl"}>{lang.violationSummaryHeader}</h3>
               </div>
               <p className={cn("text-xl leading-[2.4] font-medium pt-2", textFontClass)} dir={isResponseEnglish ? "ltr" : "rtl"}>
-                {result.violation_summary}
+                {renderMixedText(result.violation_summary)}
               </p>
               
               <div className={cn("mt-auto pt-6", isResponseEnglish ? "text-left" : "text-right")}>
@@ -344,7 +360,7 @@ export function ResultCard({ result, editedLetter, setEditedLetter, language = '
               </p>
               <div className={cn("p-5 rounded-lg bg-card border border-[#C5B69C] dark:border-[#36221A] text-xl font-bold text-center mt-3 shadow-md text-foreground relative overflow-hidden leading-[2.4]", textFontClass)} dir={isResponseEnglish ? "ltr" : "rtl"}>
                 <div className="absolute left-0 top-0 h-full w-1 bg-accent" />
-                {result.responsible_authority}
+                {renderMixedText(result.responsible_authority)}
               </div>
             </div>
             
@@ -412,6 +428,7 @@ export function ResultCard({ result, editedLetter, setEditedLetter, language = '
                           isResponseEnglish ? "text-left" : "text-right"
                         )}
                         dir={isResponseEnglish ? "ltr" : "rtl"}
+                        style={{ unicodeBidi: 'plaintext' }}
                         value={editedLetter}
                         onChange={(e) => setEditedLetter(e.target.value)}
                         placeholder={isResponseEnglish ? "Write your complaint letter..." : "شکایتی خط لکھیں..."}
@@ -447,7 +464,7 @@ export function ResultCard({ result, editedLetter, setEditedLetter, language = '
                               {lang.lawProvision}
                             </span>
                             <p className={cn("text-lg leading-relaxed text-amber-950 dark:text-[#E6DBC6]", isMostlyEnglish(lawObj.provision) ? "font-inter" : "font-urdu")} dir={isMostlyEnglish(lawObj.provision) ? "ltr" : "rtl"}>
-                              {lawObj.provision}
+                              {renderMixedText(lawObj.provision)}
                             </p>
                           </div>
 
@@ -457,7 +474,7 @@ export function ResultCard({ result, editedLetter, setEditedLetter, language = '
                                 {lang.enforcementAuthority}
                               </span>
                               <p className={cn("text-base font-semibold text-amber-950 dark:text-[#E6DBC6]", isMostlyEnglish(lawObj.authority) ? "font-inter" : "font-urdu")} dir={isMostlyEnglish(lawObj.authority) ? "ltr" : "rtl"}>
-                                {lawObj.authority}
+                                {renderMixedText(lawObj.authority)}
                               </p>
                             </div>
                             {lawObj.contact && (
@@ -466,7 +483,7 @@ export function ResultCard({ result, editedLetter, setEditedLetter, language = '
                                   {lang.officialContact}
                                 </span>
                                 <p className="font-inter text-xs font-semibold text-accent leading-normal mt-0.5" dir={isMostlyEnglish(lawObj.contact) ? "ltr" : "rtl"}>
-                                  {lawObj.contact}
+                                  {renderMixedText(lawObj.contact)}
                                 </p>
                               </div>
                             )}
@@ -486,13 +503,13 @@ export function ResultCard({ result, editedLetter, setEditedLetter, language = '
               <h4 className={cn("text-2xl font-bold text-accent mb-3", textFontClass)} dir={isResponseEnglish ? "ltr" : "rtl"}>{lang.nextStepsTitle}</h4>
               <ol className={cn("text-base md:text-lg leading-[2.2] space-y-3 list-decimal list-inside", textFontClass)} dir={isResponseEnglish ? "ltr" : "rtl"}>
                 <li className="text-foreground">
-                  {lang.step1}
+                  {renderMixedText(lang.step1)}
                 </li>
                 <li className="text-foreground">
-                  {lang.step2.replace('[authority]', result.responsible_authority)}
+                  {renderMixedText(lang.step2.replace('[authority]', result.responsible_authority))}
                 </li>
                 <li className="text-foreground">
-                  {lang.step3}
+                  {renderMixedText(lang.step3)}
                 </li>
               </ol>
             </div>

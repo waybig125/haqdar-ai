@@ -369,4 +369,26 @@ export function cleanResponse(data) {
   return data;
 }
 
+/**
+ * Transcribes audio blob using the backend /transcribe endpoint
+ * @param {Blob} audioBlob The recorded audio blob
+ * @returns {Promise<{text: string}>}
+ */
+export async function transcribeAudio(audioBlob) {
+  const formData = new FormData();
+  formData.append('audio', audioBlob, 'recording.webm');
+  
+  const response = await fetch(`${API_BASE_URL}/transcribe`, {
+    method: 'POST',
+    body: formData,
+  });
+
+  if (!response.ok) {
+    throw new Error(`Transcription failed: ${response.status}`);
+  }
+
+  return await response.json();
+}
+
+
 
