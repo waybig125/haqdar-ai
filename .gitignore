@@ -45,3 +45,6 @@ next-env.d.ts
 
 # Embeddings Gen
 /embeddings-gen
+
+# Credentials
+*.json
